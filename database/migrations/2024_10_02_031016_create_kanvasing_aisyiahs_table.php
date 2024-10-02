@@ -13,6 +13,23 @@ return new class extends Migration
     {
         Schema::create('kanvasing_aisyiahs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->string('kecamatan');
+            $table->string('kelurahan');
+            $table->string('no_kk');
+            $table->string('no_ktp')->unique();
+            $table->string('nama_responden');
+            $table->date('tgl_lahir');
+            $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
+            $table->foreignId('agama_id')->nullable();
+            $table->foreignId('pekerjaan_id')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('foto_kegiatan')->nullable();
+            $table->boolean('brosur')->nullable();
+            $table->boolean('stiker')->nullable();
+            $table->boolean('kartu_coblos')->nullable();
+            $table->string('longitude');
+            $table->string('latitude');
             $table->timestamps();
         });
     }

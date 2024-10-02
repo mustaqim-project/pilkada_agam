@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('spanduk_ds', function (Blueprint $table) {
+        Schema::create('pekerjaans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('kecamatan');
-            $table->string('kelurahan');
-            $table->text('alamat')->nullable();
-            $table->string('foto_kegiatan')->nullable();
-            $table->string('longitude');
-            $table->string('latitude');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -29,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('spanduk_ds');
+        Schema::dropIfExists('pekerjaans');
     }
 };
