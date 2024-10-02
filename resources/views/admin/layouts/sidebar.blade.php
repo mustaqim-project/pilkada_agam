@@ -6,10 +6,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="#">MAZHUB</a>
+            <a href="index.html">{{ __('admin.Stisla') }}</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="#">MAZHUB</a>
+            <a href="index.html">{{ __('admin.St') }}</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">{{ __('admin.Dashboard') }}</li>
@@ -39,7 +39,7 @@
                 </li>
             @endif
 
-            @if (canAccess(['about index', 'contact index', 'kebijakan index']))
+            @if (canAccess(['about index', 'contact index']))
                 <li class="dropdown {{ setSidebarActive(['admin.about.*', 'admin.contact.*']) }}">
                     <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i>
                         <span>{{ __('admin.Pages') }}</span></a>
@@ -47,10 +47,6 @@
                         @if (canAccess(['about index']))
                             <li class="{{ setSidebarActive(['admin.about.*']) }}"><a class="nav-link"
                                     href="{{ route('admin.about.index') }}">{{ __('admin.About Page') }}</a></li>
-                        @endif
-                        @if (canAccess(['kebijakan index']))
-                            <li class="{{ setSidebarActive(['admin.kebijakan.*']) }}"><a class="nav-link"
-                                    href="{{ route('admin.kebijakan.index') }}">Kebijakan</a></li>
                         @endif
                         @if (canAccess(['conatact index']))
                             <li class="{{ setSidebarActive(['admin.contact.*']) }}"><a class="nav-link"

@@ -3,7 +3,7 @@
     "description": "News Website Portal",
     "autoload": {
         "psr-4": {
-            "Mazhub\\News\\": "src/"
+            "App\\": "app/"
         }
     },
     "authors": [
