@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AnggaranController;
 use App\Http\Controllers\Admin\TimDsController;
 use App\Http\Controllers\Admin\TimPKHController;
+use App\Http\Controllers\Admin\TimMMController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContactMessageController;
@@ -205,6 +206,36 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         Route::prefix('koordinator-nagari')->name('koordinator.nagari.')->group(function() {
             Route::get('dashboard', [TimPKHController::class, 'koordinatorNagariDashboard'])->name('dashboard');
             Route::get('laporan', [TimPKHController::class, 'koordinatorNagariLaporan'])->name('laporan');
+        });
+
+    });
+
+
+
+    Route::prefix('timmm')->name('timmm.')->group(function() {
+
+        // Ketua mm
+        Route::prefix('ketua')->name('ketua.')->group(function() {
+            Route::get('dashboard', [TimMMController::class, 'ketuaDashboard'])->name('dashboard');
+            Route::get('laporan', [TimMMController::class, 'ketuaLaporan'])->name('laporan');
+        });
+
+        // Koordinator Wilayah
+        Route::prefix('koordinator-wilayah')->name('koordinator.wilayah.')->group(function() {
+            Route::get('dashboard', [TimMMController::class, 'koordinatorWilayahDashboard'])->name('dashboard');
+            Route::get('laporan', [TimMMController::class, 'koordinatorWilayahLaporan'])->name('laporan');
+        });
+
+        // Koordinator Kecamatan
+        Route::prefix('koordinator-kecamatan')->name('koordinator.kecamatan.')->group(function() {
+            Route::get('dashboard', [TimMMController::class, 'koordinatorKecamatanDashboard'])->name('dashboard');
+            Route::get('laporan', [TimMMController::class, 'koordinatorKecamatanLaporan'])->name('laporan');
+        });
+
+        // Koordinator Nagari
+        Route::prefix('koordinator-nagari')->name('koordinator.nagari.')->group(function() {
+            Route::get('dashboard', [TimMMController::class, 'koordinatorNagariDashboard'])->name('dashboard');
+            Route::get('laporan', [TimMMController::class, 'koordinatorNagariLaporan'])->name('laporan');
         });
 
     });

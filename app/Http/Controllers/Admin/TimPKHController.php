@@ -9,44 +9,44 @@ class TimPKHController extends Controller
 {
     public function ketuaDashboard()
         {
-            return view('admin.timds.ketua.dashboard');
+            return view('admin.timpkh.ketua.dashboard');
         }
 
         public function ketuaLaporan()
         {
-            return view('admin.timds.ketua.laporan');
+            return view('admin.timpkh.ketua.laporan');
         }
 
         // Koordinator Wilayah
         public function koordinatorWilayahDashboard()
         {
-            return view('admin.timds.koordinator_wilayah.dashboard');
+            return view('admin.timpkh.koordinator_wilayah.dashboard');
         }
 
         public function koordinatorWilayahLaporan()
         {
-            return view('admin.timds.koordinator_wilayah.laporan');
+            return view('admin.timpkh.koordinator_wilayah.laporan');
         }
 
         // Koordinator Kecamatan
         public function koordinatorKecamatanDashboard()
         {
-            return view('admin.timds.koordinator_kecamatan.dashboard');
+            return view('admin.timpkh.koordinator_kecamatan.dashboard');
         }
 
         public function koordinatorKecamatanLaporan()
         {
-            return view('admin.timds.koordinator_kecamatan.laporan');
+            return view('admin.timpkh.koordinator_kecamatan.laporan');
         }
 
         // Koordinator Nagari
         public function koordinatorNagariDashboard()
         {
-            return view('admin.timds.koordinator_nagari.dashboard');
+            return view('admin.timpkh.koordinator_nagari.dashboard');
         }
 
         public function koordinatorNagariLaporan()
         {
-            return view('admin.timds.koordinator_nagari.laporan');
+            return view('admin.timpkh.koordinator_nagari.laporan');
         }
 }

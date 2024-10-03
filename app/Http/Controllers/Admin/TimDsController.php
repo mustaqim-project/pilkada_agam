@@ -8,47 +8,65 @@ use Illuminate\Http\Request;
 
 class TimDsController extends Controller
 {
-        // Ketua DS
-        public function ketuaDashboard()
-        {
-            return view('admin.timds.ketua.dashboard');
-        }
 
-        public function ketuaLaporan()
-        {
-            return view('admin.timds.ketua.laporan');
-        }
+    public function __construct()
+    {
+        // Middleware untuk Ketua
+        $this->middleware(['permission:view ketua dashboard,admin'])->only('ketuaDashboard');
+        $this->middleware(['permission:view ketua laporan,admin'])->only('ketuaLaporan');
 
-        // Koordinator Wilayah
-        public function koordinatorWilayahDashboard()
-        {
-            return view('admin.timds.koordinator_wilayah.dashboard');
-        }
+        // Middleware untuk Koordinator Wilayah
+        $this->middleware(['permission:view koordinator wilayah dashboard,admin'])->only('koordinatorWilayahDashboard');
+        $this->middleware(['permission:view koordinator wilayah laporan,admin'])->only('koordinatorWilayahLaporan');
 
-        public function koordinatorWilayahLaporan()
-        {
-            return view('admin.timds.koordinator_wilayah.laporan');
-        }
+        // Middleware untuk Koordinator Kecamatan
+        $this->middleware(['permission:view koordinator kecamatan dashboard,admin'])->only('koordinatorKecamatanDashboard');
+        $this->middleware(['permission:view koordinator kecamatan laporan,admin'])->only('koordinatorKecamatanLaporan');
 
-        // Koordinator Kecamatan
-        public function koordinatorKecamatanDashboard()
-        {
-            return view('admin.timds.koordinator_kecamatan.dashboard');
-        }
+        // Middleware untuk Koordinator Nagari
+        $this->middleware(['permission:view koordinator nagari dashboard,admin'])->only('koordinatorNagariDashboard');
+        $this->middleware(['permission:view koordinator nagari laporan,admin'])->only('koordinatorNagariLaporan');
+    }
+    public function ketuaDashboard()
+    {
+        return view('admin.timds.ketua.dashboard');
+    }
 
-        public function koordinatorKecamatanLaporan()
-        {
-            return view('admin.timds.koordinator_kecamatan.laporan');
-        }
+    public function ketuaLaporan()
+    {
+        return view('admin.timds.ketua.laporan');
+    }
 
-        // Koordinator Nagari
-        public function koordinatorNagariDashboard()
-        {
-            return view('admin.timds.koordinator_nagari.dashboard');
-        }
+    // Koordinator Wilayah
+    public function koordinatorWilayahDashboard()
+    {
+        return view('admin.timds.koordinator_wilayah.dashboard');
+    }
 
-        public function koordinatorNagariLaporan()
-        {
-            return view('admin.timds.koordinator_nagari.laporan');
-        }
+    public function koordinatorWilayahLaporan()
+    {
+        return view('admin.timds.koordinator_wilayah.laporan');
+    }
+
+    // Koordinator Kecamatan
+    public function koordinatorKecamatanDashboard()
+    {
+        return view('admin.timds.koordinator_kecamatan.dashboard');
+    }
+
+    public function koordinatorKecamatanLaporan()
+    {
+        return view('admin.timds.koordinator_kecamatan.laporan');
+    }
+
+    // Koordinator Nagari
+    public function koordinatorNagariDashboard()
+    {
+        return view('admin.timds.koordinator_nagari.dashboard');
+    }
+
+    public function koordinatorNagariLaporan()
+    {
+        return view('admin.timds.koordinator_nagari.laporan');
+    }
 }
