@@ -1,4 +1,5 @@
-@extends('frontend.layouts.master')
+@extends('admin.layouts.master')
+
 
 @section('content')
     <!-- login -->
