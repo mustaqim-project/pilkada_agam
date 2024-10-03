@@ -17,11 +17,11 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
     }
 
     /* CSS untuk membatasi antara Contact dengan Login */
-    .navbar-nav .nav-link[href="{{ route('register') }}"] {
+    /* .navbar-nav .nav-link[href="{{ route('register') }}"] {
         border-bottom: 1px solid #ccc;
         margin-bottom: 10px;
         padding-bottom: 5px;
-    }
+    } */
 
     /* CSS untuk membatasi antara Contact dengan Login */
     .navbar-nav .nav-link[href="{{ route('contact') }}"] {
