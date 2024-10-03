@@ -21,42 +21,38 @@
                     <table class="table table-striped" id="table">
                         <thead>
                             <tr>
-                                <th class="text-center">
-                                    #
-                                </th>
+                                <th class="text-center">#</th>
                                 <th>{{ __('admin.Name') }}</th>
                                 <th>{{ __('admin.Email') }}</th>
+                                <th>{{ __('admin.PJ Name') }}</th> <!-- Menambahkan kolom PJ Name -->
+                                <th>{{ __('admin.Tim') }}</th>
                                 <th>{{ __('admin.Role') }}</th>
                                 <th>{{ __('admin.Action') }}</th>
-
                             </tr>
                         </thead>
                         <tbody>
-
                             @foreach ($admins as $admin)
                             <tr>
                                 <td>{{ $admin->id }}</td>
-
                                 <td>{{ $admin->name }}</td>
                                 <td>{{ $admin->email }}</td>
-                                <td><span class="badge bg-primary text-light">{{ $admin->getRoleNames()->first() }}</span></td>
-
+                                <td>{{ $admin->admin ? $admin->admin->name : 'N/A' }}</td> <!-- Menampilkan PJ Name dari Admin -->
+                                <td>{{ $admin->tim }}</td>
+                                <td>
+                                    <span class="badge bg-primary text-light">{{ $admin->getRoleNames()->first() }}</span>
+                                </td>
                                 <td>
                                     @if ($admin->getRoleNames()->first() != 'Super Admin')
-
-                                    <a href="{{ route('admin.role-users.edit', $admin->id) }}"
-                                        class="btn btn-primary"><i class="fas fa-edit"></i></a>
-
-                                    <a href="{{ route('admin.role-users.destroy', $admin->id) }}"
-                                        class="btn btn-danger delete-item"><i
-                                            class="fas fa-trash-alt"></i></a>
+                                        <a href="{{ route('admin.role-users.edit', $admin->id) }}" class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{ route('admin.role-users.destroy', $admin->id) }}" class="btn btn-danger delete-item">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
                                     @endif
                                 </td>
                             </tr>
                             @endforeach
-
-
-
                         </tbody>
                     </table>
                 </div>
