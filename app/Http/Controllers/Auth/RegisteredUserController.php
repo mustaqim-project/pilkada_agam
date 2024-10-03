@@ -28,23 +28,20 @@ class RegisteredUserController extends Controller
      * Display the registration view.
      */
     public function create(): View
-{
-    // Mendapatkan pengguna yang sedang login
-    $authUser = auth()->user(); // Menggunakan auth()->user()
+    {
+        $authUser = Auth::guard('admin')->user(); // Mengambil user yang terautentikasi
 
-    // Mengecek apakah pengguna memiliki role 'Super Admin'
-    if ($authUser->hasRole('Super Admin')) {
-        // Jika Super Admin, ambil semua pengguna dengan relasi Admin
-        $admins = User::with('admin')->get();
-    } else {
-        // Jika bukan Super Admin, ambil berdasarkan pj_id dengan relasi Admin
-        $admins = User::with('admin')->where('pj_id', $authUser->id)->get();
+        if ($authUser->hasRole('Super Admin')) {
+            $admins = User::with('admin')->get();
+        } else {
+            $admins = User::with('admin')->where('pj_id', $authUser->id)->get();
+        }
+
+        return view('admin.tim_lapangan.index', [
+            'admins' => $admins,
+        ]);
     }
 
-    return view('admin.tim_lapangan.index', [
-        'admins' => $admins,
-    ]);
-}
 
 
     /**
