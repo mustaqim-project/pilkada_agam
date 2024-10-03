@@ -9,7 +9,7 @@
                     <div class="card mx-auto" style="max-width: 380px;">
                         <div class="card-body">
                             <h4 class="card-title mb-4">{{ __('frontend.Register') }}</h4>
-                            <form method="POST" action="{{ route('register') }}">
+                            <form method="POST" action="{{ route('admin.register') }}">
                                 @csrf
                                 {{-- <a href="#" class="btn btn-facebook btn-block mb-2 text-white"> <i
                                         class="fa fa-facebook"></i> &nbsp; Sign
