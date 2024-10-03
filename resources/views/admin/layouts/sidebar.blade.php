@@ -16,7 +16,8 @@
         <ul class="sidebar-menu">
             <li class="menu-header">{{ __('admin.Dashboard') }}</li>
             <li class="active">
-                <a href="{{ route('admin.dashboard') }}" class="nav-link"><i class="fas fa-fire"></i><span>{{ __('admin.Dashboard') }}</span></a>
+                <a href="{{ route('admin.dashboard') }}" class="nav-link"><i
+                        class="fas fa-fire"></i><span>{{ __('admin.Dashboard') }}</span></a>
             </li>
             <li class="menu-header">{{ __('admin.Starter') }}</li>
 
@@ -25,6 +26,172 @@
                         href="{{ route('admin.category.index') }}"><i class="fas fa-list"></i>
                         <span>{{ __('admin.Category') }}</span></a></li>
             @endif
+
+            @if (canAccess(['anggaran index', 'anggaran create', 'anggaran update', 'anggaran delete']))
+                <li class="{{ setSidebarActive(['admin.anggaran.*']) }}"><a class="nav-link"
+                        href="{{ route('admin.anggaran.index') }}"><i class="fas fa-money-bill-wave"></i>
+                        <span>{{ __('admin.Anggaran') }}</span></a></li>
+            @endif
+
+            @if (canAccess(['ketua ds', 'koordinator wilayah', 'koordinator kecamatan', 'koordinator nagari']))
+                <li class="dropdown {{ setSidebarActive(['admin.timds.*']) }}">
+                    <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
+                        <span>{{ __('TIM DS') }}</span></a>
+                    <ul class="dropdown-menu">
+
+                        {{-- Ketua DS --}}
+                        @if (canAccess(['ketua ds']))
+                            <li class="dropdown {{ setSidebarActive(['admin.timds.ketua.*']) }}">
+                                <a href="#" class="nav-link has-dropdown">{{ __('Ketua DS') }}</a>
+                                <ul class="dropdown-menu">
+                                    <li class="{{ setSidebarActive(['admin.timds.ketua.dashboard']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timds.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                    </li>
+                                    <li class="{{ setSidebarActive(['admin.timds.ketua.laporan']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timds.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        {{-- Koordinator Wilayah --}}
+                        @if (canAccess(['koordinator wilayah']))
+                            <li class="dropdown {{ setSidebarActive(['admin.timds.koordinator.wilayah.*']) }}">
+                                <a href="#" class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
+                                <ul class="dropdown-menu">
+                                    <li class="{{ setSidebarActive(['admin.timds.koordinator.wilayah.dashboard']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timds.koordinator.wilayah.dashboard') }}">{{ __('Dashboard') }}</a>
+                                    </li>
+                                    <li class="{{ setSidebarActive(['admin.timds.koordinator.wilayah.laporan']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timds.koordinator.wilayah.laporan') }}">{{ __('Laporan') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        {{-- Koordinator Kecamatan --}}
+                        @if (canAccess(['koordinator kecamatan']))
+                            <li class="dropdown {{ setSidebarActive(['admin.timds.koordinator.kecamatan.*']) }}">
+                                <a href="#" class="nav-link has-dropdown">{{ __('Koordinator Kecamatan') }}</a>
+                                <ul class="dropdown-menu">
+                                    <li
+                                        class="{{ setSidebarActive(['admin.timds.koordinator.kecamatan.dashboard']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timds.koordinator.kecamatan.dashboard') }}">{{ __('Dashboard') }}</a>
+                                    </li>
+                                    <li class="{{ setSidebarActive(['admin.timds.koordinator.kecamatan.laporan']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timds.koordinator.kecamatan.laporan') }}">{{ __('Laporan') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        {{-- Koordinator Nagari --}}
+                        @if (canAccess(['koordinator nagari']))
+                            <li class="dropdown {{ setSidebarActive(['admin.timds.koordinator.nagari.*']) }}">
+                                <a href="#" class="nav-link has-dropdown">{{ __('Koordinator Nagari') }}</a>
+                                <ul class="dropdown-menu">
+                                    <li class="{{ setSidebarActive(['admin.timds.koordinator.nagari.dashboard']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timds.koordinator.nagari.dashboard') }}">{{ __('Dashboard') }}</a>
+                                    </li>
+                                    <li class="{{ setSidebarActive(['admin.timds.koordinator.nagari.laporan']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timds.koordinator.nagari.laporan') }}">{{ __('Laporan') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+                    </ul>
+                </li>
+            @endif
+
+
+            @if (canAccess(['ketua pkh', 'koordinator wilayah', 'koordinator kecamatan', 'koordinator nagari']))
+                <li class="dropdown {{ setSidebarActive(['admin.timpkh.*']) }}">
+                    <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
+                        <span>{{ __('TIM PKH') }}</span></a>
+                    <ul class="dropdown-menu">
+
+                        {{-- Ketua pkh --}}
+                        @if (canAccess(['ketua pkh']))
+                            <li class="dropdown {{ setSidebarActive(['admin.timpkh.ketua.*']) }}">
+                                <a href="#" class="nav-link has-dropdown">{{ __('Ketua pkh') }}</a>
+                                <ul class="dropdown-menu">
+                                    <li class="{{ setSidebarActive(['admin.timpkh.ketua.dashboard']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timpkh.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                    </li>
+                                    <li class="{{ setSidebarActive(['admin.timpkh.ketua.laporan']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timpkh.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        {{-- Koordinator Wilayah --}}
+                        @if (canAccess(['koordinator wilayah']))
+                            <li class="dropdown {{ setSidebarActive(['admin.timpkh.koordinator.wilayah.*']) }}">
+                                <a href="#" class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
+                                <ul class="dropdown-menu">
+                                    <li class="{{ setSidebarActive(['admin.timpkh.koordinator.wilayah.dashboard']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timpkh.koordinator.wilayah.dashboard') }}">{{ __('Dashboard') }}</a>
+                                    </li>
+                                    <li class="{{ setSidebarActive(['admin.timpkh.koordinator.wilayah.laporan']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timpkh.koordinator.wilayah.laporan') }}">{{ __('Laporan') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        {{-- Koordinator Kecamatan --}}
+                        @if (canAccess(['koordinator kecamatan']))
+                            <li class="dropdown {{ setSidebarActive(['admin.timpkh.koordinator.kecamatan.*']) }}">
+                                <a href="#" class="nav-link has-dropdown">{{ __('Koordinator Kecamatan') }}</a>
+                                <ul class="dropdown-menu">
+                                    <li
+                                        class="{{ setSidebarActive(['admin.timpkh.koordinator.kecamatan.dashboard']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timpkh.koordinator.kecamatan.dashboard') }}">{{ __('Dashboard') }}</a>
+                                    </li>
+                                    <li class="{{ setSidebarActive(['admin.timpkh.koordinator.kecamatan.laporan']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timpkh.koordinator.kecamatan.laporan') }}">{{ __('Laporan') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        {{-- Koordinator Nagari --}}
+                        @if (canAccess(['koordinator nagari']))
+                            <li class="dropdown {{ setSidebarActive(['admin.timpkh.koordinator.nagari.*']) }}">
+                                <a href="#" class="nav-link has-dropdown">{{ __('Koordinator Nagari') }}</a>
+                                <ul class="dropdown-menu">
+                                    <li class="{{ setSidebarActive(['admin.timpkh.koordinator.nagari.dashboard']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timpkh.koordinator.nagari.dashboard') }}">{{ __('Dashboard') }}</a>
+                                    </li>
+                                    <li class="{{ setSidebarActive(['admin.timpkh.koordinator.nagari.laporan']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timpkh.koordinator.nagari.laporan') }}">{{ __('Laporan') }}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+                    </ul>
+                </li>
+            @endif
+
 
             @if (canAccess(['news index']))
                 <li class="dropdown {{ setSidebarActive(['admin.news.*', 'admin.pending.news']) }}">
@@ -101,7 +268,7 @@
                     'admin.footer-info.*',
                     'admin.footer-grid-one.*',
                     'admin.footer-grid-three.*',
-                    'admin.footer-grid-two.*'
+                    'admin.footer-grid-two.*',
                 ]) }}
             ">
                     <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i>
@@ -112,9 +279,11 @@
                         <li class="{{ setSidebarActive(['admin.footer-info.*']) }}"><a class="nav-link"
                                 href="{{ route('admin.footer-info.index') }}">{{ __('admin.Footer Info') }}</a></li>
                         <li class="{{ setSidebarActive(['admin.footer-grid-one.*']) }}"><a class="nav-link"
-                                href="{{ route('admin.footer-grid-one.index') }}">{{ __('admin.Footer Grid One') }}</a></li>
+                                href="{{ route('admin.footer-grid-one.index') }}">{{ __('admin.Footer Grid One') }}</a>
+                        </li>
                         <li class="{{ setSidebarActive(['admin.footer-grid-two.*']) }}"><a class="nav-link"
-                                href="{{ route('admin.footer-grid-two.index') }}">{{ __('admin.Footer Grid Two') }}</a></li>
+                                href="{{ route('admin.footer-grid-two.index') }}">{{ __('admin.Footer Grid Two') }}</a>
+                        </li>
                         <li class="{{ setSidebarActive(['admin.footer-grid-three.*']) }}"><a class="nav-link"
                                 href="{{ route('admin.footer-grid-three.index') }}">{{ __('admin.Footer Grid Three') }}</a>
                         </li>
@@ -124,11 +293,9 @@
             @endif
 
             @if (canAccess(['access management index']))
-                <li class="dropdown
-                {{ setSidebarActive([
-                    'admin.role.*',
-                    'admin.role-users.*'
-                    ]) }}
+                <li
+                    class="dropdown
+                {{ setSidebarActive(['admin.role.*', 'admin.role-users.*']) }}
             ">
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-shield"></i>
                         <span>{{ __('admin.Access Management') }}</span></a>
@@ -138,7 +305,8 @@
                                 href="{{ route('admin.role-users.index') }}">{{ __('admin.Role Users') }}</a></li>
 
                         <li class="{{ setSidebarActive(['admin.role.*']) }}"><a class="nav-link"
-                                href="{{ route('admin.role.index') }}">{{ __('admin.Roles and Permissions') }}</a></li>
+                                href="{{ route('admin.role.index') }}">{{ __('admin.Roles and Permissions') }}</a>
+                        </li>
                     </ul>
                 </li>
             @endif
@@ -150,30 +318,30 @@
             @endif
 
             @if (canAccess(['languages index']))
-
-            <li class="dropdown
+                <li
+                    class="dropdown
                 {{ setSidebarActive([
                     'admin.frontend-localization.index',
                     'admin.admin-localization.index',
-                    'admin.language.*'
+                    'admin.language.*',
                 ]) }}
             ">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-language"></i>
-                    <span>{{ __('admin.Localization') }}</span></a>
-                <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['admin.language.*']) }}"><a class="nav-link"
-                        href="{{ route('admin.language.index') }}">
-                        <span>{{ __('admin.Languages') }}</span></a></li>
+                    <a href="#" class="nav-link has-dropdown"><i class="fas fa-language"></i>
+                        <span>{{ __('admin.Localization') }}</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ setSidebarActive(['admin.language.*']) }}"><a class="nav-link"
+                                href="{{ route('admin.language.index') }}">
+                                <span>{{ __('admin.Languages') }}</span></a></li>
 
-                    <li class="{{ setSidebarActive(['admin.frontend-localization.index']) }}"><a class="nav-link"
-                        href="{{ route('admin.frontend-localization.index') }}">
-                        <span>{{ __('admin.Frontend Lang') }}</span></a></li>
+                        <li class="{{ setSidebarActive(['admin.frontend-localization.index']) }}"><a
+                                class="nav-link" href="{{ route('admin.frontend-localization.index') }}">
+                                <span>{{ __('admin.Frontend Lang') }}</span></a></li>
 
-                    <li class="{{ setSidebarActive(['admin.admin-localization.index']) }}"><a class="nav-link"
-                        href="{{ route('admin.admin-localization.index') }}">
-                        <span>{{ __('admin.Admin Lang') }}</span></a></li>
-                </ul>
-            </li>
+                        <li class="{{ setSidebarActive(['admin.admin-localization.index']) }}"><a class="nav-link"
+                                href="{{ route('admin.admin-localization.index') }}">
+                                <span>{{ __('admin.Admin Lang') }}</span></a></li>
+                    </ul>
+                </li>
             @endif
 
             {{-- <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li> --}}

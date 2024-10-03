@@ -5,6 +5,9 @@ use App\Http\Controllers\Admin\kebijakanController;
 use App\Http\Controllers\Admin\AdController;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AnggaranController;
+use App\Http\Controllers\Admin\TimDsController;
+use App\Http\Controllers\Admin\TimPKHController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ContactMessageController;
@@ -140,8 +143,71 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
 
     Route::post('update-lang-string', [LocalizationController::class, 'updateLangString'])->name('update-lang-string');
 
-
     Route::post('translate-string', [LocalizationController::class, 'translateString'])->name('translate-string');
+
+
+
+    // Anggaran
+    Route::resource('anggaran', AnggaranController::class);
+
+
+    // Tim DS
+    Route::prefix('timds')->name('timds.')->group(function() {
+
+        // Ketua DS
+        Route::prefix('ketua')->name('ketua.')->group(function() {
+            Route::get('dashboard', [TimDSController::class, 'ketuaDashboard'])->name('dashboard');
+            Route::get('laporan', [TimDSController::class, 'ketuaLaporan'])->name('laporan');
+        });
+
+        // Koordinator Wilayah
+        Route::prefix('koordinator-wilayah')->name('koordinator.wilayah.')->group(function() {
+            Route::get('dashboard', [TimDSController::class, 'koordinatorWilayahDashboard'])->name('dashboard');
+            Route::get('laporan', [TimDSController::class, 'koordinatorWilayahLaporan'])->name('laporan');
+        });
+
+        // Koordinator Kecamatan
+        Route::prefix('koordinator-kecamatan')->name('koordinator.kecamatan.')->group(function() {
+            Route::get('dashboard', [TimDSController::class, 'koordinatorKecamatanDashboard'])->name('dashboard');
+            Route::get('laporan', [TimDSController::class, 'koordinatorKecamatanLaporan'])->name('laporan');
+        });
+
+        // Koordinator Nagari
+        Route::prefix('koordinator-nagari')->name('koordinator.nagari.')->group(function() {
+            Route::get('dashboard', [TimDSController::class, 'koordinatorNagariDashboard'])->name('dashboard');
+            Route::get('laporan', [TimDSController::class, 'koordinatorNagariLaporan'])->name('laporan');
+        });
+
+    });
+
+
+    Route::prefix('timpkh')->name('timpkh.')->group(function() {
+
+        // Ketua pkh
+        Route::prefix('ketua')->name('ketua.')->group(function() {
+            Route::get('dashboard', [TimPKHController::class, 'ketuaDashboard'])->name('dashboard');
+            Route::get('laporan', [TimPKHController::class, 'ketuaLaporan'])->name('laporan');
+        });
+
+        // Koordinator Wilayah
+        Route::prefix('koordinator-wilayah')->name('koordinator.wilayah.')->group(function() {
+            Route::get('dashboard', [TimPKHController::class, 'koordinatorWilayahDashboard'])->name('dashboard');
+            Route::get('laporan', [TimPKHController::class, 'koordinatorWilayahLaporan'])->name('laporan');
+        });
+
+        // Koordinator Kecamatan
+        Route::prefix('koordinator-kecamatan')->name('koordinator.kecamatan.')->group(function() {
+            Route::get('dashboard', [TimPKHController::class, 'koordinatorKecamatanDashboard'])->name('dashboard');
+            Route::get('laporan', [TimPKHController::class, 'koordinatorKecamatanLaporan'])->name('laporan');
+        });
+
+        // Koordinator Nagari
+        Route::prefix('koordinator-nagari')->name('koordinator.nagari.')->group(function() {
+            Route::get('dashboard', [TimPKHController::class, 'koordinatorNagariDashboard'])->name('dashboard');
+            Route::get('laporan', [TimPKHController::class, 'koordinatorNagariLaporan'])->name('laporan');
+        });
+
+    });
 
 });
 
