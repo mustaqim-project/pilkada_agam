@@ -65,20 +65,6 @@
                             </li>
                         @endif
 
-
-                        {{-- @can('view ketua dashboard')
-                        <li class="dropdown {{ setSidebarActive(['admin.timds.ketua.*']) }}">
-                            <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
-                            <ul class="dropdown-menu">
-                                <li class="{{ setSidebarActive(['admin.timds.ketua.dashboard']) }}">
-                                    <a class="nav-link" href="{{ route('admin.timds.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
-                                </li>
-                                <li class="{{ setSidebarActive(['admin.timds.ketua.laporan']) }}">
-                                    <a class="nav-link" href="{{ route('admin.timds.ketua.laporan') }}">{{ __('Laporan') }}</a>
-                                </li>
-                            </ul>
-                        </li>
-                    @endcan --}}
                         {{-- Koordinator Wilayah --}}
                         @if (canAccess(['koordinator wilayah']))
                             <li class="dropdown {{ setSidebarActive(['admin.timds.koordinator.wilayah.*']) }}">
@@ -399,6 +385,7 @@
                 </li>
             @endif
 
+
             @if (canAccess(['access management index']))
                 <li
                     class="dropdown
@@ -417,6 +404,17 @@
                     </ul>
                 </li>
             @endif
+
+            @if (canAccess(['user register']))
+                <li class="{{ setSidebarActive(['admin.anggaran.*']) }}">
+                    <a class="nav-link" href="{{ route('admin.anggaran.index') }}">
+                        <i class="fas fa-fire"></i>
+                        <span>{{ __('admin.Anggota') }}</span>
+                    </a>
+                </li>
+            @endif
+
+
 
             @if (canAccess(['setting index']))
                 <li class="{{ setSidebarActive(['admin.setting.*']) }}"><a class="nav-link"

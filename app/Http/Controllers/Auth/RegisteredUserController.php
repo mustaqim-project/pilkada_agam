@@ -29,7 +29,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register', [
+        return view('admin.tim_lapangan.index', [
             'admins' => \App\Models\Admin::all(),
         ]);
     }
