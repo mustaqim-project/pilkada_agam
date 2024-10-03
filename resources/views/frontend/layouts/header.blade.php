@@ -15,7 +15,7 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
         margin-bottom: 10px;
         padding-bottom: 5px;
     }
-    
+
     /* CSS untuk membatasi antara Contact dengan Login */
     .navbar-nav .nav-link[href="{{ route('register') }}"] {
         border-bottom: 1px solid #ccc;
@@ -49,7 +49,7 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
         margin-bottom: 10px;
         padding-bottom: 5px;
     }
-    
+
     .navbar-nav .dropdown-toggle {
         border-bottom: 1px solid #ccc; /* Garis bawah */
         margin-bottom: 10px; /* Ruang kosong di bawah */
@@ -101,10 +101,10 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                                     <a onclick="event.preventDefault(); this.closest('form').submit();" href="{{ route('logout') }}">{{ __('frontend.Logout') }}</a>
                                 </li>
                             </form>
-                            
+
                             @endif
-                            
-                            
+
+
                         </ul>
                     </div>
                 </div>
@@ -273,9 +273,6 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                                 @guest
                                 <a class="nav-link text-dark" href="{{ route('login') }}">
                                     {{ __('frontend.Login') }}
-                                </a>
-                                <a class="nav-link text-dark" href="{{ route('register') }}">
-                                    {{ __('frontend.Register') }}
                                 </a>
                                 @else
                                 <form method="POST" action="{{ route('logout') }}">
