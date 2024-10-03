@@ -19,14 +19,15 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Anda bisa mengembalikan tabel dengan mendefinisikannya kembali
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('pj_id')->constrained('admins'); // Mengambil dari admin id
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('tim', ['DS', 'PKH', 'MM', 'Asyiah', 'Parpol', 'JJ'])->nullable();
             $table->timestamps();
         });
+
     }
 };

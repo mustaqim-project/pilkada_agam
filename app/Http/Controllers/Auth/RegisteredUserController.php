@@ -16,11 +16,22 @@ use Illuminate\View\View;
 class RegisteredUserController extends Controller
 {
     /**
+     * Create a new controller instance.
+     */
+    public function __construct()
+    {
+        // Menetapkan middleware untuk mengontrol akses berdasarkan permission
+        $this->middleware(['permission:user register,admin'])->only(['create', 'store']);
+    }
+
+    /**
      * Display the registration view.
      */
     public function create(): View
     {
-        return view('auth.register');
+        return view('auth.register', [
+            'admins' => \App\Models\Admin::all(),
+        ]);
     }
 
     /**
@@ -34,12 +45,16 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'pj_id' => ['required', 'exists:admins,id'], // Validasi admin (penanggung jawab)
+            'tim' => ['required', 'in:DS,PKH,MM,Asyiah,Parpol,JJ'], // Validasi untuk enum 'tim'
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'pj_id' => $request->pj_id, // Menyimpan admin (penanggung jawab)
+            'tim' => $request->tim, // Menyimpan tim yang dipilih
         ]);
 
         event(new Registered($user));

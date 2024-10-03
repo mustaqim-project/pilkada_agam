@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('laporan_kegiatans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pj_id')->constrained('admins');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->enum('tim', ['DS', 'PKH', 'MM', 'Asyiah', 'Parpol', 'JJ'])->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('laporan_kegiatans');
     }
 };

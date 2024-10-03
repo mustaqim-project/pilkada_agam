@@ -1,39 +1,46 @@
 <?php
 
-use App\Http\Controllers\Admin\AboutController;
-use App\Http\Controllers\Admin\kebijakanController;
+use App\Models\Setting;
+use App\Models\FooterGridOne;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdController;
-use App\Http\Controllers\Admin\AdminAuthenticationController;
-use App\Http\Controllers\Admin\AdminUserController;
-use App\Http\Controllers\Admin\AnggaranController;
-use App\Http\Controllers\Admin\TimDsController;
-use App\Http\Controllers\Admin\TimPKHController;
-use App\Http\Controllers\Admin\TimMMController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ContactController;
-use App\Http\Controllers\Admin\ContactMessageController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\FooterGridOneController;
-use App\Http\Controllers\Admin\FooterGridThreeController;
-use App\Http\Controllers\Admin\FooterGridTwoController;
-use App\Http\Controllers\Admin\FooterInfoController;
-use App\Http\Controllers\Admin\HomeSectionSettingController;
-use App\Http\Controllers\Admin\LanguageController;
-use App\Http\Controllers\Admin\LocalizationController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\TimDsController;
+use App\Http\Controllers\Admin\TimMMController;
+use App\Http\Controllers\Admin\TimPKHController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\ProfileController;
-use App\Http\Controllers\Admin\RolePermisionController;
-use App\Http\Controllers\Admin\RoleUserController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\SocialCountController;
+use App\Http\Controllers\Admin\AnggaranController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\RoleUserController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\kebijakanController;
+use App\Http\Controllers\Admin\FooterInfoController;
 use App\Http\Controllers\Admin\SocialLinkController;
 use App\Http\Controllers\Admin\SubscriberController;
-use App\Models\FooterGridOne;
-use App\Models\Setting;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\SocialCountController;
+use App\Http\Controllers\Admin\LocalizationController;
+use App\Http\Controllers\Admin\FooterGridOneController;
+use App\Http\Controllers\Admin\FooterGridTwoController;
+use App\Http\Controllers\Admin\RolePermisionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\FooterGridThreeController;
+use App\Http\Controllers\Admin\HomeSectionSettingController;
+use App\Http\Controllers\Admin\AdminAuthenticationController;
 
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+
+
+    Route::get('register', [RegisteredUserController::class, 'create'])
+        ->name('register');
+
+    Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('login', [AdminAuthenticationController::class, 'login'])->name('login');
     Route::post('login', [AdminAuthenticationController::class, 'handleLogin'])->name('handle-login');
@@ -45,14 +52,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
 
     Route::get('reset-password/{token}', [AdminAuthenticationController::class, 'resetPassword'])->name('reset-password');
     Route::post('reset-password', [AdminAuthenticationController::class, 'handleResetPassword'])->name('reset-password.send');
-
-
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     /**Profile Routes */
-    Route::put('profile-password-update/{id}', [ ProfileController::class, 'passwordUpdate'])->name('profile-password.update');
+    Route::put('profile-password-update/{id}', [ProfileController::class, 'passwordUpdate'])->name('profile-password.update');
     Route::resource('profile', ProfileController::class);
 
     /** Language Route */
@@ -153,93 +158,87 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
 
 
     // Tim DS
-    Route::prefix('timds')->name('timds.')->group(function() {
+    Route::prefix('timds')->name('timds.')->group(function () {
 
         // Ketua DS
-        Route::prefix('ketua')->name('ketua.')->group(function() {
+        Route::prefix('ketua')->name('ketua.')->group(function () {
             Route::get('dashboard', [TimDSController::class, 'ketuaDashboard'])->name('dashboard');
             Route::get('laporan', [TimDSController::class, 'ketuaLaporan'])->name('laporan');
         });
 
         // Koordinator Wilayah
-        Route::prefix('koordinator-wilayah')->name('koordinator.wilayah.')->group(function() {
+        Route::prefix('koordinator-wilayah')->name('koordinator.wilayah.')->group(function () {
             Route::get('dashboard', [TimDSController::class, 'koordinatorWilayahDashboard'])->name('dashboard');
             Route::get('laporan', [TimDSController::class, 'koordinatorWilayahLaporan'])->name('laporan');
         });
 
         // Koordinator Kecamatan
-        Route::prefix('koordinator-kecamatan')->name('koordinator.kecamatan.')->group(function() {
+        Route::prefix('koordinator-kecamatan')->name('koordinator.kecamatan.')->group(function () {
             Route::get('dashboard', [TimDSController::class, 'koordinatorKecamatanDashboard'])->name('dashboard');
             Route::get('laporan', [TimDSController::class, 'koordinatorKecamatanLaporan'])->name('laporan');
         });
 
         // Koordinator Nagari
-        Route::prefix('koordinator-nagari')->name('koordinator.nagari.')->group(function() {
+        Route::prefix('koordinator-nagari')->name('koordinator.nagari.')->group(function () {
             Route::get('dashboard', [TimDSController::class, 'koordinatorNagariDashboard'])->name('dashboard');
             Route::get('laporan', [TimDSController::class, 'koordinatorNagariLaporan'])->name('laporan');
         });
-
     });
 
 
-    Route::prefix('timpkh')->name('timpkh.')->group(function() {
+    Route::prefix('timpkh')->name('timpkh.')->group(function () {
 
         // Ketua pkh
-        Route::prefix('ketua')->name('ketua.')->group(function() {
+        Route::prefix('ketua')->name('ketua.')->group(function () {
             Route::get('dashboard', [TimPKHController::class, 'ketuaDashboard'])->name('dashboard');
             Route::get('laporan', [TimPKHController::class, 'ketuaLaporan'])->name('laporan');
         });
 
         // Koordinator Wilayah
-        Route::prefix('koordinator-wilayah')->name('koordinator.wilayah.')->group(function() {
+        Route::prefix('koordinator-wilayah')->name('koordinator.wilayah.')->group(function () {
             Route::get('dashboard', [TimPKHController::class, 'koordinatorWilayahDashboard'])->name('dashboard');
             Route::get('laporan', [TimPKHController::class, 'koordinatorWilayahLaporan'])->name('laporan');
         });
 
         // Koordinator Kecamatan
-        Route::prefix('koordinator-kecamatan')->name('koordinator.kecamatan.')->group(function() {
+        Route::prefix('koordinator-kecamatan')->name('koordinator.kecamatan.')->group(function () {
             Route::get('dashboard', [TimPKHController::class, 'koordinatorKecamatanDashboard'])->name('dashboard');
             Route::get('laporan', [TimPKHController::class, 'koordinatorKecamatanLaporan'])->name('laporan');
         });
 
         // Koordinator Nagari
-        Route::prefix('koordinator-nagari')->name('koordinator.nagari.')->group(function() {
+        Route::prefix('koordinator-nagari')->name('koordinator.nagari.')->group(function () {
             Route::get('dashboard', [TimPKHController::class, 'koordinatorNagariDashboard'])->name('dashboard');
             Route::get('laporan', [TimPKHController::class, 'koordinatorNagariLaporan'])->name('laporan');
         });
-
     });
 
 
 
-    Route::prefix('timmm')->name('timmm.')->group(function() {
+    Route::prefix('timmm')->name('timmm.')->group(function () {
 
         // Ketua mm
-        Route::prefix('ketua')->name('ketua.')->group(function() {
+        Route::prefix('ketua')->name('ketua.')->group(function () {
             Route::get('dashboard', [TimMMController::class, 'ketuaDashboard'])->name('dashboard');
             Route::get('laporan', [TimMMController::class, 'ketuaLaporan'])->name('laporan');
         });
 
         // Koordinator Wilayah
-        Route::prefix('koordinator-wilayah')->name('koordinator.wilayah.')->group(function() {
+        Route::prefix('koordinator-wilayah')->name('koordinator.wilayah.')->group(function () {
             Route::get('dashboard', [TimMMController::class, 'koordinatorWilayahDashboard'])->name('dashboard');
             Route::get('laporan', [TimMMController::class, 'koordinatorWilayahLaporan'])->name('laporan');
         });
 
         // Koordinator Kecamatan
-        Route::prefix('koordinator-kecamatan')->name('koordinator.kecamatan.')->group(function() {
+        Route::prefix('koordinator-kecamatan')->name('koordinator.kecamatan.')->group(function () {
             Route::get('dashboard', [TimMMController::class, 'koordinatorKecamatanDashboard'])->name('dashboard');
             Route::get('laporan', [TimMMController::class, 'koordinatorKecamatanLaporan'])->name('laporan');
         });
 
         // Koordinator Nagari
-        Route::prefix('koordinator-nagari')->name('koordinator.nagari.')->group(function() {
+        Route::prefix('koordinator-nagari')->name('koordinator.nagari.')->group(function () {
             Route::get('dashboard', [TimMMController::class, 'koordinatorNagariDashboard'])->name('dashboard');
             Route::get('laporan', [TimMMController::class, 'koordinatorNagariLaporan'])->name('laporan');
         });
-
     });
-
 });
-
-
