@@ -29,15 +29,10 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        // Mendapatkan pengguna yang sedang login
-        $authUser = auth()->user();
-
-        // Mengecek apakah pengguna memiliki role 'Super Admin'
+        $authUser = auth()->admin();
         if ($authUser->hasRole('Super Admin')) {
-            // Jika Super Admin, ambil semua pengguna dengan relasi Admin
             $admins = User::with('admin')->get();
         } else {
-            // Jika bukan Super Admin, ambil berdasarkan pj_id dengan relasi Admin
             $admins = User::with('admin')->where('pj_id', $authUser->id)->get();
         }
 
