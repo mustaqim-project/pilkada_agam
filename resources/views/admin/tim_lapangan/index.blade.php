@@ -26,6 +26,7 @@
                                 <th>{{ __('admin.Email') }}</th>
                                 <th>{{ __('admin.PJ Name') }}</th> <!-- Menambahkan kolom PJ Name -->
                                 <th>{{ __('admin.Tim') }}</th>
+                                <th>{{ __('admin.Action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,9 +35,17 @@
                                 <td>{{ $admin->id }}</td>
                                 <td>{{ $admin->name }}</td>
                                 <td>{{ $admin->email }}</td>
-                                <td>{{ $admin->admin ? $admin->admin->name : 'N/A' }}</td> <!-- Menampilkan PJ Name dari Admin -->
+                                <td>{{ $admin->admin ? $admin->admin->name : 'N/A' }}</td>
                                 <td>{{ $admin->tim }}</td>
+                                <td>
 
+                                        <a href="{{ route('admin.user.edit', $admin->id) }}" class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{ route('admin.user.destroy', $admin->id) }}" class="btn btn-danger delete-item">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
