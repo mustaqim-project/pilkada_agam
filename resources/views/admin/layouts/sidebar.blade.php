@@ -406,8 +406,8 @@
             @endif
 
             @if (canAccess(['user register']))
-                <li class="{{ setSidebarActive(['admin.anggaran.*']) }}">
-                    <a class="nav-link" href="{{ route('admin.anggaran.index') }}">
+                <li class="{{ setSidebarActive(['admin.register.*']) }}">
+                    <a class="nav-link" href="{{ route('admin.register') }}">
                         <i class="fas fa-fire"></i>
                         <span>{{ __('admin.Anggota') }}</span>
                     </a>
