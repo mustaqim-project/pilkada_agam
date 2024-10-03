@@ -26,7 +26,6 @@
                                 <th>{{ __('admin.Email') }}</th>
                                 <th>{{ __('admin.PJ Name') }}</th> <!-- Menambahkan kolom PJ Name -->
                                 <th>{{ __('admin.Tim') }}</th>
-                                <th>{{ __('admin.Action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,16 +36,7 @@
                                 <td>{{ $admin->email }}</td>
                                 <td>{{ $admin->admin ? $admin->admin->name : 'N/A' }}</td> <!-- Menampilkan PJ Name dari Admin -->
                                 <td>{{ $admin->tim }}</td>
-                                <td>
-                                    @if ($admin->getRoleNames()->first() != 'Super Admin')
-                                        <a href="{{ route('admin.role-users.edit', $admin->id) }}" class="btn btn-primary">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="{{ route('admin.role-users.destroy', $admin->id) }}" class="btn btn-danger delete-item">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
-                                    @endif
-                                </td>
+
                             </tr>
                             @endforeach
                         </tbody>
