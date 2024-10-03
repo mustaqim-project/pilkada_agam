@@ -49,7 +49,7 @@
                     <ul class="dropdown-menu">
 
                         {{-- Ketua DS --}}
-                        @if (canAccess(['ketua ds']))
+                        @if (canAccess(['view ketua dashboard']))
                             <li class="dropdown {{ setSidebarActive(['admin.timds.ketua.*']) }}">
                                 <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                 <ul class="dropdown-menu">
@@ -65,6 +65,20 @@
                             </li>
                         @endif
 
+
+                        {{-- @can('view ketua dashboard')
+                        <li class="dropdown {{ setSidebarActive(['admin.timds.ketua.*']) }}">
+                            <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
+                            <ul class="dropdown-menu">
+                                <li class="{{ setSidebarActive(['admin.timds.ketua.dashboard']) }}">
+                                    <a class="nav-link" href="{{ route('admin.timds.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                </li>
+                                <li class="{{ setSidebarActive(['admin.timds.ketua.laporan']) }}">
+                                    <a class="nav-link" href="{{ route('admin.timds.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endcan --}}
                         {{-- Koordinator Wilayah --}}
                         @if (canAccess(['koordinator wilayah']))
                             <li class="dropdown {{ setSidebarActive(['admin.timds.koordinator.wilayah.*']) }}">
