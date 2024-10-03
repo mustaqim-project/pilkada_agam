@@ -16,12 +16,6 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
         padding-bottom: 5px;
     }
 
-    /* CSS untuk membatasi antara Contact dengan Login */
-    /* .navbar-nav .nav-link[href="{{ route('register') }}"] {
-        border-bottom: 1px solid #ccc;
-        margin-bottom: 10px;
-        padding-bottom: 5px;
-    } */
 
     /* CSS untuk membatasi antara Contact dengan Login */
     .navbar-nav .nav-link[href="{{ route('contact') }}"] {
@@ -93,7 +87,6 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                         <ul class="topbar-link">
                             @if (!auth()->check())
                             <li><a href="{{ route('login') }}">{{ __('frontend.Login') }}</a></li>
-                            <li><a href="{{ route('register') }}">{{ __('frontend.Register') }}</a></li>
                             @else
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
