@@ -29,6 +29,22 @@
 
     <!-- Flatpickr Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <style>
+        /* Membatasi ukuran maksimal tampilan pada perangkat desktop */
+        body {
+            max-width: 1024px; /* Ukuran maksimal tablet dalam piksel */
+            margin: 0 auto;    /* Menengahkan tampilan di layar lebih lebar */
+        }
+
+        /* Untuk layar yang lebih kecil dari 1024px, biarkan layout responsif */
+        @media (max-width: 1024px) {
+            body {
+                max-width: 100%; /* Sesuaikan dengan lebar layar perangkat */
+            }
+        }
+    </style>
+
 </head>
 
 <body class="theme-light" data-highlight="green3">
