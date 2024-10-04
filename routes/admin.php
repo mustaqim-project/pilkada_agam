@@ -255,7 +255,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
 
 
 
-    Route::get('reports', [ReportController::class, 'index'])->name('admin.reports.index');
-    Route::get('reports/create', [ReportController::class, 'create'])->name('admin.reports.create');
-    Route::post('reports', [ReportController::class, 'store'])->name('admin.reports.store');
+    Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('reports/create', [ReportController::class, 'create'])->name('reports.create');
+    Route::post('reports', [ReportController::class, 'store'])->name('reports.store');
 });
