@@ -398,16 +398,20 @@
                         <li class="{{ setSidebarActive(['admin.role.*']) }}"><a class="nav-link"
                                 href="{{ route('admin.role.index') }}">{{ __('admin.Roles and Permissions') }}</a>
                         </li>
+
+                        @if (canAccess(['user register']))
+                            <li class="{{ setSidebarActive(['admin.register.*']) }}">
+                                <a class="nav-link" href="{{ route('admin.register') }}">
+                                    <span>{{ __('admin.Tim Lapangan') }}</span>
+                                </a>
+                            </li>
+                        @endif
+
+
                     </ul>
                 </li>
 
-                @if (canAccess(['user register']))
-                    <li class="{{ setSidebarActive(['admin.register.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.register') }}">
-                            <span>{{ __('admin.Tim Lapangan') }}</span>
-                        </a>
-                    </li>
-                @endif
+
             @endif
 
 
