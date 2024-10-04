@@ -39,12 +39,12 @@
                             <td>{{ $admin->admin ? $admin->admin->name : 'N/A' }}</td>
                             <td>{{ $admin->tim }}</td>
                             <td>
-                                <a href="{{ route('admin.user.edit', $admin->id) }}" class="btn btn-primary">
+                                {{-- <a href="{{ route('admin.user.edit', $admin->id) }}" class="btn btn-primary">
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <a href="{{ route('admin.user.destroy', $admin->id) }}" class="btn btn-danger delete-item">
                                     <i class="fas fa-trash-alt"></i>
-                                </a>
+                                </a> --}}
                             </td>
                         </tr>
                         @endforeach
@@ -107,7 +107,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">{{ __('frontend.Sign up') }}</button>
+                        <button type="submit" class="btn btn-primary btn-block">{{ __('frontend.Simpan') }}</button>
                     </div>
                 </form>
             </div>
