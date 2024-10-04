@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('anggaran_id');
             $table->unsignedBigInteger('periode_id');
             $table->unsignedBigInteger('jenis_pembiayaan_id');
-            $table->decimal('jumlah_digunakan', 15, 2);
+            $table->string('jumlah_digunakan');
             $table->enum('status', ['unpaid', 'paid']);
             $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();

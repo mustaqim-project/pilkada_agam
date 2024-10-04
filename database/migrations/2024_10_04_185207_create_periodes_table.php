@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nama_periode');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
-            $table->decimal('anggaran_periode', 15, 2);
+            $table->string('anggaran_periode');
             $table->timestamps();
 
         });
