@@ -34,20 +34,23 @@
         <div class="card card-style ml-0 mr-0 bg-white">
             <div class="row mt-3 pt-1 mb-3">
                 <div class="col-4 text-center">
-                    <a href="{{ route('kanvasing.create') }}">
+                    <a href="#">
+                    {{-- <a href="{{ route('kanvasing.create') }}"> --}}
                         <i class="ml-3 mr-3" data-feather="user" style="color: #FF5733;"></i>
                         <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">Kunjungan Warga</h5>
                     </a>
                 </div>
                 <div class="col-4 text-center">
-                    <a href="{{ route('analisis.read') }}">
+                    <a href="#">
+                    {{-- <a href="{{ route('analisis.read') }}"> --}}
                         <i class="ml-3 mr-3" data-feather="pie-chart" style="color: #33B5FF;"></i>
                         <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">
                             Analisis Suara</h5>
                     </a>
                 </div>
                 <div class="col-4 text-center">
-                    <a href="{{ route('manajement.read') }}">
+                    <a href="#">
+                    {{-- <a href="{{ route('manajement.read') }}"> --}}
                         <i class="ml-3 mr-3" data-feather="users" style="color: #FFC733;"></i>
                         <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">
                             Manajemen Pilkada</h5>
@@ -70,7 +73,8 @@
                     Login
                 </a>
                 @else
-                <a href="{{ route('login') }}" class="btn btn-full btn-m rounded-s text-uppercase font-900 shadow-xl bg-highlight">
+                <a href="#">
+                {{-- <a href="{{ route('login') }}" class="btn btn-full btn-m rounded-s text-uppercase font-900 shadow-xl bg-highlight"> --}}
                     Login
                 </a>
                 @endif
