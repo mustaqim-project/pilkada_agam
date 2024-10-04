@@ -22,6 +22,9 @@
                         <td>{{ $report->period }}</td>
                         <td>{{ $report->report_content }}</td>
                         <td>{{ $report->assignee->name }}</td>
+                        <td>
+                            <a href="{{ route('admin.reports.show', $report->id) }}" class="btn btn-info">Lihat Detail</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -42,12 +45,15 @@
             </thead>
             <tbody>
                 @foreach ($receivedReports as $report)
-                    <tr>
-                        <td>{{ $report->period }}</td>
-                        <td>{{ $report->report_content }}</td>
-                        <td>{{ $report->creator->name }}</td>
-                    </tr>
-                @endforeach
+                <tr>
+                    <td>{{ $report->period }}</td>
+                    <td>{{ $report->report_content }}</td>
+                    <td>{{ $report->creator->name }}</td>
+                    <td>
+                        <a href="{{ route('admin.reports.show', $report->id) }}" class="btn btn-info">Lihat Detail</a>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     @endif
