@@ -95,7 +95,7 @@
 
                     <!-- Select Option untuk Tim -->
                     <div class="form-group">
-                        <label for="tim">{{ __('frontend.Tim') }}</label>
+                        <label for="tim">{{ __('admin.Tim') }}</label>
                         <select class="form-control" id="tim" name="tim">
                             <option value="DS">DS</option>
                             <option value="PKH">PKH</option>
