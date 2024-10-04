@@ -71,22 +71,22 @@
                 <form method="POST" action="{{ route('admin.register') }}">
                     @csrf
                     <div class="form-group">
-                        <input class="form-control" placeholder="{{ __('frontend.Name') }}" type="text" name="name">
+                        <input class="form-control" placeholder="{{ __('admin.Name') }}" type="text" name="name">
                     </div>
                     <div class="form-group">
-                        <input class="form-control" placeholder="{{ __('frontend.Email') }}" type="email" name="email">
+                        <input class="form-control" placeholder="{{ __('admin.Email') }}" type="email" name="email">
                         @error('email')
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <input class="form-control" placeholder="{{ __('frontend.Password') }}" type="password" name="password">
+                        <input class="form-control" placeholder="{{ __('admin.Password') }}" type="password" name="password">
                         @error('password')
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <input class="form-control" placeholder="{{ __('frontend.Confirm Password') }}" type="password"
+                        <input class="form-control" placeholder="{{ __('admin.Confirm Password') }}" type="password"
                             name="password_confirmation">
                         @error('password_confirmation')
                         <p class="text-danger">{{ $message }}</p>
@@ -107,7 +107,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">{{ __('frontend.Simpan') }}</button>
+                        <button type="submit" class="btn btn-primary btn-block">{{ __('admin.Simpan') }}</button>
                     </div>
                 </form>
             </div>
