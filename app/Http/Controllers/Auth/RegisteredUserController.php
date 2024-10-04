@@ -29,7 +29,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $authUser = Auth::guard('admin')->user(); // Mengambil user yang terautentikasi
+        $authUser = Auth::guard('admin')->user();
 
         if ($authUser->hasRole('Super Admin')) {
             $admins = User::with('admin')->get();
@@ -37,7 +37,7 @@ class RegisteredUserController extends Controller
             $admins = User::with('admin')->where('pj_id', $authUser->id)->get();
         }
 
-        return view('admin.tim_lapangan.index', [
+        return view('admin.users.index', [
             'admins' => $admins,
         ]);
     }
