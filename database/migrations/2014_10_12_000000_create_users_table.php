@@ -21,7 +21,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pj_id')->constrained('admins'); // Mengambil dari admin id
+            $table->foreignId('pj_id')->constrained('admins');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');

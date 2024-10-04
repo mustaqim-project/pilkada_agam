@@ -10,8 +10,8 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('created_by')->constrained('admins')->onDelete('cascade');
-            $table->foreignId('assigned_to')->constrained('admins')->onDelete('cascade');
+            $table->foreignId('created_by');
+            $table->foreignId('assigned_to');
             $table->text('report_content');
             $table->string('period');
             $table->timestamps();

@@ -20,7 +20,6 @@ return new class extends Migration
             $table->decimal('anggaran_periode', 15, 2);
             $table->timestamps();
 
-            $table->foreign('anggaran_id')->references('id')->on('anggaran');
         });
 
     }

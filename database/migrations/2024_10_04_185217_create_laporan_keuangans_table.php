@@ -21,9 +21,7 @@ return new class extends Migration
             $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();
 
-            $table->foreign('anggaran_id')->references('id')->on('anggaran');
-            $table->foreign('periode_id')->references('id')->on('periode');
-            $table->foreign('jenis_pembiayaan_id')->references('id')->on('jenis_pembiayaan');
+
         });
 
     }

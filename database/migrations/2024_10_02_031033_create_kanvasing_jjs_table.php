@@ -14,22 +14,24 @@ return new class extends Migration
         Schema::create('kanvasing_jjs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->string('kecamatan');
-            $table->string('kelurahan');
-            $table->string('no_kk');
-            $table->string('no_ktp')->unique();
-            $table->string('nama_responden');
-            $table->date('tgl_lahir');
+            $table->string('provinsi', 100)->nullable();
+            $table->string('kabupaten', 100)->nullable();
+            $table->string('kecamatan', 100)->nullable();
+            $table->string('kelurahan', 100)->nullable();
+            $table->string('no_kk', 16)->nullable();
+            $table->string('no_ktp', 16)->unique();
+            $table->string('nama_responden', 100)->nullable();
+            $table->date('tgl_lahir')->nullable();
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
-            $table->foreignId('agama_id')->nullable();
-            $table->foreignId('pekerjaan_id')->nullable();
+            $table->foreignId('agama_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('pekerjaan_id')->nullable()->constrained()->nullOnDelete();
             $table->text('alamat')->nullable();
             $table->string('foto_kegiatan')->nullable();
-            $table->boolean('brosur')->nullable();
-            $table->boolean('stiker')->nullable();
-            $table->boolean('kartu_coblos')->nullable();
-            $table->string('longitude');
-            $table->string('latitude');
+            $table->boolean('brosur')->default(false);
+            $table->boolean('stiker')->default(false);
+            $table->boolean('kartu_coblos')->default(false);
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
             $table->timestamps();
         });
     }
