@@ -14,10 +14,14 @@ class ReportController extends Controller
     public function index()
     {
         $admin = Auth::guard('admin')->user();
-        // Mendapatkan semua laporan yang ditugaskan kepada admin ini
-        $reports = $admin->assignedReports()->with('creator')->get();
 
-        return view('admin.reports.index', compact('reports'));
+        // Mendapatkan semua laporan yang dikirim oleh admin ini
+        $sentReports = $admin->reports()->with('assignee')->get();
+
+        // Mendapatkan semua laporan yang diterima oleh admin ini
+        $receivedReports = $admin->assignedReports()->with('creator')->get();
+
+        return view('admin.reports.index', compact('sentReports', 'receivedReports'));
     }
 
     public function create()
