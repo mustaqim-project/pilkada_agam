@@ -73,8 +73,7 @@
                     Login
                 </a>
                 @else
-                <a href="#">
-                {{-- <a href="{{ route('login') }}" class="btn btn-full btn-m rounded-s text-uppercase font-900 shadow-xl bg-highlight"> --}}
+                <a href="{{ route('login') }}" class="btn btn-full btn-m rounded-s text-uppercase font-900 shadow-xl bg-highlight">
                     Login
                 </a>
                 @endif
