@@ -387,10 +387,7 @@
 
 
             @if (canAccess(['access management index']))
-                <li
-                    class="dropdown
-                {{ setSidebarActive(['admin.role.*', 'admin.role-users.*']) }}
-            ">
+                <li class="dropdown{{ setSidebarActive(['admin.role.*', 'admin.role-users.*']) }}">
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-shield"></i>
                         <span>{{ __('admin.Access Management') }}</span></a>
                     <ul class="dropdown-menu">
@@ -403,16 +400,17 @@
                         </li>
                     </ul>
                 </li>
+
+                @if (canAccess(['user register']))
+                    <li class="{{ setSidebarActive(['admin.register.*']) }}">
+                        <a class="nav-link" href="{{ route('admin.register') }}">
+                            <span>{{ __('admin.Tim Lapangan') }}</span>
+                        </a>
+                    </li>
+                @endif
             @endif
 
-            @if (canAccess(['user register']))
-                <li class="{{ setSidebarActive(['admin.register.*']) }}">
-                    <a class="nav-link" href="{{ route('admin.register') }}">
-                        <i class="fas fa-fire"></i>
-                        <span>{{ __('admin.Anggota') }}</span>
-                    </a>
-                </li>
-            @endif
+
 
 
 
