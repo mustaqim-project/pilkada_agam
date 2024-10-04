@@ -1,0 +1,57 @@
+{
+    "version": "2.1",
+    "comment": "---Above version must be the same as data-pwa-version",
+    "lang": "en",
+    "name": "Sikadsis",
+    "scope": "/",
+    "display": "fullscreen",
+    "start_url": "/",
+    "short_name": "Sikadsis - Sistem Informasi Kampanye dan Analisis Pilkada Sistematis",
+    "description": "",
+    "orientation": "portrait",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "generated": "true",
+    "icons": [
+      {
+        "src": "images/logo.png",
+        "sizes": "72x72",
+        "type": "image/png"
+      },
+      {
+        "src": "images/logo.png",
+        "sizes": "96x96",
+        "type": "image/png"
+      },
+      {
+        "src": "images/logo.png",
+        "sizes": "128x128",
+        "type": "image/png"
+      },
+      {
+        "src": "images/logo.png",
+        "sizes": "144x144",
+        "type": "image/png"
+      },
+      {
+        "src": "images/logo.png",
+        "sizes": "152x152",
+        "type": "image/png"
+      },
+      {
+        "src": "images/logo.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "images/logo.png",
+        "sizes": "384x384",
+        "type": "image/png"
+      },
+      {
+        "src": "images/logo.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
