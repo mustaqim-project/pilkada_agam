@@ -24,11 +24,6 @@
             <textarea name="report_content" id="report_content" class="form-control summernote" required></textarea>
         </div>
 
-        <div class="form-group">
-            <label for="attachment">Lampiran</label>
-            <textarea name="attachment" id="attachment" class="form-control summernote"></textarea>
-        </div>
-
         <button type="submit" class="btn btn-primary">Kirim Laporan</button>
     </form>
 </div>
