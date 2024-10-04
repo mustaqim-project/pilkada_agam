@@ -411,9 +411,6 @@
             @endif
 
 
-
-
-
             @if (canAccess(['setting index']))
                 <li class="{{ setSidebarActive(['admin.setting.*']) }}"><a class="nav-link"
                         href="{{ route('admin.setting.index') }}"><i class="fas fa-cog"></i>
