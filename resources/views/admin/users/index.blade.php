@@ -70,6 +70,26 @@
                 <!-- Form Tambah Data -->
                 <form method="POST" action="{{ route('admin.register') }}">
                     @csrf
+                    @php
+                        use App\Models\Admin;
+                        use Spatie\Permission\Models\Role;
+
+                        $admins = Admin::with('roles')->get();
+
+
+                    @endphp
+                    <div class="form-group">
+                        <label for="pj_id">{{ __('admin.Nama Koordinator') }}</label>
+                        <select class="form-control" name="pj_id" id="pj_id">
+                            <option value="">{{ __('Pilih Koordinator') }}</option>
+                            @foreach($admins as $admin)
+                                @foreach($admin->roles as $role)
+                                    <option value="{{ $admin->id }}">{{ $admin->name }} - {{ $role->name }}</option>
+                                @endforeach
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <input class="form-control" placeholder="{{ __('admin.Name') }}" type="text" name="name">
                     </div>
