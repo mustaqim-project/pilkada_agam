@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kanvasing_parpols', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('provinsi', 100)->nullable();
             $table->string('kabupaten', 100)->nullable();
             $table->string('kecamatan', 100)->nullable();
@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('nama_responden', 100)->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
-            $table->foreignId('agama_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('pekerjaan_id')->nullable()->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('agama_id')->nullable()->constrained()->nullOnDelete();
+            $table->unsignedBigInteger('pekerjaan_id')->nullable()->constrained()->nullOnDelete();
             $table->text('alamat')->nullable();
             $table->string('foto_kegiatan')->nullable();
             $table->boolean('brosur')->default(false);

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('spanduk_pkhs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('provinsi', 100)->nullable();
             $table->string('kabupaten', 100)->nullable();
             $table->string('kecamatan', 100)->nullable();

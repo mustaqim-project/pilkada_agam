@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('anggaran', function (Blueprint $table) {
             $table->id();
-            $table->string('tim_id');
+            $table->unsignedBigInteger('tim_id');
             $table->string('total_anggaran');
             $table->string('jumlah_periode');
             $table->timestamps();

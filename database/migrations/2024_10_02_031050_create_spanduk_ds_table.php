@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('spanduk_ds', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('kecamatan');
-            $table->string('kelurahan');
+            $table->unsignedBigInteger('user_id');
+            $table->string('provinsi', 100)->nullable();
+            $table->string('kabupaten', 100)->nullable();
+            $table->string('kecamatan', 100)->nullable();
+            $table->string('kelurahan', 100)->nullable();
             $table->text('alamat')->nullable();
             $table->string('foto_kegiatan')->nullable();
-            $table->string('longitude');
-            $table->string('latitude');
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
             $table->timestamps();
         });
     }

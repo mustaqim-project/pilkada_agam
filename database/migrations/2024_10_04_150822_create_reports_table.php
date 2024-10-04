@@ -10,9 +10,9 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('created_by');
-            $table->foreignId('assigned_to');
-            $table->text('report_content');
+            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('assigned_to');
+            $table->text(column: 'report_content');
             $table->string('period');
             $table->timestamps();
         });
