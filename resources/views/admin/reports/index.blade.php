@@ -4,6 +4,11 @@
 <div class="container">
     <h1>Laporan Tim</h1>
 
+    <!-- Tombol Tambah Laporan -->
+    <div class="mb-3">
+        <a href="{{ route('admin.reports.create') }}" class="btn btn-success">Tambah Laporan</a>
+    </div>
+
     <h2>Laporan yang Dikirim</h2>
     @if ($sentReports->isEmpty())
         <p>Tidak ada laporan yang dikirim.</p>
@@ -14,6 +19,7 @@
                     <th>Periode</th>
                     <th>Isi Laporan</th>
                     <th>Dikirim ke</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +47,7 @@
                     <th>Periode</th>
                     <th>Isi Laporan</th>
                     <th>Dari</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
