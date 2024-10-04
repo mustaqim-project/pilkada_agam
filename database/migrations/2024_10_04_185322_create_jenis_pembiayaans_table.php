@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('anggaran_aisyiah_apks', function (Blueprint $table) {
+        Schema::create('jenis_pembiayaan', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_pembiayaan');
             $table->timestamps();
         });
+
     }
 
     /**
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('anggaran_aisyiah_apks');
+        Schema::dropIfExists('jenis_pembiayaans');
     }
 };

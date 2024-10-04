@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('anggarans', function (Blueprint $table) {
+        Schema::create('anggaran', function (Blueprint $table) {
             $table->id();
+            $table->string('tim');
+            $table->decimal('total_anggaran', 15, 2);
+            $table->integer('jumlah_periode');
             $table->timestamps();
         });
+
     }
 
     /**

@@ -11,16 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('laporan_kegiatan', function (Blueprint $table) {
+        Schema::create('laporan_keuangan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('anggaran_id');
             $table->unsignedBigInteger('periode_id');
-            $table->text('deskripsi_kegiatan');
-            $table->string('lampiran_kegiatan')->nullable();
+            $table->unsignedBigInteger('jenis_pembiayaan_id');
+            $table->decimal('jumlah_digunakan', 15, 2);
+            $table->enum('status', ['unpaid', 'paid']);
+            $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();
 
             $table->foreign('anggaran_id')->references('id')->on('anggaran');
             $table->foreign('periode_id')->references('id')->on('periode');
+            $table->foreign('jenis_pembiayaan_id')->references('id')->on('jenis_pembiayaan');
         });
 
     }
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('laporan_kegiatans');
+        Schema::dropIfExists('laporan_keuangans');
     }
 };
