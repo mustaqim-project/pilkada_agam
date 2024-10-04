@@ -50,7 +50,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'pj_id' => ['required', 'exists:admins,id'], // Validasi admin (penanggung jawab)
+            // 'pj_id' => ['required', 'exists:admins,id'], // Validasi admin (penanggung jawab)
             'tim' => ['required', 'in:DS,PKH,MM,Asyiah,Parpol,JJ'], // Validasi untuk enum 'tim'
         ]);
 
@@ -58,7 +58,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'pj_id' => $request->pj_id, // Menyimpan admin (penanggung jawab)
+            'pj_id' => 6, // Menyimpan admin (penanggung jawab)
             'tim' => $request->tim, // Menyimpan tim yang dipilih
         ]);
 
