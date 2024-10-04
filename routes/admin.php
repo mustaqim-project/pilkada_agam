@@ -32,6 +32,7 @@ use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\FooterGridThreeController;
 use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
+use App\Http\Controllers\Admin\ReportController;
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -241,4 +242,20 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
             Route::get('laporan', [TimMMController::class, 'koordinatorNagariLaporan'])->name('laporan');
         });
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Route::get('reports', [ReportController::class, 'index'])->name('admin.reports.index');
+    Route::get('reports/create', [ReportController::class, 'create'])->name('admin.reports.create');
+    Route::post('reports', [ReportController::class, 'store'])->name('admin.reports.store');
 });

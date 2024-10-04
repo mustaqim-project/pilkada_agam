@@ -45,27 +45,32 @@ class RegisteredUserController extends Controller
 
 
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'pj_id' => ['required', 'exists:admins,id'], // Validasi admin (penanggung jawab)
-            'tim' => ['required', 'in:DS,PKH,MM,Asyiah,Parpol,JJ'], // Validasi untuk enum 'tim'
-        ]);
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'], // Perbaiki unique table dengan tabel `users`
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        'pj_id' => ['required', 'exists:admins,id'], // Validasi admin (penanggung jawab)
+        'tim' => ['required', 'in:DS,PKH,MM,Asyiah,Parpol,JJ'], // Validasi untuk enum 'tim'
+    ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'pj_id' => 6, // Menyimpan admin (penanggung jawab)
-            'tim' => $request->tim, // Menyimpan tim yang dipilih
-        ]);
+    // Buat user baru berdasarkan input yang telah divalidasi
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'pj_id' => $request->pj_id, // Simpan admin penanggung jawab yang dipilih
+        'tim' => $request->tim, // Simpan tim yang dipilih
+    ]);
 
-        event(new Registered($user));
+    // Event untuk user terdaftar
+    event(new Registered($user));
 
-        Auth::login($user);
+    // Login otomatis setelah registrasi
+    Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
-    }
+    // Redirect ke halaman daftar pengguna dengan pesan sukses
+    return redirect()->route('admin.users.index')->with('success', 'Tim berhasil ditambahkan.');
+}
+
 }

@@ -46,4 +46,14 @@ class Admin extends Authenticatable
         'password' => 'hashed',
     ];
 
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'created_by');
+    }
+
+    public function assignedReports()
+    {
+        return $this->hasMany(Report::class, 'assigned_to');
+    }
 }

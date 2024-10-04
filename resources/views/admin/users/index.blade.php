@@ -73,10 +73,7 @@
                     @php
                         use App\Models\Admin;
                         use Spatie\Permission\Models\Role;
-
                         $admins = Admin::with('roles')->get();
-
-
                     @endphp
                     <div class="form-group">
                         <label for="pj_id">{{ __('admin.Nama Koordinator') }}</label>
