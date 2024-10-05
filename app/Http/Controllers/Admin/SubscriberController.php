@@ -15,9 +15,7 @@ class SubscriberController extends Controller
         $this->middleware(['permission:subscribers index,admin'])->only(['index', 'store']);
         $this->middleware(['permission:subscribers delete,admin'])->only(['destroy']);
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $subs = Subscriber::all();
