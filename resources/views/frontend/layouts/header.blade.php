@@ -8,7 +8,7 @@ $featuredCategories = \App\Models\Category::where([
 
 $categories = \App\Models\Category::where(['status' => 1, 'language' => getLangauge(), 'show_at_nav' => 0])->get();
 @endphp
-<style>
+{{-- <style>
     /* CSS untuk membatasi antara kategori dengan About Us */
     .navbar-nav .nav-link[href="{{ route('about') }}"] {
         border-bottom: 1px solid #ccc;
@@ -49,7 +49,7 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
         margin-bottom: 10px; /* Ruang kosong di bawah */
         padding-bottom: 5px; /* Padding bawah */
     }
-</style>
+</style> --}}
 
 <header class="bg-light">
     <!-- Navbar Top -->
