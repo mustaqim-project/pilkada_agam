@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
             $request->session()->regenerate();
 
             // Redirect ke halaman dashboard setelah berhasil login
-            return redirect()->route('dashboard'); // Pastikan 'dashboard.index' sesuai dengan nama rute Anda
+            return view('mobile.frontend.dashboard.index');
         }
 
         // Jika gagal, kembali ke halaman login dengan pesan error
