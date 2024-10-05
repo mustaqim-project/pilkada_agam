@@ -46,7 +46,7 @@
 </div>
 
 <!-- Modal Create -->
-<div class="modal fade" id="createPeriodeModal" tabindex="-1" role="dialog" aria-labelledby="createPeriodeModalLabel" aria-hidden="true">
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createPeriodeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form id="createPeriodeForm" method="POST" action="{{ route('admin.periode.store') }}">
@@ -92,7 +92,7 @@
 </div>
 
 <!-- Modal Edit -->
-<div class="modal fade" id="editPeriodeModal" tabindex="-1" role="dialog" aria-labelledby="editPeriodeModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editPeriodeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form id="editPeriodeForm" method="POST">
