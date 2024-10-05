@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Anggaran</h1>
-    <button class="btn btn-primary" id="createAnggaran">Tambah Anggaran</button>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#anggaranModal" id="createAnggaran">Tambah Anggaran</button>
 
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -27,7 +27,7 @@
                 <td>{{ number_format($anggaran->total_anggaran, 2) }}</td>
                 <td>{{ $anggaran->jumlah_periode }}</td>
                 <td>
-                    <button class="btn btn-warning editAnggaran" data-id="{{ $anggaran->id }}">Edit</button>
+                    <button class="btn btn-warning editAnggaran" data-id="{{ $anggaran->id }}" data-bs-toggle="modal" data-bs-target="#anggaranModal">Edit</button>
                     <form action="{{ route('admin.anggaran.destroy', $anggaran->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
@@ -42,7 +42,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="anggaranModal" tabindex="-1" aria-labelledby="anggaranModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="anggaranModalLabel">Anggaran</h5>
@@ -79,63 +79,29 @@
     </div>
 </div>
 
-@endsection
-
-@section('scripts')
-
 <script>
-$(document).ready(function() {
-    // Show modal for creating new Anggaran
-    $('#createAnggaran').click(function() {
-        $('#anggaranForm')[0].reset();
-        $('#anggaranId').val('');
-        $('#methodField').val('POST');
-        $('#anggaranModalLabel').text('Tambah Anggaran');
-        $('#anggaranModal').modal('show');
+    // Untuk form create
+    document.getElementById('createAnggaran').addEventListener('click', function () {
+        document.getElementById('anggaranForm').reset();
+        document.getElementById('methodField').value = 'POST';
+        document.getElementById('anggaranId').value = '';
     });
 
-    // Show modal for editing existing Anggaran
-    $('.editAnggaran').click(function() {
-        const anggaranId = $(this).data('id');
-        $.get(`/admin/anggaran/${anggaranId}/edit`, function(data) {
-            $('#anggaranId').val(data.id);
-            $('#tim_id').val(data.tim_id);
-            $('#total_anggaran').val(data.total_anggaran);
-            $('#jumlah_periode').val(data.jumlah_periode);
-            $('#anggaranModalLabel').text('Edit Anggaran');
-            $('#methodField').val('PUT');
-            $('#anggaranModal').modal('show');
-        }).fail(function() {
-            alert('Data tidak ditemukan. Silakan coba lagi.');
+    // Untuk form edit
+    document.querySelectorAll('.editAnggaran').forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            fetch(`/admin/anggaran/${id}/edit`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('anggaranId').value = data.id;
+                    document.getElementById('tim_id').value = data.tim_id;
+                    document.getElementById('total_anggaran').value = data.total_anggaran;
+                    document.getElementById('jumlah_periode').value = data.jumlah_periode;
+                    document.getElementById('methodField').value = 'PUT';
+                });
         });
     });
-
-    // Handle form submission
-    $('#anggaranForm').on('submit', function(event) {
-        event.preventDefault();
-        const actionUrl = $('#anggaranId').val() ? `/admin/anggaran/${$('#anggaranId').val()}` : '{{ route("admin.anggaran.store") }}';
-
-        $.ajax({
-            url: actionUrl,
-            type: $(this).find('input[name="_method"]').val() || 'POST',
-            data: $(this).serialize(),
-            success: function() {
-                location.reload();
-            },
-            error: function(xhr) {
-                const errors = xhr.responseJSON.errors;
-                let errorMessage = 'Terjadi kesalahan: ';
-                if (errors) {
-                    for (let key in errors) {
-                        errorMessage += `${errors[key].join(' ')} `;
-                    }
-                } else {
-                    errorMessage += 'Silakan coba lagi.';
-                }
-                alert(errorMessage);
-            }
-        });
-    });
-});
 </script>
+
 @endsection
