@@ -151,10 +151,10 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                         @endif
                         {{-- <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">
                                 {{ __('frontend.About Us') }}
-                            </a></li>
+                            </a></li>--}}
                         <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">
-                                {{ __('frontend.contact') }}
-                            </a></li> --}}
+                                {{ __('frontend.Aspirasi Masyarakat') }}
+                            </a></li>
                     </ul>
 
                     <!-- Search bar -->
