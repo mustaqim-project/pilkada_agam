@@ -19,9 +19,9 @@ class PeriodeController extends Controller
 
     public function index()
     {
-        $periodes = periode::with('anggaran')->get();
-        $anggarans = anggaran::all(); // Ambil semua data anggaran
-        return view('admin.periode.index', compact('periodes', 'anggarans')); // Kirimkan data anggaran ke view
+        $periodes = Periode::with('anggaran.tim')->get(); // Eager load 'anggaran' dan 'tim'
+        $anggarans = Anggaran::with('tim')->get(); // Eager load 'tim' pada anggaran
+        return view('admin.periode.index', compact('periodes', 'anggarans'));
     }
 
     public function store(Request $request)
