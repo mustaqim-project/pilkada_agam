@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('kanvasing_jjs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('provinsi');
             $table->unsignedBigInteger('kabupaten');
             $table->unsignedBigInteger('kecamatan');
