@@ -56,10 +56,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="anggaran_id">Anggaran ID</label>
-                        <input type="text" class="form-control" name="anggaran_id" id="anggaran_id" required>
-                    </div>
+
                     <div class="form-group">
                         <label for="nama_periode">Nama Periode</label>
                         <input type="text" class="form-control" name="nama_periode" id="nama_periode" required>
@@ -99,10 +96,6 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="id" id="periodeId">
-                    <div class="form-group">
-                        <label for="edit_anggaran_id">Anggaran ID</label>
-                        <input type="text" class="form-control" name="anggaran_id" id="edit_anggaran_id" required>
-                    </div>
                     <div class="form-group">
                         <label for="edit_nama_periode">Nama Periode</label>
                         <input type="text" class="form-control" name="nama_periode" id="edit_nama_periode" required>

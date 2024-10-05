@@ -25,7 +25,6 @@ class PeriodeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'anggaran_id' => 'required|exists:anggaran,id',
             'nama_periode' => 'required|string|max:255',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
@@ -45,7 +44,6 @@ class PeriodeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'anggaran_id' => 'required|exists:anggaran,id',
             'nama_periode' => 'required|string|max:255',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',

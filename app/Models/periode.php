@@ -11,7 +11,6 @@ class periode extends Model
 
     protected $table = 'periode';
     protected $primaryKey = 'id';
-    protected $keyType = 'bigint';
 
     protected $fillable = [
         'anggaran_id',
