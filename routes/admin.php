@@ -33,6 +33,9 @@ use App\Http\Controllers\Admin\FooterGridThreeController;
 use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\JabatanController;
+use App\Http\Controllers\Admin\TimController;
+use App\Http\Controllers\Admin\AgamaController;
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -259,4 +262,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::get('reports/create', [ReportController::class, 'create'])->name('reports.create');
     Route::post('reports', [ReportController::class, 'store'])->name('reports.store');
     Route::get('reports/{id}', [ReportController::class, 'show'])->name('reports.show');
+
+
+
+
+    Route::resource('jabatan', JabatanController::class);
+    Route::resource('tims', TimController::class);
+    Route::resource('agamas', AgamaController::class);
+
+
 });

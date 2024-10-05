@@ -15,7 +15,6 @@ class tim extends Model
 
     protected $fillable = [
         'name', // Fillable properties for mass assignment
-        // You can add other relevant fields here
     ];
 
     public $timestamps = true; // Automatically manage created_at and updated_at

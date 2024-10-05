@@ -16,10 +16,10 @@ class CategoryController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['permission:category index,admin'])->only('index');
-        $this->middleware(['permission:category create,admin'])->only(['create', 'store']);
-        $this->middleware(['permission:category update,admin'])->only(['edit', 'update']);
-        $this->middleware(['permission:category delete,admin'])->only(['destroy']);
+        $this->middleware(['permission:tim index,admin'])->only('index');
+        $this->middleware(['permission:tim create,admin'])->only(['create', 'store']);
+        $this->middleware(['permission:tim update,admin'])->only(['edit', 'update']);
+        $this->middleware(['permission:tim delete,admin'])->only('destroy');
     }
 
     /**
