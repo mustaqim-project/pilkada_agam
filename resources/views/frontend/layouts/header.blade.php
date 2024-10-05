@@ -149,12 +149,12 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                             </ul>
                         </li>
                         @endif
-                        <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">
+                        {{-- <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">
                                 {{ __('frontend.About Us') }}
                             </a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">
                                 {{ __('frontend.contact') }}
-                            </a></li>
+                            </a></li> --}}
                     </ul>
 
                     <!-- Search bar -->
@@ -217,13 +217,13 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                 </div>
                 <div class="modal-body">
                     <nav class="list-group list-group-flush">
-                        <select id="nav-side-site-language">
+                        {{-- <select id="nav-side-site-language">
                             @foreach ($languages as $language)
                             <option value="{{ $language->lang }}" {{ getLangauge() === $language->lang ? 'selected' : '' }}>
                                 {{ $language->name }}
                             </option>
                             @endforeach
-                        </select>
+                        </select> --}}
                         <ul class="navbar-nav">
                             @foreach ($featuredCategories as $category)
                             <li class="nav-item">
@@ -250,7 +250,7 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                             </li>
                             @endif
 
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link text-dark" href="{{ route('about') }}">
                                     {{ __('frontend.About Us') }}
                                 </a>
@@ -260,7 +260,7 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                                 <a class="nav-link text-dark" href="{{ route('contact') }}">
                                     {{ __('frontend.contact') }}
                                 </a>
-                            </li>
+                            </li> --}}
 
                             <li class="nav-item">
                                 @guest
@@ -276,11 +276,11 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                                 </form>
                                 @endguest
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="https://www.mazhub.com/mazhub.apk" download style="text-decoration: none; color: #333; display: block; padding: 10px; border: 1px solid #ccc; border-radius: 5px; text-align: center; width: 200px;">
                                     <i class="fab fa-android" style="font-size: 24px; color: green;"></i><br>
                                     Download App
-                                </a>
+                                </a> --}}
                             </li>
 
 
