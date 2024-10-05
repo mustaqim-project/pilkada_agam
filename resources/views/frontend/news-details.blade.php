@@ -540,7 +540,7 @@
                         </div>
                     </aside>
 
-                    <aside class="wrapper__list__article">
+                    {{-- <aside class="wrapper__list__article">
                         <h4 class="border_section">{{ __('frontend.newsletter') }}</h4>
                         <!-- Form Subscribe -->
                         <div class="widget__form-subscribe bg__card-shadow">
@@ -557,11 +557,11 @@
                                 </div>
                             </form>
                         </div>
-                    </aside>
+                    </aside> --}}
 
                     @if ($ad->side_bar_ad_status == 1)
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{ __('frontend.Advertise') }}</h4>
+                        {{-- <h4 class="border_section">{{ __('frontend.Advertise') }}</h4> --}}
                         <a href="{{ $ad->side_bar_ad_url }}">
                             <figure>
                                 <img src="{{ asset($ad->side_bar_ad) }}" alt="" class="img-fluid">
