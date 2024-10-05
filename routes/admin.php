@@ -36,6 +36,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\TimController;
 use App\Http\Controllers\Admin\AgamaController;
+use App\Http\Controllers\Admin\JenisPembiayaanController;
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -156,11 +157,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::post('translate-string', [LocalizationController::class, 'translateString'])->name('translate-string');
 
 
-
-    // Anggaran
-    Route::resource('anggaran', AnggaranController::class);
-
-
     // Tim DS
     Route::prefix('timds')->name('timds.')->group(function () {
 
@@ -246,29 +242,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         });
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
     Route::get('reports/create', [ReportController::class, 'create'])->name('reports.create');
     Route::post('reports', [ReportController::class, 'store'])->name('reports.store');
     Route::get('reports/{id}', [ReportController::class, 'show'])->name('reports.show');
 
-
-
-
     Route::resource('jabatan', JabatanController::class);
     Route::resource('tims', TimController::class);
     Route::resource('agamas', AgamaController::class);
+    Route::resource('jenis-pembiayaan', JenisPembiayaanController::class);
+    Route::resource('anggaran', AnggaranController::class);
 
 
 });
