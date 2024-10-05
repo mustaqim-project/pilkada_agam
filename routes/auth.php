@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
 
+    Route::get('/', [HomeController::class, 'index']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
@@ -33,6 +34,11 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('/', function () {
+        return view('mobile.frontend.dashboard.index');
+    });
+
     Route::get('verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
 

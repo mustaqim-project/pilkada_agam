@@ -25,11 +25,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        // Melakukan autentikasi
+        if ($request->authenticate()) {
+            $request->session()->regenerate();
 
-        $request->session()->regenerate();
+            // Redirect ke halaman dashboard setelah berhasil login
+            return redirect()->route('dashboard.index'); // Pastikan 'dashboard.index' sesuai dengan nama rute Anda
+        }
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // Jika gagal, kembali ke halaman login dengan pesan error
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email'); // Menyimpan input email saat gagal
     }
 
     /**
