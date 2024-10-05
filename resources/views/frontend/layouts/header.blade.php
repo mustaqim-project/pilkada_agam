@@ -74,7 +74,7 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                 </div>
                <div class="col-sm-6 col-md-4">
                     <div class="list-unstyled topbar-right d-flex align-items-center justify-content-end">
-                        <div class="topbar_language">
+                        {{-- <div class="topbar_language">
                             <label for="site-language" hidden>Choose Language:</label>
                             <select id="site-language">
                                 @foreach ($languages as $language)
@@ -83,7 +83,7 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                                 </option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                         <ul class="topbar-link">
                             @if (!auth()->check())
                             <li><a href="{{ route('login') }}">{{ __('frontend.Login') }}</a></li>
