@@ -21,9 +21,9 @@
             </li>
 
 
-            @if (canAccess(['anggaran index', 'anggaran create', 'anggaran update', 'anggaran delete']))
-                <li class="{{ setSidebarActive(['admin.anggaran.*']) }}"><a class="nav-link"
-                        href="{{ route('admin.anggaran.index') }}"><i class="fas fa-fire"></i>
+            @if (canAccess(['Dashboard Utama']))
+                <li class="{{ setSidebarActive(['admin.dashboard-utama.*']) }}"><a class="nav-link"
+                        href="{{ route('admin.dashboard-utama.index') }}"><i class="fas fa-fire"></i>
                         <span>{{ __('admin.Dashboard Utama') }}</span></a></li>
             @endif
 
