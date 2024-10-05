@@ -8,12 +8,12 @@ class spanduk_pkh extends Model
 {
     use HasFactory;
 
-    protected $table = 'spanduk_pkhs'; // Specify the table name
-    protected $primaryKey = 'id'; // Define the primary key
-    protected $keyType = 'bigint'; // Specify the key type if it's bigint
+    protected $table = 'spanduk_pkhs';
+    protected $primaryKey = 'id';
+    protected $keyType = 'bigint';
 
     protected $fillable = [
-        'user_id',         // Foreign key
+        'user_id',
         'provinsi',
         'kabupaten',
         'kecamatan',
@@ -24,11 +24,10 @@ class spanduk_pkh extends Model
         'latitude',
     ];
 
-    public $timestamps = true; // Automatically manage created_at and updated_at
+    public $timestamps = true;
 
-    // Relasi ke model User
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id'); // Define the belongsTo relationship
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

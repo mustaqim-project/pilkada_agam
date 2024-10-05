@@ -9,23 +9,22 @@ class periode extends Model
 {
     use HasFactory;
 
-    protected $table = 'periode'; // Specify the table name
-    protected $primaryKey = 'id'; // Define the primary key
-    protected $keyType = 'bigint'; // Specify the key type if it's bigint
+    protected $table = 'periode';
+    protected $primaryKey = 'id';
+    protected $keyType = 'bigint';
 
     protected $fillable = [
-        'anggaran_id',      // Foreign key
+        'anggaran_id',
         'nama_periode',
         'tanggal_mulai',
         'tanggal_selesai',
         'anggaran_periode',
     ];
 
-    public $timestamps = true; // Automatically manage created_at and updated_at
+    public $timestamps = true;
 
-    // Relasi ke model Anggaran
     public function anggaran()
     {
-        return $this->belongsTo(anggaran::class, 'anggaran_id'); // Define the belongsTo relationship
+        return $this->belongsTo(anggaran::class, 'anggaran_id');
     }
 }

@@ -8,10 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
     use HasFactory;
-
-
     protected $table = 'news';
-
     protected $fillable = [
         'language',
         'category_id',
@@ -31,7 +28,6 @@ class News extends Model
         'meta_keyword',
     ];
 
-    /** scope for active items */
     public function scopeActiveEntries($query)
     {
         return $query->where([
@@ -39,8 +35,6 @@ class News extends Model
             'is_approved' => 1
         ]);
     }
-
-    /** scope for check language */
     public function scopeWithLocalize($query)
     {
         return $query->where([

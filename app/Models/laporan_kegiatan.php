@@ -11,7 +11,7 @@ class laporan_kegiatan extends Model
 {
     use HasFactory;
 
-    protected $table = 'laporan_kegiatan'; // Jika nama tabel tidak mengikuti konvensi plural Laravel
+    protected $table = 'laporan_kegiatan';
     protected $primaryKey = 'id';
 
     protected $fillable = [
@@ -26,13 +26,11 @@ class laporan_kegiatan extends Model
         'updated_at' => 'datetime',
     ];
 
-    // Relasi ke model Anggaran
     public function anggaran()
     {
         return $this->belongsTo(anggaran::class, 'anggaran_id');
     }
 
-    // Relasi ke model Periode
     public function periode()
     {
         return $this->belongsTo(periode::class, 'periode_id');

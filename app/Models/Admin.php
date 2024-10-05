@@ -19,25 +19,7 @@ class Admin extends Authenticatable
 
     protected $guard = 'admin';
     protected $table = 'admins';
-
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
     protected $primaryKey = 'id';
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'image',
         'name',
@@ -49,21 +31,11 @@ class Admin extends Authenticatable
         'status',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
@@ -71,25 +43,16 @@ class Admin extends Authenticatable
         'status' => 'boolean',
     ];
 
-    /**
-     * Get the admin's superior.
-     */
-    public function atasan()
+      public function atasan()
     {
         return $this->belongsTo(Admin::class, 'atasan_id');
     }
 
-    /**
-     * Get the admin's tim.
-     */
     public function tim()
     {
         return $this->belongsTo(tim::class, 'tim_id');
     }
 
-    /**
-     * Get the admin's position.
-     */
     public function jabatan()
     {
         return $this->belongsTo(Jabatan::class, 'jabatan_id');

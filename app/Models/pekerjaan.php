@@ -9,14 +9,13 @@ class pekerjaan extends Model
 {
     use HasFactory;
 
-    protected $table = 'pekerjaans'; // Specify the table name if it's not following Laravel's pluralization
-    protected $primaryKey = 'id'; // Define the primary key
-    protected $keyType = 'bigint'; // Specify the key type if it's bigint
+    protected $table = 'pekerjaans';
+    protected $primaryKey = 'id';
+    protected $keyType = 'bigint';
 
     protected $fillable = [
-        'name', // Define fillable fields for mass assignment
+        'name',
     ];
 
-    // Optional: Define timestamps behavior
-    public $timestamps = true; // Automatically manage created_at and updated_at
+    public $timestamps = true;
 }

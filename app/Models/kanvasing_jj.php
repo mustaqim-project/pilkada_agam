@@ -47,19 +47,16 @@ class kanvasing_jj extends Model
         'updated_at' => 'datetime',
     ];
 
-    // Relasi ke model User
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Relasi ke model Agama
     public function agama()
     {
         return $this->belongsTo(agamas::class, 'agama_id');
     }
 
-    // Relasi ke model Pekerjaan
     public function pekerjaan()
     {
         return $this->belongsTo(pekerjaan::class, 'pekerjaan_id');

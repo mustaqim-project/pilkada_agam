@@ -9,19 +9,18 @@ class tim extends Model
 {
     use HasFactory;
 
-    protected $table = 'tims'; // Specify the table name
-    protected $primaryKey = 'id'; // Define the primary key
-    protected $keyType = 'bigint'; // Specify the key type if it's bigint
+    protected $table = 'tims';
+    protected $primaryKey = 'id';
+    protected $keyType = 'bigint';
 
     protected $fillable = [
-        'name', // Fillable properties for mass assignment
+        'name',
     ];
 
-    public $timestamps = true; // Automatically manage created_at and updated_at
+    public $timestamps = true;
 
-    // Relasi ke model User (misalnya)
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id'); // Define the belongsTo relationship with User
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
