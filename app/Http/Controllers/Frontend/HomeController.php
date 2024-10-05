@@ -276,7 +276,7 @@ class HomeController extends Controller
         $about = About::where('language', getLangauge())->first();
         return view('frontend.about', compact('about'));
     }
-    
+
         public function kebijakan()
     {
         $kebijakan = kebijakan::where('language', getLangauge())->first();
