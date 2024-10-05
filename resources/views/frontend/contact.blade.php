@@ -31,7 +31,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <h5>{{ __('frontend.Kirimkan Aspirasi dan Keluhanmu ke Guspardi Gaus & Yogi Yolanda') }}</h5>
+                    <h5>{{ __('frontend.Kirimkan Aspirasi dan Keluhan') }}</h5>
                     <form action="{{ route('contact.submit') }}" method="POST">
                         @csrf
                         <div class="row">
