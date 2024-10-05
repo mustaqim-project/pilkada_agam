@@ -590,7 +590,7 @@
                         </aside>
                         @endif
 
-                        <aside class="wrapper__list__article">
+                        {{-- <aside class="wrapper__list__article">
                             <h4 class="border_section">{{ __('frontend.newsletter') }}</h4>
                             <!-- Form Subscribe -->
                             <div class="widget__form-subscribe bg__card-shadow">
@@ -607,7 +607,7 @@
                                     </div>
                                 </form>
                             </div>
-                        </aside>
+                        </aside> --}}
                     </div>
                 </div>
 
