@@ -254,13 +254,13 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                                 <a class="nav-link text-dark" href="{{ route('about') }}">
                                     {{ __('frontend.About Us') }}
                                 </a>
-                            </li>
+                            </li>--}}
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark" href="{{ route('contact') }}">
-                                    {{ __('frontend.contact') }}
+                                {{ __('frontend.Aspirasi Masyarakat') }}
                                 </a>
-                            </li> --}}
+                            </li>
 
                             <li class="nav-item">
                                 @guest
