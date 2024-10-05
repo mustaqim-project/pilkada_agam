@@ -6,24 +6,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\tim;
+use App\Models\Admin;
+
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected $table = "users"; // Specify the table name
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-
-    protected $table="users";
     protected $fillable = [
         'name',
         'email',
         'password',
-        'pj_id',
-        'tim',
+        'pj_id', // This should relate to an Admin or equivalent model
+        'tim_id', // This should relate to a Tim model
     ];
 
     /**
@@ -43,7 +46,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password' => 'hashed', // Ensure password is hashed
     ];
 
     /**
@@ -51,6 +54,17 @@ class User extends Authenticatable
      */
     public function admin()
     {
-        return $this->belongsTo(Admin::class, 'pj_id'); // Relasi ke admin (penanggung jawab)
+        return $this->belongsTo(Admin::class, 'pj_id'); // Relationship to the admin (penanggung jawab)
     }
+
+    /**
+     * Relasi ke tabel Tim.
+     */
+    public function tim()
+    {
+        return $this->belongsTo(tim::class, 'tim_id'); // Relationship to the Tim
+    }
+
+
+
 }
