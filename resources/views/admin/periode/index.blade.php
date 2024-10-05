@@ -33,7 +33,7 @@
                 <td>{{ $periode->anggaran_periode }}</td>
                 <td>
                     <button class="btn btn-warning edit-button" data-id="{{ $periode->id }}">Edit</button>
-                    <form action="{{ route('periode.destroy', $periode->id) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('admin.periode.destroy', $periode->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Hapus</button>
@@ -49,7 +49,7 @@
 <div class="modal fade" id="periodeModal" tabindex="-1" role="dialog" aria-labelledby="periodeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="periodeForm" method="POST" action="{{ route('periode.store') }}">
+            <form id="periodeForm" method="POST" action="{{ route('admin.periode.store') }}">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="periodeModalLabel">Tambah/Edit Periode</h5>
