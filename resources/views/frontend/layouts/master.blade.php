@@ -5,7 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
     <title>@hasSection('title') @yield('title') @else {{ $settings['site_seo_title'] }} @endif </title>
     <meta name="description" content="@hasSection('meta_description') @yield('meta_description') @else {{ $settings['site_seo_description'] }} @endif " />
     <meta name="keywords" content="@hasSection('meta_keyword') @yield('meta_keyword') @else {{ $settings['site_seo_keywords'] }} @endif " />
@@ -13,11 +15,15 @@
     <meta name="og:title" content="@yield('meta_og_title')" />
     <meta name="og:description" content="@yield('meta_og_description')" />
     <meta name="og:image" content="@hasSection('meta_og_image') @yield('meta_og_image') @else {{ asset($settings['site_logo']) }} @endif" />
-
+    <link rel="manifest" href="{{ asset('mobile/_manifest.json') }}" data-pwa-version="set_in_manifest_and_pwa_js">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('mobile/images/logo.png') }}">
+    <link rel="icon" href="{{ asset('mobile/images/logo.png') }}" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset($settings['site_favicon']) }}" type="image/png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link href="{{ asset('frontend/assets/css/styles.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('mobile/scripts/jquery.js') }}"></script>
+
     <style>
         :root {
             --colorPrimary: {{ $settings['site_color'] }};
@@ -192,8 +198,8 @@
                 })
             })
         })
-        
-      
+
+
     </script>
 
 
