@@ -24,7 +24,7 @@
             <tr>
                 <td>{{ $anggaran->id }}</td>
                 <td>{{ $anggaran->tim->name }}</td>
-                <td>{{ $anggaran->total_anggaran }}</td>
+                <td>{{ number_format($anggaran->total_anggaran, 2) }}</td>
                 <td>{{ $anggaran->jumlah_periode }}</td>
                 <td>
                     <button class="btn btn-warning editAnggaran" data-id="{{ $anggaran->id }}">Edit</button>
@@ -71,8 +71,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="saveAnggaran">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
@@ -85,6 +85,7 @@
 
 <script>
 $(document).ready(function() {
+    // Show modal for creating new Anggaran
     $('#createAnggaran').click(function() {
         $('#anggaranForm')[0].reset();
         $('#anggaranId').val('');
@@ -93,9 +94,10 @@ $(document).ready(function() {
         $('#anggaranModal').modal('show');
     });
 
+    // Show modal for editing existing Anggaran
     $('.editAnggaran').click(function() {
-        const id = $(this).data('id');
-        $.get('/admin/anggaran/' + id + '/edit', function(data) {
+        const anggaranId = $(this).data('id');
+        $.get(`/admin/anggaran/${anggaranId}/edit`, function(data) {
             $('#anggaranId').val(data.id);
             $('#tim_id').val(data.tim_id);
             $('#total_anggaran').val(data.total_anggaran);
@@ -103,21 +105,34 @@ $(document).ready(function() {
             $('#anggaranModalLabel').text('Edit Anggaran');
             $('#methodField').val('PUT');
             $('#anggaranModal').modal('show');
+        }).fail(function() {
+            alert('Data tidak ditemukan. Silakan coba lagi.');
         });
     });
 
+    // Handle form submission
     $('#anggaranForm').on('submit', function(event) {
         event.preventDefault();
-        const actionUrl = $('#anggaranId').val() ? '/admin/anggaran/' + $('#anggaranId').val() : '{{ route("admin.anggaran.store") }}';
+        const actionUrl = $('#anggaranId').val() ? `/admin/anggaran/${$('#anggaranId').val()}` : '{{ route("admin.anggaran.store") }}';
+
         $.ajax({
             url: actionUrl,
             type: $(this).find('input[name="_method"]').val() || 'POST',
             data: $(this).serialize(),
-            success: function(response) {
+            success: function() {
                 location.reload();
             },
             error: function(xhr) {
-                alert('Terjadi kesalahan. Silakan coba lagi.');
+                const errors = xhr.responseJSON.errors;
+                let errorMessage = 'Terjadi kesalahan: ';
+                if (errors) {
+                    for (let key in errors) {
+                        errorMessage += `${errors[key].join(' ')} `;
+                    }
+                } else {
+                    errorMessage += 'Silakan coba lagi.';
+                }
+                alert(errorMessage);
             }
         });
     });
