@@ -2,17 +2,25 @@
 
 @section('content')
 <div class="container">
-    <h1>Anggaran</h1>
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#anggaranModal" id="createAnggaran">Tambah Anggaran</button>
+    <h1 class="mb-4">Kelola Anggaran</h1>
 
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+    <!-- Tampilkan pesan sukses jika ada -->
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
     @endif
 
-    <table class="table">
+    <!-- Tombol Tambah Anggaran -->
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambahAnggaran">
+        Tambah Anggaran
+    </button>
+
+    <!-- Tabel Data Anggaran -->
+    <table class="table table-bordered">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>#</th>
                 <th>Tim</th>
                 <th>Total Anggaran</th>
                 <th>Jumlah Periode</th>
@@ -20,53 +28,56 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($anggarans as $anggaran)
-            <tr>
-                <td>{{ $anggaran->id }}</td>
-                <td>{{ $anggaran->tim->name }}</td>
-                <td>{{ number_format($anggaran->total_anggaran, 2) }}</td>
-                <td>{{ $anggaran->jumlah_periode }}</td>
-                <td>
-                    <button class="btn btn-warning editAnggaran" data-id="{{ $anggaran->id }}" data-bs-toggle="modal" data-bs-target="#anggaranModal">Edit</button>
-                    <form action="{{ route('admin.anggaran.destroy', $anggaran->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
-                    </form>
-                </td>
-            </tr>
+            @foreach($anggarans as $anggaran)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $anggaran->tim->nama_tim }}</td>
+                    <td>{{ number_format($anggaran->total_anggaran, 2) }}</td>
+                    <td>{{ $anggaran->jumlah_periode }}</td>
+                    <td>
+                        <!-- Tombol Edit Anggaran -->
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditAnggaran" data-id="{{ $anggaran->id }}">
+                            Edit
+                        </button>
+                        <!-- Tombol Hapus Anggaran -->
+                        <form action="{{ route('admin.anggaran.destroy', $anggaran->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus anggaran ini?')">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="anggaranModal" tabindex="-1" aria-labelledby="anggaranModalLabel" aria-hidden="true">
+<!-- Modal Tambah Anggaran -->
+<div class="modal fade" id="modalTambahAnggaran" tabindex="-1" aria-labelledby="modalTambahAnggaranLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="anggaranModalLabel">Anggaran</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="anggaranForm" method="POST">
+            <form action="{{ route('admin.anggaran.store') }}" method="POST">
                 @csrf
-                <input type="hidden" name="_method" id="methodField" value="POST">
-                <input type="hidden" name="id" id="anggaranId">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTambahAnggaranLabel">Tambah Anggaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="tim_id">Tim</label>
+                    <div class="mb-3">
+                        <label for="tim_id" class="form-label">Tim</label>
                         <select name="tim_id" id="tim_id" class="form-control" required>
-                            @foreach ($tims as $tim)
-                                <option value="{{ $tim->id }}">{{ $tim->name }}</option>
+                            <option value="">Pilih Tim</option>
+                            @foreach($tims as $tim)
+                                <option value="{{ $tim->id }}">{{ $tim->nama_tim }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="total_anggaran">Total Anggaran</label>
+                    <div class="mb-3">
+                        <label for="total_anggaran" class="form-label">Total Anggaran</label>
                         <input type="number" name="total_anggaran" id="total_anggaran" class="form-control" required>
                     </div>
-                    <div class="form-group">
-                        <label for="jumlah_periode">Jumlah Periode</label>
+                    <div class="mb-3">
+                        <label for="jumlah_periode" class="form-label">Jumlah Periode</label>
                         <input type="number" name="jumlah_periode" id="jumlah_periode" class="form-control" required>
                     </div>
                 </div>
@@ -79,29 +90,62 @@
     </div>
 </div>
 
-<script>
-    // Untuk form create
-    document.getElementById('createAnggaran').addEventListener('click', function () {
-        document.getElementById('anggaranForm').reset();
-        document.getElementById('methodField').value = 'POST';
-        document.getElementById('anggaranId').value = '';
-    });
+<!-- Modal Edit Anggaran -->
+<div class="modal fade" id="modalEditAnggaran" tabindex="-1" aria-labelledby="modalEditAnggaranLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="formEditAnggaran" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditAnggaranLabel">Edit Anggaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="edit_tim_id" class="form-label">Tim</label>
+                        <select name="tim_id" id="edit_tim_id" class="form-control" required>
+                            <option value="">Pilih Tim</option>
+                            @foreach($tims as $tim)
+                                <option value="{{ $tim->id }}">{{ $tim->nama_tim }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_total_anggaran" class="form-label">Total Anggaran</label>
+                        <input type="number" name="total_anggaran" id="edit_total_anggaran" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_jumlah_periode" class="form-label">Jumlah Periode</label>
+                        <input type="number" name="jumlah_periode" id="edit_jumlah_periode" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-    // Untuk form edit
-    document.querySelectorAll('.editAnggaran').forEach(button => {
-        button.addEventListener('click', function () {
-            const id = this.getAttribute('data-id');
-            fetch(`/admin/anggaran/${id}/edit`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('anggaranId').value = data.id;
-                    document.getElementById('tim_id').value = data.tim_id;
-                    document.getElementById('total_anggaran').value = data.total_anggaran;
-                    document.getElementById('jumlah_periode').value = data.jumlah_periode;
-                    document.getElementById('methodField').value = 'PUT';
-                });
+@endsection
+
+@push('scripts')
+<script>
+    $('#modalEditAnggaran').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+
+        // Fetch data anggaran berdasarkan ID
+        $.get(`/admin/anggaran/${id}/edit`, function (data) {
+            $('#edit_tim_id').val(data.tim_id);
+            $('#edit_total_anggaran').val(data.total_anggaran);
+            $('#edit_jumlah_periode').val(data.jumlah_periode);
+
+            // Ubah action form untuk update
+            $('#formEditAnggaran').attr('action', `/admin/anggaran/${id}`);
         });
     });
 </script>
-
-@endsection
+@endpush
