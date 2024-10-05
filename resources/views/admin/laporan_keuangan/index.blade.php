@@ -54,10 +54,12 @@
                     <div class="form-group">
                         <label for="anggaran_id">Anggaran</label>
                         <select name="anggaran_id" id="anggaran_id" class="form-control" required>
-                            <option value="{{ $anggaran->id }}">
-                                {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} -
-                                Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
-                            </option>
+                            @foreach ($anggarans as $anggaran)
+                                    <option value="{{ $anggaran->id }}">
+                                        {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} -
+                                        Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
+                                    </option>
+                                @endforeach
                         </select>
                     </div>
                     <div class="form-group">
