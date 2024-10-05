@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\tim;
 
 class anggaran extends Model
 {
@@ -21,6 +22,6 @@ class anggaran extends Model
     ];
     public function tim()
     {
-        return $this->belongsTo(Tim::class, 'tim_id');
+        return $this->belongsTo(tim::class, 'tim_id');
     }
 }
