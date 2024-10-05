@@ -28,7 +28,7 @@
                 <td>{{ $anggaran->jumlah_periode }}</td>
                 <td>
                     <button class="btn btn-warning editAnggaran" data-id="{{ $anggaran->id }}">Edit</button>
-                    <form action="{{ route('anggaran.destroy', $anggaran->id) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('admin.anggaran.destroy', $anggaran->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
@@ -113,7 +113,7 @@ $(document).ready(function() {
 
     $('#anggaranForm').on('submit', function(event) {
         event.preventDefault();
-        const actionUrl = $('#anggaranId').val() ? '/admin/anggaran/' + $('#anggaranId').val() : '{{ route("anggaran.store") }}';
+        const actionUrl = $('#anggaranId').val() ? '/admin/anggaran/' + $('#anggaranId').val() : '{{ route("admin.anggaran.store") }}';
         $.ajax({
             url: actionUrl,
             type: $(this).find('input[name="_method"]').val() || 'POST',
