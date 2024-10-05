@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('spanduk_ds', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('provinsi', 100)->nullable();
-            $table->string('kabupaten', 100)->nullable();
-            $table->string('kecamatan', 100)->nullable();
-            $table->string('kelurahan', 100)->nullable();
+            $table->unsignedBigInteger('provinsi');
+            $table->unsignedBigInteger('kabupaten');
+            $table->unsignedBigInteger('kecamatan');
+            $table->unsignedBigInteger('kelurahan');
             $table->text('alamat')->nullable();
             $table->string('foto_kegiatan')->nullable();
             $table->string('longitude')->nullable();

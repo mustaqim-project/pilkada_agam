@@ -16,14 +16,12 @@ class JenisPembiayaanController extends Controller
         $this->middleware(['permission:JenisPembiayaan delete,admin'])->only('destroy');
     }
 
-    // Menampilkan halaman index
     public function index()
     {
         $jenisPembiayaan = jenis_pembiayaan::all();
         return view('admin.jenis_pembiayaan.index', compact('jenisPembiayaan'));
     }
 
-    // Menyimpan data baru
     public function store(Request $request)
     {
         $request->validate([
@@ -35,7 +33,6 @@ class JenisPembiayaanController extends Controller
         return redirect()->route('admin.jenis-pembiayaan.index')->with('success', 'Jenis Pembiayaan berhasil ditambahkan.');
     }
 
-    // Mengupdate data yang sudah ada
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -48,7 +45,6 @@ class JenisPembiayaanController extends Controller
         return redirect()->route('admin.jenis-pembiayaan.index')->with('success', 'Jenis Pembiayaan berhasil diperbarui.');
     }
 
-    // Menghapus data
     public function destroy($id)
     {
         $jenisPembiayaan = jenis_pembiayaan::findOrFail($id);

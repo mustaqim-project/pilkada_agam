@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('data_gandas', function (Blueprint $table) {
             $table->id();
-            $table->string('kecamatan');
-            $table->string('nagari');
+            $table->unsignedBigInteger('kecamatan');
+            $table->unsignedBigInteger('nagari');
             $table->string('no_ktp');
             $table->string('no_kk')->nullable();
             $table->string('nama_responden');

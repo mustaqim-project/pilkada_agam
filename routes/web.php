@@ -1,9 +1,14 @@
 <?php
 
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\LanguageController;
-use App\Http\Controllers\ProfileController;
+use App\Models\News;
+use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Admin\KanvasingDsController;
+use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\Admin\KanvasingAisyiahController;
 
 
 
@@ -13,7 +18,31 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    Route::get('kanvasing-aisyiah', action: [KanvasingAisyiahController::class, 'index'])->name('kanvasing-aisyiah.index');
+    Route::post('kanvasing-aisyiah/store', [KanvasingAisyiahController::class, 'store'])->name('kanvasing-aisyiah.store');
+    Route::put('kanvasing-aisyiah/update/{id}', [KanvasingAisyiahController::class, 'update'])->name('kanvasing-aisyiah.update');
+
+    Route::get('kanvasing-ds', [KanvasingDsController::class, 'index'])->name('kanvasing-ds.index');
+    Route::post('kanvasing-ds/store', [KanvasingDsController::class, 'store'])->name('kanvasing-ds.store');
+    Route::put('kanvasing-ds/update/{id}', [KanvasingDsController::class, 'update'])->name('kanvasing-ds.update');
+
+
+
+
+
+
 });
+
+
+
+
+
+
+
+
+
 
 require __DIR__ . '/auth.php';
 
@@ -47,12 +76,12 @@ Route::post('contact', [HomeController::class, 'handleContactFrom'])->name('cont
 // Auth::routes(['reset' => true]);
 
 
-use App\Models\News;
-use App\Models\Category;
+// use App\Models\News;
+// use App\Models\Category;
 
-Route::get('/sitemap.xml', function () {
-    $news = News::all();
-    $categories = Category::all();
+// Route::get('/sitemap.xml', function () {
+//     $news = News::all();
+//     $categories = Category::all();
 
-    return response()->view('sitemap', compact('news', 'categories'))->header('Content-Type', 'text/xml');
-});
+//     return response()->view('sitemap', compact('news', 'categories'))->header('Content-Type', 'text/xml');
+// });

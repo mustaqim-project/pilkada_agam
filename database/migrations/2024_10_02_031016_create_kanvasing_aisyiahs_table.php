@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('kanvasing_aisyiahs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('provinsi', 100)->nullable();
-            $table->string('kabupaten', 100)->nullable();
-            $table->string('kecamatan', 100)->nullable();
-            $table->string('kelurahan', 100)->nullable();
+            $table->unsignedBigInteger('provinsi');
+            $table->unsignedBigInteger('kabupaten');
+            $table->unsignedBigInteger('kecamatan');
+            $table->unsignedBigInteger('kelurahan');
             $table->string('no_kk', 16)->nullable();
             $table->string('no_ktp', 16)->unique();
             $table->string('nama_responden', 100)->nullable();

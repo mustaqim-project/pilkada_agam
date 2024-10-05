@@ -37,6 +37,8 @@ use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\TimController;
 use App\Http\Controllers\Admin\AgamaController;
 use App\Http\Controllers\Admin\JenisPembiayaanController;
+use App\Http\Controllers\Admin\KanvasingAisyiahController;
+use App\Http\Controllers\Admin\KanvasingDsController;
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -252,6 +254,23 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::resource('agamas', AgamaController::class);
     Route::resource('jenis-pembiayaan', JenisPembiayaanController::class);
     Route::resource('anggaran', AnggaranController::class);
+    Route::resource('kanvasing-aisyiah', KanvasingAisyiahController::class);
+
+
+
+// Route Kanvasing Aisyiyah
+Route::get('admin/kanvasing-aisyiah', [KanvasingAisyiahController::class, 'indexAdmin'])->name('kanvasing-aisyiah.indexAdmin');
+Route::post('kanvasing-aisyiah/store', [KanvasingAisyiahController::class, 'store'])->name('kanvasing-aisyiah.store');
+Route::put('kanvasing-aisyiah/update/{id}', [KanvasingAisyiahController::class, 'update'])->name('kanvasing-aisyiah.update');
+Route::delete('kanvasing-aisyiah/destroy/{id}', [KanvasingAisyiahController::class, 'destroy'])->name('kanvasing-aisyiah.destroy');
+
+
+
+Route::get('admin/kanvasing-ds', [KanvasingDsController::class, 'indexAdmin'])->name('kanvasing-ds.indexAdmin');
+Route::post('kanvasing-ds/store', [KanvasingDsController::class, 'store'])->name('kanvasing-ds.store');
+Route::put('kanvasing-ds/update/{id}', [KanvasingDsController::class, 'update'])->name('kanvasing-ds.update');
+Route::delete('kanvasing-ds/destroy/{id}', [KanvasingDsController::class, 'destroy'])->name('kanvasing-ds.destroy');
+
 
 
 });
