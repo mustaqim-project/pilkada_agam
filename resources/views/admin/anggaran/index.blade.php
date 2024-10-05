@@ -41,14 +41,12 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="anggaranModal" tabindex="-1" role="dialog" aria-labelledby="anggaranModalLabel" aria-hidden="true">
+<div class="modal fade" id="anggaranModal" tabindex="-1" aria-labelledby="anggaranModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="anggaranModalLabel">Anggaran</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="anggaranForm" method="POST">
                 @csrf
@@ -58,7 +56,6 @@
                     <div class="form-group">
                         <label for="tim_id">Tim</label>
                         <select name="tim_id" id="tim_id" class="form-control" required>
-                            <!-- Pastikan Anda mengisi opsi Tim di sini -->
                             @foreach ($tims as $tim)
                                 <option value="{{ $tim->id }}">{{ $tim->name }}</option>
                             @endforeach
@@ -74,7 +71,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" id="saveAnggaran">Simpan</button>
                 </div>
             </form>
@@ -85,8 +82,6 @@
 @endsection
 
 @section('scripts')
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
 <script>
 $(document).ready(function() {
