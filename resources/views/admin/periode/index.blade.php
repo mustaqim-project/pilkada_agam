@@ -61,7 +61,7 @@
                         <select class="form-control" name="anggaran_id" id="anggaran_id" required>
                             <option value="">Pilih Anggaran</option>
                             @foreach($anggarans as $anggaran)
-                            {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} - {{ $anggaran->total_anggaran }}
+                                <option value="{{ $anggaran->id }}">{{ $anggaran->tim->name }} - {{ $anggaran->tim->total_anggaran }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -109,7 +109,7 @@
                         <select class="form-control" name="anggaran_id" id="edit_anggaran_id" required>
                             <option value="">Pilih Anggaran</option>
                             @foreach($anggarans as $anggaran)
-                            {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} - {{ $anggaran->total_anggaran }}
+                                <option value="{{ $anggaran->id }}">{{ $anggaran->tim->name }} - {{ $anggaran->tim->total_anggaran }}</option>
                             @endforeach
                         </select>
                     </div>

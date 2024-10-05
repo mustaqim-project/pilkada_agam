@@ -19,8 +19,8 @@ class PeriodeController extends Controller
 
     public function index()
     {
-        $periodes = Periode::with('anggaran.tim')->get(); // Eager load 'anggaran' dan 'tim'
-        $anggarans = Anggaran::with('tim')->get(); // Eager load 'tim' pada anggaran
+        $periodes = periode::with('anggaran.tim')->get(); // Eager load 'anggaran' dan 'tim'
+        $anggarans = anggaran::with('tim')->get(); // Eager load 'tim' pada anggaran
 
         dd($periodes,$anggarans);
         return view('admin.periode.index', compact('periodes', 'anggarans'));
