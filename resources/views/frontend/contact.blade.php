@@ -48,7 +48,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group form-group-name">
-                                    <label>{{ __('frontend.Subject') }} <span class="required"></span></label>
+                                    <label>{{ __('frontend.Judul') }} <span class="required"></span></label>
                                     <input type="text" class="form-control" name="subject" required="">
                                     @error('subject')
                                         <p class="text-danger">{{ $message }}</p>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>{{ __('frontend.Your message') }} </label>
+                                    <label>{{ __('frontend.Pesan') }} </label>
                                     <textarea class="form-control" rows="8" name="message"></textarea>
                                     @error('message')
                                         <p class="text-danger">{{ $message }}</p>
