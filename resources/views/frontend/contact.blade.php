@@ -15,7 +15,7 @@
                                 <i class="fa fa-home"></i> {{ __('frontend.Home') }}</a>
                         </li>
                         <li class="breadcrumbs__item">
-                            <a href="javascript:;" class="breadcrumbs__url">{{ __('frontend.Contact') }}</a>
+                            <a href="javascript:;" class="breadcrumbs__url">{{ __('frontend.Aspirasi Masyarakat') }}</a>
                         </li>
 
                     </ul>
@@ -38,8 +38,8 @@
 
                             <div class="col-md-6">
                                 <div class="form-group form-group-name">
-                                    <label>{{ __('frontend.Your email') }} <span class="required"></span></label>
-                                    <input type="email" class="form-control" name="email" required="">
+                                    <label>{{ __('frontend.Nomor Wa') }} <span class="required"></span></label>
+                                    <input type="no_hp" class="form-control" name="email" required="">
                                     @error('email')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -71,7 +71,7 @@
                     </form>
                 </div>
 
-                <div class="col-md-4">
+                {{-- <div class="col-md-4">
                     <h5>{{ __('frontend.Info location') }}</h5>
                     <div class="wrap__contact-form-office">
                         <ul class="list-unstyled">
@@ -117,7 +117,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
