@@ -65,6 +65,7 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                                     <i class="{{ $link->icon }}"></i>
                                 </a>
                             </li>
+
                             @endforeach
                         </ul>
                         <div class="topbar-text">

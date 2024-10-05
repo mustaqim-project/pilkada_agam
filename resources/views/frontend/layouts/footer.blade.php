@@ -77,7 +77,7 @@
 
 
 
-                                {{-- <div class="social__media mt-4">
+                                <div class="social__media mt-4">
                                     <ul class="list-inline">
                                         @foreach ($socialLinks as $link)
                                         <li class="list-inline-item">
@@ -89,16 +89,16 @@
                                         </li>
                                         @endforeach
 
-                                            <a href="https://www.mazhub.com/mazhub.apk" download class="download-link" >
+                                            {{-- <a href="https://www.mazhub.com/mazhub.apk" download class="download-link" >
                                                 <i class="fab fa-android download-icon"></i>Download App
-                                            </a>
+                                            </a> --}}
 
 
                                     </ul>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
-                        {{-- <div class="col-md-3">
+                        <div class="col-md-3">
                             <div class="widget__footer">
                                 <div class="dropdown-footer">
                                     <h4 class="footer-title">
@@ -159,7 +159,7 @@
                                     </ul>
 
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
