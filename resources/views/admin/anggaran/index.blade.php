@@ -31,7 +31,7 @@
             @foreach($anggarans as $anggaran)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $anggaran->tim->nama_tim }}</td>
+                    <td>{{ $anggaran->tim->name }}</td>
                     <td>{{ number_format($anggaran->total_anggaran, 2) }}</td>
                     <td>{{ $anggaran->jumlah_periode }}</td>
                     <td>
@@ -68,7 +68,7 @@
                         <select name="tim_id" id="tim_id" class="form-control" required>
                             <option value="">Pilih Tim</option>
                             @foreach($tims as $tim)
-                                <option value="{{ $tim->id }}">{{ $tim->nama_tim }}</option>
+                                <option value="{{ $tim->id }}">{{ $tim->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -107,7 +107,7 @@
                         <select name="tim_id" id="edit_tim_id" class="form-control" required>
                             <option value="">Pilih Tim</option>
                             @foreach($tims as $tim)
-                                <option value="{{ $tim->id }}">{{ $tim->nama_tim }}</option>
+                                <option value="{{ $tim->id }}">{{ $tim->name }}</option>
                             @endforeach
                         </select>
                     </div>
