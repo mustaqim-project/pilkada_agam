@@ -213,28 +213,10 @@
                         </div>
                     </aside>
 
-                    <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{ __('frontend.newsletter') }}</h4>
-                        <!-- Form Subscribe -->
-                        <div class="widget__form-subscribe bg__card-shadow">
-                            <h6>
-                                {{ __('frontend.The most important world news and events of the day') }}.
-                            </h6>
-                            <p><small>{{ __('frontend.Get magzrenvi daily newsletter on your inbox') }}.</small></p>
-                            <form action="" class="newsletter-form">
-                                <div class="input-group ">
-                                    <input type="text" class="form-control" name="email" placeholder="Your email address">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary newsletter-button" type="submit">{{ __('frontend.sign up') }}</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </aside>
+
 
                     @if ($ad->side_bar_ad_status == 1)
                     <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{ __('frontend.Advertise') }}</h4>
                         <a href="{{ $ad->side_bar_ad_url }}">
                             <figure>
                                 <img src="{{ asset($ad->side_bar_ad) }}" alt="" class="img-fluid">

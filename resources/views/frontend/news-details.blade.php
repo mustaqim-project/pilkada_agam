@@ -496,30 +496,7 @@
                         </div>
                     </aside>
 
-                    {{-- <!-- social media -->
-                    <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{ __('frontend.stay conected') }}</h4>
-                        <!-- widget Social media -->
-                        <div class="wrap__social__media">
-                            @foreach ($socialCounts as $socialCount)
-                            <a href="{{ $socialCount->url }}" target="_blank">
-                                <div class="social__media__widget mt-2" style="background-color:{{ $socialCount->color }}">
-                                    <span class="social__media__widget-icon">
-                                        <i class="{{ $socialCount->icon }}"></i>
-                                    </span>
-                                    <span class="social__media__widget-counter">
-                                        {{ $socialCount->fan_count }} {{ $socialCount->fan_type }}
-                                    </span>
-                                    <span class="social__media__widget-name">
-                                        {{ $socialCount->button_text }}
-                                    </span>
-                                </div>
-                            </a>
-                            @endforeach
 
-                        </div>
-                    </aside>
-                    <!-- End social media --> --}}
 
                     <aside class="wrapper__list__article">
                         <h4 class="border_section">{{ __('frontend.tags') }}</h4>
@@ -540,24 +517,6 @@
                         </div>
                     </aside>
 
-                    {{-- <aside class="wrapper__list__article">
-                        <h4 class="border_section">{{ __('frontend.newsletter') }}</h4>
-                        <!-- Form Subscribe -->
-                        <div class="widget__form-subscribe bg__card-shadow">
-                            <h6>
-                                {{ __('frontend.The most important world news and events of the day') }}.
-                            </h6>
-                            <p><small>{{ __('frontend.Get magzrenvi daily newsletter on your inbox') }}.</small></p>
-                            <form action="" class="newsletter-form">
-                                <div class="input-group ">
-                                    <input type="text" class="form-control" name="email" placeholder="Your email address">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary newsletter-button" type="submit">{{ __('frontend.sign up') }}</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </aside> --}}
 
                     @if ($ad->side_bar_ad_status == 1)
                     <aside class="wrapper__list__article">
