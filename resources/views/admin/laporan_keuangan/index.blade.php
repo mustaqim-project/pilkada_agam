@@ -83,6 +83,10 @@
                         <input type="number" name="jumlah_digunakan" id="jumlah_digunakan" class="form-control" required>
                     </div>
                     <div class="form-group">
+                        <label for="keterangan">Keterangan</label>
+                        <input type="text" name="keterangan" id="keterangan" class="form-control" required>
+                    </div>
+                    <div class="form-group">
                         <label for="bukti_pembayaran">Bukti Pembayaran</label>
                         <input type="file" name="bukti_pembayaran" id="bukti_pembayaran" class="form-control">
                     </div>

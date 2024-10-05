@@ -39,6 +39,7 @@ class LaporanKeuanganController extends Controller
             'periode_id' => 'required',
             'jenis_pembiayaan_id' => 'required',
             'jumlah_digunakan' => 'required|numeric',
+            'keterangan' => 'required|string',
             'bukti_pembayaran' => 'nullable|file|mimes:jpg,png,jpeg,pdf|max:2048',
         ]);
 
@@ -49,6 +50,7 @@ class LaporanKeuanganController extends Controller
             'periode_id' => $request->periode_id,
             'jenis_pembiayaan_id' => $request->jenis_pembiayaan_id,
             'jumlah_digunakan' => $request->jumlah_digunakan,
+            'keterangan' => $request->keterangan,
             'status' => $request->status,
             'bukti_pembayaran' => $imagePath,
         ]);
@@ -69,6 +71,7 @@ class LaporanKeuanganController extends Controller
             'periode_id' => 'required',
             'jenis_pembiayaan_id' => 'required',
             'jumlah_digunakan' => 'required|numeric',
+            'keterangan' => 'required|string',
             'bukti_pembayaran' => 'nullable|file|mimes:jpg,png,jpeg,pdf|max:2048',
         ]);
 
@@ -81,6 +84,7 @@ class LaporanKeuanganController extends Controller
             'periode_id' => $request->periode_id,
             'jenis_pembiayaan_id' => $request->jenis_pembiayaan_id,
             'jumlah_digunakan' => $request->jumlah_digunakan,
+            'keterangan' => $request->keterangan,
             'status' => $request->status,
             'bukti_pembayaran' => $imagePath,
         ]);

@@ -20,6 +20,7 @@ class laporan_keuangan extends Model
         'periode_id',
         'jenis_pembiayaan_id',
         'jumlah_digunakan',
+        'keterangan',
         'status',
         'bukti_pembayaran',
     ];
