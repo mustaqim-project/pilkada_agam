@@ -83,13 +83,19 @@
                         <input type="number" name="jumlah_digunakan" id="jumlah_digunakan" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="status">Status</label>
-                        <input type="text" name="status" id="status" class="form-control" required>
-                    </div>
-                    <div class="form-group">
                         <label for="bukti_pembayaran">Bukti Pembayaran</label>
                         <input type="file" name="bukti_pembayaran" id="bukti_pembayaran" class="form-control">
                     </div>
+
+                    <div class="form-group">
+                        <label for="status_pembayaran">Status Pembayaran</label>
+                        <select name="status_pembayaran" id="status_pembayaran" class="form-control" required>
+                            <option value="">Pilih Status Pembayaran</option>
+                            <option value="unpaid">Unpaid</option>
+                            <option value="paid">Paid</option>
+                        </select>
+                    </div>
+
                     <input type="hidden" name="_method" id="method" value="POST">
                     <input type="hidden" name="laporan_id" id="laporan_id" value="">
                 </div>
