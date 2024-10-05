@@ -61,7 +61,7 @@
                         <select class="form-control" name="anggaran_id" id="anggaran_id" required>
                             <option value="">Pilih Anggaran</option>
                             @foreach($anggarans as $anggaran)
-                                <option value="{{ $anggaran->id }}">{{ $anggaran->nama_anggaran }}</option>
+                                <option value="{{ $anggaran->id }}">{{ $anggaran->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -109,7 +109,7 @@
                         <select class="form-control" name="anggaran_id" id="edit_anggaran_id" required>
                             <option value="">Pilih Anggaran</option>
                             @foreach($anggarans as $anggaran)
-                                <option value="{{ $anggaran->id }}">{{ $anggaran->nama_anggaran }}</option>
+                                <option value="{{ $anggaran->id }}">{{ $anggaran->name }}</option>
                             @endforeach
                         </select>
                     </div>
