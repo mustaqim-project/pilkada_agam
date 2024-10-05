@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('mobile.auth.login');
+        return view('auth.login');
     }
 
     /**
@@ -25,18 +25,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        // Melakukan autentikasi
-        if ($request->authenticate()) {
-            $request->session()->regenerate();
+        $request->authenticate();
 
-            // Redirect ke halaman dashboard setelah berhasil login
-            return view('mobile.frontend.dashboard.index');
-        }
+        $request->session()->regenerate();
 
-        // Jika gagal, kembali ke halaman login dengan pesan error
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email'); // Menyimpan input email saat gagal
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**
