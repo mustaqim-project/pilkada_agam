@@ -1,16 +1,16 @@
 <section class="wrapper__section p-0">
-    
+
     <style>
         /* General List Styling */
         .option-content {
             list-style-type: none;
             padding: 0;
         }
-        
+
         .option-content li {
             margin-bottom: 10px; /* Adjust spacing between list items */
         }
-        
+
         /* Link Styling */
         .option-content a {
             text-decoration: none;
@@ -19,11 +19,11 @@
             display: block; /* Ensure link occupies the full width */
             padding: 10px;
         }
-        
+
         .option-content a:hover {
             color: #007bff; /* Hover color for links */
         }
-        
+
         /* Download Link Specific Styling */
         .download-link {
             background-color: #000; /* Button background color black */
@@ -37,30 +37,30 @@
             padding: 10px; /* Padding inside the button */
             font-size: 15px; /* Font size for text */
         }
-        
+
         .download-link:hover {
             background-color: #333; /* Slightly lighter black on hover */
         }
-        
+
         .download-icon {
             font-size: 24px; /* Icon font size */
             color: #fff; /* Icon color */
             margin-right: 5px; /* Space between icon and text */
         }
-        
+
         /* Additional Responsive Design */
         @media (max-width: 768px) {
             .option-content a {
                 font-size: 14px; /* Slightly smaller text size for mobile */
             }
-        
+
             .download-link {
                 width: 100%; /* Full width on smaller screens */
             }
         }
 
     </style>
-    
+
     <div class="wrapper__section__components">
         <!-- Footer -->
         <footer>
@@ -75,30 +75,30 @@
 
                                 <p>{{ @$footerInfo->description }}</p>
 
-                                  
-                                      
-                                <div class="social__media mt-4">
+
+
+                                {{-- <div class="social__media mt-4">
                                     <ul class="list-inline">
                                         @foreach ($socialLinks as $link)
                                         <li class="list-inline-item">
                                             <a href="{{ $link->url }}" class="btn btn-social rounded text-white"  aria-label="Go to Mazhub Media Social" alt="Mazhub  Media Social" >
                                                 <i class="{{ $link->icon }}"></i>
                                             </a>
-                                            
-                                            
+
+
                                         </li>
                                         @endforeach
-                                        
+
                                             <a href="https://www.mazhub.com/mazhub.apk" download class="download-link" >
                                                 <i class="fab fa-android download-icon"></i>Download App
                                             </a>
-                                        
+
 
                                     </ul>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <div class="widget__footer">
                                 <div class="dropdown-footer">
                                     <h4 class="footer-title">
@@ -155,11 +155,11 @@
                                             <a href="{{ $gridThree->url }}">{{ $gridThree->name }}</a>
                                         </li>
                                         @endforeach
-                                       
+
                                     </ul>
 
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
