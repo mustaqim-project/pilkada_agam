@@ -7,9 +7,12 @@ use App\Models\kanvasing_ds;
 use App\Models\agamas;
 use App\Models\pekerjaan;
 use Illuminate\Http\Request;
+use App\Traits\FileUploadTrait;
 
 class KanvasingDsController extends Controller
 {
+    use FileUploadTrait;
+
     public function __construct()
     {
         $this->middleware(['permission:KanvasingDs index,admin'])->only(['indexAdmin']);
@@ -18,13 +21,12 @@ class KanvasingDsController extends Controller
         $this->middleware(['permission:KanvasingDs delete,admin'])->only('destroy');
     }
 
-
     public function index()
     {
         $userId = auth()->id();
         $kanvasing = kanvasing_ds::with('agama', 'pekerjaan')
-                        ->where('user_id', $userId)
-                        ->get();
+            ->where('user_id', $userId)
+            ->get();
 
         $agamas = agamas::all();
         $pekerjaans = pekerjaan::all();
@@ -32,15 +34,15 @@ class KanvasingDsController extends Controller
         return view('mobile.kanvasing_ds.index', compact('kanvasing', 'agamas', 'pekerjaans'));
     }
 
-    // Menampilkan halaman index untuk admin
     public function indexAdmin()
     {
         $kanvasing = kanvasing_ds::with('agama', 'pekerjaan')->get();
         $agamas = agamas::all();
         $pekerjaans = pekerjaan::all();
 
-        return view('admin.kanvasing_aisyiah.index', compact('kanvasing', 'agamas', 'pekerjaans'));
+        return view('admin.kanvasing_ds.index', compact('kanvasing', 'agamas', 'pekerjaans'));
     }
+
     public function store(Request $request)
     {
         // Validasi input form
@@ -52,12 +54,12 @@ class KanvasingDsController extends Controller
             'no_ktp' => 'required|string|unique:kanvasing_ds,no_ktp',
             'tgl_lahir' => 'nullable|date',
             'jenis_kelamin' => 'nullable|in:L,P',
-            'provinsi' => 'nullable|string|max:100',
-            'kabupaten' => 'nullable|string|max:100',
-            'kecamatan' => 'nullable|string|max:100',
-            'kelurahan' => 'nullable|string|max:100',
+            'provinsi' => 'required|integer', // Ensure these are integers
+            'kabupaten' => 'required|integer',
+            'kecamatan' => 'required|integer',
+            'kelurahan' => 'required|integer',
             'no_kk' => 'nullable|string|max:16',
-            'foto_kegiatan' => 'nullable|string', // Sesuaikan jika menggunakan file upload
+            'foto_kegiatan' => 'nullable|string', // Adjust if using file upload
             'brosur' => 'boolean',
             'stiker' => 'boolean',
             'kartu_coblos' => 'boolean',
@@ -65,8 +67,14 @@ class KanvasingDsController extends Controller
             'latitude' => 'nullable|string',
         ]);
 
+        // Handle file upload
+        $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
+
         // Simpan data kanvasing
-        kanvasing_ds::create($request->all() + ['user_id' => auth()->id()]); // Menambahkan user_id saat menyimpan
+        kanvasing_ds::create($request->all() + [
+            'user_id' => auth()->id(),
+            'foto_kegiatan' => $imagePath, // Assign uploaded file path
+        ]);
 
         return redirect()->back()->with('success', 'Data berhasil ditambahkan');
     }
@@ -84,10 +92,10 @@ class KanvasingDsController extends Controller
             'no_ktp' => 'required|string|unique:kanvasing_ds,no_ktp,' . $kanvasing->id,
             'tgl_lahir' => 'nullable|date',
             'jenis_kelamin' => 'nullable|in:L,P',
-            'provinsi' => 'required|',
-            'kabupaten' => 'required|',
-            'kecamatan' => 'required|',
-            'kelurahan' => 'required|',
+            'provinsi' => 'required|integer',
+            'kabupaten' => 'required|integer',
+            'kecamatan' => 'required|integer',
+            'kelurahan' => 'required|integer',
             'no_kk' => 'nullable|string|max:16',
             'foto_kegiatan' => 'nullable|string',
             'brosur' => 'boolean',
@@ -96,6 +104,12 @@ class KanvasingDsController extends Controller
             'longitude' => 'nullable|string',
             'latitude' => 'nullable|string',
         ]);
+
+        // Handle file upload if provided
+        if ($request->hasFile('foto_kegiatan')) {
+            $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
+            $request->merge(['foto_kegiatan' => $imagePath]); // Update request data with new file path
+        }
 
         // Update data kanvasing
         $kanvasing->update($request->all());

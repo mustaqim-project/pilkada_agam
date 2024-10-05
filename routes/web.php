@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\KanvasingDsController;
+use App\Http\Controllers\Admin\KanvasingJjController;
+use App\Http\Controllers\Admin\KanvasingMmController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\Admin\KanvasingPkhController;
+use App\Http\Controllers\Admin\KanvasingParpolController;
 use App\Http\Controllers\Admin\KanvasingAisyiahController;
 
 
@@ -20,13 +24,34 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
+    Route::get('kanvasing-ds', [KanvasingDsController::class, 'index'])->name('kanvasing-ds.index');
+    Route::post('kanvasing-ds/store', [KanvasingDsController::class, 'store'])->name('kanvasing-ds.store');
+    Route::put('kanvasing-ds/update/{id}', [KanvasingDsController::class, 'update'])->name('kanvasing-ds.update');
+
+
+    Route::get('kanvasing-pkh', [KanvasingPkhController::class, 'index'])->name('kanvasing-pkh.index');
+    Route::post('kanvasing-pkh/store', [KanvasingPkhController::class, 'store'])->name('kanvasing-pkh.store');
+    Route::put('kanvasing-pkh/update/{id}', [KanvasingPkhController::class, 'update'])->name('kanvasing-pkh.update');
+
+
+    Route::get('kanvasing-mm', [KanvasingMmController::class, 'index'])->name('kanvasing-mm.index');
+    Route::post('kanvasing-mm/store', [KanvasingMmController::class, 'store'])->name('kanvasing-mm.store');
+    Route::put('kanvasing-mm/update/{id}', [KanvasingMmController::class, 'update'])->name('kanvasing-mm.update');
+
     Route::get('kanvasing-aisyiah', action: [KanvasingAisyiahController::class, 'index'])->name('kanvasing-aisyiah.index');
     Route::post('kanvasing-aisyiah/store', [KanvasingAisyiahController::class, 'store'])->name('kanvasing-aisyiah.store');
     Route::put('kanvasing-aisyiah/update/{id}', [KanvasingAisyiahController::class, 'update'])->name('kanvasing-aisyiah.update');
 
-    Route::get('kanvasing-ds', [KanvasingDsController::class, 'index'])->name('kanvasing-ds.index');
-    Route::post('kanvasing-ds/store', [KanvasingDsController::class, 'store'])->name('kanvasing-ds.store');
-    Route::put('kanvasing-ds/update/{id}', [KanvasingDsController::class, 'update'])->name('kanvasing-ds.update');
+
+    Route::get('kanvasing-parpol', [KanvasingParpolController::class, 'index'])->name('kanvasing-parpol.index');
+    Route::post('kanvasing-parpol/store', [KanvasingParpolController::class, 'store'])->name('kanvasing-parpol.store');
+    Route::put('kanvasing-parpol/update/{id}', [KanvasingParpolController::class, 'update'])->name('kanvasing-parpol.update');
+
+
+    Route::get('kanvasing-jj', [KanvasingJjController::class, 'index'])->name('kanvasing-jj.index');
+    Route::post('kanvasing-jj/store', [KanvasingJjController::class, 'store'])->name('kanvasing-jj.store');
+    Route::put('kanvasing-jj/update/{id}', [KanvasingJjController::class, 'update'])->name('kanvasing-jj.update');
+
 
 
 

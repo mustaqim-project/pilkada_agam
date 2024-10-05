@@ -140,7 +140,7 @@ class NewsController extends Controller
     {
         $languages = Language::all();
         $news = News::findOrFail($id);
-        
+
         if(!canAccess(['news all-access'])){
             if($news->auther_id != auth()->guard('admin')->user()->id){
                 return abort(404);

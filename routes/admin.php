@@ -4,12 +4,16 @@ use App\Models\Setting;
 use App\Models\FooterGridOne;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdController;
+use App\Http\Controllers\Admin\TimController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\AgamaController;
 use App\Http\Controllers\Admin\TimDsController;
 use App\Http\Controllers\Admin\TimMMController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\TimPKHController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AnggaranController;
@@ -22,6 +26,9 @@ use App\Http\Controllers\Admin\kebijakanController;
 use App\Http\Controllers\Admin\FooterInfoController;
 use App\Http\Controllers\Admin\SocialLinkController;
 use App\Http\Controllers\Admin\SubscriberController;
+use App\Http\Controllers\Admin\KanvasingDsController;
+use App\Http\Controllers\Admin\KanvasingJjController;
+use App\Http\Controllers\Admin\KanvasingMMController;
 use App\Http\Controllers\Admin\SocialCountController;
 use App\Http\Controllers\Admin\LocalizationController;
 use App\Http\Controllers\Admin\FooterGridOneController;
@@ -30,16 +37,13 @@ use App\Http\Controllers\Admin\RolePermisionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\FooterGridThreeController;
-use App\Http\Controllers\Admin\HomeSectionSettingController;
-use App\Http\Controllers\Admin\AdminAuthenticationController;
-use App\Http\Controllers\Admin\ReportController;
-use App\Http\Controllers\Admin\JabatanController;
-use App\Http\Controllers\Admin\TimController;
-use App\Http\Controllers\Admin\AgamaController;
 use App\Http\Controllers\Admin\JenisPembiayaanController;
 use App\Http\Controllers\Admin\KanvasingAisyiahController;
-use App\Http\Controllers\Admin\KanvasingDsController;
-
+use App\Http\Controllers\Admin\HomeSectionSettingController;
+use App\Http\Controllers\Admin\AdminAuthenticationController;
+use App\Http\Controllers\Admin\KanvasingPkhController;
+use App\Http\Controllers\Admin\KanvasingParpolController;
+use App\Http\Controllers\Admin\KanvasingJsController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
@@ -254,22 +258,46 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::resource('agamas', AgamaController::class);
     Route::resource('jenis-pembiayaan', JenisPembiayaanController::class);
     Route::resource('anggaran', AnggaranController::class);
-    Route::resource('kanvasing-aisyiah', KanvasingAisyiahController::class);
 
 
+
+
+// Route Kanvasing DS
+Route::get('kanvasing-ds', [KanvasingDsController::class, 'indexAdmin'])->name('kanvasing-ds.indexAdmin');
+Route::post('kanvasing-ds/store', [KanvasingDsController::class, 'store'])->name('kanvasing-ds.store');
+Route::put('kanvasing-ds/update/{id}', [KanvasingDsController::class, 'update'])->name('kanvasing-ds.update');
+Route::delete('kanvasing-ds/destroy/{id}', [KanvasingDsController::class, 'destroy'])->name('kanvasing-ds.destroy');
+
+// Route Kanvasing PKH
+Route::get('kanvasing-pkh', [KanvasingPkhController::class, 'indexAdmin'])->name('kanvasing-pkh.indexAdmin');
+Route::post('kanvasing-pkh/store', [KanvasingPkhController::class, 'store'])->name('kanvasing-pkh.store');
+Route::put('kanvasing-pkh/update/{id}', [KanvasingPkhController::class, 'update'])->name('kanvasing-pkh.update');
+Route::delete('kanvasing-pkh/destroy/{id}', [KanvasingPkhController::class, 'destroy'])->name('kanvasing-pkh.destroy');
+
+// Route Kanvasing Mm
+Route::get('kanvasing-mm', [KanvasingMmController::class, 'indexAdmin'])->name('kanvasing-mm.indexAdmin');
+Route::post('kanvasing-mm/store', [KanvasingMmController::class, 'store'])->name('kanvasing-mm.store');
+Route::put('kanvasing-mm/update/{id}', [KanvasingMmController::class, 'update'])->name('kanvasing-mm.update');
+Route::delete('kanvasing-mm/destroy/{id}', [KanvasingMmController::class, 'destroy'])->name('kanvasing-mm.destroy');
 
 // Route Kanvasing Aisyiyah
-Route::get('admin/kanvasing-aisyiah', [KanvasingAisyiahController::class, 'indexAdmin'])->name('kanvasing-aisyiah.indexAdmin');
+Route::get('kanvasing-aisyiah', [KanvasingAisyiahController::class, 'indexAdmin'])->name('kanvasing-aisyiah.indexAdmin');
 Route::post('kanvasing-aisyiah/store', [KanvasingAisyiahController::class, 'store'])->name('kanvasing-aisyiah.store');
 Route::put('kanvasing-aisyiah/update/{id}', [KanvasingAisyiahController::class, 'update'])->name('kanvasing-aisyiah.update');
 Route::delete('kanvasing-aisyiah/destroy/{id}', [KanvasingAisyiahController::class, 'destroy'])->name('kanvasing-aisyiah.destroy');
 
+// Route Kanvasing Parpol
+Route::get('kanvasing-parpol', [KanvasingParpolController::class, 'indexAdmin'])->name('kanvasing-parpol.indexAdmin');
+Route::post('kanvasing-parpol/store', [KanvasingParpolController::class, 'store'])->name('kanvasing-parpol.store');
+Route::put('kanvasing-parpol/update/{id}', [KanvasingParpolController::class, 'update'])->name('kanvasing-parpol.update');
+Route::delete('kanvasing-parpol/destroy/{id}', [KanvasingParpolController::class, 'destroy'])->name('kanvasing-parpol.destroy');
 
 
-Route::get('admin/kanvasing-ds', [KanvasingDsController::class, 'indexAdmin'])->name('kanvasing-ds.indexAdmin');
-Route::post('kanvasing-ds/store', [KanvasingDsController::class, 'store'])->name('kanvasing-ds.store');
-Route::put('kanvasing-ds/update/{id}', [KanvasingDsController::class, 'update'])->name('kanvasing-ds.update');
-Route::delete('kanvasing-ds/destroy/{id}', [KanvasingDsController::class, 'destroy'])->name('kanvasing-ds.destroy');
+// Route Kanvasing JJ
+Route::get('kanvasing-jj', [KanvasingJjController::class, 'indexAdmin'])->name('kanvasing-jj.indexAdmin');
+Route::post('kanvasing-jj/store', [KanvasingJjController::class, 'store'])->name('kanvasing-jj.store');
+Route::put('kanvasing-jj/update/{id}', [KanvasingJjController::class, 'update'])->name('kanvasing-jj.update');
+Route::delete('kanvasing-jj/destroy/{id}', [KanvasingJjController::class, 'destroy'])->name('kanvasing-jj.destroy');
 
 
 
