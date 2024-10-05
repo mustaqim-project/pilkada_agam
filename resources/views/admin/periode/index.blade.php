@@ -8,7 +8,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPeriodeModal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
         Tambah Periode
     </button>
 
@@ -32,7 +32,7 @@
                 <td>{{ $periode->tanggal_selesai }}</td>
                 <td>{{ $periode->anggaran_periode }}</td>
                 <td>
-                    <button class="btn btn-warning edit-button" data-id="{{ $periode->id }}" data-bs-toggle="modal" data-bs-target="#editPeriodeModal">Edit</button>
+                    <button class="btn btn-warning edit-button" data-id="{{ $periode->id }}">Edit</button>
                     <form action="{{ route('admin.periode.destroy', $periode->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
@@ -56,7 +56,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
+                    <div class="form-group">
+                        <label for="anggaran_id">Anggaran ID</label>
+                        <select class="form-control" name="anggaran_id" id="anggaran_id" required>
+                            <option value="">Pilih Anggaran</option>
+                            @foreach($anggarans as $anggaran)
+                                <option value="{{ $anggaran->id }}">{{ $anggaran->nama_anggaran }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="nama_periode">Nama Periode</label>
                         <input type="text" class="form-control" name="nama_periode" id="nama_periode" required>
@@ -97,6 +105,15 @@
                 <div class="modal-body">
                     <input type="hidden" name="id" id="periodeId">
                     <div class="form-group">
+                        <label for="edit_anggaran_id">Anggaran ID</label>
+                        <select class="form-control" name="anggaran_id" id="edit_anggaran_id" required>
+                            <option value="">Pilih Anggaran</option>
+                            @foreach($anggarans as $anggaran)
+                                <option value="{{ $anggaran->id }}">{{ $anggaran->nama_anggaran }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="edit_nama_periode">Nama Periode</label>
                         <input type="text" class="form-control" name="nama_periode" id="edit_nama_periode" required>
                     </div>
@@ -122,25 +139,26 @@
     </div>
 </div>
 
+
 @section('scripts')
 <script>
     $(document).ready(function() {
         $('.edit-button').on('click', function() {
             var id = $(this).data('id');
             $.get('/admin/periode/' + id + '/edit', function(data) {
-                $('#periodeId').val(data.id);
+                $('#editPeriodeId').val(data.id);
                 $('#edit_anggaran_id').val(data.anggaran_id);
                 $('#edit_nama_periode').val(data.nama_periode);
                 $('#edit_tanggal_mulai').val(data.tanggal_mulai);
                 $('#edit_tanggal_selesai').val(data.tanggal_selesai);
                 $('#edit_anggaran_periode').val(data.anggaran_periode);
-                $('#editPeriodeModal').modal('show');
-                $('#editPeriodeForm').attr('action', '/admin/periode/' + data.id);
+                $('#editForm').attr('action', '/admin/periode/' + data.id);
+                $('#editModal').modal('show');
             });
         });
 
-        // Handle submission for create form
-        $('#createPeriodeForm').on('submit', function(e) {
+        // Handle create form submission
+        $('#createForm').on('submit', function(e) {
             e.preventDefault();
             $.ajax({
                 type: $(this).attr('method'),
@@ -155,8 +173,8 @@
             });
         });
 
-        // Handle submission for edit form
-        $('#editPeriodeForm').on('submit', function(e) {
+        // Handle edit form submission
+        $('#editForm').on('submit', function(e) {
             e.preventDefault();
             $.ajax({
                 type: $(this).attr('method'),

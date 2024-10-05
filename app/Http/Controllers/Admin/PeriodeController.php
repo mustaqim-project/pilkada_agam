@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\periode;
+use App\Models\anggaran;
 
 class PeriodeController extends Controller
 {
@@ -19,12 +20,14 @@ class PeriodeController extends Controller
     public function index()
     {
         $periodes = periode::with('anggaran')->get();
-        return view('admin.periode.index', compact('periodes'));
+        $anggarans = anggaran::all(); // Ambil semua data anggaran
+        return view('admin.periode.index', compact('periodes', 'anggarans')); // Kirimkan data anggaran ke view
     }
 
     public function store(Request $request)
     {
         $request->validate([
+            'anggaran_id' => 'required|exists:anggaran,id',
             'nama_periode' => 'required|string|max:255',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
@@ -44,6 +47,7 @@ class PeriodeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'anggaran_id' => 'required|exists:anggaran,id',
             'nama_periode' => 'required|string|max:255',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
