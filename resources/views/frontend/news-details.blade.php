@@ -496,7 +496,7 @@
                         </div>
                     </aside>
 
-                    <!-- social media -->
+                    {{-- <!-- social media -->
                     <aside class="wrapper__list__article">
                         <h4 class="border_section">{{ __('frontend.stay conected') }}</h4>
                         <!-- widget Social media -->
@@ -519,7 +519,7 @@
 
                         </div>
                     </aside>
-                    <!-- End social media -->
+                    <!-- End social media --> --}}
 
                     <aside class="wrapper__list__article">
                         <h4 class="border_section">{{ __('frontend.tags') }}</h4>
