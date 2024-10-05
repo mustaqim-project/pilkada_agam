@@ -32,7 +32,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $anggaran->tim->name }}</td>
-                    <td>{{ number_format($anggaran->total_anggaran, 2) }}</td>
+                    <td>Rp {{ number_format($anggaran->total_anggaran, 2) }}</td>
                     <td>{{ $anggaran->jumlah_periode }}</td>
                     <td>
                         <!-- Tombol Edit Anggaran -->
