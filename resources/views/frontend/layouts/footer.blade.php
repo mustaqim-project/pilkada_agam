@@ -1,6 +1,6 @@
 <section class="wrapper__section p-0">
 
-    <style>
+    {{-- <style>
         /* General List Styling */
         .option-content {
             list-style-type: none;
@@ -59,7 +59,7 @@
             }
         }
 
-    </style>
+    </style> --}}
 
     <div class="wrapper__section__components">
         <!-- Footer -->
