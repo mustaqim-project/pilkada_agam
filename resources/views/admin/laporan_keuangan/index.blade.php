@@ -21,9 +21,9 @@
             @foreach($laporanKeuangan as $laporan)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $laporan->anggaran->name }}</td>
+                    <td>{{ $laporan->anggaran->tim->name }}</td>
                     <td>{{ $laporan->periode->name }}</td>
-                    <td>{{ $laporan->jenisPembiayaan->name }}</td>
+                    <td>{{ $laporan->jenisPembiayaan->nama_pembiayaan }}</td>
                     <td>{{ $laporan->jumlah_digunakan }}</td>
                     <td>{{ $laporan->status }}</td>
                     <td>
@@ -54,16 +54,17 @@
                     <div class="form-group">
                         <label for="anggaran_id">Anggaran</label>
                         <select name="anggaran_id" id="anggaran_id" class="form-control" required>
-                            @foreach($anggarans as $anggaran)
-                                <option value="{{ $anggaran->id }}">{{ $anggaran->name }}</option>
-                            @endforeach
+                            <option value="{{ $anggaran->id }}">
+                                {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} -
+                                Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
+                            </option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="periode_id">Periode</label>
                         <select name="periode_id" id="periode_id" class="form-control" required>
                             @foreach($periodes as $periode)
-                                <option value="{{ $periode->id }}">{{ $periode->name }}</option>
+                                <option value="{{ $periode->id }}">{{ $periode->nama_periode }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -71,7 +72,7 @@
                         <label for="jenis_pembiayaan_id">Jenis Pembiayaan</label>
                         <select name="jenis_pembiayaan_id" id="jenis_pembiayaan_id" class="form-control" required>
                             @foreach($jenisPembiayaans as $jenisPembiayaan)
-                                <option value="{{ $jenisPembiayaan->id }}">{{ $jenisPembiayaan->name }}</option>
+                                <option value="{{ $jenisPembiayaan->id }}">{{ $jenisPembiayaan->nama_pembiayaan }}</option>
                             @endforeach
                         </select>
                     </div>

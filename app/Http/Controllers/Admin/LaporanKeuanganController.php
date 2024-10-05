@@ -25,8 +25,8 @@ class LaporanKeuanganController extends Controller
     public function index()
     {
         $laporanKeuangan = laporan_keuangan::with(['anggaran', 'periode', 'jenisPembiayaan'])->get();
-        $anggarans = anggaran::all();
-        $periodes = periode::all();
+        $periodes = periode::with('anggaran.tim')->get(); // Eager load 'anggaran' dan 'tim'
+        $anggarans = anggaran::with('tim')->get(); // Eager load 'tim' pada anggaran
         $jenisPembiayaans = jenis_pembiayaan::all();
 
         return view('admin.laporan_keuangan.index', compact('laporanKeuangan', 'anggarans', 'periodes', 'jenisPembiayaans'));
