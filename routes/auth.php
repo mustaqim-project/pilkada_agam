@@ -34,9 +34,6 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/', function () {
-        return view('mobile.frontend.dashboard.index');
-    });
 
     Route::get('verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
