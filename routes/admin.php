@@ -43,8 +43,8 @@ use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
 use App\Http\Controllers\Admin\KanvasingPkhController;
 use App\Http\Controllers\Admin\KanvasingParpolController;
-use App\Http\Controllers\Admin\KanvasingJsController;
 use App\Http\Controllers\Admin\PeriodeController;
+use App\Http\Controllers\Admin\LaporanKeuanganController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
@@ -260,6 +260,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::resource('jenis-pembiayaan', JenisPembiayaanController::class);
     Route::resource('anggaran', AnggaranController::class);
     Route::resource('periode', PeriodeController::class);
+    Route::resource('laporan-keuangan', LaporanKeuanganController::class);
+
 
 
 
