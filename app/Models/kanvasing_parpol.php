@@ -14,7 +14,6 @@ class kanvasing_parpol extends Model
 
     protected $table = 'kanvasing_parpols';
     protected $primaryKey = 'id';
-    public $incrementing = false;
 
     protected $fillable = [
         'user_id',

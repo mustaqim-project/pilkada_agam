@@ -14,7 +14,6 @@ class kanvasing_pkh extends Model
 
     protected $table = 'kanvasing_pkhs';
     protected $primaryKey = 'id';
-    public $incrementing = false;
 
     protected $fillable = [
         'user_id',

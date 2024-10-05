@@ -11,7 +11,6 @@ class pekerjaan extends Model
 
     protected $table = 'pekerjaans'; // Specify the table name if it's not following Laravel's pluralization
     protected $primaryKey = 'id'; // Define the primary key
-    public $incrementing = false; // Set this to false if id is not auto-incrementing
     protected $keyType = 'bigint'; // Specify the key type if it's bigint
 
     protected $fillable = [

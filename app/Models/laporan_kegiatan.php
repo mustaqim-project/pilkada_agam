@@ -13,7 +13,6 @@ class laporan_kegiatan extends Model
 
     protected $table = 'laporan_kegiatan'; // Jika nama tabel tidak mengikuti konvensi plural Laravel
     protected $primaryKey = 'id';
-    public $incrementing = false;
 
     protected $fillable = [
         'anggaran_id',

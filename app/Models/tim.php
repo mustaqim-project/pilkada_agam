@@ -11,7 +11,6 @@ class tim extends Model
 
     protected $table = 'tims'; // Specify the table name
     protected $primaryKey = 'id'; // Define the primary key
-    public $incrementing = false; // Set this to false if id is not auto-incrementing
     protected $keyType = 'bigint'; // Specify the key type if it's bigint
 
     protected $fillable = [
