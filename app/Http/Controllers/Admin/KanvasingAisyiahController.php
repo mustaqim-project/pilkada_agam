@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\kanvasing_aisyiah;
 use App\Models\agamas;
 use App\Models\pekerjaan;
+use App\Models\data_ganda;
+
 use Illuminate\Http\Request;
 use App\Traits\FileUploadTrait;
 
@@ -71,13 +73,26 @@ class KanvasingAisyiahController extends Controller
         $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
 
         // Simpan data kanvasing
-        kanvasing_aisyiah::create($request->all() + [
+        $kanvasing = kanvasing_aisyiah::create($request->all() + [
             'user_id' => auth()->id(),
             'foto_kegiatan' => $imagePath, // Assign uploaded file path
         ]);
 
+        // Simpan data ke model data_ganda
+        data_ganda::create([
+            'kecamatan' => $request->input('kecamatan'),
+            'nagari' => $request->input('nagari'), // Pastikan input 'nagari' ada dalam form
+            'no_ktp' => $request->input('no_ktp'),
+            'no_kk' => $request->input('no_kk'),
+            'nama_responden' => $request->input('nama_responden'),
+            'alamat' => $request->input('alamat'),
+            'longitude' => $request->input('longitude'),
+            'latitude' => $request->input('latitude'),
+        ]);
+
         return redirect()->back()->with('success', 'Data berhasil ditambahkan');
     }
+
 
     public function update(Request $request, $id)
     {

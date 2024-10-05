@@ -11,7 +11,6 @@ class tim extends Model
 
     protected $table = 'tims';
     protected $primaryKey = 'id';
-    protected $keyType = 'bigint';
 
     protected $fillable = [
         'name',
