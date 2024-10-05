@@ -66,7 +66,7 @@
                         <label for="periode_id">Periode</label>
                         <select name="periode_id" id="periode_id" class="form-control" required>
                             @foreach($periodes as $periode)
-                                <option value="{{ $periode->id }}">{{ $periode->nama_periode }}</option>
+                                <option value="{{ $periode->id }}">{{ $periode->nama_periode }} -  Rp {{ number_format($anggaran->anggaran_periode, 2, ',', '.') }}</option>
                             @endforeach
                         </select>
                     </div>
