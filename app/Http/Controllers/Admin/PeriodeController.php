@@ -22,7 +22,7 @@ class PeriodeController extends Controller
         $periodes = periode::with('anggaran.tim')->get(); // Eager load 'anggaran' dan 'tim'
         $anggarans = anggaran::with('tim')->get(); // Eager load 'tim' pada anggaran
 
-        dd($periodes,$anggarans);
+        // dd($periodes,$anggarans);
         return view('admin.periode.index', compact('periodes', 'anggarans'));
     }
 
