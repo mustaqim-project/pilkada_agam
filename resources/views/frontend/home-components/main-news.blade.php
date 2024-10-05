@@ -540,7 +540,7 @@
                             </div>
                         </aside>
 
-                        <aside class="wrapper__list__article">
+                        {{-- <aside class="wrapper__list__article">
                             <h4 class="border_section">{{ __('frontend.stay conected') }}</h4>
                             <!-- widget Social media -->
                             <div class="wrap__social__media">
@@ -561,7 +561,7 @@
                                 @endforeach
 
                             </div>
-                        </aside>
+                        </aside> --}}
 
                         <aside class="wrapper__list__article">
                             <h4 class="border_section">{{ __('frontend.tags') }}</h4>
