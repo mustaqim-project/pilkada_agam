@@ -14,10 +14,8 @@
                     <li class="breadcrumbs__item">
                         <a href="javascirt:;" class="breadcrumbs__url">{{ __('frontend.News') }}</a>
                     </li>
-
                 </ul>
             </div>
-
         </div>
     </div>
     <div class="container">
