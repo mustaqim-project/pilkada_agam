@@ -14,7 +14,6 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 
 Route::middleware('guest')->group(function () {
 
-    Route::get('/', [HomeController::class, 'index']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
