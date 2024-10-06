@@ -34,7 +34,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $laporan->anggaran->tim->name }}</td>
-                                <td>{{ $laporan->periode->name }}</td>
+                                <td>{{ $laporan->periode->nama_periode }}</td>
                                 <td>{{ $laporan->jenisPembiayaan->nama_pembiayaan }}</td>
                                 <td>{{ $laporan->jumlah_digunakan }}</td>
                                 <td>{{ $laporan->status }}</td>
