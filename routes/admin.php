@@ -38,7 +38,6 @@ use App\Http\Controllers\Admin\FooterGridTwoController;
 use App\Http\Controllers\Admin\RolePermisionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\ContactMessageController;
-use App\Http\Controllers\admin\DashboardUtamaController;
 use App\Http\Controllers\Admin\FooterGridThreeController;
 use App\Http\Controllers\Admin\JenisPembiayaanController;
 use App\Http\Controllers\Admin\KanvasingParpolController;
@@ -46,6 +45,7 @@ use App\Http\Controllers\Admin\LaporanKeuanganController;
 use App\Http\Controllers\Admin\KanvasingAisyiahController;
 use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
+use App\Http\Controllers\Admin\DashboardUtamaController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
