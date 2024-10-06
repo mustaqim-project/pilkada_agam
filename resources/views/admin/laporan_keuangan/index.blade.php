@@ -51,6 +51,9 @@
                 <form id="laporanForm" method="POST" action="{{ route('admin.laporan-keuangan.store') }}"
                     enctype="multipart/form-data">
                     @csrf
+                    <!-- This hidden input will dynamically change to PUT when editing -->
+                    <input type="hidden" name="_method" id="method" value="POST">
+                    <input type="hidden" name="laporan_id" id="laporan_id" value="">
                     <div class="modal-header">
                         <h5 class="modal-title" id="laporanModalLabel">Tambah Laporan Keuangan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
@@ -106,9 +109,6 @@
                                 <option value="paid">Paid</option>
                             </select>
                         </div>
-
-                        <input type="hidden" name="_method" id="method" value="POST">
-                        <input type="hidden" name="laporan_id" id="laporan_id" value="">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -125,6 +125,7 @@
                 document.getElementById('laporanForm').reset();
                 document.getElementById('method').value = 'POST';
                 document.getElementById('laporan_id').value = '';
+                document.getElementById('laporanForm').setAttribute('action', '{{ route("admin.laporan-keuangan.store") }}');
                 document.getElementById('laporanModalLabel').innerText = 'Tambah Laporan Keuangan';
             };
 
@@ -138,7 +139,10 @@
                         document.getElementById('jumlah_digunakan').value = data.jumlah_digunakan;
                         document.getElementById('keterangan').value = data.keterangan;
                         document.getElementById('status').value = data.status;
-                        document.getElementById('method').value = 'PUT';
+
+                        // Set action for the update request
+                        document.getElementById('laporanForm').setAttribute('action', '/admin/laporan-keuangan/' + id);
+                        document.getElementById('method').value = 'PUT'; // Change method to PUT
                         document.getElementById('laporan_id').value = id;
                         document.getElementById('laporanModalLabel').innerText = 'Edit Laporan Keuangan';
                         var myModal = new bootstrap.Modal(document.getElementById('laporanModal'));
@@ -147,5 +151,4 @@
             };
         });
     </script>
-
 @endsection
