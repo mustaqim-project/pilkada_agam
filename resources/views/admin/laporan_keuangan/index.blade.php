@@ -92,8 +92,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="status_pembayaran">Status Pembayaran</label>
-                        <select name="status_pembayaran" id="status_pembayaran" class="form-control" required>
+                        <label for="status">Status Pembayaran</label>
+                        <select name="status" id="status" class="form-control" required>
                             <option value="">Pilih Status Pembayaran</option>
                             <option value="unpaid">Unpaid</option>
                             <option value="paid">Paid</option>
