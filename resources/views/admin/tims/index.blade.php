@@ -8,7 +8,6 @@
 
     <div class="card card-primary">
         <div class="card-header">
-            <h4>{{ __('admin.All Teams') }}</h4>
             <div class="card-header-actions">
                 <button class="btn btn-primary" id="createTimBtn" data-bs-toggle="modal" data-bs-target="#timModal">
                     <i class="fas fa-plus"></i> {{ __('admin.Create new') }}

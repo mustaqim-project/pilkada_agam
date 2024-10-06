@@ -8,9 +8,8 @@
 
     <div class="card card-primary">
         <div class="card-header">
-            <h4>{{ __('admin.All Agama') }}</h4>
-            <div class="card-header-action">
-                <button class="btn btn-primary" id="createAgamaBtn" data-toggle="modal" data-target="#agamaModal">
+            <div class="card-header-actions">
+                <button class="btn btn-primary" id="createAgamaBtn" data-bs-toggle="modal" data-bs-target="#agamaModal">
                     <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
                 </button>
             </div>
@@ -36,7 +35,7 @@
                                 <form action="{{ route('admin.agamas.destroy', $agama->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -49,8 +48,8 @@
 </section>
 
 <!-- Modal -->
-<div class="modal fade" id="agamaModal" tabindex="-1" role="dialog" aria-labelledby="agamaModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="agamaModal" tabindex="-1" aria-labelledby="agamaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="agamaModalLabel">{{ __('admin.Agama Form') }}</h5>
@@ -60,8 +59,8 @@
                 <form id="agamaForm" action="" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="POST" id="formMethod">
-                    <div class="form-group">
-                        <label for="name">{{ __('admin.Name') }}</label>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">{{ __('admin.Name') }}</label>
                         <input type="text" class="form-control" name="name" id="name" required>
                     </div>
                     <div class="modal-footer">
@@ -98,7 +97,8 @@ $(document).ready(function() {
                 $('#agamaForm').attr('action', `/admin/agamas/${id}`);
             },
             error: function(xhr) {
-                console.log(xhr.responseText);
+                console.error('Error fetching data:', xhr.responseText);
+                alert('Error fetching data. Please try again.');
             }
         });
     });
@@ -112,11 +112,12 @@ $(document).ready(function() {
             method: method,
             data: $(this).serialize(),
             success: function(response) {
+                $('#agamaModal').modal('hide');
                 location.reload(); // Refresh the page to reflect changes
             },
             error: function(xhr) {
-                console.log(xhr.responseText);
-                // Optionally handle error display to the user
+                console.error('Error saving data:', xhr.responseText);
+                alert('Error saving data. Please check your input.');
             }
         });
     });
