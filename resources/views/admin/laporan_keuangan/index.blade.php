@@ -68,7 +68,6 @@
                 <form id="laporanForm" method="POST" action="{{ route('admin.laporan-keuangan.store') }}"
                     enctype="multipart/form-data">
                     @csrf
-                    <!-- This hidden input will dynamically change to PUT when editing -->
                     <input type="hidden" name="_method" id="method" value="POST">
                     <input type="hidden" name="laporan_id" id="laporan_id" value="">
                     <div class="modal-header">
