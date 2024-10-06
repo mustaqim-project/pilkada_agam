@@ -34,7 +34,7 @@ class LaporanKeuanganController extends Controller
 
         laporan_keuangan::create($request->all());
 
-        return redirect()->route('admin.laporan_keuangan.index')->with('success', 'Laporan berhasil ditambahkan.');
+        return redirect()->route('admin.laporan-keuangan.index')->with('success', 'Laporan berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -57,13 +57,13 @@ class LaporanKeuanganController extends Controller
         $laporan = laporan_keuangan::find($id);
         $laporan->update($request->all());
 
-        return redirect()->route('admin.laporan_keuangan.index')->with('success', 'Laporan berhasil diperbarui.');
+        return redirect()->route('admin.laporan-keuangan.index')->with('success', 'Laporan berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         laporan_keuangan::destroy($id);
 
-        return redirect()->route('admin.laporan_keuangan.index')->with('success', 'Laporan berhasil dihapus.');
+        return redirect()->route('admin.laporan-keuangan.index')->with('success', 'Laporan berhasil dihapus.');
     }
 }
