@@ -118,7 +118,6 @@
         </div>
     </div>
 
-@section('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             window.resetForm = function() {
@@ -146,5 +145,5 @@
             };
         });
     </script>
-@endsection
+
 @endsection
