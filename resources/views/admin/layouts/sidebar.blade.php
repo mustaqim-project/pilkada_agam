@@ -15,11 +15,11 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">{{ __('admin.Dashboard') }}</li>
-
             <li class="active">
                 <a href="{{ route('admin.dashboard') }}" class="nav-link"><i
                         class="fas fa-fire"></i><span>{{ __('admin.Dashboard Blog') }}</span></a>
             </li>
+
 
             @if (canAccess(['Dashboard Utama']))
                 <li class="{{ setSidebarActive(['admin.dashboard-utama.*']) }}"><a class="nav-link"
@@ -64,6 +64,7 @@
             @endif
 
             @if (canAccess(['Tim Pusat']))
+
                 <li class="menu-header">{{ __('admin.TIM PUSAT') }}</li>
                 <li class="dropdown {{ setSidebarActive(['admin.timds.*']) }}">
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
@@ -105,6 +106,7 @@
                         @endif
                     </ul>
                 </li>
+
 
                 @if (canAccess(['ketua pkh', 'koordinator wilayah', 'koordinator kecamatan', 'koordinator nagari']))
                     <li class="dropdown {{ setSidebarActive(['admin.timpkh.*']) }}">
@@ -148,7 +150,6 @@
                                     </ul>
                                 </li>
                             @endif
-
                         </ul>
                     </li>
                 @endif
@@ -195,6 +196,7 @@
                                     </ul>
                                 </li>
                             @endif
+
                         </ul>
                     </li>
                 @endif
@@ -511,10 +513,11 @@
                             @if ($unReadMessages > 0)
                                 <i class="badge bg-danger"
                                     style="color:
-             #fff">{{ $unReadMessages }}</i>
+                    #fff">{{ $unReadMessages }}</i>
                             @endif
                         </a></li>
                 @endif
+
                 @if (canAccess(['home section index']))
                     <li class="{{ setSidebarActive(['admin.home-section-setting.*']) }}"><a class="nav-link"
                             href="{{ route('admin.home-section-setting.index') }}"><i class="fas fa-wrench"></i>
@@ -537,14 +540,14 @@
                 @if (canAccess(['footer index']))
                     <li
                         class="dropdown
-                {{ setSidebarActive([
-                    'admin.social-link.*',
-                    'admin.footer-info.*',
-                    'admin.footer-grid-one.*',
-                    'admin.footer-grid-three.*',
-                    'admin.footer-grid-two.*',
-                ]) }}
-                ">
+                    {{ setSidebarActive([
+                        'admin.social-link.*',
+                        'admin.footer-info.*',
+                        'admin.footer-grid-one.*',
+                        'admin.footer-grid-three.*',
+                        'admin.footer-grid-two.*',
+                    ]) }}
+                    ">
                         <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i>
                             <span>{{ __('admin.Footer') }} {{ __('admin.Setting') }}</span></a>
                         <ul class="dropdown-menu">
@@ -570,6 +573,8 @@
 
 
             @endif
+
+
 
             @if (canAccess(['Setting']))
                 <li class="menu-header">{{ __('admin.Setting') }}</li>
