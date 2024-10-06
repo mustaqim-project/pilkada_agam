@@ -31,11 +31,11 @@
                             <td>{{ $agama->id }}</td>
                             <td>{{ $agama->name }}</td>
                             <td>
-                                <button class="btn btn-warning editAgamaBtn" data-id="{{ $agama->id }}">Edit</button>
+                                <button class="btn btn-warning editAgamaBtn" data-id="{{ $agama->id }}" aria-label="Edit {{ $agama->name }}">Edit</button>
                                 <form action="{{ route('admin.agamas.destroy', $agama->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?');" aria-label="Delete {{ $agama->name }}">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -78,6 +78,7 @@
 @section('scripts')
 <script>
 $(document).ready(function() {
+    // Handle the creation of a new Agama
     $('#createAgamaBtn').on('click', function() {
         $('#agamaModal').modal('show');
         $('#agamaForm')[0].reset();
@@ -85,6 +86,7 @@ $(document).ready(function() {
         $('#agamaForm').attr('action', '{{ route('admin.agamas.store') }}');
     });
 
+    // Handle the editing of an existing Agama
     $('.editAgamaBtn').on('click', function() {
         const id = $(this).data('id');
         $.ajax({
@@ -103,6 +105,7 @@ $(document).ready(function() {
         });
     });
 
+    // Handle form submission for both create and update
     $('#agamaForm').on('submit', function(e) {
         e.preventDefault();
         const actionUrl = $(this).attr('action');
