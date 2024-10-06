@@ -14,6 +14,7 @@
                     <th>Periode</th>
                     <th>Jenis Pembiayaan</th>
                     <th>Jumlah Digunakan</th>
+                    <th>Keterangan</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
@@ -111,7 +112,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
