@@ -443,6 +443,29 @@
 
             @if (canAccess(['Setting']))
                 <li class="menu-header">{{ __('admin.Setting') }}</li>
+
+
+                @if (canAccess(['tim index', 'tim create', 'tim udpate', 'tim delete']))
+                <li class="{{ setSidebarActive(['admin.tims.*']) }}"><a class="nav-link"
+                        href="{{ route('admin.tims.index') }}"><i class="fas fa-list"></i>
+                        <span>{{ __('admin.Tim') }}</span></a></li>
+                @endif
+
+
+                @if (canAccess(['jabatan index', 'jabatan create', 'jabatan udpate', 'jabatan delete']))
+                <li class="{{ setSidebarActive(['admin.jabatan.*']) }}"><a class="nav-link"
+                        href="{{ route('admin.jabatan.index') }}"><i class="fas fa-list"></i>
+                        <span>{{ __('admin.Jabatan') }}</span></a></li>
+                @endif
+
+
+                @if (canAccess(['agama index', 'agama create', 'agama udpate', 'agama delete']))
+                <li class="{{ setSidebarActive(['admin.agamas.*']) }}"><a class="nav-link"
+                        href="{{ route('admin.agamas.index') }}"><i class="fas fa-list"></i>
+                        <span>{{ __('admin.Agama') }}</span></a></li>
+                @endif
+
+
                 @if (canAccess(['access management index']))
                     <li class="dropdown{{ setSidebarActive(['admin.role.*', 'admin.role-users.*']) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-user-shield"></i>
