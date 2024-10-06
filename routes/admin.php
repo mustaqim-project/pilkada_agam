@@ -268,8 +268,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
 
 
 
-
-
 // Route Kanvasing DS
 Route::get('kanvasing-ds', [KanvasingDsController::class, 'indexAdmin'])->name('kanvasing-ds.indexAdmin');
 Route::post('kanvasing-ds/store', [KanvasingDsController::class, 'store'])->name('kanvasing-ds.store');
