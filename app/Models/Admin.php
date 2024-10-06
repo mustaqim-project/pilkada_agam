@@ -43,7 +43,7 @@ class Admin extends Authenticatable
         'status' => 'boolean',
     ];
 
-      public function atasan()
+    public function atasan()
     {
         return $this->belongsTo(Admin::class, 'atasan_id');
     }

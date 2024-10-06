@@ -26,6 +26,12 @@ use App\Models\data_ganda;
 
 class DashboardUtamaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['permission:Dashboiard Utana,admin'])->only(methods: ['index']);
+
+    }
     public function index()
     {
 
