@@ -26,5 +26,9 @@ use App\Models\data_ganda;
 
 class DashboardUtamaController extends Controller
 {
-    //
+    public function index()
+    {
+
+    }
+
 }
