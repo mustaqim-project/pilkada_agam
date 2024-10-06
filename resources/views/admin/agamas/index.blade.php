@@ -32,13 +32,19 @@
                             <td>{{ $agama->name }}</td>
                             <td>
                                 <!-- Tombol Edit Agama -->
-                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAgamaModal" data-id="{{ $agama->id }}">Edit</button>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editAgamaModal"
+                                        data-id="{{ $agama->id }}"
+                                        data-name="{{ $agama->name }}">
+                                    Edit
+                                </button>
 
                                 <!-- Tombol Hapus Agama -->
                                 <form action="{{ route('admin.agamas.destroy', $agama->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" aria-label="Delete {{ $agama->name }}">Delete</button>
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" aria-label="Delete {{ $agama->name }}">
+                                        Delete
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -87,7 +93,7 @@
                 <form id="editAgamaForm" action="" method="POST">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" id="editAgamaId">
+                    <input type="hidden" id="editAgamaId" name="id">
                     <div class="mb-3">
                         <label for="editName" class="form-label">{{ __('admin.Name') }}</label>
                         <input type="text" class="form-control" name="name" id="editName" required>
@@ -106,54 +112,21 @@
 
 @push('scripts')
 <script>
-    // Modal Create Agama
-    $('#newAgamaForm').on('submit', function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: $(this).attr('action'),
-            method: 'POST',
-            data: $(this).serialize(),
-            success: function(response) {
-                $('#newAgamaModal').modal('hide');
-                location.reload(); // Reload page to reflect new data
-            },
-            error: function(xhr) {
-                console.error('Error saving data:', xhr.responseText);
-                alert('Error saving data. Please check your input.');
-            }
-        });
-    });
+    // Populate the edit modal with data
+    var editAgamaModal = document.getElementById('editAgamaModal');
+    editAgamaModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // Button that triggered the modal
+        var id = button.getAttribute('data-id'); // Extract info from data-* attributes
+        var name = button.getAttribute('data-name'); // Extract info from data-* attributes
 
-    // Show modal Edit Agama
-    $('#editAgamaModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget);
-        var id = button.data('id');
+        // Update the modal's content.
+        var modalTitle = editAgamaModal.querySelector('.modal-title');
+        var modalBodyInput = editAgamaModal.querySelector('#editName');
+        var formAction = editAgamaModal.querySelector('form');
 
-        // Fetch data Agama untuk modal edit
-        $.get(`/admin/agamas/${id}/edit`, function(data) {
-            $('#editName').val(data.name);
-            $('#editAgamaForm').attr('action', `/admin/agamas/${id}`);
-        });
-    });
-
-    // Modal Edit Agama
-    $('#editAgamaForm').on('submit', function(e) {
-        e.preventDefault();
-        var actionUrl = $(this).attr('action');
-
-        $.ajax({
-            url: actionUrl,
-            method: 'PUT',
-            data: $(this).serialize(),
-            success: function(response) {
-                $('#editAgamaModal').modal('hide');
-                location.reload(); // Reload page to reflect changes
-            },
-            error: function(xhr) {
-                console.error('Error updating data:', xhr.responseText);
-                alert('Error updating data. Please check your input.');
-            }
-        });
+        modalTitle.textContent = 'Edit Agama: ' + name; // Optional: Update title
+        modalBodyInput.value = name; // Fill the input with the current name
+        formAction.action = '/admin/agamas/' + id; // Update form action URL
     });
 </script>
 @endpush
