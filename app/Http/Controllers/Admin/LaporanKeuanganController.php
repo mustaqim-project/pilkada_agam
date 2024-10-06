@@ -8,9 +8,12 @@ use App\Models\laporan_keuangan;
 use App\Models\anggaran;
 use App\Models\periode;
 use App\Models\jenis_pembiayaan;
+use App\Traits\FileUploadTrait;
 
 class LaporanKeuanganController extends Controller
 {
+    use FileUploadTrait;
+
     public function index()
     {
         $laporanKeuangan = laporan_keuangan::with(['anggaran.tim', 'periode', 'jenisPembiayaan'])->get();
@@ -32,9 +35,19 @@ class LaporanKeuanganController extends Controller
             'status' => 'required',
         ]);
 
-        laporan_keuangan::create($request->all());
+        $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran');
 
-        return redirect()->route('admin.laporan-keuangan.index')->with('success', 'Laporan berhasil ditambahkan.');
+        laporan_keuangan::create([
+            'anggaran_id' => $request->anggaran_id,
+            'periode_id' => $request->periode_id,
+            'jenis_pembiayaan_id' => $request->jenis_pembiayaan_id,
+            'jumlah_digunakan' => $request->jumlah_digunakan,
+            'keterangan' => $request->keterangan,
+            'status' => $request->status,
+            'bukti_pembayaran' => $imagePath,
+        ]);
+
+        return redirect()->route(route: 'admin.laporan-keuangan.index')->with('success', 'Laporan berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -51,12 +64,21 @@ class LaporanKeuanganController extends Controller
             'jenis_pembiayaan_id' => 'required',
             'jumlah_digunakan' => 'required|numeric',
             'keterangan' => 'required|string',
-            'status' => 'required',
+            'bukti_pembayaran' => 'nullable|file|mimes:jpg,png,jpeg,pdf|max:2048',
         ]);
 
-        $laporan = laporan_keuangan::find($id);
-        $laporan->update($request->all());
+        $laporan = laporan_keuangan::findOrFail($id);
 
+        $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran', $laporan->bukti_pembayaran);
+
+        $laporan->update([
+            'anggaran_id' => $request->anggaran_id,
+            'periode_id' => $request->periode_id,
+            'jenis_pembiayaan_id' => $request->jenis_pembiayaan_id,
+            'jumlah_digunakan' => $request->jumlah_digunakan,
+            'status' => $request->status,
+            'bukti_pembayaran' => $imagePath,
+        ]);
         return redirect()->route('admin.laporan-keuangan.index')->with('success', 'Laporan berhasil diperbarui.');
     }
 
