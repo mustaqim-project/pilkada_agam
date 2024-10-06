@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Jabatan;
+use App\Models\jabatan;
 use Illuminate\Http\Request;
 
 class JabatanController extends Controller
@@ -18,7 +18,7 @@ class JabatanController extends Controller
 
     public function index()
     {
-        $jabatans = Jabatan::all();
+        $jabatans = jabatan::all();
         return view('admin.jabatan.index', compact('jabatans'));
     }
 
@@ -33,17 +33,17 @@ class JabatanController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        Jabatan::create($request->all());
+        jabatan::create($request->all());
 
         return redirect()->route('admin.jabatan.index')->with('success', 'Jabatan created successfully.');
     }
 
-    public function edit(Jabatan $jabatan)
+    public function edit(jabatan $jabatan)
     {
         return response()->json(['success' => true, 'data' => view('admin.jabatan.form', compact('jabatan'))->render()]);
     }
 
-    public function update(Request $request, Jabatan $jabatan)
+    public function update(Request $request, jabatan $jabatan)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -54,7 +54,7 @@ class JabatanController extends Controller
         return redirect()->route('admin.jabatan.index')->with('success', 'Jabatan updated successfully.');
     }
 
-    public function destroy(Jabatan $jabatan)
+    public function destroy(jabatan $jabatan)
     {
         $jabatan->delete();
         return redirect()->route('admin.jabatan.index')->with('success', 'Jabatan deleted successfully.');
