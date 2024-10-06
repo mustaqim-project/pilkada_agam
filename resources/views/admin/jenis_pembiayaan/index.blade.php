@@ -32,7 +32,7 @@
                             <td>{{ $pembiayaan->nama_pembiayaan }}</td>
                             <td>
                                 <!-- Edit Button -->
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $pembiayaan->id }}">
+                                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalEditPembiayaan" data-id="{{ $pembiayaan->id }}">
                                     Edit
                                 </button>
 
@@ -46,32 +46,6 @@
                                 </form>
                             </td>
                         </tr>
-
-                        <!-- Edit Modal -->
-                        <div class="modal fade" id="editModal{{ $pembiayaan->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $pembiayaan->id }}" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="editModalLabel{{ $pembiayaan->id }}">Edit Jenis Pembiayaan</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-                                    </div>
-                                    <form action="{{ route('admin.jenis-pembiayaan.update', $pembiayaan->id) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label for="nama_pembiayaan">Nama Pembiayaan</label>
-                                                <input type="text" name="nama_pembiayaan" class="form-control" value="{{ $pembiayaan->nama_pembiayaan }}" required>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                         @endforeach
                     </tbody>
                 </table>
@@ -104,5 +78,48 @@
         </div>
     </div>
 </div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="modalEditPembiayaan" tabindex="-1" aria-labelledby="modalEditPembiayaanLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEditPembiayaanLabel">Edit Jenis Pembiayaan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <form id="formEditPembiayaan" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="edit_nama_pembiayaan">Nama Pembiayaan</label>
+                        <input type="text" id="edit_nama_pembiayaan" name="nama_pembiayaan" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script>
+    $('#modalEditPembiayaan').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var id = button.data('id'); // Extract info from data-* attributes
+
+        // Fetch data pembiayaan berdasarkan ID
+        $.get(`/admin/jenis-pembiayaan/${id}/edit`, function (data) {
+            $('#edit_nama_pembiayaan').val(data.nama_pembiayaan);
+
+            // Ubah action form untuk update
+            $('#formEditPembiayaan').attr('action', `/admin/jenis-pembiayaan/${id}`);
+        });
+    });
+</script>
+@endpush
 
 @endsection
