@@ -26,6 +26,7 @@
                         <td>{{ $laporan->periode->name }}</td>
                         <td>{{ $laporan->jenisPembiayaan->nama_pembiayaan }}</td>
                         <td>{{ $laporan->jumlah_digunakan }}</td>
+                        <td>{{ $laporan->keterangan }}</td>
                         <td>{{ $laporan->status }}</td>
                         <td>
                             <button class="btn btn-warning" onclick="editLaporan({{ $laporan->id }})">Edit</button>
@@ -135,6 +136,7 @@
                         document.getElementById('periode_id').value = data.periode_id;
                         document.getElementById('jenis_pembiayaan_id').value = data.jenis_pembiayaan_id;
                         document.getElementById('jumlah_digunakan').value = data.jumlah_digunakan;
+                        document.getElementById('keterangan').value = data.keterangan;
                         document.getElementById('status').value = data.status;
                         document.getElementById('method').value = 'PUT';
                         document.getElementById('laporan_id').value = id;
