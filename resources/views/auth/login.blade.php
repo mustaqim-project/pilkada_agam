@@ -11,15 +11,6 @@
                             <h4 class="card-title mb-4">{{ __('frontend.Sign in') }}</h4>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
-                                {{-- <a href="#" class="btn btn-facebook btn-block mb-2 text-white"> <i
-                                        class="fa fa-facebook"></i> &nbsp; Sign
-                                    in
-                                    with
-                                    Facebook</a>
-                                <a href="#" class="btn btn-primary btn-block mb-4"> <i class="fa fa-google"></i>
-                                    &nbsp;
-                                    Sign in with
-                                    Google</a> --}}
                                 <div class="form-group">
                                     <input class="form-control" placeholder="{{ __('frontend.Email') }}" type="text" name="email">
                                     @error('email')
@@ -44,8 +35,6 @@
                             </form>
                         </div>
                     </div>
-
-                    {{-- <p class="text-center mt-4 mb-0">{{ __('frontend.Dont have account?') }} <a href="{{ route('register') }}">{{ __('frontend.Sign up') }}</a></p> --}}
                 </div>
             </div>
         </div>

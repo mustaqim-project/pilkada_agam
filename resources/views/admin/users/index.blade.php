@@ -10,7 +10,6 @@
         <div class="card-header">
             <h4>{{ __('admin.All Anggota Tim') }}</h4>
             <div class="card-header-action">
-                <!-- Tombol yang membuka modal -->
                 <button class="btn btn-primary" data-toggle="modal" data-target="#tambahDataModal">
                     <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
                 </button>
@@ -25,8 +24,8 @@
                             <th class="text-center">#</th>
                             <th>{{ __('admin.Name') }}</th>
                             <th>{{ __('admin.Email') }}</th>
-                            <th>{{ __('admin.PJ Name') }}</th> <!-- Menambahkan kolom PJ Name -->
-                            <th>{{ __('admin.Tim') }}</th>
+                            <th>{{ __('admin.PJ Name') }}</th>
+                            <th>{{ __('admin.Tim') }}</th> <!-- Menampilkan nama tim -->
                             <th>{{ __('admin.Action') }}</th>
                         </tr>
                     </thead>
@@ -37,14 +36,9 @@
                             <td>{{ $admin->name }}</td>
                             <td>{{ $admin->email }}</td>
                             <td>{{ $admin->admin ? $admin->admin->name : 'N/A' }}</td>
-                            <td>{{ $admin->tim }}</td>
+                            <td>{{ $admin->tim ? $admin->tim->name : 'N/A' }}</td> <!-- Menggunakan relasi untuk menampilkan nama tim -->
                             <td>
-                                {{-- <a href="{{ route('admin.user.edit', $admin->id) }}" class="btn btn-primary">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="{{ route('admin.user.destroy', $admin->id) }}" class="btn btn-danger delete-item">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a> --}}
+                                {{-- Edit dan delete buttons bisa diaktifkan kembali jika diperlukan --}}
                             </td>
                         </tr>
                         @endforeach
@@ -67,13 +61,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Form Tambah Data -->
                 <form method="POST" action="{{ route('admin.register') }}">
                     @csrf
                     @php
                         use App\Models\Admin;
-                        use Spatie\Permission\Models\Role;
+                        use App\Models\tim; // Tambahkan model tim
                         $admins = Admin::with('roles')->get();
+                        $tims = tim::all(); // Mengambil semua tim
                     @endphp
                     <div class="form-group">
                         <label for="pj_id">{{ __('admin.Nama Koordinator') }}</label>
@@ -83,6 +77,16 @@
                                 @foreach($admin->roles as $role)
                                     <option value="{{ $admin->id }}">{{ $admin->name }} - {{ $role->name }}</option>
                                 @endforeach
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tim_id">{{ __('admin.Tim') }}</label>
+                        <select class="form-control" name="tim_id" id="tim_id">
+                            <option value="">{{ __('Pilih Tim') }}</option>
+                            @foreach($tims as $tim)
+                                <option value="{{ $tim->id }}">{{ $tim->name }}</option> <!-- Menampilkan nama tim -->
                             @endforeach
                         </select>
                     </div>
@@ -108,19 +112,6 @@
                         @error('password_confirmation')
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
-                    </div>
-
-                    <!-- Select Option untuk Tim -->
-                    <div class="form-group">
-                        <label for="tim">{{ __('admin.Tim') }}</label>
-                        <select class="form-control" id="tim" name="tim">
-                            <option value="DS">DS</option>
-                            <option value="PKH">PKH</option>
-                            <option value="MM">MM</option>
-                            <option value="Asyiah">Asyiah</option>
-                            <option value="Parpol">Parpol</option>
-                            <option value="JJ">JJ</option>
-                        </select>
                     </div>
 
                     <div class="form-group">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\tim;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -15,62 +16,52 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     */
     public function __construct()
     {
-        // Menetapkan middleware untuk mengontrol akses berdasarkan permission
         $this->middleware(['permission:user register,admin'])->only(['create', 'store']);
     }
 
-    /**
-     * Display the registration view.
-     */
     public function create(): View
     {
         $authUser = Auth::guard('admin')->user();
+        $tims = tim::all(); // Ambil data tim
 
         if ($authUser->hasRole('Super Admin')) {
-            $admins = User::with('admin')->get();
+            $admins = User::with(['admin', 'tim'])->get(); // Mengambil admin dan tim
         } else {
-            $admins = User::with('admin')->where('pj_id', $authUser->id)->get();
+            $admins = User::with(['admin', 'tim'])->where('pj_id', $authUser->id)->get();
         }
 
         return view('admin.users.index', [
             'admins' => $admins,
+            'tims' => $tims, // Kirim data tim ke view
         ]);
     }
 
 
 
     public function store(Request $request): RedirectResponse
-{
-    $request->validate([
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'], // Perbaiki unique table dengan tabel `users`
-        'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        'pj_id' => ['required', 'exists:admins,id'], // Validasi admin (penanggung jawab)
-        'tim' => ['required', 'in:DS,PKH,MM,Asyiah,Parpol,JJ'], // Validasi untuk enum 'tim'
-    ]);
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'pj_id' => ['required', 'exists:admins,id'],
+            'tim_id' => ['required', 'exists:tims,id'],
+        ]);
 
-    // Buat user baru berdasarkan input yang telah divalidasi
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'pj_id' => $request->pj_id, // Simpan admin penanggung jawab yang dipilih
-        'tim' => $request->tim, // Simpan tim yang dipilih
-    ]);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'pj_id' => $request->pj_id,
+            'tim_id' => $request->tim_id,
+        ]);
 
-    // Event untuk user terdaftar
-    event(new Registered($user));
+        event(new Registered($user));
 
-    // Login otomatis setelah registrasi
-    Auth::login($user);
+        Auth::login($user);
 
-    // Redirect ke halaman daftar pengguna dengan pesan sukses
-    return redirect()->route('admin.users.index')->with('success', 'Tim berhasil ditambahkan.');
-}
-
+        return redirect()->route('admin.users.index')->with('success', 'Tim berhasil ditambahkan.');
+    }
 }
