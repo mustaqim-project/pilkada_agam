@@ -33,6 +33,12 @@ class JenisPembiayaanController extends Controller
         return redirect()->route('admin.jenis-pembiayaan.index')->with('success', 'Jenis Pembiayaan berhasil ditambahkan.');
     }
 
+    public function edit($id)
+    {
+        $jenisPembiayaan = jenis_pembiayaan::findOrFail($id);
+        return response()->json($jenisPembiayaan);
+    }
+
     public function update(Request $request, $id)
     {
         $request->validate([
