@@ -53,7 +53,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editModalLabel{{ $pembiayaan->id }}">Edit Jenis Pembiayaan</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                                     </div>
                                     <form action="{{ route('admin.jenis-pembiayaan.update', $pembiayaan->id) }}" method="POST">
                                         @csrf
@@ -86,7 +86,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="createModalLabel">Tambah Jenis Pembiayaan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
             </div>
             <form action="{{ route('admin.jenis-pembiayaan.store') }}" method="POST">
                 @csrf
