@@ -9,8 +9,8 @@
     <div class="card card-primary">
         <div class="card-header">
             <h4>{{ __('admin.All Jabatan') }}</h4>
-            <div class="card-header-action">
-                <button class="btn btn-primary" id="createJabatanBtn" data-toggle="modal" data-target="#jabatanModal">
+            <div class="card-header-actions">
+                <button class="btn btn-primary" id="createJabatanBtn" data-bs-toggle="modal" data-bs-target="#jabatanModal">
                     <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
                 </button>
             </div>
@@ -49,8 +49,8 @@
 </section>
 
 <!-- Modal -->
-<div class="modal fade" id="jabatanModal" tabindex="-1" role="dialog" aria-labelledby="jabatanModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="jabatanModal" tabindex="-1" aria-labelledby="jabatanModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="jabatanModalLabel">{{ __('admin.Jabatan Form') }}</h5>
@@ -60,8 +60,8 @@
                 <form id="jabatanForm" action="" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="POST" id="formMethod">
-                    <div class="form-group">
-                        <label for="name">{{ __('admin.Name') }}</label>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">{{ __('admin.Name') }}</label>
                         <input type="text" class="form-control" name="name" id="name" required>
                     </div>
                     <div class="modal-footer">

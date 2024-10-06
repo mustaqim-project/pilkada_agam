@@ -9,8 +9,8 @@
     <div class="card card-primary">
         <div class="card-header">
             <h4>{{ __('admin.All Teams') }}</h4>
-            <div class="card-header-action">
-                <button class="btn btn-primary" id="createTimBtn" data-toggle="modal" data-target="#timModal">
+            <div class="card-header-actions">
+                <button class="btn btn-primary" id="createTimBtn" data-bs-toggle="modal" data-bs-target="#timModal">
                     <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
                 </button>
             </div>
@@ -28,18 +28,18 @@
                     </thead>
                     <tbody>
                         @foreach ($tims as $tim)
-                            <tr>
-                                <td>{{ $tim->id }}</td>
-                                <td>{{ $tim->name }}</td>
-                                <td>
-                                    <button class="btn btn-warning editTimBtn" data-id="{{ $tim->id }}">Edit</button>
-                                    <form action="{{ route('admin.tims.destroy', $tim->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>{{ $tim->id }}</td>
+                            <td>{{ $tim->name }}</td>
+                            <td>
+                                <button class="btn btn-warning editTimBtn" data-id="{{ $tim->id }}">Edit</button>
+                                <form action="{{ route('admin.tims.destroy', $tim->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -49,24 +49,24 @@
 </section>
 
 <!-- Modal -->
-<div class="modal fade" id="timModal" tabindex="-1" role="dialog" aria-labelledby="timModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="timModal" tabindex="-1" aria-labelledby="timModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="timModalLabel">Team Form</h5>
+                <h5 class="modal-title" id="timModalLabel">{{ __('admin.Team Form') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="timForm" action="" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="POST" id="formMethod">
-                    <div class="form-group">
-                        <label for="name">Name</label>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">{{ __('admin.Name') }}</label>
                         <input type="text" class="form-control" name="name" id="name" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">{{ __('admin.Save') }}</button>
                     </div>
                 </form>
             </div>
@@ -97,9 +97,8 @@
                     $('#timForm').attr('action', `/admin/tims/${id}`);
                 },
                 error: function(xhr) {
-                    // Handle errors
                     alert('Error fetching data. Please try again.');
-                    console.log(xhr.responseText);
+                    console.error(xhr.responseText);
                 }
             });
         });
@@ -117,9 +116,8 @@
                     location.reload();
                 },
                 error: function(xhr) {
-                    // Handle errors
                     alert('Error saving data. Please check your input.');
-                    console.log(xhr.responseText);
+                    console.error(xhr.responseText);
                 }
             });
         });
