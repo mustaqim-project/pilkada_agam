@@ -111,7 +111,6 @@
         </div>
     </div>
 </div>
-
 @section('scripts')
 <script>
     function resetForm() {
@@ -138,5 +137,4 @@
             });
     }
 </script>
-@endsection
 @endsection
