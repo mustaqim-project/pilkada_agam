@@ -55,6 +55,8 @@
     </div>
 </section>
 
+
+
 <!-- Modal untuk Menambah Laporan -->
 <div class="modal fade" id="newLaporanModal" tabindex="-1" role="dialog" aria-labelledby="newLaporanModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
