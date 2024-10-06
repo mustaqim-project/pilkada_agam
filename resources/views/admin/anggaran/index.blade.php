@@ -1,56 +1,61 @@
 @extends('admin.layouts.master')
 
 @section('content')
-<div class="container">
-    <h1 class="mb-4">Kelola Anggaran</h1>
+<section class="section">
+    <div class="section-header">
+        <h1>{{ __('admin.Anggaran') }}</h1>
+    </div>
 
-    <!-- Tampilkan pesan sukses jika ada -->
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+    <div class="card card-primary">
+        <div class="card-header">
+            <div class="card-header-actions">
+                <button class="btn btn-primary" id="createAgamaBtn" data-bs-toggle="modal" data-bs-target="#modalTambahAnggaran">
+                    <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
+                </button>
+            </div>
         </div>
-    @endif
 
-    <!-- Tombol Tambah Anggaran -->
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambahAnggaran">
-        Tambah Anggaran
-    </button>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped" id="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tim</th>
+                            <th>Total Anggaran</th>
+                            <th>Jumlah Periode</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($anggarans as $anggaran)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $anggaran->tim->name }}</td>
+                                <td>Rp {{ number_format($anggaran->total_anggaran, 2) }}</td>
+                                <td>{{ $anggaran->jumlah_periode }}</td>
+                                <td>
+                                    <!-- Tombol Edit Anggaran -->
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditAnggaran" data-id="{{ $anggaran->id }}">
+                                        Edit
+                                    </button>
+                                    <!-- Tombol Hapus Anggaran -->
+                                    <form action="{{ route('admin.anggaran.destroy', $anggaran->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus anggaran ini?')">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <!-- Tabel Data Anggaran -->
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Tim</th>
-                <th>Total Anggaran</th>
-                <th>Jumlah Periode</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($anggarans as $anggaran)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $anggaran->tim->name }}</td>
-                    <td>Rp {{ number_format($anggaran->total_anggaran, 2) }}</td>
-                    <td>{{ $anggaran->jumlah_periode }}</td>
-                    <td>
-                        <!-- Tombol Edit Anggaran -->
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditAnggaran" data-id="{{ $anggaran->id }}">
-                            Edit
-                        </button>
-                        <!-- Tombol Hapus Anggaran -->
-                        <form action="{{ route('admin.anggaran.destroy', $anggaran->id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus anggaran ini?')">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+
 
 <!-- Modal Tambah Anggaran -->
 <div class="modal fade" id="modalTambahAnggaran" tabindex="-1" aria-labelledby="modalTambahAnggaranLabel" aria-hidden="true">
