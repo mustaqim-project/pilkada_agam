@@ -1,44 +1,61 @@
 @extends('admin.layouts.master')
 
 @section('content')
-<div class="container">
-    <h2>Laporan Keuangan</h2>
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#laporanModal" onclick="resetForm()">Tambah Laporan Keuangan</button>
+<section class="section">
+    <div class="section-header">
+        <h1>{{ __('admin.Laporan Keuangan') }}</h1>
+    </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Anggaran</th>
-                <th>Periode</th>
-                <th>Jenis Pembiayaan</th>
-                <th>Jumlah Digunakan</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($laporanKeuangan as $laporan)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $laporan->anggaran->tim->name }}</td>
-                    <td>{{ $laporan->periode->name }}</td>
-                    <td>{{ $laporan->jenisPembiayaan->nama_pembiayaan }}</td>
-                    <td>{{ $laporan->jumlah_digunakan }}</td>
-                    <td>{{ $laporan->status }}</td>
-                    <td>
-                        <button class="btn btn-warning" onclick="editLaporan({{ $laporan->id }})">Edit</button>
-                        <form action="{{ route('admin.laporan-keuangan.destroy', $laporan->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+    <div class="card card-primary">
+        <div class="card-header">
+            <div class="card-header-actions">
+                <button class="btn btn-primary" id="createKeuanganBtn" data-bs-toggle="modal" data-bs-target="#laporanModal"  onclick="resetForm()">
+                    <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
+                </button>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped" id="table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Anggaran</th>
+                            <th>Periode</th>
+                            <th>Jenis Pembiayaan</th>
+                            <th>Jumlah Digunakan</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($laporanKeuangan as $laporan)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $laporan->anggaran->tim->name }}</td>
+                                <td>{{ $laporan->periode->name }}</td>
+                                <td>{{ $laporan->jenisPembiayaan->nama_pembiayaan }}</td>
+                                <td>{{ $laporan->jumlah_digunakan }}</td>
+                                <td>{{ $laporan->status }}</td>
+                                <td>
+                                    <button class="btn btn-warning" onclick="editLaporan({{ $laporan->id }})">Edit</button>
+                                    <form action="{{ route('admin.laporan-keuangan.destroy', $laporan->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="laporanModal" tabindex="-1" role="dialog" aria-labelledby="laporanModalLabel" aria-hidden="true">
