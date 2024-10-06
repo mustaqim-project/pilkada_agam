@@ -69,7 +69,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('dashboard-utama', [DashboardUtamaController::class, 'index'])->name('dashboard-utama');
+    Route::get('dashboard-utama', [DashboardUtamaController::class, 'index'])->name('dashboard-utama.index');
 
 
     /**Profile Routes */
