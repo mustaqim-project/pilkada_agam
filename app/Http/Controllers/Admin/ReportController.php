@@ -14,7 +14,7 @@ class ReportController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['permission:Laporan index,admin'])->only(['index']);
+        $this->middleware(['permission:Laporan index,admin'])->only( ['index']);
         $this->middleware(['permission:Laporan create,admin'])->only(['store']);
         $this->middleware(['permission:Laporan update,admin'])->only(['update']);
         $this->middleware(['permission:Laporan delete,admin'])->only('destroy');
