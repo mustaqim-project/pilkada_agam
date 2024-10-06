@@ -172,7 +172,7 @@
                 </div>
                 <!-- end author-->
 
-                <!-- Comment  -->
+                {{-- <!-- Comment  -->
                 @auth
                 <div id="comments" class="comments-area">
                     <h3 class="comments-title">{{ $news->comments()->count() }} {{ __('frontend.Comments:') }}</h3>
@@ -316,7 +316,7 @@
                         <h5 class="p-0">{{ __('frontend.Please') }} <a href="{{ route('login') }}">{{ __('frontend.Login') }}</a> {{ __('frontend.to comment in the post!') }}</h5>
                     </div>
                 </div>
-                @endauth
+                @endauth --}}
 
 
 
