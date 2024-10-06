@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\TimPKHController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\JabatanController;
+use App\Http\Controllers\Admin\PeriodeController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\AnggaranController;
@@ -30,21 +31,21 @@ use App\Http\Controllers\Admin\KanvasingDsController;
 use App\Http\Controllers\Admin\KanvasingJjController;
 use App\Http\Controllers\Admin\KanvasingMMController;
 use App\Http\Controllers\Admin\SocialCountController;
+use App\Http\Controllers\Admin\KanvasingPkhController;
 use App\Http\Controllers\Admin\LocalizationController;
 use App\Http\Controllers\Admin\FooterGridOneController;
 use App\Http\Controllers\Admin\FooterGridTwoController;
 use App\Http\Controllers\Admin\RolePermisionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\admin\DashboardUtamaController;
 use App\Http\Controllers\Admin\FooterGridThreeController;
 use App\Http\Controllers\Admin\JenisPembiayaanController;
+use App\Http\Controllers\Admin\KanvasingParpolController;
+use App\Http\Controllers\Admin\LaporanKeuanganController;
 use App\Http\Controllers\Admin\KanvasingAisyiahController;
 use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
-use App\Http\Controllers\Admin\KanvasingPkhController;
-use App\Http\Controllers\Admin\KanvasingParpolController;
-use App\Http\Controllers\Admin\PeriodeController;
-use App\Http\Controllers\Admin\LaporanKeuanganController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
@@ -68,6 +69,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard-utama', [DashboardUtamaController::class, 'index'])->name('dashboard-utama');
+
+
     /**Profile Routes */
     Route::put('profile-password-update/{id}', [ProfileController::class, 'passwordUpdate'])->name('profile-password.update');
     Route::resource('profile', ProfileController::class);

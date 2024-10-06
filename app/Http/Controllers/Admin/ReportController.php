@@ -31,30 +31,38 @@ class ReportController extends Controller
 
         public function create()
         {
-            $assignees = Admin::where('id', '<>', Auth::id())->get();
+            $admin = Auth::guard('admin')->user();
+            $assignees = Admin::where('id', $admin->atasan_id)->get();
 
             return view('admin.reports.create', compact('assignees'));
         }
+
 
         public function store(Request $request)
         {
             $request->validate([
                 'assigned_to' => 'required|exists:admins,id',
+                'period' => 'required|string|max:255',
                 'report_content' => 'required|string',
-                'period' => 'required|string',
-                'attachment' => 'nullable|string', // Validasi untuk lampiran
             ]);
 
+            $admin = Auth::guard('admin')->user();
+
+            // Check if the assigned admin is indeed the superior
+            if ($admin->atasan_id !== $request->assigned_to) {
+                return redirect()->back()->withErrors(['assigned_to' => 'You can only send reports to your superior.']);
+            }
+
             Report::create([
-                'created_by' => Auth::id(),
-                'assigned_to' => $request->input('assigned_to'),
-                'report_content' => $request->input('report_content'),
-                'period' => $request->input('period'),
-                'attachment' => $request->input('attachment'), // Menyimpan lampiran
+                'created_by' => $admin->id,
+                'assigned_to' => $request->assigned_to,
+                'period' => $request->period,
+                'report_content' => $request->report_content,
             ]);
 
             return redirect()->route('admin.reports.index')->with('success', 'Laporan berhasil dikirim.');
         }
+
 
         public function show($id)
         {

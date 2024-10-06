@@ -28,7 +28,6 @@
     </form>
 </div>
 
-
 <script>
     $(document).ready(function() {
         $('.summernote').summernote({
