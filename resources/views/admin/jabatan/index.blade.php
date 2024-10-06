@@ -1,42 +1,59 @@
 @extends('admin.layouts.master')
 
 @section('content')
-<div class="container">
-    <h1>Jabatan Management</h1>
-    <button class="btn btn-primary" id="createJabatanBtn">Create Jabatan</button>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($jabatans as $jabatan)
-            <tr>
-                <td>{{ $jabatan->id }}</td>
-                <td>{{ $jabatan->name }}</td>
-                <td>
-                    <button class="btn btn-warning editJabatanBtn" data-id="{{ $jabatan->id }}">Edit</button>
-                    <form action="{{ route('admin.jabatan.destroy', $jabatan->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+<section class="section">
+    <div class="section-header">
+        <h1>{{ __('admin.Jabatan Management') }}</h1>
+    </div>
+
+    <div class="card card-primary">
+        <div class="card-header">
+            <h4>{{ __('admin.All Jabatan') }}</h4>
+            <div class="card-header-action">
+                <button class="btn btn-primary" id="createJabatanBtn" data-toggle="modal" data-target="#jabatanModal">
+                    <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
+                </button>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped" id="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($jabatans as $jabatan)
+                        <tr>
+                            <td>{{ $jabatan->id }}</td>
+                            <td>{{ $jabatan->name }}</td>
+                            <td>
+                                <button class="btn btn-warning editJabatanBtn" data-id="{{ $jabatan->id }}">Edit</button>
+                                <form action="{{ route('admin.jabatan.destroy', $jabatan->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Modal -->
 <div class="modal fade" id="jabatanModal" tabindex="-1" role="dialog" aria-labelledby="jabatanModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jabatanModalLabel">Jabatan Form</h5>
+                <h5 class="modal-title" id="jabatanModalLabel">{{ __('admin.Jabatan Form') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -46,12 +63,12 @@
                     @csrf
                     <input type="hidden" name="_method" value="POST" id="formMethod">
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name">{{ __('admin.Name') }}</label>
                         <input type="text" class="form-control" name="name" id="name" required>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('admin.Close') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('admin.Save') }}</button>
                     </div>
                 </form>
             </div>
@@ -81,6 +98,9 @@ $(document).ready(function() {
                 $('#name').val(response.data.name);
                 $('#formMethod').val('PUT');
                 $('#jabatanForm').attr('action', `/admin/jabatan/${id}`);
+            },
+            error: function(xhr) {
+                console.error('Error fetching data:', xhr.responseText);
             }
         });
     });
@@ -94,11 +114,12 @@ $(document).ready(function() {
             method: method,
             data: $(this).serialize(),
             success: function(response) {
+                $('#jabatanModal').modal('hide');
                 location.reload();
             },
             error: function(xhr) {
-                // Handle errors
-                console.log(xhr.responseText);
+                console.error('Error saving data:', xhr.responseText);
+                alert('An error occurred. Please try again.');
             }
         });
     });
