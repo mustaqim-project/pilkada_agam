@@ -39,11 +39,15 @@
                                 <td>{{ $laporan->jumlah_digunakan }}</td>
                                 <td>{{ $laporan->status }}</td>
                                 <td>
-                                    <button class="btn btn-warning" onclick="editLaporan({{ $laporan->id }})">Edit</button>
+                                    <!-- Tombol Edit Laporan -->
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editLaporanModal" onclick="editLaporan({{ $laporan->id }})">
+                                        Edit
+                                    </button>
+                                    <!-- Tombol Hapus Laporan -->
                                     <form action="{{ route('admin.laporan-keuangan.destroy', $laporan->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">Hapus</button>
+                                        <button class="btn btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus laporan ini?')">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
@@ -54,8 +58,6 @@
         </div>
     </div>
 </section>
-
-
 
 <!-- Modal untuk Menambah Laporan -->
 <div class="modal fade" id="newLaporanModal" tabindex="-1" role="dialog" aria-labelledby="newLaporanModalLabel" aria-hidden="true">
