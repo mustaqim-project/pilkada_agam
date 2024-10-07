@@ -9,7 +9,7 @@
     <div class="card card-primary">
         <div class="card-header">
             <div class="card-header-actions">
-                <button class="btn btn-primary" id="createAgamaBtn" data-bs-toggle="modal" data-bs-target="#modalTambahAnggaran">
+                <button class="btn btn-primary" id="createAgamaBtn" data-toggle="modal" data-target="#modalTambahAnggaran">
                     <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
                 </button>
             </div>
@@ -36,7 +36,7 @@
                                 <td>{{ $anggaran->jumlah_periode }}</td>
                                 <td>
                                     <!-- Tombol Edit Anggaran -->
-                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditAnggaran" data-id="{{ $anggaran->id }}">
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalEditAnggaran" data-id="{{ $anggaran->id }}">
                                         Edit
                                     </button>
                                     <!-- Tombol Hapus Anggaran -->
@@ -55,8 +55,6 @@
     </div>
 </section>
 
-
-
 <!-- Modal Tambah Anggaran -->
 <div class="modal fade" id="modalTambahAnggaran" tabindex="-1" aria-labelledby="modalTambahAnggaranLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -65,10 +63,12 @@
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTambahAnggaranLabel">Tambah Anggaran</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="tim_id" class="form-label">Tim</label>
                         <select name="tim_id" id="tim_id" class="form-control" required>
                             <option value="">Pilih Tim</option>
@@ -77,17 +77,17 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="total_anggaran" class="form-label">Total Anggaran</label>
                         <input type="number" name="total_anggaran" id="total_anggaran" class="form-control" required>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="jumlah_periode" class="form-label">Jumlah Periode</label>
                         <input type="number" name="jumlah_periode" id="jumlah_periode" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
@@ -104,10 +104,12 @@
                 @method('PUT')
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalEditAnggaranLabel">Edit Anggaran</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="edit_tim_id" class="form-label">Tim</label>
                         <select name="tim_id" id="edit_tim_id" class="form-control" required>
                             <option value="">Pilih Tim</option>
@@ -116,17 +118,17 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="edit_total_anggaran" class="form-label">Total Anggaran</label>
                         <input type="number" name="total_anggaran" id="edit_total_anggaran" class="form-control" required>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="edit_jumlah_periode" class="form-label">Jumlah Periode</label>
                         <input type="number" name="jumlah_periode" id="edit_jumlah_periode" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
