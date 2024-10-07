@@ -202,7 +202,7 @@
                 @endif
             @endif
 
-            @if (canAccess(['Tim']))
+            @if (canAccess(['Tim Inti']))
 
                 <li class="menu-header">{{ __('admin.TIM') }}</li>
                 <li class="dropdown {{ setSidebarActive(['admin.timds.*']) }}">
