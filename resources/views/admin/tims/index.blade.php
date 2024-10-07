@@ -9,7 +9,7 @@
     <div class="card card-primary">
         <div class="card-header">
             <div class="card-header-actions">
-                <button class="btn btn-primary" id="createTimBtn" data-bs-toggle="modal" data-bs-target="#timModal">
+                <button class="btn btn-primary" id="createTimBtn" data-toggle="modal" data-target="#timModal">
                     <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
                 </button>
             </div>
@@ -48,23 +48,25 @@
 </section>
 
 <!-- Modal -->
-<div class="modal fade" id="timModal" tabindex="-1" aria-labelledby="timModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="timModal" tabindex="-1" role="dialog" aria-labelledby="timModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="timModalLabel">{{ __('admin.Team Form') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="timForm" action="" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="POST" id="formMethod">
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="name" class="form-label">{{ __('admin.Name') }}</label>
                         <input type="text" class="form-control" name="name" id="name" required>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">{{ __('admin.Save') }}</button>
                     </div>
                 </form>
