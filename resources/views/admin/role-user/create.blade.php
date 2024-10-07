@@ -47,6 +47,31 @@
                         @enderror
                     </div>
 
+
+                    <div class="form-group">
+                        <label for="">{{__('admin. BANK')}}</label>
+                        <input type="password" class="form-control" name="password_confirmation">
+                        @error('password_confirmation')
+                        <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">{{__('admin. Nomor Rekening')}}</label>
+                        <input type="password" class="form-control" name="password_confirmation">
+                        @error('password_confirmation')
+                        <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">{{__('admin. Gaji')}}</label>
+                        <input type="password" class="form-control" name="password_confirmation">
+                        @error('password_confirmation')
+                        <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <div class="form-group">
                         <label for="">{{__('admin.Role')}}</label>
 

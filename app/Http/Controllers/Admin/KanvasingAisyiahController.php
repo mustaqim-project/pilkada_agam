@@ -47,21 +47,20 @@ class KanvasingAisyiahController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input form
         $request->validate([
             'nama_responden' => 'required|string|max:100',
-            'agama_id' => 'required|exists:agamas,id',
+            // 'agama_id' => 'required|exists:agamas,id',
             'pekerjaan_id' => 'required|exists:pekerjaans,id',
             'alamat' => 'required|string',
             'no_ktp' => 'required|string|unique:kanvasing_aisyiah,no_ktp',
             'tgl_lahir' => 'nullable|date',
             'jenis_kelamin' => 'nullable|in:L,P',
-            'provinsi' => 'required|integer', // Ensure these are integers
+            'provinsi' => 'required|integer',
             'kabupaten' => 'required|integer',
             'kecamatan' => 'required|integer',
             'kelurahan' => 'required|integer',
             'no_kk' => 'nullable|string|max:16',
-            'foto_kegiatan' => 'nullable|string', // Adjust if using file upload
+            'foto_kegiatan' => 'nullable|string',
             'brosur' => 'boolean',
             'stiker' => 'boolean',
             'kartu_coblos' => 'boolean',
@@ -69,19 +68,17 @@ class KanvasingAisyiahController extends Controller
             'latitude' => 'nullable|string',
         ]);
 
-        // Handle file upload
         $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
 
-        // Simpan data kanvasing
         $kanvasing = kanvasing_aisyiah::create($request->all() + [
             'user_id' => auth()->id(),
-            'foto_kegiatan' => $imagePath, // Assign uploaded file path
+            'foto_kegiatan' => $imagePath,
         ]);
 
         // Simpan data ke model data_ganda
         data_ganda::create([
             'kecamatan' => $request->input('kecamatan'),
-            'nagari' => $request->input('nagari'), // Pastikan input 'nagari' ada dalam form
+            'nagari' => $request->input('nagari'),
             'no_ktp' => $request->input('no_ktp'),
             'no_kk' => $request->input('no_kk'),
             'nama_responden' => $request->input('nama_responden'),
@@ -96,12 +93,12 @@ class KanvasingAisyiahController extends Controller
 
     public function update(Request $request, $id)
     {
-        $kanvasing = kanvasing_aisyiah::findOrFail($id); // Ambil data berdasarkan ID
+        $kanvasing = kanvasing_aisyiah::findOrFail($id);
 
         // Validasi update form
         $request->validate([
             'nama_responden' => 'required|string|max:100',
-            'agama_id' => 'required|exists:agamas,id',
+            // 'agama_id' => 'required|exists:agamas,id',
             'pekerjaan_id' => 'required|exists:pekerjaans,id',
             'alamat' => 'required|string',
             'no_ktp' => 'required|string|unique:kanvasing_aisyiah,no_ktp,' . $kanvasing->id,
@@ -120,13 +117,11 @@ class KanvasingAisyiahController extends Controller
             'latitude' => 'nullable|string',
         ]);
 
-        // Handle file upload if provided
         if ($request->hasFile('foto_kegiatan')) {
             $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
-            $request->merge(['foto_kegiatan' => $imagePath]); // Update request data with new file path
+            $request->merge(['foto_kegiatan' => $imagePath]);
         }
 
-        // Update data kanvasing
         $kanvasing->update($request->all());
 
         return redirect()->back()->with('success', 'Data berhasil diupdate');
@@ -135,7 +130,7 @@ class KanvasingAisyiahController extends Controller
     public function destroy($id)
     {
         $kanvasing = kanvasing_aisyiah::findOrFail($id);
-        $kanvasing->delete(); // Hapus data
+        $kanvasing->delete();
 
         return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
