@@ -77,7 +77,7 @@ class NewsController extends Controller
     public function store(AdminNewsCreateRequest $request)
     {
 
-        dd($request);
+        var_dump($request);
         /** Handle image */
         $imagePath = $this->handleFileUpload($request, 'image');
 
