@@ -634,14 +634,7 @@
                 @endif
 
                 @if (canAccess(['languages index']))
-                    <li
-                        class="dropdown
-                {{ setSidebarActive([
-                    'admin.frontend-localization.index',
-                    'admin.admin-localization.index',
-                    'admin.language.*',
-                ]) }}
-            ">
+                    <li class="dropdown {{ setSidebarActive(['admin.frontend-localization.index','admin.admin-localization.index','admin.language.*',]) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-language"></i>
                             <span>{{ __('admin.Localization') }}</span></a>
                         <ul class="dropdown-menu">
