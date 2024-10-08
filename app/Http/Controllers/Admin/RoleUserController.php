@@ -7,6 +7,7 @@ use App\Http\Requests\AdminRoleUserStoreRequest;
 use App\Http\Requests\AdminRoleUserUpdateRequest;
 use App\Mail\RoleUserCreateMail;
 use App\Models\Admin;
+use App\Models\tim;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -39,7 +40,10 @@ class RoleUserController extends Controller
     {
         $roles = Role::all();
         $admins = Admin::all();
-        return view('admin.role-user.create', compact('roles','admins'));
+        $teams = Team::all(); // Fetching teams
+        $positions = Jabatan::all(); // Fetching Jabatan positions
+
+        return view('admin.role-user.create', compact('roles', 'admins', 'teams', 'positions'));
     }
 
     /**
