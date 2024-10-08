@@ -8,6 +8,7 @@ use App\Http\Requests\AdminRoleUserUpdateRequest;
 use App\Mail\RoleUserCreateMail;
 use App\Models\Admin;
 use App\Models\tim;
+use App\Models\jabatan;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
