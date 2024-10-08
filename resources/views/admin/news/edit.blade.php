@@ -67,7 +67,7 @@
                     <div class="form-group">
                         <label for="">{{ __('admin.Content') }}</label>
                         <div id="editor-container"></div>
-                        <textarea name="content" id="editor">{{ $news->content }}</textarea>
+                        <textarea name="content" id="content" class="d-none">{{ $news->content }}</textarea>
                         @error('content')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
