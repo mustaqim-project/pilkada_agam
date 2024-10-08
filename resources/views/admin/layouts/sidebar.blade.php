@@ -200,6 +200,101 @@
                         </ul>
                     </li>
                 @endif
+                @if (canAccess(['ketua mm', 'koordinator wilayah', 'koordinator kecamatan', 'koordinator nagari']))
+                    <li class="dropdown {{ setSidebarActive(['admin.timmm.*']) }}">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
+                            <span>{{ __('TIM AISYIAH') }}</span></a>
+                        <ul class="dropdown-menu">
+
+                            {{-- Ketua mm --}}
+                            @if (canAccess(['ketua mm']))
+                                <li class="dropdown {{ setSidebarActive(['admin.timmm.ketua.*']) }}">
+                                    <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="{{ setSidebarActive(['admin.timmm.ketua.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timmm.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li class="{{ setSidebarActive(['admin.timmm.ketua.laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timmm.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+
+                            {{-- Koordinator Wilayah --}}
+                            @if (canAccess(['koordinator wilayah']))
+                                <li class="dropdown {{ setSidebarActive(['admin.timmm.koordinator.wilayah.*']) }}">
+                                    <a href="#"
+                                        class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timmm.koordinator.wilayah.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timmm.koordinator.wilayah.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timmm.koordinator.wilayah.laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timmm.koordinator.wilayah.laporan') }}">{{ __('Laporan') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+
+                        </ul>
+                    </li>
+                @endif
+                @if (canAccess(['ketua mm', 'koordinator wilayah', 'koordinator kecamatan', 'koordinator nagari']))
+                    <li class="dropdown {{ setSidebarActive(['admin.timmm.*']) }}">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
+                            <span>{{ __('TIM MUHAMMADIYAH') }}</span></a>
+                        <ul class="dropdown-menu">
+
+                            {{-- Ketua mm --}}
+                            @if (canAccess(['ketua mm']))
+                                <li class="dropdown {{ setSidebarActive(['admin.timmm.ketua.*']) }}">
+                                    <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="{{ setSidebarActive(['admin.timmm.ketua.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timmm.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li class="{{ setSidebarActive(['admin.timmm.ketua.laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timmm.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+
+                            {{-- Koordinator Wilayah --}}
+                            @if (canAccess(['koordinator wilayah']))
+                                <li class="dropdown {{ setSidebarActive(['admin.timmm.koordinator.wilayah.*']) }}">
+                                    <a href="#"
+                                        class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timmm.koordinator.wilayah.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timmm.koordinator.wilayah.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timmm.koordinator.wilayah.laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timmm.koordinator.wilayah.laporan') }}">{{ __('Laporan') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+
+                        </ul>
+                    </li>
+                @endif
+
+
+
             @endif
 
             @if (canAccess(['Tim Inti']))
