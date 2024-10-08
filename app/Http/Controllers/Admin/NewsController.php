@@ -14,7 +14,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class NewsController extends Controller
 {
@@ -77,7 +76,7 @@ class NewsController extends Controller
      */
     public function store(AdminNewsCreateRequest $request)
     {
-      /** Handle image */
+        /** Handle image */
         $imagePath = $this->handleFileUpload($request, 'image');
 
         $news = new News();
@@ -86,7 +85,7 @@ class NewsController extends Controller
         $news->auther_id = Auth::guard('admin')->user()->id;
         $news->image = $imagePath;
         $news->title = $request->title;
-        $news->slug = Str::slug($request->title);
+        $news->slug = \Str::slug($request->title);
         $news->content = $request->content;
         $news->meta_title = $request->meta_title;
         $news->meta_description = $request->meta_description;
@@ -95,7 +94,6 @@ class NewsController extends Controller
         $news->show_at_popular = $request->show_at_popular == 1 ? 1 : 0;
         $news->status = $request->status == 1 ? 1 : 0;
         $news->is_approved = getRole() == 'Super Admin' || checkPermission('news all-access') ? 1 : 0;
-        $news->meta_keyword = $request->meta_keyword;
         $news->save();
 
         $tags = explode(',', $request->tags);
@@ -172,7 +170,7 @@ class NewsController extends Controller
         $news->category_id = $request->category;
         $news->image = !empty($imagePath) ? $imagePath : $news->image;
         $news->title = $request->title;
-        $news->slug = Str::slug($request->title);
+        $news->slug = \Str::slug($request->title);
         $news->content = $request->content;
         $news->meta_title = $request->meta_title;
         $news->meta_description = $request->meta_description;
@@ -180,7 +178,6 @@ class NewsController extends Controller
         $news->show_at_slider = $request->show_at_slider == 1 ? 1 : 0;
         $news->show_at_popular = $request->show_at_popular == 1 ? 1 : 0;
         $news->status = $request->status == 1 ? 1 : 0;
-        $news->meta_keyword = $request->meta_keyword;
         $news->save();
 
         $tags = explode(',', $request->tags);

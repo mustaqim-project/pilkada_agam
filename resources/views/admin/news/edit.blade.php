@@ -66,7 +66,7 @@
 
                     <div class="form-group">
                         <label for="">{{ __('admin.Content') }}</label>
-                        <textarea name="content" id="editor">{{ $news->content }}</textarea>
+                        <textarea name="content" class="summernote-simple">{{ $news->content }}</textarea>
                         @error('content')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -157,14 +157,6 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            
-            ClassicEditor
-                .create(document.querySelector('#editor'))
-                .then(editor => {
-                })
-                .catch(error => {
-                });
-                  
             $('.image-preview').css({
                 "background-image": "url({{ asset($news->image) }})",
                 "background-size": "cover",

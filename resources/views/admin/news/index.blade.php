@@ -31,13 +31,13 @@
                     @foreach ($languages as $language)
                         @php
                             if(canAccess(['news all-access'])){
-                                $news = \App\Models\News::with('category','auther')
+                                $news = \App\Models\News::with('category')
                                 ->where('language', $language->lang)
                                 ->where('is_approved', 1)
                                 ->orderBy('id', 'DESC')
                                 ->get();
                             }else {
-                                $news = \App\Models\News::with('category','auther')
+                                $news = \App\Models\News::with('category')
                                 ->where('language', $language->lang)
                                 ->where('is_approved', 1)
                                 ->where('auther_id', auth()->guard('admin')->user()->id)
@@ -55,8 +55,6 @@
                                                 <th class="text-center">
                                                     #
                                                 </th>
-                                                <th>{{ __('Auther') }}</th>
-                                                <th>{{ __('Date') }}</th>
                                                 <th>{{ __('admin.Image') }}</th>
                                                 <th>{{ __('admin.Title') }}</th>
                                                 <th>{{ __('admin.Category') }}</th>
@@ -73,8 +71,6 @@
                                             @foreach ($news as $item)
                                                 <tr>
                                                     <td>{{ $item->id }}</td>
-                                                    <td>{{ $item->auther->name }}</td>
-                                                    <td>{{ date('M d, Y', strtotime($item->created_at)) }}</td>
                                                     <td >
                                                         <img src="{{ asset($item->image) }}" width="100" alt="">
                                                     </td>
@@ -119,29 +115,16 @@
                                                         </label>
                                                     </td>
 
-                                                    <td>
-                                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                                            <a href="{{ route('admin.news.edit', $item->id) }}" class="btn btn-primary">
-                                                                <i class="fas fa-edit"></i>
-                                                            </a>
-                                                            <a href="{{ route('admin.news.destroy', $item->id) }}" class="btn btn-danger delete-item">
-                                                                <i class="fas fa-trash-alt"></i>
-                                                            </a>
-                                                            <a href="{{ route('admin.news-copy', $item->id) }}" class="btn btn-primary">
-                                                                <i class="fas fa-copy"></i>
-                                                            </a>
-                                                        </div>
-                                                    </td>
 
-                                                    <!--<td>-->
-                                                    <!--    <a href="{{ route('admin.news.edit', $item->id) }}"-->
-                                                    <!--        class="btn btn-primary"><i class="fas fa-edit"></i></a>-->
-                                                    <!--    <a href="{{ route('admin.news.destroy', $item->id) }}"-->
-                                                    <!--        class="btn btn-danger delete-item"><i-->
-                                                    <!--            class="fas fa-trash-alt"></i></a>-->
-                                                    <!--    <a href="{{ route('admin.news-copy', $item->id) }}"-->
-                                                    <!--        class="btn btn-primary"><i class="fas fa-copy"></i></i></a>-->
-                                                    <!--</td>-->
+                                                    <td>
+                                                        <a href="{{ route('admin.news.edit', $item->id) }}"
+                                                            class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                                        <a href="{{ route('admin.news.destroy', $item->id) }}"
+                                                            class="btn btn-danger delete-item"><i
+                                                                class="fas fa-trash-alt"></i></a>
+                                                        <a href="{{ route('admin.news-copy', $item->id) }}"
+                                                            class="btn btn-primary"><i class="fas fa-copy"></i></i></a>
+                                                    </td>
                                                 </tr>
                                             @endforeach
 
