@@ -15,14 +15,6 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="">{{ __('admin.Image') }}</label>
-                        <input type="file" class="form-control" name="image">
-                        @error('image')
-                        <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
                         <label for="">{{ __('admin.User Name') }}</label>
                         <input type="text" class="form-control" name="name">
                         @error('name')
