@@ -22,7 +22,7 @@ class RoleUserController extends Controller
         $this->middleware(['permission:access management update,admin'])->only(['edit', 'update', 'handleTitle']);
         $this->middleware(['permission:access management destroy,admin'])->only(['destroy']);
     }
-    
+
     /**
      * Display a listing of the resource.
      */
