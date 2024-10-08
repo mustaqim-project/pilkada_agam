@@ -107,7 +107,7 @@
                                 @foreach ($socialLinks as $link)
                                     <li class="list-inline-item-contact mx-1">
                                         <a href="{{ $link->url }}"
-                                            class="btn btn-social rounded text-white"  aria-label="Go to Mazhub Media Social" alt="Mazhub  Media Social" aria-hidden="true">
+                                            class="btn btn-social rounded text-white"  aria-label="Go to sikadsis Media Social" alt="sikadsis  Media Social" aria-hidden="true">
                                             <i class="{{ $link->icon }}"></i>
                                         </a>
                                     </li>

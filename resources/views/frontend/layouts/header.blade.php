@@ -120,7 +120,7 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                 </div>
                 <figure class="mb-0 mx-auto">
                     <a href="{{ url('/') }}">
-                        <img src="{{ asset($settings['site_logo']) }}" class="img-fluid logo" aria-label="Go to Mazhub " alt="Mazhub Logo">
+                        <img src="{{ asset($settings['site_logo']) }}" class="img-fluid logo" aria-label="Go to sikadsis " alt="sikadsis Logo">
                     </a>
                 </figure>
 
@@ -278,7 +278,7 @@ $categories = \App\Models\Category::where(['status' => 1, 'language' => getLanga
                                 @endguest
                             </li>
                             {{-- <li>
-                                <a href="https://www.mazhub.com/mazhub.apk" download style="text-decoration: none; color: #333; display: block; padding: 10px; border: 1px solid #ccc; border-radius: 5px; text-align: center; width: 200px;">
+                                <a href="https://www.sikadsis.com/sikadsis.apk" download style="text-decoration: none; color: #333; display: block; padding: 10px; border: 1px solid #ccc; border-radius: 5px; text-align: center; width: 200px;">
                                     <i class="fab fa-android" style="font-size: 24px; color: green;"></i><br>
                                     Download App
                                 </a> --}}

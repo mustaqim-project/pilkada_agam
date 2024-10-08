@@ -1,5 +1,5 @@
 {
-    "name": "mazhub/news",
+    "name": "sikadsis/news",
     "description": "News Website Portal",
     "autoload": {
         "psr-4": {
@@ -9,7 +9,7 @@
     "authors": [
         {
             "name": "Agung Mustaqim",
-            "email": "AgungMustaqim@mazhub.com"
+            "email": "AgungMustaqim@sikadsis.com"
         }
     ],
     "require": {

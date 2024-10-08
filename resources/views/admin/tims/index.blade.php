@@ -31,8 +31,8 @@
                                     <td>{{ $tim->id }}</td>
                                     <td>{{ $tim->name }}</td>
                                     <td>
-                                        <button class="btn btn-warning editTimBtn"
-                                        data-id="{{ $tim->id }}" onclick="editTimBtn({{ $tim->id }})">Edit</button>
+                                        <button class="btn btn-warning"
+                                            data-id="{{ $tim->id }}" onclick="editTimBtn">Edit</button>
                                         <form action="{{ route('admin.tims.destroy', $tim->id) }}" method="POST"
                                             style="display:inline;">
                                             @csrf

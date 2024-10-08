@@ -6,10 +6,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="#">MAZHUB</a>
+            <a href="#">sikadsis</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="#">MAZHUB</a>
+            <a href="#">sikadsis</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">{{ __('admin.Dashboard') }}</li>

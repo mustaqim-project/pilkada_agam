@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <title>General Dashboard &mdash; MAZHUB</title>
+    <title>General Dashboard &mdash; sikadsis</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -36,7 +36,7 @@
     <!--  window.dataLayer = window.dataLayer || [];-->
     <!--  function gtag(){dataLayer.push(arguments);}-->
     <!--  gtag('js', new Date());-->
-    
+
     <!--  gtag('config', 'G-FZQWWJHNHP');-->
     <!--</script>-->
 

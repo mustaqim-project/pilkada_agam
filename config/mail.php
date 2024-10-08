@@ -58,8 +58,8 @@ return [
     ],
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'admin@mazhub.com'),
-        'name' => env('MAIL_FROM_NAME', 'Mazhub.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'admin@sikadsis.com'),
+        'name' => env('MAIL_FROM_NAME', 'sikadsis.com'),
     ],
 
     'markdown' => [

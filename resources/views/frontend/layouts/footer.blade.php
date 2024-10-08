@@ -70,7 +70,7 @@
                         <div class="col-md-4">
                             <div class="widget__footer">
                                 <figure class="image-logo">
-                                    <img src="{{ asset(@$footerInfo->logo) }}" alt="Mazhub Logo" class="logo-footer">
+                                    <img src="{{ asset(@$footerInfo->logo) }}" alt="sikadsis Logo" class="logo-footer">
                                 </figure>
 
                                 <p>{{ @$footerInfo->description }}</p>
@@ -81,7 +81,7 @@
                                     <ul class="list-inline">
                                         @foreach ($socialLinks as $link)
                                         <li class="list-inline-item">
-                                            <a href="{{ $link->url }}" class="btn btn-social rounded text-white"  aria-label="Go to Mazhub Media Social" alt="Mazhub  Media Social" >
+                                            <a href="{{ $link->url }}" class="btn btn-social rounded text-white"  aria-label="Go to sikadsis Media Social" alt="sikadsis  Media Social" >
                                                 <i class="{{ $link->icon }}"></i>
                                             </a>
 
@@ -89,7 +89,7 @@
                                         </li>
                                         @endforeach
 
-                                            {{-- <a href="https://www.mazhub.com/mazhub.apk" download class="download-link" >
+                                            {{-- <a href="https://www.sikadsis.com/sikadsis.apk" download class="download-link" >
                                                 <i class="fab fa-android download-icon"></i>Download App
                                             </a> --}}
 
