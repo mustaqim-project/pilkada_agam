@@ -40,8 +40,8 @@ class RoleUserController extends Controller
     {
         $roles = Role::all();
         $admins = Admin::all();
-        $teams = Team::all(); // Fetching teams
-        $positions = Jabatan::all(); // Fetching Jabatan positions
+        $teams = tim::all(); // Fetching teams
+        $positions = jabatan::all(); // Fetching Jabatan positions
 
         return view('admin.role-user.create', compact('roles', 'admins', 'teams', 'positions'));
     }
