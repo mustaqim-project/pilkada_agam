@@ -230,17 +230,12 @@
 
     <script>
         $(document).ready(function() {
-
-            ClassicEditor
-                .create(document.querySelector('#editor'))
-                .then(editor => {})
-                .catch(error => {});
-
             $('.image-preview').css({
                 "background-image": "url({{ asset($news->image) }})",
                 "background-size": "cover",
                 "background-position": "center center"
             });
+
             $('#language-select').on('change', function() {
                 let lang = $(this).val();
                 $.ajax({
