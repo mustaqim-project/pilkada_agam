@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="">{{ __('admin.Ttile') }}</label>
+                        <label for="">{{ __('admin.Title') }}</label>
                         <input name="title" value="{{ $news->title }}" type="text" class="form-control"
                             id="name">
                         @error('title')
@@ -241,7 +241,6 @@
                 "background-size": "cover",
                 "background-position": "center center"
             });
-
             $('#language-select').on('change', function() {
                 let lang = $(this).val();
                 $.ajax({
