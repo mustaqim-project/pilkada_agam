@@ -205,17 +205,18 @@
                 }
             });
 
+            // Set the content of the editor to the value from the textarea
+            const content = document.querySelector('textarea[name=content]');
+            quill.root.innerHTML = content.value;
+
             const form = document.querySelector('form');
             form.onsubmit = function() {
-                const content = document.querySelector('textarea[name=content]');
                 content.value = quill.root.innerHTML;
             };
 
-            // Using MutationObserver to handle DOM changes
             const observer = new MutationObserver(function(mutations) {
                 mutations.forEach(function(mutation) {
                     if (mutation.type === 'childList' && mutation.target === quill.root) {
-                        const content = document.querySelector('textarea[name=content]');
                         content.value = quill.root.innerHTML;
                     }
                 });
