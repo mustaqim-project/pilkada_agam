@@ -204,7 +204,7 @@
 
             @if (canAccess(['Tim Inti']))
 
-                <li class="menu-header">{{ __('admin.TIM') }}</li>
+                <li class="menu-header">{{ __('admin.TIM INTI') }}</li>
                 <li class="dropdown {{ setSidebarActive(['admin.timds.*']) }}">
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
                         <span>{{ __('TIM DS') }}</span></a>
