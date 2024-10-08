@@ -59,12 +59,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="">{{ __('admin.Content') }}</label>
-                        <textarea name="content" class="summernote-simple"></textarea>
+                        <label for="content">{{ __('admin.Content') }}</label>
+                        <div id="editor-container"></div>
+                        <textarea name="content" id="content" class="d-none"></textarea>
                         @error('content')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
+
 
                     <div class="form-group">
                         <label class="">{{ __('admin.Tags') }}</label>
@@ -102,39 +104,39 @@
                         </div>
 
                         @if (canAccess(['news status', 'news all-access']))
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <div class="control-label">{{ __('admin.Is Breaking News') }}</div>
-                                <label class="custom-switch mt-2">
-                                    <input value="1" type="checkbox" name="is_breaking_news"
-                                        class="custom-switch-input">
-                                    <span class="custom-switch-indicator"></span>
-                                </label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="control-label">{{ __('admin.Is Breaking News') }}</div>
+                                    <label class="custom-switch mt-2">
+                                        <input value="1" type="checkbox" name="is_breaking_news"
+                                            class="custom-switch-input">
+                                        <span class="custom-switch-indicator"></span>
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <div class="control-label">{{ __('admin.Show At Slider') }}</div>
-                                <label class="custom-switch mt-2">
-                                    <input value="1" type="checkbox" name="show_at_slider" class="custom-switch-input">
-                                    <span class="custom-switch-indicator"></span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-
-                            <div class="form-group">
-                                <div class="control-label">{{ __('admin.Show At Popular') }}</div>
-                                <label class="custom-switch mt-2">
-                                    <input value="1" type="checkbox" name="show_at_popular"
-                                        class="custom-switch-input">
-                                    <span class="custom-switch-indicator"></span>
-                                </label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="control-label">{{ __('admin.Show At Slider') }}</div>
+                                    <label class="custom-switch mt-2">
+                                        <input value="1" type="checkbox" name="show_at_slider"
+                                            class="custom-switch-input">
+                                        <span class="custom-switch-indicator"></span>
+                                    </label>
+                                </div>
                             </div>
 
-                        </div>
+                            <div class="col-md-3">
+
+                                <div class="form-group">
+                                    <div class="control-label">{{ __('admin.Show At Popular') }}</div>
+                                    <label class="custom-switch mt-2">
+                                        <input value="1" type="checkbox" name="show_at_popular"
+                                            class="custom-switch-input">
+                                        <span class="custom-switch-indicator"></span>
+                                    </label>
+                                </div>
+
+                            </div>
                         @endif
 
                     </div>
@@ -147,8 +149,80 @@
 @endsection
 
 @push('scripts')
+    <link href="https://cdn.jsdelivr.net/npm/quill@1.3.6/dist/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/quill@1.3.6/dist/quill.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var quill = new Quill('#editor-container', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{
+                            'font': []
+                        }, {
+                            'size': []
+                        }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{
+                            'color': []
+                        }, {
+                            'background': []
+                        }],
+                        [{
+                            'script': 'sub'
+                        }, {
+                            'script': 'super'
+                        }],
+                        [{
+                            'header': '1'
+                        }, {
+                            'header': '2'
+                        }, 'blockquote', 'code-block'],
+                        [{
+                            'list': 'ordered'
+                        }, {
+                            'list': 'bullet'
+                        }, {
+                            'indent': '-1'
+                        }, {
+                            'indent': '+1'
+                        }],
+                        [{
+                            'direction': 'rtl'
+                        }, {
+                            'align': []
+                        }],
+                        ['link', 'image', 'video', 'formula'],
+                        ['clean']
+                    ]
+                }
+            });
+
+            const form = document.querySelector('form');
+            form.onsubmit = function() {
+                const content = document.querySelector('textarea[name=content]');
+                content.value = quill.root.innerHTML;
+            };
+
+            // Using MutationObserver to handle DOM changes
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList' && mutation.target === quill.root) {
+                        const content = document.querySelector('textarea[name=content]');
+                        content.value = quill.root.innerHTML;
+                    }
+                });
+            });
+
+            observer.observe(quill.root, {
+                childList: true
+            });
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
+
             $('#language-select').on('change', function() {
                 let lang = $(this).val();
                 $.ajax({
@@ -158,21 +232,18 @@
                         lang: lang
                     },
                     success: function(data) {
-                        $('#category').html("");
                         $('#category').html(
                             `<option value="">---{{ __('admin.Select') }}---</option>`);
-
                         $.each(data, function(index, data) {
                             $('#category').append(
-                                `<option value="${data.id}">${data.name}</option>`)
-                        })
-
+                                `<option value="${data.id}">${data.name}</option>`);
+                        });
                     },
                     error: function(error) {
-                        console.log(error);
+                        console.log('Error fetching categories:', error);
                     }
-                })
-            })
-        })
+                });
+            });
+        });
     </script>
 @endpush
