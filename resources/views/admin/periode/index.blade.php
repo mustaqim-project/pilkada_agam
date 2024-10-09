@@ -1,50 +1,59 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="container">
-        <h1>Daftar Periode</h1>
+    <section class="section">
+        <div class="section-header">
+            <h1>{{ __('admin.Periode Anggaran') }}</h1>
+        </div>
 
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
+        <div class="card card-primary">
+            <div class="card-header">
+                <div class="card-header-actions">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                        Tambah Periode
+                    </button>
+                </div>
+            </div>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-            Tambah Periode
-        </button>
-
-        <table class="table table-bordered mt-3">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nama Periode</th>
-                    <th>Tanggal Mulai</th>
-                    <th>Tanggal Selesai</th>
-                    <th>Anggaran Periode</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($periodes as $periode)
-                    <tr>
-                        <td>{{ $periode->id }}</td>
-                        <td>{{ $periode->nama_periode }}</td>
-                        <td>{{ $periode->tanggal_mulai }}</td>
-                        <td>{{ $periode->tanggal_selesai }}</td>
-                        <td>Rp {{ number_format($periode->anggaran_periode, 2, ',', '.') }}</td>
-                        <td>
-                            <button class="btn btn-warning edit-button" data-id="{{ $periode->id }}">Edit</button>
-                            <form action="{{ route('admin.periode.destroy', $periode->id) }}" method="POST"
-                                style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama Periode</th>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal Selesai</th>
+                                <th>Anggaran Periode</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($periodes as $periode)
+                                <tr>
+                                    <td>{{ $periode->id }}</td>
+                                    <td>{{ $periode->nama_periode }}</td>
+                                    <td>{{ $periode->tanggal_mulai }}</td>
+                                    <td>{{ $periode->tanggal_selesai }}</td>
+                                    <td>Rp {{ number_format($periode->anggaran_periode, 2, ',', '.') }}</td>
+                                    <td>
+                                        <button class="btn btn-warning edit-button"
+                                            data-id="{{ $periode->id }}">Edit</button>
+                                        <form action="{{ route('admin.periode.destroy', $periode->id) }}" method="POST"
+                                            style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Modal Create -->
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createPeriodeModalLabel"
@@ -157,6 +166,9 @@
         </div>
     </div>
 
+
+
+@section('scripts')
     <script>
         $(document).ready(function() {
             $('#createPeriodeBtn').on('click', function() {
@@ -208,5 +220,5 @@
             });
         });
     </script>
-
+@endsection
 @endsection
