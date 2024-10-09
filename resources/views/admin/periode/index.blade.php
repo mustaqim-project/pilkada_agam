@@ -9,8 +9,8 @@
     <div class="card card-primary">
         <div class="card-header">
             <div class="card-header-actions">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-                    Tambah Periode
+                <button class="btn btn-primary" id="createPeriodeBtn" data-bs-toggle="modal" data-bs-target="#periodeModal">
+                    <i class="fas fa-plus"></i> {{ __('admin.Tambah Periode') }}
                 </button>
             </div>
         </div>
@@ -37,11 +37,11 @@
                                 <td>{{ $periode->tanggal_selesai }}</td>
                                 <td>Rp {{ number_format($periode->anggaran_periode, 2, ',', '.') }}</td>
                                 <td>
-                                    <button class="btn btn-warning edit-button" data-id="{{ $periode->id }}">Edit</button>
+                                    <button class="btn btn-warning editPeriodeBtn" data-id="{{ $periode->id }}">Edit</button>
                                     <form action="{{ route('admin.periode.destroy', $periode->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus periode ini?')">Hapus</button>
+                                        <button class="btn btn-danger" type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus periode ini?')">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
@@ -53,102 +53,94 @@
     </div>
 </section>
 
-<!-- Modal Create and Edit -->
-<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createPeriodeModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<!-- Modal -->
+<div class="modal fade" id="periodeModal" tabindex="-1" aria-labelledby="periodeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <form id="createPeriodeForm" method="POST" action="{{ route('admin.periode.store') }}">
-                @csrf
-                <input type="hidden" name="_method" value="POST" id="formMethod">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createPeriodeModalLabel">Tambah Periode</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="anggaran_id">Anggaran ID</label>
-                        <select class="form-control" name="anggaran_id" id="anggaran_id" required>
-                            <option value="">Pilih Anggaran</option>
-                            @foreach ($anggarans as $anggaran)
-                                <option value="{{ $anggaran->id }}">
-                                    {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} - Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="nama_periode">Nama Periode</label>
+            <div class="modal-header">
+                <h5 class="modal-title" id="periodeModalLabel">{{ __('admin.Form Periode') }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <form id="periodeForm" action="" method="POST">
+                    @csrf
+                    <input type="hidden" name="_method" value="POST" id="formMethod">
+                    <div class="mb-3">
+                        <label for="nama_periode" class="form-label">{{ __('admin.Nama Periode') }}</label>
                         <input type="text" class="form-control" name="nama_periode" id="nama_periode" required>
                     </div>
-                    <div class="form-group">
-                        <label for="tanggal_mulai">Tanggal Mulai</label>
+                    <div class="mb-3">
+                        <label for="tanggal_mulai" class="form-label">{{ __('admin.Tanggal Mulai') }}</label>
                         <input type="date" class="form-control" name="tanggal_mulai" id="tanggal_mulai" required>
                     </div>
-                    <div class="form-group">
-                        <label for="tanggal_selesai">Tanggal Selesai</label>
+                    <div class="mb-3">
+                        <label for="tanggal_selesai" class="form-label">{{ __('admin.Tanggal Selesai') }}</label>
                         <input type="date" class="form-control" name="tanggal_selesai" id="tanggal_selesai" required>
                     </div>
-                    <div class="form-group">
-                        <label for="anggaran_periode">Anggaran Periode</label>
+                    <div class="mb-3">
+                        <label for="anggaran_periode" class="form-label">{{ __('admin.Anggaran Periode') }}</label>
                         <input type="number" class="form-control" name="anggaran_periode" id="anggaran_periode" required>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Simpan Periode</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">{{ __('admin.Simpan') }}</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
+@endsection
+
 @section('scripts')
 <script>
-    $(document).ready(function() {
-        // Menangani event klik pada tombol edit
-        $('.edit-button').on('click', function() {
-            const id = $(this).data('id');
-            $.ajax({
-                url: `/admin/periode/${id}/edit`,
-                method: 'GET',
-                success: function(data) {
-                    $('#createModal').modal('show');
-                    $('#nama_periode').val(data.nama_periode);
-                    $('#anggaran_id').val(data.anggaran_id);
-                    $('#tanggal_mulai').val(data.tanggal_mulai);
-                    $('#tanggal_selesai').val(data.tanggal_selesai);
-                    $('#anggaran_periode').val(data.anggaran_periode);
-                    $('#formMethod').val('PUT');
-                    $('#createPeriodeForm').attr('action', `/admin/periode/${data.id}`);
-                },
-                error: function(xhr) {
-                    console.error('Error fetching data:', xhr.responseText);
-                }
-            });
-        });
+$(document).ready(function() {
+    $('#createPeriodeBtn').on('click', function() {
+        $('#periodeModal').modal('show');
+        $('#periodeForm')[0].reset();
+        $('#formMethod').val('POST');
+        $('#periodeForm').attr('action', '{{ route('admin.periode.store') }}');
+    });
 
-        // Menangani form submit untuk create dan update
-        $('#createPeriodeForm').on('submit', function(e) {
-            e.preventDefault();
-            const actionUrl = $(this).attr('action');
-            const method = $('#formMethod').val();
-            $.ajax({
-                url: actionUrl,
-                method: method,
-                data: $(this).serialize(),
-                success: function(response) {
-                    $('#createModal').modal('hide');
-                    location.reload(); // Refresh halaman setelah sukses
-                },
-                error: function(xhr) {
-                    console.error('Error saving data:', xhr.responseText);
-                    alert('Terjadi kesalahan. Silakan coba lagi.');
-                }
-            });
+    $('.editPeriodeBtn').on('click', function() {
+        const id = $(this).data('id');
+        $.ajax({
+            url: `/admin/periode/${id}/edit`,
+            method: 'GET',
+            success: function(response) {
+                $('#periodeModal').modal('show');
+                $('#nama_periode').val(response.nama_periode);
+                $('#tanggal_mulai').val(response.tanggal_mulai);
+                $('#tanggal_selesai').val(response.tanggal_selesai);
+                $('#anggaran_periode').val(response.anggaran_periode);
+                $('#formMethod').val('PUT');
+                $('#periodeForm').attr('action', `/admin/periode/${id}`);
+            },
+            error: function(xhr) {
+                console.error('Error fetching data:', xhr.responseText);
+            }
         });
     });
+
+    $('#periodeForm').on('submit', function(e) {
+        e.preventDefault();
+        const actionUrl = $(this).attr('action');
+        const method = $('#formMethod').val();
+        $.ajax({
+            url: actionUrl,
+            method: method,
+            data: $(this).serialize(),
+            success: function(response) {
+                $('#periodeModal').modal('hide');
+                location.reload(); // Refresh halaman setelah sukses
+            },
+            error: function(xhr) {
+                console.error('Error saving data:', xhr.responseText);
+                alert('Terjadi kesalahan. Silakan coba lagi.');
+            }
+        });
+    });
+});
 </script>
-@endsection
 @endsection
