@@ -9,7 +9,7 @@
     <div class="card card-primary">
         <div class="card-header">
             <div class="card-header-actions">
-                <button class="btn btn-primary" id="createPeriodeBtn" data-toggle="modal" data-target="#periodeModal">
+                <button class="btn btn-primary" id="createPeriodeBtn" data-bs-toggle="modal" data-bs-target="#periodeModal">
                     <i class="fas fa-plus"></i> {{ __('admin.Tambah Periode') }}
                 </button>
             </div>
@@ -37,7 +37,7 @@
                                 <td>{{ $periode->tanggal_selesai }}</td>
                                 <td>Rp {{ number_format($periode->anggaran_periode, 2, ',', '.') }}</td>
                                 <td>
-                                    <button class="btn btn-warning editJabatanBtn" data-id="{{ $periode->id }}">Edit</button>
+                                    <button class="btn btn-warning editPeriodeBtn" data-id="{{ $periode->id }}">Edit</button>
                                     <form action="{{ route('admin.periode.destroy', $periode->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
@@ -103,9 +103,7 @@ $(document).ready(function() {
         $('#periodeForm').attr('action', '{{ route('admin.periode.store') }}');
     });
 
-
-
-    $('.editJabatanBtn').on('click', function() {
+    $('.editPeriodeBtn').on('click', function() {
         const id = $(this).data('id');
         $.ajax({
             url: `/admin/periode/${id}/edit`,
@@ -125,6 +123,7 @@ $(document).ready(function() {
             }
         });
     });
+
 
 
     $('#periodeForm').on('submit', function(e) {
