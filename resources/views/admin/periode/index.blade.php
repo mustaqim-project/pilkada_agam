@@ -157,6 +157,10 @@
         </div>
     </div>
 
+    <!-- Menambahkan jQuery dan Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('.edit-button').on('click', function() {
@@ -181,14 +185,15 @@
                     url: form.attr('action'),
                     data: form.serialize(),
                     success: function(response) {
+                        $('#createModal').modal('hide');
+                        $('#editModal').modal('hide');
                         location.reload();
                     },
-                    error: function(response) {
+                    error: function(xhr) {
                         alert('Terjadi kesalahan. Silakan coba lagi.');
                     }
                 });
             });
         });
     </script>
-
 @endsection
