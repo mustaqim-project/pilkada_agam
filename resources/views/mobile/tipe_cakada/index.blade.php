@@ -63,7 +63,9 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="modalCakadaLabel">Tambah / Edit Tipe Cakada</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                         </div>
                         <div class="modal-body">
                             <form id="formCakada" method="POST">

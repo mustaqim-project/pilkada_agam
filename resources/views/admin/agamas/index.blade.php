@@ -62,7 +62,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="newAgamaModalLabel">{{ __('admin.New Agama Form') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
             </div>
             <div class="modal-body">
                 <form id="newAgamaForm" action="{{ route('admin.agamas.store') }}" method="POST">
@@ -87,7 +89,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editAgamaModalLabel">{{ __('admin.Edit Agama Form') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
             </div>
             <div class="modal-body">
                 <form id="editAgamaForm" action="" method="POST">
