@@ -207,6 +207,6 @@
                 });
             });
         });
-        </script>
+    </script>
 
 @endsection
