@@ -30,7 +30,7 @@
                         <td>{{ $periode->nama_periode }}</td>
                         <td>{{ $periode->tanggal_mulai }}</td>
                         <td>{{ $periode->tanggal_selesai }}</td>
-                        <td>{{ $periode->anggaran_periode }}</td>
+                        <td>Rp {{ number_format($periode->anggaran_periode, 2, ',', '.') }}</td>
                         <td>
                             <button class="btn btn-warning edit-button" data-id="{{ $periode->id }}">Edit</button>
                             <form action="{{ route('admin.periode.destroy', $periode->id) }}" method="POST"
@@ -66,7 +66,8 @@
                                 <option value="">Pilih Anggaran</option>
                                 @foreach ($anggarans as $anggaran)
                                     <option value="{{ $anggaran->id }}">
-                                        {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} - Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
+                                        {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} -
+                                        Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
                                     </option>
                                 @endforeach
                             </select>
@@ -85,7 +86,8 @@
                         </div>
                         <div class="form-group">
                             <label for="anggaran_periode">Anggaran Periode</label>
-                            <input type="number" class="form-control" name="anggaran_periode" id="anggaran_periode" required>
+                            <input type="number" class="form-control" name="anggaran_periode" id="anggaran_periode"
+                                required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -98,7 +100,8 @@
     </div>
 
     <!-- Modal Edit -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editPeriodeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editPeriodeModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form id="editPeriodeForm" method="POST">
@@ -118,26 +121,31 @@
                                 <option value="">Pilih Anggaran</option>
                                 @foreach ($anggarans as $anggaran)
                                     <option value="{{ $anggaran->id }}">
-                                        {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} - Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
+                                        {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} -
+                                        Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="edit_nama_periode">Nama Periode</label>
-                            <input type="text" class="form-control" name="nama_periode" id="edit_nama_periode" required>
+                            <input type="text" class="form-control" name="nama_periode" id="edit_nama_periode"
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="edit_tanggal_mulai">Tanggal Mulai</label>
-                            <input type="date" class="form-control" name="tanggal_mulai" id="edit_tanggal_mulai" required>
+                            <input type="date" class="form-control" name="tanggal_mulai" id="edit_tanggal_mulai"
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="edit_tanggal_selesai">Tanggal Selesai</label>
-                            <input type="date" class="form-control" name="tanggal_selesai" id="edit_tanggal_selesai" required>
+                            <input type="date" class="form-control" name="tanggal_selesai" id="edit_tanggal_selesai"
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="edit_anggaran_periode">Anggaran Periode</label>
-                            <input type="number" class="form-control" name="anggaran_periode" id="edit_anggaran_periode" required>
+                            <input type="number" class="form-control" name="anggaran_periode"
+                                id="edit_anggaran_periode" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -162,8 +170,6 @@
                     $('#edit_anggaran_periode').val(data.anggaran_periode);
                     $('#editPeriodeForm').attr('action', '/admin/periode/' + data.id);
                     $('#editModal').modal('show');
-                }).fail(function() {
-                    alert('Error fetching data. Please try again.');
                 });
             });
 
@@ -184,4 +190,5 @@
             });
         });
     </script>
+
 @endsection
