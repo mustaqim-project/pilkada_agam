@@ -55,7 +55,9 @@
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="createPeriodeModalLabel">Tambah Periode</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
@@ -63,10 +65,10 @@
                             <select class="form-control" name="anggaran_id" id="anggaran_id" required>
                                 <option value="">Pilih Anggaran</option>
                                 @foreach ($anggarans as $anggaran)
-                                <option value="{{ $anggaran->id }}">
-                                    {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} -
-                                    Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
-                                </option>
+                                    <option value="{{ $anggaran->id }}">
+                                        {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} -
+                                        Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -89,7 +91,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Simpan Periode</button>
                     </div>
                 </form>
@@ -107,7 +109,9 @@
                     @method('PUT')
                     <div class="modal-header">
                         <h5 class="modal-title" id="editPeriodeModalLabel">Edit Periode</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="id" id="periodeId">
@@ -145,7 +149,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">Update Periode</button>
                     </div>
                 </form>
@@ -153,49 +157,31 @@
         </div>
     </div>
 
-
-@section('scripts')
     <script>
         $(document).ready(function() {
             $('.edit-button').on('click', function() {
                 var id = $(this).data('id');
                 $.get('/admin/periode/' + id + '/edit', function(data) {
-                    $('#editPeriodeId').val(data.id);
+                    $('#periodeId').val(data.id);
                     $('#edit_anggaran_id').val(data.anggaran_id);
                     $('#edit_nama_periode').val(data.nama_periode);
                     $('#edit_tanggal_mulai').val(data.tanggal_mulai);
                     $('#edit_tanggal_selesai').val(data.tanggal_selesai);
                     $('#edit_anggaran_periode').val(data.anggaran_periode);
-                    $('#editForm').attr('action', '/admin/periode/' + data.id);
+                    $('#editPeriodeForm').attr('action', '/admin/periode/' + data.id);
                     $('#editModal').modal('show');
                 });
             });
 
-            // Handle create form submission
-            $('#createForm').on('submit', function(e) {
+            $('#createPeriodeForm, #editPeriodeForm').on('submit', function(e) {
                 e.preventDefault();
+                var form = $(this);
                 $.ajax({
-                    type: $(this).attr('method'),
-                    url: $(this).attr('action'),
-                    data: $(this).serialize(),
+                    type: form.attr('method'),
+                    url: form.attr('action'),
+                    data: form.serialize(),
                     success: function(response) {
-                        location.reload(); // Refresh page to see the changes
-                    },
-                    error: function(response) {
-                        alert('Terjadi kesalahan. Silakan coba lagi.');
-                    }
-                });
-            });
-
-            // Handle edit form submission
-            $('#editForm').on('submit', function(e) {
-                e.preventDefault();
-                $.ajax({
-                    type: $(this).attr('method'),
-                    url: $(this).attr('action'),
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        location.reload(); // Refresh page to see the changes
+                        location.reload();
                     },
                     error: function(response) {
                         alert('Terjadi kesalahan. Silakan coba lagi.');
@@ -204,5 +190,4 @@
             });
         });
     </script>
-@endsection
 @endsection
