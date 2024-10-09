@@ -103,7 +103,8 @@ $(document).ready(function() {
         $('#periodeForm').attr('action', '{{ route('admin.periode.store') }}');
     });
 
-    $('.editPeriodeBtn').on('click', function() {
+    $(document).on('click', '.editPeriodeBtn', function() {
+        console.log('Edit button clicked'); // Debugging
         const id = $(this).data('id');
         $.ajax({
             url: `/admin/periode/${id}/edit`,
@@ -120,6 +121,7 @@ $(document).ready(function() {
             },
             error: function(xhr) {
                 console.error('Error fetching data:', xhr.responseText);
+                alert('Gagal memuat data, silakan coba lagi.');
             }
         });
     });
