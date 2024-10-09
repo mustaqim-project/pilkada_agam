@@ -109,6 +109,7 @@ $(document).ready(function() {
             url: `/admin/periode/${id}/edit`,
             method: 'GET',
             success: function(response) {
+                console.log(response); // Debugging
                 $('#periodeModal').modal('show');
                 $('#nama_periode').val(response.nama_periode);
                 $('#tanggal_mulai').val(response.tanggal_mulai);
@@ -122,6 +123,8 @@ $(document).ready(function() {
             }
         });
     });
+
+
 
     $('#periodeForm').on('submit', function(e) {
         e.preventDefault();
