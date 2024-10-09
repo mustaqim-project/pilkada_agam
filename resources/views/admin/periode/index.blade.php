@@ -9,7 +9,7 @@
     <div class="card card-primary">
         <div class="card-header">
             <div class="card-header-actions">
-                <button class="btn btn-primary" id="createPeriodeBtn" data-bs-toggle="modal" data-bs-target="#periodeModal">
+                <button class="btn btn-primary" id="createPeriodeBtn" data-toggle="modal" data-target="#periodeModal">
                     <i class="fas fa-plus"></i> {{ __('admin.Tambah Periode') }}
                 </button>
             </div>
@@ -59,30 +59,30 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="periodeModalLabel">{{ __('admin.Form Periode') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
                 <form id="periodeForm" action="" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="POST" id="formMethod">
-                    <div class="mb-3">
-                        <label for="nama_periode" class="form-label">{{ __('admin.Nama Periode') }}</label>
+                    <div class="form-group">
+                        <label for="nama_periode">{{ __('admin.Nama Periode') }}</label>
                         <input type="text" class="form-control" name="nama_periode" id="nama_periode" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="tanggal_mulai" class="form-label">{{ __('admin.Tanggal Mulai') }}</label>
+                    <div class="form-group">
+                        <label for="tanggal_mulai">{{ __('admin.Tanggal Mulai') }}</label>
                         <input type="date" class="form-control" name="tanggal_mulai" id="tanggal_mulai" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="tanggal_selesai" class="form-label">{{ __('admin.Tanggal Selesai') }}</label>
+                    <div class="form-group">
+                        <label for="tanggal_selesai">{{ __('admin.Tanggal Selesai') }}</label>
                         <input type="date" class="form-control" name="tanggal_selesai" id="tanggal_selesai" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="anggaran_periode" class="form-label">{{ __('admin.Anggaran Periode') }}</label>
+                    <div class="form-group">
+                        <label for="anggaran_periode">{{ __('admin.Anggaran Periode') }}</label>
                         <input type="number" class="form-control" name="anggaran_periode" id="anggaran_periode" required>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                         <button type="submit" class="btn btn-primary">{{ __('admin.Simpan') }}</button>
                     </div>
                 </form>
