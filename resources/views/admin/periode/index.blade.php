@@ -37,7 +37,7 @@
                                 <td>{{ $periode->tanggal_selesai }}</td>
                                 <td>Rp {{ number_format($periode->anggaran_periode, 2, ',', '.') }}</td>
                                 <td>
-                                    <button class="btn btn-warning editPeriodeBtn" data-id="{{ $periode->id }}">Edit</button>
+                                    <button class="btn btn-warning editJabatanBtn" data-id="{{ $periode->id }}">Edit</button>
                                     <form action="{{ route('admin.periode.destroy', $periode->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
@@ -103,8 +103,9 @@ $(document).ready(function() {
         $('#periodeForm').attr('action', '{{ route('admin.periode.store') }}');
     });
 
-    $(document).on('click', '.editPeriodeBtn', function() {
-        console.log('Edit button clicked'); // Debugging
+
+
+    $('.editJabatanBtn').on('click', function() {
         const id = $(this).data('id');
         $.ajax({
             url: `/admin/periode/${id}/edit`,
@@ -121,11 +122,9 @@ $(document).ready(function() {
             },
             error: function(xhr) {
                 console.error('Error fetching data:', xhr.responseText);
-                alert('Gagal memuat data, silakan coba lagi.');
             }
         });
     });
-
 
 
     $('#periodeForm').on('submit', function(e) {
