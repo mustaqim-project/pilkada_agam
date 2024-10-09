@@ -157,40 +157,56 @@
         </div>
     </div>
 
-
     <script>
         $(document).ready(function() {
+            $('#createPeriodeBtn').on('click', function() {
+                $('#editModal').modal('show');
+                $('#editPeriodeForm')[0].reset();
+                $('#formMethod').val('POST');
+                $('#editPeriodeForm').attr('action', '{{ route('admin.periode.store') }}');
+            });
+
             $('.edit-button').on('click', function() {
-                var id = $(this).data('id');
-                $.get('/admin/periode/' + id + '/edit', function(data) {
-                    $('#periodeId').val(data.id);
-                    $('#edit_anggaran_id').val(data.anggaran_id);
-                    $('#edit_nama_periode').val(data.nama_periode);
-                    $('#edit_tanggal_mulai').val(data.tanggal_mulai);
-                    $('#edit_tanggal_selesai').val(data.tanggal_selesai);
-                    $('#edit_anggaran_periode').val(data.anggaran_periode);
-                    $('#editPeriodeForm').attr('action', '/admin/periode/' + data.id);
-                    $('#editModal').modal('show');
+                const id = $(this).data('id');
+                $.ajax({
+                    url: `/admin/periode/${id}/edit`,
+                    method: 'GET',
+                    success: function(data) {
+                        $('#editModal').modal('show');
+                        $('#periodeId').val(data.id);
+                        $('#edit_anggaran_id').val(data.anggaran_id);
+                        $('#edit_nama_periode').val(data.nama_periode);
+                        $('#edit_tanggal_mulai').val(data.tanggal_mulai);
+                        $('#edit_tanggal_selesai').val(data.tanggal_selesai);
+                        $('#edit_anggaran_periode').val(data.anggaran_periode);
+                        $('#formMethod').val('PUT');
+                        $('#editPeriodeForm').attr('action', `/admin/periode/${data.id}`);
+                    },
+                    error: function(xhr) {
+                        console.error('Error fetching data:', xhr.responseText);
+                    }
                 });
             });
 
-            $('#createPeriodeForm, #editPeriodeForm').on('submit', function(e) {
+            $('#editPeriodeForm').on('submit', function(e) {
                 e.preventDefault();
-                var form = $(this);
+                const actionUrl = $(this).attr('action');
+                const method = $('#formMethod').val();
                 $.ajax({
-                    type: form.attr('method'),
-                    url: form.attr('action'),
-                    data: form.serialize(),
+                    url: actionUrl,
+                    method: method,
+                    data: $(this).serialize(),
                     success: function(response) {
-                        $('#createModal').modal('hide');
                         $('#editModal').modal('hide');
                         location.reload();
                     },
                     error: function(xhr) {
+                        console.error('Error saving data:', xhr.responseText);
                         alert('Terjadi kesalahan. Silakan coba lagi.');
                     }
                 });
             });
         });
-    </script>
+        </script>
+
 @endsection
