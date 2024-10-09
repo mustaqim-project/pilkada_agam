@@ -41,7 +41,7 @@
                                     <form action="{{ route('admin.periode.destroy', $periode->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus periode ini?')">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
@@ -107,14 +107,7 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
-
-        $('#createPeriodeBtn').on('click', function() {
-            $('#editModal').modal('show');
-            $('#editPeriodeForm')[0].reset();
-            $('#formMethod').val('POST');
-            $('#editPeriodeForm').attr('action', '{{ route('admin.periode.store') }}');
-        });
-
+        // Menangani event klik pada tombol edit
         $('.edit-button').on('click', function() {
             const id = $(this).data('id');
             $.ajax({
@@ -136,6 +129,7 @@
             });
         });
 
+        // Menangani form submit untuk create dan update
         $('#createPeriodeForm').on('submit', function(e) {
             e.preventDefault();
             const actionUrl = $(this).attr('action');
@@ -146,7 +140,7 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     $('#createModal').modal('hide');
-                    location.reload();
+                    location.reload(); // Refresh halaman setelah sukses
                 },
                 error: function(xhr) {
                     console.error('Error saving data:', xhr.responseText);
