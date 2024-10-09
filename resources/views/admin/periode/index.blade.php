@@ -107,6 +107,14 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
+
+        $('#createPeriodeBtn').on('click', function() {
+            $('#editModal').modal('show');
+            $('#editPeriodeForm')[0].reset();
+            $('#formMethod').val('POST');
+            $('#editPeriodeForm').attr('action', '{{ route('admin.periode.store') }}');
+        });
+
         $('.edit-button').on('click', function() {
             const id = $(this).data('id');
             $.ajax({
