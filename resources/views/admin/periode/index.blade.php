@@ -21,6 +21,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Tim</th>
                             <th>Nama Periode</th>
                             <th>Tanggal Mulai</th>
                             <th>Tanggal Selesai</th>
@@ -32,10 +33,11 @@
                         @foreach ($periodes as $periode)
                             <tr>
                                 <td>{{ $periode->id }}</td>
+                                <td>{{ $periode->anggaran->tim->name }}</td>
                                 <td>{{ $periode->nama_periode }}</td>
                                 <td>{{ $periode->tanggal_mulai }}</td>
                                 <td>{{ $periode->tanggal_selesai }}</td>
-                                <td>{{ $periode->anggaran_periode }}</td>
+                                <td>Rp {{ number_format($periode->anggaran_periode, 0, ',', '.') }}</td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editPeriodeModal" data-id="{{ $periode->id }}">
                                         Edit
