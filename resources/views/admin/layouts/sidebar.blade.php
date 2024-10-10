@@ -101,6 +101,7 @@
                             </li>
                         @endif
 
+
                         {{-- Keuangan DS --}}
                         @if (canAccess(['tim_inti.keuangan_index', 'tim_inti.keuangan_create', 'tim_inti.keuangan_update', 'tim_inti.keuangan_delete']))
                             <li class="{{ setSidebarActive(['admin.periode.index']) }}">
