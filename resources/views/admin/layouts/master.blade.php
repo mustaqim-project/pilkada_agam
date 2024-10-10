@@ -97,8 +97,6 @@
     <script src="{{ asset('admin/assets/js/custom.js') }}"></script>
 
     <script>
-
-
         $.uploadPreview({
             input_field: "#image-upload", // Default: .image-upload
             preview_box: "#image-preview", // Default: .image-preview
