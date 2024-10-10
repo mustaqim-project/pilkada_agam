@@ -1038,12 +1038,12 @@
                             <span>{{ __('admin.Jabatan') }}</span></a></li>
                 @endif
 
-
+{{--
                 @if (canAccess(['agama index', 'agama create', 'agama udpate', 'agama delete']))
                     <li class="{{ setSidebarActive(['admin.agamas.*']) }}"><a class="nav-link"
                             href="{{ route('admin.agamas.index') }}"><i class="fas fa-list"></i>
                             <span>{{ __('admin.Agama') }}</span></a></li>
-                @endif
+                @endif --}}
 
 
                 @if (canAccess(['access management index']))
