@@ -40,7 +40,7 @@
                             @foreach ($layanans as $message)
                                 <tr>
                                     <td>{{ ++$loop->index }}</td>
-                                    <td>{{ $message->no_Wa }}</td>
+                                    <td>{{ $message->no_hp }}</td>
                                     <td>{{ $message->judul }}</td>
                                     <td>{{ $message->message }}</td>
                                     {{-- <td>
