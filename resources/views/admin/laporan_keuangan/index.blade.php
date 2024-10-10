@@ -203,8 +203,15 @@
 @section('scripts')
 <script>
     $(document).ready(function() {
-        // Initialize DataTable
-        $('#tableLapKeu').DataTable();
+        $("#tableAnggaran").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }],
+            "order": [
+                [0, 'desc']
+            ]
+        });
 
         // Handle edit button click
         $('#editModalLapKeu').on('show.bs.modal', function (event) {
