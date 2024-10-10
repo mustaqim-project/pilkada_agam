@@ -39,7 +39,7 @@
                                 <td>{{ $laporan->jenisPembiayaan->nama_pembiayaan }}</td>
                                 <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
                                 <td>{{ $laporan->keterangan }}</td>
-                                <td>{{ $laporan->status }}</td>
+                                <td>{{ ucfirst($laporan->status) }}</td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModalLapKeu" data-id="{{ $laporan->id }}">
                                         Edit
@@ -186,6 +186,7 @@
                     <div class="form-group">
                         <label for="edit_status">Status Pembayaran</label>
                         <select name="status" id="edit_status" class="form-control" required>
+                            <option value="">Pilih Status Pembayaran</option>
                             <option value="unpaid">Unpaid</option>
                             <option value="paid">Paid</option>
                         </select>
@@ -200,7 +201,9 @@
     </div>
 </div>
 
-@section('scripts')
+@endsection
+
+@push('scripts')
 <script>
     $(document).ready(function() {
         $("#tableAnggaran").dataTable({
@@ -235,8 +238,6 @@
 
     function resetForm() {
         $('#laporanForm')[0].reset();
-        $('#laporanForm select').val('').change();
     }
 </script>
-@endsection
-@endsection
+@endpush
