@@ -46,6 +46,7 @@ use App\Http\Controllers\Admin\KanvasingAisyiahController;
 use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
 use App\Http\Controllers\Admin\DashboardUtamaController;
+use App\Http\Controllers\Admin\TimPusatController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
@@ -304,6 +305,33 @@ Route::get('kanvasing-jj', [KanvasingJjController::class, 'indexAdmin'])->name('
 Route::post('kanvasing-jj/store', [KanvasingJjController::class, 'store'])->name('kanvasing-jj.store');
 Route::put('kanvasing-jj/update/{id}', [KanvasingJjController::class, 'update'])->name('kanvasing-jj.update');
 Route::delete('kanvasing-jj/destroy/{id}', [KanvasingJjController::class, 'destroy'])->name('kanvasing-jj.destroy');
+
+
+
+
+
+
+
+
+
+
+
+Route::group(['prefix' => 'timpusatds', 'as' => 'timpusatds.'], function () {
+    // Route untuk Ketua Tim
+    Route::group(['prefix' => 'ketua', 'as' => 'ketua.'], function () {
+        Route::get('dashboard', [TimPusatController::class, 'ketuaDashboard'])->name('dashboard');
+        Route::get('laporan', [TimPusatController::class, 'ketuaLaporan'])->name('laporan');
+    });
+
+    // Route untuk Admin
+    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+        Route::get('dashboard', [TimPusatController::class, 'adminDashboard'])->name('dashboard');
+        Route::get('laporan', [TimPusatController::class, 'adminLaporan'])->name('laporan');
+    });
+
+    // Route untuk Keuangan DS
+    Route::get('/', [TimPusatController::class, 'index'])->name('index');
+});
 
 
 

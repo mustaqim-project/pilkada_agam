@@ -13,7 +13,6 @@ use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Admin\KanvasingPkhController;
 use App\Http\Controllers\Admin\KanvasingParpolController;
 use App\Http\Controllers\Admin\KanvasingAisyiahController;
-use App\Http\Controllers\Admin\TimPusatController;
 
 
 
@@ -56,22 +55,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::group(['prefix' => 'admin/timpusatds', 'as' => 'admin.timpusatds.'], function () {
-        // Route untuk Ketua Tim
-        Route::group(['prefix' => 'ketua', 'as' => 'ketua.'], function () {
-            Route::get('dashboard', [TimPusatController::class, 'ketuaDashboard'])->name('dashboard');
-            Route::get('laporan', [TimPusatController::class, 'ketuaLaporan'])->name('laporan');
-        });
 
-        // Route untuk Admin
-        Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-            Route::get('dashboard', [TimPusatController::class, 'adminDashboard'])->name('dashboard');
-            Route::get('laporan', [TimPusatController::class, 'adminLaporan'])->name('laporan');
-        });
-
-        // Route untuk Keuangan DS
-        Route::get('/', [TimPusatController::class, 'index'])->name('index');
-    });
 
 
 });
