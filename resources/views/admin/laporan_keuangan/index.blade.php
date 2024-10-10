@@ -207,8 +207,10 @@
         $('#tableLapKeu').DataTable();
 
         // Handle edit button click
-        $('#tableLapKeu tbody').on('click', '.btn-warning', function() {
-            var id = $(this).data('id');
+        $('#editModalLapKeu').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+
             $.get(`/admin/laporan-keuangan/${id}/edit`, function(data) {
                 $('#edit_laporan_id').val(data.id);
                 $('#edit_anggaran_id').val(data.anggaran_id);
