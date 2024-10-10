@@ -41,7 +41,9 @@
                                 <td>{{ $laporan->keterangan }}</td>
                                 <td>{{ $laporan->status }}</td>
                                 <td>
-                                    <button class="btn btn-warning" onclick="editLaporan({{ $laporan->id }})">Edit</button>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModalLapKeu" data-id="{{ $laporan->id }}">
+                                        Edit
+                                    </button>
                                     <form action="{{ route('admin.laporan-keuangan.destroy', $laporan->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
@@ -128,7 +130,7 @@
 </div>
 
 <!-- Modal Edit Laporan Keuangan -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModalLapKeu" tabindex="-1" role="dialog" aria-labelledby="editModalLapKeuLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form id="editLaporanForm" method="POST" action="" enctype="multipart/form-data">
@@ -136,7 +138,7 @@
                 <input type="hidden" name="_method" id="editMethod" value="PUT">
                 <input type="hidden" name="laporan_id" id="edit_laporan_id" value="">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalLabel">Edit Laporan Keuangan</h5>
+                    <h5 class="modal-title" id="editModalLapKeuLabel">Edit Laporan Keuangan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
