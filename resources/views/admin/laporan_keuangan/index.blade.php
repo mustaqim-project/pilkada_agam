@@ -9,7 +9,7 @@
         <div class="card card-primary">
             <div class="card-header">
                 <div class="card-header-actions">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#laporanModal" onclick="resetForm()">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#createModal" onclick="resetForm()">
                         <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
                     </button>
                 </div>
@@ -41,7 +41,7 @@
                                     <td>{{ $laporan->keterangan }}</td>
                                     <td>{{ $laporan->status }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-warning" onclick="editLaporan({{ $laporan->id }})">Edit</button>
+                                        <button class="btn btn-warning" onclick="editLaporan({{ $laporan->id }})">Edit</button>
                                         <form action="{{ route('admin.laporan-keuangan.destroy', $laporan->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
@@ -57,16 +57,14 @@
         </div>
     </section>
 
-    <!-- Modal Tambah/Edit Laporan Keuangan -->
-    <div class="modal fade" id="laporanModal" tabindex="-1" role="dialog" aria-labelledby="laporanModalLabel" aria-hidden="true">
+    <!-- Modal Create Laporan Keuangan -->
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form id="laporanForm" method="POST" action="{{ route('admin.laporan-keuangan.store') }}" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="_method" id="method" value="POST">
-                    <input type="hidden" name="laporan_id" id="laporan_id" value="">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="laporanModalLabel">Tambah Laporan Keuangan</h5>
+                        <h5 class="modal-title" id="createModalLabel">Tambah Laporan Keuangan</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -77,8 +75,8 @@
                             <select name="anggaran_id" id="anggaran_id" class="form-control" required>
                                 @foreach ($anggarans as $anggaran)
                                     <option value="{{ $anggaran->id }}">
-                                        {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} - Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
-                                    </option>
+                                        {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} - Rp
+                                        {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -86,7 +84,8 @@
                             <label for="periode_id">Periode</label>
                             <select name="periode_id" id="periode_id" class="form-control" required>
                                 @foreach ($periodes as $periode)
-                                    <option value="{{ $periode->id }}">{{ $periode->nama_periode }} - Rp {{ number_format($periode->anggaran_periode, 2, ',', '.') }}</option>
+                                    <option value="{{ $periode->id }}">{{ $periode->nama_periode }} - Rp
+                                        {{ number_format($periode->anggaran_periode, 2, ',', '.') }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -128,44 +127,128 @@
         </div>
     </div>
 
+    <!-- Modal Edit Laporan Keuangan -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="editLaporanForm" method="POST" action="" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="_method" id="editMethod" value="PUT">
+                    <input type="hidden" name="laporan_id" id="edit_laporan_id" value="">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Laporan Keuangan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="edit_anggaran_id">Anggaran</label>
+                            <select name="anggaran_id" id="edit_anggaran_id" class="form-control" required>
+                                @foreach ($anggarans as $anggaran)
+                                    <option value="{{ $anggaran->id }}">
+                                        {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} - Rp
+                                        {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_periode_id">Periode</label>
+                            <select name="periode_id" id="edit_periode_id" class="form-control" required>
+                                @foreach ($periodes as $periode)
+                                    <option value="{{ $periode->id }}">{{ $periode->nama_periode }} - Rp
+                                        {{ number_format($periode->anggaran_periode, 2, ',', '.') }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_jenis_pembiayaan_id">Jenis Pembiayaan</label>
+                            <select name="jenis_pembiayaan_id" id="edit_jenis_pembiayaan_id" class="form-control" required>
+                                @foreach ($jenisPembiayaans as $jenisPembiayaan)
+                                    <option value="{{ $jenisPembiayaan->id }}">{{ $jenisPembiayaan->nama_pembiayaan }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_jumlah_digunakan">Jumlah Digunakan</label>
+                            <input type="number" name="jumlah_digunakan" id="edit_jumlah_digunakan" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_keterangan">Keterangan</label>
+                            <input type="text" name="keterangan" id="edit_keterangan" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_bukti_pembayaran">Bukti Pembayaran</label>
+                            <input type="file" name="bukti_pembayaran" id="edit_bukti_pembayaran" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_status">Status Pembayaran</label>
+                            <select name="status" id="edit_status" class="form-control" required>
+                                <option value="">Pilih Status Pembayaran</option>
+                                <option value="unpaid">Unpaid</option>
+                                <option value="paid">Paid</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-warning">Perbarui</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
     <script>
-        $(document).ready(function() {
-            $("#tableLapKeu").DataTable({
+
+
+            $("#tableLapKeu").dataTable({
                 "columnDefs": [{
                     "sortable": false,
-                    "targets": [6] // Mengatur agar kolom aksi tidak bisa disortir
+                    "targets": [2, 3]
                 }],
                 "order": [
-                    [0, 'asc'] // Mengurutkan berdasarkan No
+                    [0, 'desc']
                 ]
             });
+
+        function resetForm() {
+            document.getElementById("laporanForm").reset();
+            $('#anggaran_id').val('').change();
+            $('#periode_id').val('').change();
+            $('#jenis_pembiayaan_id').val('').change();
+            $('#status').val('').change();
+        }
+
+        function editLaporan(id) {
+            $.ajax({
+                url: `/admin/laporan-keuangan/${id}/edit`,
+                method: 'GET',
+                success: function(data) {
+                    $('#edit_laporan_id').val(data.id);
+                    $('#edit_anggaran_id').val(data.anggaran_id).change();
+                    $('#edit_periode_id').val(data.periode_id).change();
+                    $('#edit_jenis_pembiayaan_id').val(data.jenis_pembiayaan_id).change();
+                    $('#edit_jumlah_digunakan').val(data.jumlah_digunakan);
+                    $('#edit_keterangan').val(data.keterangan);
+                    $('#edit_status').val(data.status).change();
+
+                    $('#editLaporanForm').attr('action', `/admin/laporan-keuangan/${id}`);
+                    $('#editModal').modal('show');
+                },
+                error: function() {
+                    alert('Gagal mengambil data laporan keuangan');
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            $('#tableLapKeu').DataTable({
+                "responsive": true,
+                "autoWidth": false,
+            });
         });
-
-        window.resetForm = function() {
-            $('#laporanForm')[0].reset();
-            $('#method').val('POST');
-            $('#laporan_id').val('');
-            $('#laporanForm').attr('action', '{{ route('admin.laporan-keuangan.store') }}');
-            $('#laporanModalLabel').text('Tambah Laporan Keuangan');
-        };
-
-        window.editLaporan = function(id) {
-            fetch('/admin/laporan-keuangan/' + id + '/edit')
-                .then(response => response.json())
-                .then(data => {
-                    $('#anggaran_id').val(data.anggaran_id);
-                    $('#periode_id').val(data.periode_id);
-                    $('#jenis_pembiayaan_id').val(data.jenis_pembiayaan_id);
-                    $('#jumlah_digunakan').val(data.jumlah_digunakan);
-                    $('#keterangan').val(data.keterangan);
-                    $('#status').val(data.status);
-
-                    $('#laporanForm').attr('action', '/admin/laporan-keuangan/' + id);
-                    $('#method').val('PUT');
-                    $('#laporan_id').val(id);
-                    $('#laporanModalLabel').text('Edit Laporan Keuangan');
-                    $('#laporanModal').modal('show');
-                });
-        };
     </script>
 @endsection
