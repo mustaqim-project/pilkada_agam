@@ -136,10 +136,7 @@
         </div>
     </div>
 
-    @push('scripts')
-<script>
-    $(document).ready(function() {
-        // Inisialisasi DataTable
+    <script>
         $("#tableLapKeu").dataTable({
             "columnDefs": [{
                 "sortable": false,
@@ -150,41 +147,36 @@
             ]
         });
 
-        // Fungsi untuk mereset form modal
-        window.resetForm = function() {
-            $('#laporanForm')[0].reset(); // Reset form
-            $('#method').val('POST'); // Set method ke POST
-            $('#laporan_id').val(''); // Kosongkan ID laporan
-            $('#laporanForm').attr('action', '{{ route('admin.laporan-keuangan.store') }}'); // Set action form
-            $('#laporanModalLabel').text('Tambah Laporan Keuangan'); // Ubah judul modal
-        };
 
-        // Event saat modal untuk edit ditampilkan
-        $('#laporanModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget); // Tombol yang memicu modal
-            var id = button.data('id'); // Ambil ID dari tombol
+        document.addEventListener('DOMContentLoaded', function() {
+            window.resetForm = function() {
+                document.getElementById('laporanForm').reset();
+                document.getElementById('method').value = 'POST';
+                document.getElementById('laporan_id').value = '';
+                document.getElementById('laporanForm').setAttribute('action',
+                    '{{ route('admin.laporan-keuangan.store') }}');
+                document.getElementById('laporanModalLabel').innerText = 'Tambah Laporan Keuangan';
+            };
 
-            if (id) {
-                // Fetch data laporan berdasarkan ID
-                $.get(`/admin/laporan-keuangan/${id}/edit`, function(data) {
-                    $('#anggaran_id').val(data.anggaran_id); // Set anggaran_id ke select
-                    $('#periode_id').val(data.periode_id); // Set periode_id ke select
-                    $('#jenis_pembiayaan_id').val(data.jenis_pembiayaan_id); // Set jenis_pembiayaan_id ke select
-                    $('#jumlah_digunakan').val(data.jumlah_digunakan); // Set jumlah_digunakan ke input
-                    $('#keterangan').val(data.keterangan); // Set keterangan ke input
-                    $('#status').val(data.status); // Set status ke select
+            window.editLaporan = function(id) {
+                fetch('/admin/laporan-keuangan/' + id + '/edit')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('anggaran_id').value = data.anggaran_id;
+                        document.getElementById('periode_id').value = data.periode_id;
+                        document.getElementById('jenis_pembiayaan_id').value = data.jenis_pembiayaan_id;
+                        document.getElementById('jumlah_digunakan').value = data.jumlah_digunakan;
+                        document.getElementById('keterangan').value = data.keterangan;
+                        document.getElementById('status').value = data.status;
 
-                    // Ubah action form untuk update
-                    $('#laporanForm').attr('action', `/admin/laporan-keuangan/${id}`);
-                    $('#method').val('PUT'); // Set method ke PUT
-                    $('#laporan_id').val(id); // Set ID laporan
-                    $('#laporanModalLabel').text('Edit Laporan Keuangan'); // Ubah judul modal
-                });
-            } else {
-                resetForm(); // Jika tidak ada ID, reset form
-            }
+                        document.getElementById('laporanForm').setAttribute('action',
+                            '/admin/laporan-keuangan/' + id);
+                        document.getElementById('method').value = 'PUT';
+                        document.getElementById('laporan_id').value = id;
+                        document.getElementById('laporanModalLabel').innerText = 'Edit Laporan Keuangan';
+                        $('#laporanModal').modal('show');
+                    });
+            };
         });
-    });
-</script>
-@endpush
-
+    </script>
+@endsection
