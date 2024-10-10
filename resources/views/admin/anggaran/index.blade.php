@@ -143,10 +143,10 @@
         $("#tableAnggaran").dataTable({
             "columnDefs": [{
                 "sortable": false,
-                "targets": [2, 3]
+                "targets": [2]
             }],
             "order": [
-                [0, 'desc']
+                [0, 'asc']
             ]
         });
 
@@ -155,13 +155,11 @@
         var button = $(event.relatedTarget);
         var id = button.data('id');
 
-        // Fetch data anggaran berdasarkan ID
         $.get(`/admin/anggaran/${id}/edit`, function (data) {
             $('#edit_tim_id').val(data.tim_id);
             $('#edit_total_anggaran').val(data.total_anggaran);
             $('#edit_jumlah_periode').val(data.jumlah_periode);
 
-            // Ubah action form untuk update
             $('#formEditAnggaran').attr('action', `/admin/anggaran/${id}`);
         });
     });

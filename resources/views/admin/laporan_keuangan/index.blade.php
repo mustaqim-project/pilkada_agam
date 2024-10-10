@@ -206,10 +206,10 @@
         $("#tableAnggaran").dataTable({
             "columnDefs": [{
                 "sortable": false,
-                "targets": [2, 3]
+                "targets": [2]
             }],
             "order": [
-                [0, 'desc']
+                [0, 'asc']
             ]
         });
 
