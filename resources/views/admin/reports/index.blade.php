@@ -9,7 +9,7 @@
         <div class="card card-primary">
             <div class="card-header">
                 <div class="card-header-actions">
-                    <a href="{{ route('admin.reports.create') }}" class="btn btn-success">Tambah Laporan</a>
+                    <a href="{{ route('admin.reports.create') }}" class="btn btn-primary"><i class="fas fa-plus">Tambah Laporan</a>
                 </div>
             </div>
             <div class="card-body">
@@ -51,7 +51,7 @@
         <div class="card card-primary">
             <div class="card-header">
                 <div class="card-header-actions">
-                    <a href="{{ route('admin.reports.create') }}" class="btn btn-success">Tambah Laporan</a>
+                    <a href="{{ route('admin.reports.create') }}" class="btn btn-primary"><i class="fas fa-plus">Tambah Laporan</a>
                 </div>
             </div>
             <div class="card-body">
