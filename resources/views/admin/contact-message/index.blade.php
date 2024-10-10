@@ -81,7 +81,7 @@
         </div>
     </section>
 
-    @foreach ($messages as $message)
+    {{-- @foreach ($messages as $message)
         <!-- Modal -->
         <div class="modal fade" id="exampleModal-{{ $message->id }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -125,7 +125,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
 @endsection
 
 @push('scripts')
