@@ -116,16 +116,17 @@
 
     @push('scripts')
         <script>
-            $("#tablePembiayaan").dataTable({
-                "columnDefs": [{
-                    "sortable": false,
-                    "targets": [2, 3]
-                }],
-                "order": [
-                    [0, 'desc']
-                ]
+            $(document).ready(function() {
+                $("#tablePembiayaan").dataTable({
+                    "columnDefs": [{
+                        "sortable": false, // Menonaktifkan sorting pada kolom tertentu
+                        "targets": [2] // Indeks kolom ke-2 (mulai dari 0)
+                    }],
+                    "order": [
+                        [0, 'asc'] // Mengatur sorting default pada kolom pertama secara ascending
+                    ]
+                });
             });
-
             $('#modalEditPembiayaan').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
