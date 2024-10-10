@@ -26,6 +26,7 @@ class ReportController extends Controller
             $sentReports = $admin->reports()->with('assignee')->get();
             $receivedReports = $admin->assignedReports()->with('creator')->get();
 
+
             return view('admin.reports.index', compact('sentReports', 'receivedReports'));
         }
 
@@ -33,7 +34,7 @@ class ReportController extends Controller
         {
             $admin = Auth::guard('admin')->user();
             $assignees = Admin::where('id', $admin->atasan_id)->get();
-
+            dd($assignees);
             return view('admin.reports.create', compact('assignees'));
         }
 
