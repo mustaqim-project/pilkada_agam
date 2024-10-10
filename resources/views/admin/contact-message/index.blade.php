@@ -20,33 +20,37 @@
                                 <th class="text-center">
                                     #
                                 </th>
-                                <th>{{ __('admin.Email') }}</th>
+                                {{-- <th>{{ __('admin.Email') }}</th>
 
                                 <th>{{ __('admin.Subject') }}</th>
                                 <th>{{ __('admin.Message') }}</th>
-                                <th>{{ __('admin.Replied') }}</th>
+                                <th>{{ __('admin.Replied') }}</th> --}}
 
 
-                                <th>{{ __('admin.Action') }}</th>
+                                {{-- <th>{{ __('admin.Action') }}</th> --}}
+
+                                <th>{{ __('admin.No Hp') }}</th>
+                                <th>{{ __('admin.Judul') }}</th>
+                                <th>{{ __('admin.Pesan') }}</th>
 
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ($messages as $message)
+                            @foreach ($layanans as $message)
                                 <tr>
                                     <td>{{ ++$loop->index }}</td>
-                                    <td>{{ $message->email }}</td>
-                                    <td>{{ $message->subject }}</td>
+                                    <td>{{ $message->no_Wa }}</td>
+                                    <td>{{ $message->judul }}</td>
                                     <td>{{ $message->message }}</td>
-                                    <td>
+                                    {{-- <td>
                                         @if ($message->replied == 1)
                                         <i style="font-size:20px" class="fas fa-check text-success"></i>
                                         @else
                                         <i style="font-size:20px" class="fas fa-clock text-warning"></i>
                                         @endif
 
-                                    </td>
+                                    </td> --}}
 
                                     {{-- <td>
                                     @if ($link->status === 1)
@@ -55,7 +59,7 @@
                                         <span class="badge badge-danger">{{ __('admin.No') }}</span>
                                     @endif
                                 </td> --}}
-                                    <td>
+                                    {{-- <td>
                                         <a href="" class="btn btn-primary" data-toggle="modal"
                                             data-target="#exampleModal-{{ $message->id }}"><i
                                                 class="fas fa-envelope"></i></a>
@@ -63,7 +67,7 @@
                                         <a href="{{ route('admin.social-link.destroy', $message->id) }}"
                                             class="btn btn-danger delete-item"><i class="fas fa-trash-alt"></i></a>
 
-                                    </td>
+                                    </td> --}}
 
                                 </tr>
                             @endforeach

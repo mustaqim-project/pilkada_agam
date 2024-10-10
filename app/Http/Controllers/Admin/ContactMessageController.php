@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\ContactMail;
 use App\Models\Contact;
+use App\Models\Layanan;
 use App\Models\RecivedMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -17,12 +18,19 @@ class ContactMessageController extends Controller
         $this->middleware(['permission:contact message update,admin'])->only(['sendReplay']);
     }
 
+    // public function index()
+    // {
+    //     RecivedMail::query()->update(['seen' => 1]);
+
+    //     $messages = RecivedMail::all();
+    //     return view('admin.contact-message.index', compact('messages'));
+    // }
     public function index()
     {
         RecivedMail::query()->update(['seen' => 1]);
 
-        $messages = RecivedMail::all();
-        return view('admin.contact-message.index', compact('messages'));
+        $layanans = Layanan::all();
+        return view('admin.contact-message.index', compact('layanans'));
     }
 
     /** Sned Replay to a email */

@@ -10,6 +10,7 @@ use App\Models\Ad;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Contact;
+use App\Models\Layanan;
 use App\Models\HomeSectionSetting;
 use App\Models\News;
 use App\Models\RecivedMail;
@@ -291,34 +292,60 @@ class HomeController extends Controller
         return view('frontend.contact', compact('contact', 'socials'));
     }
 
-    public function handleContactFrom(Request $request)
+    // public function handleContactFrom(Request $request)
+    // {
+    //     $request->validate([
+    //         'email' => ['required', 'email', 'max:255'],
+    //         'subject' => ['required', 'max:255'],
+    //         'message' => ['required', 'max:500']
+    //     ]);
+
+    //     try{
+    //         $toMail = Contact::where('language', 'en')->first();
+
+    //         /** Send Mail */
+    //         Mail::to($toMail->email)->send(new ContactMail($request->subject, $request->message, $request->email));
+
+    //         /** store the mail */
+
+    //         $mail = new RecivedMail();
+    //         $mail->email = $request->email;
+    //         $mail->subject = $request->subject;
+    //         $mail->message = $request->message;
+    //         $mail->save();
+
+    //     }catch(\Exception $e){
+    //         toast(__($e->getMessage()));
+    //     }
+
+    //     toast(__('frontend.Message sent successfully!'), 'success');
+
+    //     return redirect()->back();
+    // }
+
+    public function handleContactForm(Request $request)
     {
         $request->validate([
-            'email' => ['required', 'email', 'max:255'],
-            'subject' => ['required', 'max:255'],
+            'no_hp' => ['required', 'string', 'max:255'],
+            'judul' => ['required', 'max:255'],
             'message' => ['required', 'max:500']
         ]);
 
-        try{
-            $toMail = Contact::where('language', 'en')->first();
+        try {
+            $pesan = new Layanan();
+            $pesan->no_hp = $request->no_hp;
+            $pesan->judul = $request->judul;
+            $pesan->message = $request->message;
 
-            /** Send Mail */
-            Mail::to($toMail->email)->send(new ContactMail($request->subject, $request->message, $request->email));
-
-            /** store the mail */
-
-            $mail = new RecivedMail();
-            $mail->email = $request->email;
-            $mail->subject = $request->subject;
-            $mail->message = $request->message;
-            $mail->save();
-
-        }catch(\Exception $e){
-            toast(__($e->getMessage()));
+            $pesan->save();
+        } catch (\Exception $e) {
+            toast(__($e->getMessage()), 'error');
+            return redirect()->back()->withInput();
         }
 
         toast(__('frontend.Message sent successfully!'), 'success');
 
         return redirect()->back();
     }
+
 }
