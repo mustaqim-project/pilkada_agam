@@ -80,6 +80,18 @@
 @section('scripts')
 <script>
 $(document).ready(function() {
+
+    $("#table").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }],
+            "order": [
+                [0, 'desc']
+            ]
+        });
+
+
     $('#createJabatanBtn').on('click', function() {
         $('#jabatanModal').modal('show');
         $('#jabatanForm')[0].reset();

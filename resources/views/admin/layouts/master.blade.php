@@ -97,15 +97,6 @@
     <script src="{{ asset('admin/assets/js/custom.js') }}"></script>
 
     <script>
-        $("#table").dataTable({
-            "columnDefs": [{
-                "sortable": false,
-                "targets": [2, 3]
-            }],
-            "order": [
-                [0, 'desc']
-            ]
-        });
 
 
         $.uploadPreview({

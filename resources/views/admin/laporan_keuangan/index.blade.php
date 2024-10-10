@@ -127,6 +127,18 @@
 </div>
 
 <script>
+
+$("#table").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }],
+            "order": [
+                [0, 'desc']
+            ]
+        });
+
+
     document.addEventListener('DOMContentLoaded', function() {
         window.resetForm = function() {
             document.getElementById('laporanForm').reset();

@@ -140,6 +140,15 @@
 
 @push('scripts')
 <script>
+        $("#table").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }],
+            "order": [
+                [0, 'desc']
+            ]
+        });
 
 
     $('#modalEditAnggaran').on('show.bs.modal', function (event) {

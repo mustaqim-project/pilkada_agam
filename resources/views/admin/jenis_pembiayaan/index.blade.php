@@ -113,6 +113,18 @@
 
 @push('scripts')
 <script>
+
+$("#table").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }],
+            "order": [
+                [0, 'desc']
+            ]
+        });
+
+
     $('#modalEditPembiayaan').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         var id = button.data('id'); // Extract info from data-* attributes
