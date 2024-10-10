@@ -10,14 +10,14 @@ class TimPusatController extends Controller
     public function __construct()
     {
         // Middleware untuk akses berdasarkan izin
-        $this->middleware(['permission:Tim Pusat ketua_tim_dashboard'])->only('ketuaDashboard');
-        $this->middleware(['permission:Tim Pusat ketua_tim_laporan'])->only('ketuaLaporan');
-        $this->middleware(['permission:Tim Pusat admin_dashboard'])->only('adminDashboard');
-        $this->middleware(['permission:Tim Pusat admin_laporan'])->only('adminLaporan');
-        $this->middleware(['permission:Tim Pusat DS keuangan_index'])->only('index');
-        $this->middleware(['permission:Tim Pusat DS keuangan_create'])->only(['create', 'store']);
-        $this->middleware(['permission:Tim Pusat DS keuangan_update'])->only(['edit', 'update']);
-        $this->middleware(['permission:Tim Pusat DS keuangan_delete'])->only('destroy');
+        $this->middleware(['permission:Tim Pusat DS ketua_tim_dashboard,admin'])->only('ketuaDashboard');
+        $this->middleware(['permission:Tim Pusat DS ketua_tim_laporan,admin'])->only('ketuaLaporan');
+        $this->middleware(['permission:Tim Pusat DS admin_dashboard,admin'])->only('adminDashboard');
+        $this->middleware(['permission:Tim Pusat DS admin_laporan,admin'])->only('adminLaporan');
+        $this->middleware(['permission:Tim Pusat DS keuangan_index,admin'])->only('index');
+        $this->middleware(['permission:Tim Pusat DS keuangan_create,admin'])->only(['create', 'store']);
+        $this->middleware(['permission:Tim Pusat DS keuangan_update,admin'])->only(['edit', 'update']);
+        $this->middleware(['permission:Tim Pusat DS keuangan_delete,admin'])->only('destroy');
     }
 
     public function ketuaDashboard()
