@@ -89,7 +89,7 @@
                         @endif
 
                         {{-- Koordinator Wilayah --}}
-                        @if (canAccess(['koordinator wilayah']))
+                        @if (canAccess(['Admin']))
                             <li class="dropdown {{ setSidebarActive(['admin.timds.koordinator.wilayah.*']) }}">
                                 <a href="#" class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
                                 <ul class="dropdown-menu">
@@ -108,7 +108,7 @@
                 </li>
 
 
-                @if (canAccess(['ketua pkh', 'koordinator wilayah', 'koordinator kecamatan', 'koordinator nagari']))
+                @if (canAccess(['ketua pkh', 'Admin', 'koordinator kecamatan', 'koordinator nagari']))
                     <li class="dropdown {{ setSidebarActive(['admin.timpkh.*']) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
                             <span>{{ __('TIM PKH') }}</span></a>
@@ -132,7 +132,7 @@
                             @endif
 
                             {{-- Koordinator Wilayah --}}
-                            @if (canAccess(['koordinator wilayah']))
+                            @if (canAccess(['Admin']))
                                 <li class="dropdown {{ setSidebarActive(['admin.timpkh.koordinator.wilayah.*']) }}">
                                     <a href="#"
                                         class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
@@ -154,7 +154,7 @@
                     </li>
                 @endif
 
-                @if (canAccess(['ketua mm', 'koordinator wilayah', 'koordinator kecamatan', 'koordinator nagari']))
+                @if (canAccess(['ketua mm', 'Admin', 'koordinator kecamatan', 'koordinator nagari']))
                     <li class="dropdown {{ setSidebarActive(['admin.timmm.*']) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
                             <span>{{ __('TIM MUHAMMADIYAH') }}</span></a>
@@ -178,7 +178,7 @@
                             @endif
 
                             {{-- Koordinator Wilayah --}}
-                            @if (canAccess(['koordinator wilayah']))
+                            @if (canAccess(['Admin']))
                                 <li class="dropdown {{ setSidebarActive(['admin.timmm.koordinator.wilayah.*']) }}">
                                     <a href="#"
                                         class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
@@ -200,7 +200,7 @@
                         </ul>
                     </li>
                 @endif
-                @if (canAccess(['ketua mm', 'koordinator wilayah', 'koordinator kecamatan', 'koordinator nagari']))
+                @if (canAccess(['ketua mm', 'Admin', 'koordinator kecamatan', 'koordinator nagari']))
                     <li class="dropdown {{ setSidebarActive(['admin.timmm.*']) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
                             <span>{{ __('TIM AISYIAH') }}</span></a>
@@ -224,7 +224,7 @@
                             @endif
 
                             {{-- Koordinator Wilayah --}}
-                            @if (canAccess(['koordinator wilayah']))
+                            @if (canAccess(['Admin']))
                                 <li class="dropdown {{ setSidebarActive(['admin.timmm.koordinator.wilayah.*']) }}">
                                     <a href="#"
                                         class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
@@ -246,7 +246,7 @@
                         </ul>
                     </li>
                 @endif
-                @if (canAccess(['ketua mm', 'koordinator wilayah', 'koordinator kecamatan', 'koordinator nagari']))
+                @if (canAccess(['ketua mm', 'Admin', 'koordinator kecamatan', 'koordinator nagari']))
                     <li class="dropdown {{ setSidebarActive(['admin.timmm.*']) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
                             <span>{{ __('TIM WISATA') }}</span></a>
@@ -270,7 +270,7 @@
                             @endif
 
                             {{-- Koordinator Wilayah --}}
-                            @if (canAccess(['koordinator wilayah']))
+                            @if (canAccess(['Admin']))
                                 <li class="dropdown {{ setSidebarActive(['admin.timmm.koordinator.wilayah.*']) }}">
                                     <a href="#"
                                         class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
@@ -292,7 +292,7 @@
                         </ul>
                     </li>
                 @endif
-                @if (canAccess(['ketua mm', 'koordinator wilayah', 'koordinator kecamatan', 'koordinator nagari']))
+                @if (canAccess(['ketua mm', 'Admin', 'koordinator kecamatan', 'koordinator nagari']))
                 <li class="dropdown {{ setSidebarActive(['admin.timmm.*']) }}">
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
                         <span>{{ __('TIM PARPOL') }}</span></a>
@@ -316,7 +316,7 @@
                         @endif
 
                         {{-- Koordinator Wilayah --}}
-                        @if (canAccess(['koordinator wilayah']))
+                        @if (canAccess(['Admin']))
                             <li class="dropdown {{ setSidebarActive(['admin.timmm.koordinator.wilayah.*']) }}">
                                 <a href="#"
                                     class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
