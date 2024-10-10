@@ -9,7 +9,7 @@
     <div class="card card-primary">
         <div class="card-header">
             <div class="card-header-actions">
-                <button class="btn btn-primary" id="createTimBtn" data-toggle="modal" data-target="#timModal">
+                <button class="btn btn-primary" id="createTimBtn" data-toggle="modal" data-target="#createTimModal">
                     <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
                 </button>
             </div>
@@ -31,12 +31,11 @@
                             <td>{{ $tim->id }}</td>
                             <td>{{ $tim->name }}</td>
                             <td>
-                                <button class="btn btn-warning editTimBtn" data-id="{{ $tim->id }}">Edit</button>
+                                <button class="btn btn-warning editTimBtn" data-id="{{ $tim->id }}" data-name="{{ $tim->name }}" data-toggle="modal" data-target="#editTimModal">Edit</button>
                                 <form action="{{ route('admin.tims.destroy', $tim->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" type="submit"
-                                        onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -48,23 +47,22 @@
     </div>
 </section>
 
-<!-- Modal -->
-<div class="modal fade" id="timModal" tabindex="-1" role="dialog" aria-labelledby="timModalLabel" aria-hidden="true">
+<!-- Modal Create -->
+<div class="modal fade" id="createTimModal" tabindex="-1" role="dialog" aria-labelledby="createTimModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="timModalLabel">{{ __('admin.Team Form') }}</h5>
+                <h5 class="modal-title" id="createTimModalLabel">{{ __('admin.Create Team') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="timForm" action="" method="POST">
+                <form id="createTimForm" action="{{ route('admin.tims.store') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="_method" value="POST" id="formMethod">
                     <div class="form-group">
                         <label for="name" class="form-label">{{ __('admin.Name') }}</label>
-                        <input type="text" class="form-control" name="name" id="name" required>
+                        <input type="text" class="form-control" name="name" id="createName" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -75,54 +73,60 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Edit -->
+<div class="modal fade" id="editTimModal" tabindex="-1" role="dialog" aria-labelledby="editTimModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editTimModalLabel">{{ __('admin.Edit Team') }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editTimForm" action="" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" id="editTimId">
+                    <div class="form-group">
+                        <label for="name" class="form-label">{{ __('admin.Name') }}</label>
+                        <input type="text" class="form-control" name="name" id="editName" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">{{ __('admin.Save changes') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
-    $(document).ready(function() {
-        $('#createTimBtn').on('click', function() {
-            $('#timModal').modal('show');
-            $('#timForm')[0].reset();
-            $('#formMethod').val('POST');
-            $('#timForm').attr('action', '{{ route('admin.tims.store') }}');
-        });
+    $("#table").dataTable({
+        "columnDefs": [{
+            "sortable": false,
+            "targets": [2]
+        }],
+        "order": [
+            [0, 'desc']
+        ]
+    });
 
-        $('.editTimBtn').on('click', function() {
-            const id = $(this).data('id');
+    // Handle Edit Button Click
+    $('.editTimBtn').on('click', function() {
+        const id = $(this).data('id');
+        const name = $(this).data('name');
 
-            $.ajax({
-                url: `/admin/tims/${id}/edit`,
-                method: 'GET',
-                success: function(response) {
-                    $('#timModal').modal('show');
-                    $('#name').val(response.data.name);
-                    $('#formMethod').val('PUT');
-                    $('#timForm').attr('action', `/admin/tims/${id}`);
-                },
-                error: function(xhr) {
-                    alert('Error fetching data. Please try again.');
-                }
-            });
-        });
-
-        $('#timForm').on('submit', function(e) {
-            e.preventDefault();
-            const actionUrl = $(this).attr('action');
-            const method = $('#formMethod').val();
-
-            $.ajax({
-                url: actionUrl,
-                method: method,
-                data: $(this).serialize(),
-                success: function(response) {
-                    $('#timModal').modal('hide');
-                    location.reload();
-                },
-                error: function(xhr) {
-                    alert('Error saving data. Please check your input.');
-                }
-            });
+        $.get(`/admin/tims/${id}/edit`, function(data) {
+            $('#editTimId').val(id);
+            $('#editName').val(name);
+            $('#editTimForm').attr('action', `/admin/tims/${id}`);
         });
     });
 </script>
-@endsection
+@endpush
