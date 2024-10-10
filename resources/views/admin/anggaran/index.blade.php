@@ -17,7 +17,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped" id="table">
+                <table class="table table-striped" id="tableAnggaran">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -140,7 +140,7 @@
 
 @push('scripts')
 <script>
-        $("#table").dataTable({
+        $("#tableAnggaran").dataTable({
             "columnDefs": [{
                 "sortable": false,
                 "targets": [2, 3]

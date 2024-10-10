@@ -17,7 +17,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="table">
+                    <table class="table table-striped" id="tablePeriode">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -173,7 +173,7 @@
 
     @push('scripts')
         <script>
-            $("#table").dataTable({
+            $("#tablePeriode").dataTable({
                 "columnDefs": [{
                     "sortable": false,
                     "targets": [2, 3]
