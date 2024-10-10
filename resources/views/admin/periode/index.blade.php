@@ -15,46 +15,48 @@
                 </div>
             </div>
             <div class="tab-content tab-bordered" id="myTab3Content">
-
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped" id="table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Tim</th>
-                                    <th>Nama Periode</th>
-                                    <th>Tanggal Mulai</th>
-                                    <th>Tanggal Selesai</th>
-                                    <th>Anggaran Periode</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($periodes as $periode)
+                <div class="tab-pane fade show {{ $loop->index === 0 ? 'active' : '' }}" id="home" role="tabpanel"
+                    aria-labelledby="home-tab2">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="table">
+                                <thead>
                                     <tr>
-                                        <td>{{ $periode->id }}</td>
-                                        <td>{{ $periode->anggaran->tim->name }}</td>
-                                        <td>{{ $periode->nama_periode }}</td>
-                                        <td>{{ $periode->tanggal_mulai }}</td>
-                                        <td>{{ $periode->tanggal_selesai }}</td>
-                                        <td>Rp {{ number_format($periode->anggaran_periode, 0, ',', '.') }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                data-target="#editPeriodeModal" data-id="{{ $periode->id }}">
-                                                Edit
-                                            </button>
-                                            <form action="{{ route('admin.periode.destroy', $periode->id) }}" method="POST"
-                                                style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Hapus</button>
-                                            </form>
-                                        </td>
+                                        <th>ID</th>
+                                        <th>Tim</th>
+                                        <th>Nama Periode</th>
+                                        <th>Tanggal Mulai</th>
+                                        <th>Tanggal Selesai</th>
+                                        <th>Anggaran Periode</th>
+                                        <th>Aksi</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($periodes as $periode)
+                                        <tr>
+                                            <td>{{ $periode->id }}</td>
+                                            <td>{{ $periode->anggaran->tim->name }}</td>
+                                            <td>{{ $periode->nama_periode }}</td>
+                                            <td>{{ $periode->tanggal_mulai }}</td>
+                                            <td>{{ $periode->tanggal_selesai }}</td>
+                                            <td>Rp {{ number_format($periode->anggaran_periode, 0, ',', '.') }}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-warning" data-toggle="modal"
+                                                    data-target="#editPeriodeModal" data-id="{{ $periode->id }}">
+                                                    Edit
+                                                </button>
+                                                <form action="{{ route('admin.periode.destroy', $periode->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
