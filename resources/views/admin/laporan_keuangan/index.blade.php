@@ -193,35 +193,23 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-@endsection
-
 @section('scripts')
 <script>
     $(document).ready(function() {
+        // Initialize DataTable
         $('#tableLapKeu').DataTable();
 
-        // Add event listener for opening and closing details
-        $('#tableLapKeu tbody').on('click', 'tr', function() {
-            $(this).toggleClass('active');
-        });
-    });
-
-    function resetForm() {
-        $('#laporanForm')[0].reset();
-    }
-
-    function editLaporan(id) {
-        $.ajax({
-            url: `/admin/laporan-keuangan/${id}/edit`,
-            method: 'GET',
-            success: function(data) {
+        // Handle edit button click
+        $('#tableLapKeu tbody').on('click', '.btn-warning', function() {
+            var id = $(this).data('id');
+            $.get(`/admin/laporan-keuangan/${id}/edit`, function(data) {
                 $('#edit_laporan_id').val(data.id);
                 $('#edit_anggaran_id').val(data.anggaran_id);
                 $('#edit_periode_id').val(data.periode_id);
@@ -229,12 +217,17 @@
                 $('#edit_jumlah_digunakan').val(data.jumlah_digunakan);
                 $('#edit_keterangan').val(data.keterangan);
                 $('#edit_status').val(data.status);
-                $('#editModal').modal('show');
-            },
-            error: function() {
-                alert('Error fetching data');
-            }
+                $('#editModalLapKeu').modal('show');
+            }).fail(function() {
+                alert('Error fetching data. Please try again.');
+            });
         });
+    });
+
+    function resetForm() {
+        $('#laporanForm')[0].reset();
+        $('#laporanForm select').val('').change();
     }
 </script>
+@endsection
 @endsection
