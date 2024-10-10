@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::group(['prefix' => 'timpusatds', 'as' => 'timpusatds.'], function () {
+    Route::group(['prefix' => 'admin/timpusatds', 'as' => 'admin.timpusatds.'], function () {
         // Route untuk Ketua Tim
         Route::group(['prefix' => 'ketua', 'as' => 'ketua.'], function () {
             Route::get('dashboard', [TimPusatController::class, 'ketuaDashboard'])->name('dashboard');
