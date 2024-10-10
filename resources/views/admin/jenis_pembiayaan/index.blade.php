@@ -9,7 +9,7 @@
         <div class="card card-primary">
             <div class="card-header">
                 <div class="card-header-actions">
-                    <button class="btn btn-primary" id="createAgamaBtn" data-bs-toggle="modal" data-bs-target="#createModal">
+                    <button class="btn btn-primary" id="createAgamaBtn" data-toggle="modal" data-target="#createModal">
                         <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
                     </button>
                 </div>
@@ -32,8 +32,8 @@
                                     <td>{{ $pembiayaan->nama_pembiayaan }}</td>
                                     <td>
                                         <!-- Edit Button -->
-                                        <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#modalEditPembiayaan" data-id="{{ $pembiayaan->id }}">
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                            data-target="#modalEditPembiayaan" data-id="{{ $pembiayaan->id }}">
                                             Edit
                                         </button>
 
@@ -56,8 +56,6 @@
             </div>
         </div>
     </section>
-
-
 
     <!-- Create Modal -->
     <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
@@ -128,16 +126,15 @@
                 ]
             });
 
-
             $('#modalEditPembiayaan').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget); // Button that triggered the modal
-                var id = button.data('id'); // Extract info from data-* attributes
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
 
-                // Fetch data pembiayaan berdasarkan ID
+                // Fetch data pembiayaan
                 $.get(`/admin/jenis-pembiayaan/${id}/edit`, function(data) {
                     $('#edit_nama_pembiayaan').val(data.nama_pembiayaan);
 
-                    // Ubah action form untuk update
+                    // Update form action
                     $('#formEditPembiayaan').attr('action', `/admin/jenis-pembiayaan/${id}`);
                 });
             });
