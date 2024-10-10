@@ -34,7 +34,6 @@ class ReportController extends Controller
         {
             $admin = Auth::guard('admin')->user();
             $assignees = Admin::where('id', $admin->atasan_id)->get();
-            dd($assignees);
             return view('admin.reports.create', compact('assignees'));
         }
 
