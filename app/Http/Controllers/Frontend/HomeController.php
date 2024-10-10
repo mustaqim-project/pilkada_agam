@@ -323,7 +323,7 @@ class HomeController extends Controller
     //     return redirect()->back();
     // }
 
-    public function handleContactForm(Request $request)
+    public function layanan(Request $request)
     {
         $request->validate([
             'no_hp' => ['required', 'string', 'max:255'],
@@ -332,12 +332,8 @@ class HomeController extends Controller
         ]);
 
         try {
-            $pesan = new Layanan();
-            $pesan->no_hp = $request->no_hp;
-            $pesan->judul = $request->judul;
-            $pesan->message = $request->message;
+            Layanan::create($request->all());
 
-            $pesan->save();
         } catch (\Exception $e) {
             toast(__($e->getMessage()), 'error');
             return redirect()->back()->withInput();
@@ -347,5 +343,8 @@ class HomeController extends Controller
 
         return redirect()->back();
     }
+
+
+
 
 }

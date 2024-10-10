@@ -40,7 +40,7 @@
                                 <div class="form-group form-group-name">
                                     <label>{{ __('frontend.Nomor Wa') }} <span class="required"></span></label>
                                     <input type="no_hp" class="form-control" name="no_hp" required="">
-                                    @error('email')
+                                    @error('no_hp')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>

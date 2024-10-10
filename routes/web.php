@@ -96,7 +96,8 @@ Route::get('kebijakan', [HomeController::class, 'kebijakan'])->name('kebijakan')
 /** Contact Page Route */
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 /** Contact Page Route */
-Route::post('contact', [HomeController::class, 'handleContactFrom'])->name('contact.submit');
+// Route::post('contact', [HomeController::class, 'handleContactFrom'])->name('contact.submit');
+Route::post('contact', [HomeController::class, 'layanan'])->name('contact.submit');
 
 // Auth::routes(['reset' => true]);
 
