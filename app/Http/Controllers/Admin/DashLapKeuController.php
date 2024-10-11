@@ -10,7 +10,6 @@ class DashLapKeuController extends Controller
 {
     public function index()
     {
-        dd("khsdbkjfhskdjfkjsdhkjfhd");
         // Total Anggaran Keseluruhan
         $totalAnggaranKeseluruhan = DB::table('anggaran')
             ->select(DB::raw('SUM(total_anggaran) AS total_anggaran_keseluruhan'))
