@@ -73,14 +73,16 @@ class DashLapKeuController extends Controller
             ->get();
 
         // Penggunaan Anggaran per Periode
-        $penggunaanPeriode = DB::table('penggunaan_anggaran as pa')
-            ->join('periode as p', 'pa.periode_id', '=', 'p.id')
-            ->join('anggaran as a', 'p.anggaran_id', '=', 'a.id')
-            ->join('tims as t', 'a.tim_id', '=', 't.id')
-            ->select('t.name as tim', 'p.nama_periode', DB::raw('SUM(pa.jumlah_digunakan) AS total_digunakan'))
-            ->groupBy('t.name', 'p.nama_periode')
-            ->orderBy('p.nama_periode')
-            ->get();
+        $penggunaanPeriode = DB::table('tims as t')
+        ->leftJoin('anggaran as a', 't.id', '=', 'a.tim_id')
+        ->leftJoin('periode as p', 'a.id', '=', 'p.anggaran_id')
+        ->leftJoin('penggunaan_anggaran as pa', 'p.id', '=', 'pa.periode_id')
+        ->select('t.name as tim', 'p.nama_periode', DB::raw('COALESCE(SUM(pa.jumlah_digunakan), 0) AS total_digunakan'))
+        ->groupBy('t.name', 'p.nama_periode')
+        ->orderBy('p.nama_periode')
+        ->orderBy('t.name')
+        ->get();
+
 
         // Status Pembayaran
         $statusPembayaran = DB::table('penggunaan_anggaran as pa')
