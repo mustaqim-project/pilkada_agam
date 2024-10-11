@@ -26,14 +26,18 @@ class KoordinatorWilayahController extends Controller
             ->get();
 
         // 3. Jumlah Responden Berdasarkan Pekerjaan
-        $jumlahRespondenPekerjaan = KanvasingWisata::select('pekerjaan_id', DB::raw('COUNT(*) AS jumlah_responden'))
-            ->groupBy('pekerjaan_id')
+        $jumlahRespondenPekerjaan = DB::table('kanvasing_wisata AS kw')
+            ->join('pekerjaans AS p', 'kw.pekerjaan_id', '=', 'p.id')
+            ->select('p.name AS nama_pekerjaan', DB::raw('COUNT(*) AS jumlah_responden'))
+            ->groupBy('p.id') // Mengelompokkan berdasarkan ID pekerjaan
             ->get();
 
         // 4. Jumlah Responden per Kecamatan
-        $jumlahRespondenKecamatan = KanvasingWisata::select('kecematan_id', DB::raw('COUNT(*) AS jumlah_responden'))
-            ->groupBy('kecematan_id')
+        $jumlahRespondenKecamatan = KanvasingWisata::select('k.nama_kecamatan', DB::raw('COUNT(*) AS jumlah_responden'))
+            ->join('kecamatan as k', 'kanvasing_wisata.kecematan_id', '=', 'k.id')
+            ->groupBy('k.id', 'k.nama_kecamatan')
             ->get();
+
 
         // 5. Jumlah Responden per Kelurahan
         $jumlahRespondenKelurahan = KanvasingWisata::select('kelurahan_id', DB::raw('COUNT(*) AS jumlah_responden'))
@@ -91,6 +95,19 @@ class KoordinatorWilayahController extends Controller
             ->groupBy('user_id')
             ->get();
 
+
+
+        // 13. Jumlah Responden per Wilayah
+        $jumlahRespondenWilayah = DB::table('kanvasing_wisata AS kw')
+            ->select('w.nama_wilayah', DB::raw('COUNT(*) AS jumlah_responden'))
+            ->join('kecamatan AS k', 'kw.kecematan_id', '=', 'k.id')
+            ->join('wilayah AS w', 'k.wilayah_id', '=', 'w.id')
+            ->groupBy('w.id', 'w.nama_wilayah')
+            ->orderBy('jumlah_responden', 'DESC')
+            ->get();
+
+
+
         // Mengirim data ke view
         return view('admin.wisata.koordinator.wilayah.dashboard', compact(
             'jumlahRespondenJenisKelamin',
@@ -106,7 +123,8 @@ class KoordinatorWilayahController extends Controller
             'jumlahKegiatanPengguna',
             'jumlahKeseluruhanTerupdate',
             'aktivitasPerPromosi',
-            'rataRataRespondenPerUser'
+            'rataRataRespondenPerUser',
+            'jumlahRespondenWilayah'
         ));
     }
 

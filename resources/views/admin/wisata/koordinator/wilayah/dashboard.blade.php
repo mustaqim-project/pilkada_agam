@@ -55,7 +55,7 @@
                     <tbody>
                         @foreach ($jumlahRespondenPekerjaan as $pekerjaan)
                             <tr>
-                                <td>{{ $pekerjaan->name }}</td>
+                                <td>{{ $pekerjaan->nama_pekerjaan }}</td>
                                 <td>{{ $pekerjaan->jumlah_responden }}</td>
                             </tr>
                         @endforeach
@@ -76,7 +76,7 @@
                     <tbody>
                         @foreach ($jumlahRespondenKecamatan as $kecamatan)
                             <tr>
-                                <td>{{ $kecamatan->nama_kecematan }}</td>
+                                <td>{{ $kecamatan->nama_kecamatan }}</td>
                                 <td>{{ $kecamatan->jumlah_responden }}</td>
                             </tr>
                         @endforeach
