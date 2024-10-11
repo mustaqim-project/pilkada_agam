@@ -42,10 +42,11 @@ class LaporanKeuanganController extends Controller
             'jenis_pembiayaan_id' => 'required',
             'jumlah_digunakan' => 'required|numeric',
             'keterangan' => 'required|string',
-            'status' => 'required',
+            'status' => 'nullable|string', // make status nullable for default value
         ]);
 
-        $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran');
+        $status = $request->status ?? 'unpaid'; // Default to 'Unpaid'
+        $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran') ?? ''; // Default to empty string
 
         laporan_keuangan::create([
             'anggaran_id' => $request->anggaran_id,
@@ -53,12 +54,13 @@ class LaporanKeuanganController extends Controller
             'jenis_pembiayaan_id' => $request->jenis_pembiayaan_id,
             'jumlah_digunakan' => $request->jumlah_digunakan,
             'keterangan' => $request->keterangan,
-            'status' => $request->status,
+            'status' => $status,
             'bukti_pembayaran' => $imagePath,
         ]);
 
-        return redirect()->route(route: 'admin.laporan-keuangan.index')->with('success', 'Laporan berhasil ditambahkan.');
+        return redirect()->route('admin.laporan-keuangan.index')->with('success', 'Laporan berhasil ditambahkan.');
     }
+
 
     public function edit($id)
     {
