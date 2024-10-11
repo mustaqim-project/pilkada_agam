@@ -49,6 +49,7 @@ use App\Http\Controllers\Admin\DashboardUtamaController;
 use App\Http\Controllers\Admin\TimPusatController;
 use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\BankController;
+use App\Http\Controllers\DashLapKeuController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
@@ -357,6 +358,10 @@ Route::group(['prefix' => 'timpusatds', 'as' => 'timpusatds.'], function () {
 
 Route::resource('gaji', GajiController::class);
 Route::resource('bank', BankController::class);
+
+
+
+Route::get('/laporan-keuangan', [DashLapKeuController::class, 'index']);
 
 
 });
