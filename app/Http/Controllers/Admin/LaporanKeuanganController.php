@@ -14,6 +14,16 @@ class LaporanKeuanganController extends Controller
 {
     use FileUploadTrait;
 
+    public function keuangan()
+    {
+        $laporanKeuangan = laporan_keuangan::with(['anggaran.tim', 'periode', 'jenisPembiayaan'])->get();
+        $anggarans = anggaran::all();
+        $periodes = periode::all();
+        $jenisPembiayaans = jenis_pembiayaan::all();
+
+        return view('admin.laporan_keuangan.keuangan', compact('laporanKeuangan', 'anggarans', 'periodes', 'jenisPembiayaans'));
+    }
+
     public function index()
     {
         $laporanKeuangan = laporan_keuangan::with(['anggaran.tim', 'periode', 'jenisPembiayaan'])->get();
