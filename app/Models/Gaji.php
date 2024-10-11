@@ -14,7 +14,6 @@ class Gaji extends Model
         'admin_id', 'gaji', 'periode', 'bukti_pembayaran'
     ];
 
-    // Relasi dengan model Admin
     public function admin()
     {
         return $this->belongsTo(Admin::class);
