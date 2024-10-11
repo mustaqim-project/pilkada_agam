@@ -236,11 +236,10 @@ new Chart(penggunaanPeriodeCtx, {
 new Chart(rekapitulasiAnggaranCtx, {
     type: 'bar',
     data: {
-        labels: ['Tim','Total Anggaran', 'Total Digunakan', 'Sisa Anggaran'],
+        labels: ['Total Anggaran', 'Total Digunakan', 'Sisa Anggaran'],
         datasets: [{
             label: 'Rekapitulasi Anggaran',
             data: [
-                {!! json_encode($rekapitulasiAnggaran['tim']) !!},
                 {!! json_encode($rekapitulasiAnggaran['total_anggaran_periode']) !!},
                 {!! json_encode($rekapitulasiAnggaran['total_digunakan']) !!},
                 {!! json_encode($rekapitulasiAnggaran['sisa_anggaran']) !!}
