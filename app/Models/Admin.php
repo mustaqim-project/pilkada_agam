@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Models\Report;
 use App\Models\tim;
 use App\Models\Jabatan;
+use App\Models\Bank;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -20,12 +21,15 @@ class Admin extends Authenticatable
     protected $guard = 'admin';
     protected $table = 'admins';
     protected $primaryKey = 'id';
+    // Kolom yang dapat diisi (fillable)
     protected $fillable = [
         'image',
         'name',
         'email',
         'atasan_id',
         'tim_id',
+        'kode_bank',  // Menyimpan kode bank
+        'no_rek',
         'jabatan_id',
         'password',
         'status',
@@ -66,5 +70,10 @@ class Admin extends Authenticatable
     public function assignedReports()
     {
         return $this->hasMany(Report::class, 'assigned_to');
+    }
+
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class, 'kode_bank', 'kode_bank');
     }
 }

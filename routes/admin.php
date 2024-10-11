@@ -47,6 +47,8 @@ use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
 use App\Http\Controllers\Admin\DashboardUtamaController;
 use App\Http\Controllers\Admin\TimPusatController;
+use App\Http\Controllers\Admin\GajiController;
+use App\Http\Controllers\Admin\BankController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
@@ -333,6 +335,19 @@ Route::group(['prefix' => 'timpusatds', 'as' => 'timpusatds.'], function () {
     Route::get('/', [TimPusatController::class, 'index'])->name('index');
 });
 
+
+
+
+
+
+
+
+
+
+
+
+Route::resource('gaji', GajiController::class);
+Route::resource('bank', BankController::class);
 
 
 });
