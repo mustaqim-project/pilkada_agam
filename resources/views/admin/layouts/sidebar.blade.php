@@ -237,14 +237,14 @@
 
                             {{-- Keuangan DS --}}
                             @if (canAccess([
-                                    'Tim Pusat DS keuangan_index',
-                                    'Tim Pusat DS keuangan_create',
-                                    'Tim Pusat DS keuangan_update',
-                                    'Tim Pusat DS keuangan_delete',
+                                    'Tim Pusat Wisata keuangan_index',
+                                    'Tim Pusat Wisata keuangan_create',
+                                    'Tim Pusat Wisata keuangan_update',
+                                    'Tim Pusat Wisata keuangan_delete',
                                 ]))
                                 <li class="{{ setSidebarActive(['admin.timpusatwisata.index']) }}">
                                     <a class="nav-link"
-                                        href="{{ route('admin.timpusatwisata.index') }}">{{ __('Keuangan DS') }}</a>
+                                        href="{{ route('admin.timpusatwisata.index') }}">{{ __('Keuangan Wisata') }}</a>
                                 </li>
                             @endif
 
