@@ -143,10 +143,10 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="editLaporanForm" method="POST" action="{{ route('admin.laporan-keuangan.update', 'laporan_keuangan') }}" enctype="multipart/form-data">
+                <form id="editLaporanForm" method="POST" action="{{ route('admin.laporan-keuangan.update') }}" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="_method" value="PUT">
-                    <input type="hidden" name="laporan_keuangan" id="edit_laporan_id" value="">
+                    <input type="hidden" name="_method" id="editMethod" value="PUT">
+                    <input type="hidden" name="laporan_id" id="edit_laporan_id" value="">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editModalLapKeuLabel">Edit Laporan Keuangan</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -177,15 +177,13 @@
                             <label for="edit_jenis_pembiayaan_id">Jenis Pembiayaan</label>
                             <select name="jenis_pembiayaan_id" id="edit_jenis_pembiayaan_id" class="form-control" required>
                                 @foreach ($jenisPembiayaans as $jenisPembiayaan)
-                                    <option value="{{ $jenisPembiayaan->id }}">{{ $jenisPembiayaan->nama_pembiayaan }}
-                                    </option>
+                                    <option value="{{ $jenisPembiayaan->id }}">{{ $jenisPembiayaan->nama_pembiayaan }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="edit_jumlah_digunakan">Jumlah Digunakan</label>
-                            <input type="number" name="jumlah_digunakan" id="edit_jumlah_digunakan" class="form-control"
-                                required>
+                            <input type="number" name="jumlah_digunakan" id="edit_jumlah_digunakan" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="edit_keterangan">Keterangan</label>
@@ -209,17 +207,15 @@
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
-
 @endsection
 
-@section('scripts')
-<script>
-    $(document).ready(function () {
-
-
+@push('scripts')
+    <script>
+        $(document).ready(function() {
             $("#tableLapKeu").dataTable({
                 "columnDefs": [{
                     "sortable": false, // Menonaktifkan sorting pada kolom tertentu
@@ -229,9 +225,8 @@
                     [0, 'asc'] // Mengatur sorting default pada kolom pertama secara ascending
                 ]
             });
-
-
-
+        });
+        // Handle edit button click
         $('#editModalLapKeu').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var id = button.data('id');
@@ -249,6 +244,10 @@
                 alert('Error fetching data. Please try again.');
             });
         });
-    });
-</script>
-@endsection
+
+
+        function resetForm() {
+            $('#laporanForm')[0].reset();
+        }
+    </script>
+@endpush
