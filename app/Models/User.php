@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\tim;
 use App\Models\Admin;
+use App\Models\Bank;
 
 
 class User extends Authenticatable
@@ -23,6 +24,9 @@ class User extends Authenticatable
         'password',
         'pj_id',
         'tim_id',
+        'no_hp',
+        'gaji',
+        'kode_bank',
     ];
 
 
@@ -49,6 +53,9 @@ class User extends Authenticatable
         return $this->belongsTo(tim::class, 'tim_id');
     }
 
-
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class, 'kode_bank', 'kode_bank');
+    }
 
 }
