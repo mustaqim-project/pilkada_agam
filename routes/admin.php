@@ -49,7 +49,7 @@ use App\Http\Controllers\Admin\DashboardUtamaController;
 use App\Http\Controllers\Admin\TimPusatController;
 use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\BankController;
-use App\Http\Controllers\DashLapKeuController;
+use App\Http\Controllers\Admin\DashLapKeuController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
