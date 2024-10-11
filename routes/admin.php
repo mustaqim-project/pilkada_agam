@@ -274,11 +274,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::get('laporan-keuangan/keuangan', [LaporanKeuanganController::class, 'keuangan'])->name('laporan-keuangan.keuangan'); // Menambahkan route ini
     Route::post('laporan-keuangan', [LaporanKeuanganController::class, 'store'])->name('laporan-keuangan.store');
     Route::get('laporan-keuangan/create', [LaporanKeuanganController::class, 'create'])->name('laporan-keuangan.create');
-    Route::get('laporan-keuangan/{laporan_keuangan}', [LaporanKeuanganController::class, 'show'])->name('laporan-keuangan.show');
-    Route::get('laporan-keuangan/{laporan_keuangan}/edit', [LaporanKeuanganController::class, 'edit'])->name('laporan-keuangan.edit');
-    Route::put('laporan-keuangan/{laporan_keuangan}', [LaporanKeuanganController::class, 'update'])->name('laporan-keuangan.update');
-    Route::patch('laporan-keuangan/{laporan_keuangan}', [LaporanKeuanganController::class, 'update'])->name('laporan-keuangan.update');
-    Route::delete('laporan-keuangan/{laporan_keuangan}', [LaporanKeuanganController::class, 'destroy'])->name('laporan-keuangan.destroy');
+    Route::get('laporan-keuangan/{id}', [LaporanKeuanganController::class, 'show'])->name('laporan-keuangan.show');
+    Route::get('laporan-keuangan/{id}/edit', [LaporanKeuanganController::class, 'edit'])->name('laporan-keuangan.edit');
+    Route::put('laporan-keuangan/{id}', [LaporanKeuanganController::class, 'update'])->name('laporan-keuangan.update');
+    Route::patch('laporan-keuangan/{id}', [LaporanKeuanganController::class, 'update'])->name('laporan-keuangan.update');
+    Route::delete('laporan-keuangan/{id}', [LaporanKeuanganController::class, 'destroy'])->name('laporan-keuangan.destroy');
 
 // Route Kanvasing DS
 Route::get('kanvasing-ds', [KanvasingDsController::class, 'indexAdmin'])->name('kanvasing-ds.indexAdmin');
