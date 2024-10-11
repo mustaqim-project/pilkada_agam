@@ -160,6 +160,7 @@
         </div>
 
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Script untuk Chart.js
         const totalAnggaranPerTimCtx = document.getElementById('totalAnggaranPerTimChart').getContext('2d');
