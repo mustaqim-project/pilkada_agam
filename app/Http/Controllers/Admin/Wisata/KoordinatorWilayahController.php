@@ -29,7 +29,7 @@ class KoordinatorWilayahController extends Controller
         $jumlahRespondenPekerjaan = DB::table('kanvasing_wisata AS kw')
             ->join('pekerjaans AS p', 'kw.pekerjaan_id', '=', 'p.id')
             ->select('p.name AS nama_pekerjaan', DB::raw('COUNT(*) AS jumlah_responden'))
-            ->groupBy('p.id') // Mengelompokkan berdasarkan ID pekerjaan
+            ->groupBy('p.name') // Mengelompokkan berdasarkan ID pekerjaan
             ->get();
 
         // 4. Jumlah Responden per Kecamatan
