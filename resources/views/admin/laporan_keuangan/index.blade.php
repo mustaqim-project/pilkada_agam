@@ -143,10 +143,10 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="editLaporanForm" method="POST" action="{{ route('admin.laporan-keuangan.update') }}" enctype="multipart/form-data">
+                <form id="editLaporanForm" method="POST" action="{{ route('admin.laporan-keuangan.update', 'laporan_keuangan') }}" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="_method" id="editMethod" value="PUT">
-                    <input type="hidden" name="laporan_id" id="edit_laporan_id" value="">
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="laporan_keuangan" id="edit_laporan_id" value="">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editModalLapKeuLabel">Edit Laporan Keuangan</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -177,13 +177,15 @@
                             <label for="edit_jenis_pembiayaan_id">Jenis Pembiayaan</label>
                             <select name="jenis_pembiayaan_id" id="edit_jenis_pembiayaan_id" class="form-control" required>
                                 @foreach ($jenisPembiayaans as $jenisPembiayaan)
-                                    <option value="{{ $jenisPembiayaan->id }}">{{ $jenisPembiayaan->nama_pembiayaan }}</option>
+                                    <option value="{{ $jenisPembiayaan->id }}">{{ $jenisPembiayaan->nama_pembiayaan }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="edit_jumlah_digunakan">Jumlah Digunakan</label>
-                            <input type="number" name="jumlah_digunakan" id="edit_jumlah_digunakan" class="form-control" required>
+                            <input type="number" name="jumlah_digunakan" id="edit_jumlah_digunakan" class="form-control"
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="edit_keterangan">Keterangan</label>
@@ -207,14 +209,17 @@
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
+
 @endsection
 
-@push('scripts')
-    <script>
+@section('scripts')
+<script>
+    $(document).ready(function () {
+
+
         $(document).ready(function() {
             $("#tableLapKeu").dataTable({
                 "columnDefs": [{
@@ -226,28 +231,25 @@
                 ]
             });
         });
-        // Handle edit button click
-        $('#editModalLapKeu').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var id = button.data('id');
 
-            $.get(`/admin/laporan-keuangan/${id}/edit`, function(data) {
-                $('#edit_laporan_id').val(data.id);
-                $('#edit_anggaran_id').val(data.anggaran_id);
-                $('#edit_periode_id').val(data.periode_id);
-                $('#edit_jenis_pembiayaan_id').val(data.jenis_pembiayaan_id);
-                $('#edit_jumlah_digunakan').val(data.jumlah_digunakan);
-                $('#edit_keterangan').val(data.keterangan);
-                $('#edit_status').val(data.status);
-                $('#editModalLapKeu').modal('show');
-            }).fail(function() {
-                alert('Error fetching data. Please try again.');
+
+        $('#tableLapKeu').on('click', '.btn-warning', function () {
+            var id = $(this).data('id');
+            // Fetch existing data for the selected id
+            $.ajax({
+                url: '/admin/laporan-keuangan/' + id,
+                method: 'GET',
+                success: function (data) {
+                    $('#edit_laporan_id').val(data.id);
+                    $('#edit_anggaran_id').val(data.anggaran_id);
+                    $('#edit_periode_id').val(data.periode_id);
+                    $('#edit_jenis_pembiayaan_id').val(data.jenis_pembiayaan_id);
+                    $('#edit_jumlah_digunakan').val(data.jumlah_digunakan);
+                    $('#edit_keterangan').val(data.keterangan);
+                    $('#edit_status').val(data.status);
+                }
             });
         });
-
-
-        function resetForm() {
-            $('#laporanForm')[0].reset();
-        }
-    </script>
-@endpush
+    });
+</script>
+@endsection
