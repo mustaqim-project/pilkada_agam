@@ -20,8 +20,8 @@ class AdminRoleUserUpdateRequest extends FormRequest
             'email' => ['required', 'max:255', 'email', 'unique:admins,email,'.$id],
             'role' => ['required'],
             'kode_bank' => ['required', 'exists:banks,kode_bank'],  // Validasi kode_bank
-            'no_rek' => ['required', 'max:20']  // Validasi no_rek
-            'jum_gaji' => ['required', 'max:50']  // Validasi no_rek
+            'no_rek' => ['required', 'max:20'],  // Validasi no_rek
+            'jum_gaji' => ['required']  // Validasi no_rek
         ];
     }
 }

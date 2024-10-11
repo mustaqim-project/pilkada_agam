@@ -19,8 +19,8 @@ class AdminRoleUserStoreRequest extends FormRequest
             'password' => ['required', 'confirmed', 'min:6'],
             'role' => ['required'],
             'kode_bank' => ['required', 'exists:bank,kode_bank'],  // Validasi kode_bank
-            'no_rek' => ['required', 'max:20']  // Validasi no_rek
-            'jum_gaji' => ['required', 'max:50']  // Validasi no_rek
+            'no_rek' => ['required', 'max:20'],  // Validasi no_rek
+            'jum_gaji' => ['required']  // Validasi no_rek
         ];
     }
 }
