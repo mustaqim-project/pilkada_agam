@@ -11,6 +11,8 @@
             <table class="table">
                 <tr>
                     <th>Total Anggaran</th>
+                    {{ dd($totalAnggaranKeseluruhan) }}
+
                     <td>Rp {{ number_format($totalAnggaranKeseluruhan, 0, ',', '.') }}</td>
                 </tr>
             </table>
