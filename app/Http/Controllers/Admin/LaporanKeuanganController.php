@@ -57,8 +57,9 @@ class LaporanKeuanganController extends Controller
             'status' => $status,
             'bukti_pembayaran' => $imagePath,
         ]);
+        return back()->with('success', 'Laporan berhasil ditambahkan.');
 
-        return redirect()->route('admin.laporan-keuangan.index')->with('success', 'Laporan berhasil ditambahkan.');
+        // return redirect()->route('admin.laporan-keuangan.index')->with('success', 'Laporan berhasil ditambahkan.');
     }
 
 
@@ -92,7 +93,9 @@ class LaporanKeuanganController extends Controller
             'status' => $request->status,
             'bukti_pembayaran' => $imagePath,
         ]);
-        return redirect()->route('admin.laporan-keuangan.index')->with('success', 'Laporan berhasil diperbarui.');
+        // return redirect()->route('admin.laporan-keuangan.index')->with('success', 'Laporan berhasil diperbarui.');
+        return back()->with('success', 'Laporan berhasil diperbarui.');
+
     }
 
     public function destroy($id)
