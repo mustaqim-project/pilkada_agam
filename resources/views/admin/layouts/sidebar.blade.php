@@ -36,7 +36,7 @@
                         @if (canAccess(['Anggaran index', 'Anggaran create', 'Anggaran update', 'Anggaran delete']))
                             <li class="{{ setSidebarActive(['admin.anggaran.index']) }}">
                                 <a class="nav-link"
-                                    href="{{ route('admin.anggaran.index') }}">{{ __('Anggaran Tim') }}</a>
+                                    href="{{ route('admin.anggaran.index') }}">{{ __('Manajemen Anggaran') }}</a>
                             </li>
                         @endif
 
@@ -44,7 +44,13 @@
                         @if (canAccess(['JenisPembiayaan index', 'JenisPembiayaan create', 'JenisPembiayaan update', 'JenisPembiayaan delete']))
                             <li class="{{ setSidebarActive(['admin.jenis-pembiayaan.index']) }}">
                                 <a class="nav-link"
-                                    href="{{ route('admin.jenis-pembiayaan.index') }}">{{ __('Jenis Pembiayan') }}</a>
+                                    href="{{ route('admin.jenis-pembiayaan.index') }}">{{ __('Jenis Pembiayaan') }}</a>
+                            </li>
+                        @endif
+
+                        @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
+                            <li class="{{ setSidebarActive(['admin.periode.index']) }}">
+                                <a class="nav-link" href="{{ route('admin.periode.index') }}">{{ __('Detail Pembiayaan') }}</a>
                             </li>
                         @endif
 
@@ -54,6 +60,18 @@
                                 <a class="nav-link" href="{{ route('admin.periode.index') }}">{{ __('Periode Pembiayaan') }}</a>
                             </li>
                         @endif
+
+                        @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
+                            <li class="{{ setSidebarActive(['admin.periode.index']) }}">
+                                <a class="nav-link" href="{{ route('admin.periode.index') }}">{{ __('Penggunaan Anggaran') }}</a>
+                            </li>
+                        @endif
+
+                        @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
+                        <li class="{{ setSidebarActive(['admin.periode.index']) }}">
+                            <a class="nav-link" href="{{ route('admin.periode.index') }}">{{ __('Laporan Keuangan') }}</a>
+                        </li>
+                    @endif
 
                         @if (canAccess(['LaporanKeuangan index', 'LaporanKeuangan create', 'LaporanKeuangan update', 'LaporanKeuangan delete']))
                             <li class="{{ setSidebarActive(['admin.laporan-keuangan.index']) }}">
