@@ -143,7 +143,6 @@ class KoordinatorWilayahController extends Controller
     public function create()
     {
         $atasans = Admin::where('id', '<>', Auth::id())->get();
-dd($atasans);
         return view('admin.reports.create', compact('atasans'));
     }
 
