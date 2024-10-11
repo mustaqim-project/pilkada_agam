@@ -50,6 +50,10 @@ use App\Http\Controllers\Admin\TimPusatController;
 use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\DashLapKeuController;
+use App\Http\Controllers\Admin\Wisata\KoordinatorWilayahController;
+
+
+
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
@@ -364,4 +368,19 @@ Route::resource('bank', BankController::class);
 Route::get('dashboard-Keuangan', [DashLapKeuController::class, 'index'])->name('keuangan.AdminDashboard');
 
 
+
+
+
+Route::prefix('timwisata/koordinator/wilayah')->group(function () {
+
+    // Route untuk halaman dashboard Koordinator Wilayah
+    Route::get('/dashboard', [KoordinatorWilayahController::class, 'dashboard'])
+        ->name('timwisata.koordinator.wilayah.dashboard')
+        ->middleware('can:koordinator wilayah wisata'); // Middleware untuk permission
+
+    // Route untuk halaman laporan Koordinator Wilayah
+    Route::get('/laporan', [KoordinatorWilayahController::class, 'laporan'])
+        ->name('timwisata.koordinator.wilayah.laporan')
+        ->middleware('can:koordinator wilayah wisata'); // Middleware untuk permission
+});
 });
