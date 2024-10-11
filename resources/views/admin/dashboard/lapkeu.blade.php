@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
     <h1 class="mb-4">Dashboard Keuangan</h1>
-    dd($rekapitulasiAnggaran);
 
     <div class="row mb-4">
         <!-- Total Anggaran Keseluruhan -->
@@ -12,7 +11,6 @@
             <table class="table">
                 <tr>
                     <th>Total Anggaran</th>
-                    <th>{{ dd($rekapitulasiAnggaran); }}</th>
 
                     <td>Rp {{ number_format($totalAnggaranKeseluruhan->total_anggaran_keseluruhan, 0, ',', '.') }}</td>
                 </tr>
@@ -242,9 +240,9 @@ new Chart(rekapitulasiAnggaranCtx, {
         datasets: [{
             label: 'Rekapitulasi Anggaran',
             data: [
-                {!! json_encode($rekapitulasiAnggaran['total_anggaran_periode']) !!},
-                {!! json_encode($rekapitulasiAnggaran['total_digunakan']) !!},
-                {!! json_encode($rekapitulasiAnggaran['sisa_anggaran']) !!}
+                {!! json_encode($rekapitulasiAnggaran->first()->total_anggaran_periode ?? 0) !!},
+                {!! json_encode($rekapitulasiAnggaran->first()->total_digunakan ?? 0) !!},
+                {!! json_encode($rekapitulasiAnggaran->first()->sisa_anggaran ?? 0) !!}
             ],
             backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
         }]
