@@ -141,7 +141,7 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="editLaporanForm" method="POST" action="{{ route('admin.laporan-keuangan.update') }}" enctype="multipart/form-data">
+                <form id="editLaporanForm" method="POST" action="" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="_method" id="editMethod" value="PUT">
                     <input type="hidden" name="laporan_id" id="edit_laporan_id" value="">
@@ -241,6 +241,9 @@
                 $('#edit_keterangan').val(data.keterangan);
                 $('#edit_status').val(data.status);
                 $('#editModalLapKeu').modal('show');
+
+                $('#editLaporanForm').attr('action', `/admin/laporan-keuangan/${id}`);
+
             }).fail(function() {
                 alert('Error fetching data. Please try again.');
             });
