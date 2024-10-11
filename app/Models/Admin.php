@@ -22,6 +22,9 @@ class Admin extends Authenticatable
     protected $table = 'admins';
     protected $primaryKey = 'id';
     // Kolom yang dapat diisi (fillable)
+
+    public $incrementing = true;  // Aktifkan auto increment
+
     protected $fillable = [
         'image',
         'name',
