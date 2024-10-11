@@ -220,7 +220,7 @@
             $("#tableLapKeu").dataTable({
                 "columnDefs": [{
                     "sortable": false, // Menonaktifkan sorting pada kolom tertentu
-                    "targets": [6] // Indeks kolom ke-2 (mulai dari 0)
+                    "targets": [7]
                 }],
                 "order": [
                     [0, 'desc'] // Mengatur sorting default pada kolom pertama secara ascending
