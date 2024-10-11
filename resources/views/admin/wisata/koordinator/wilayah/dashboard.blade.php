@@ -94,8 +94,39 @@
         </div>
 
         <div class="row mb-4">
-            <!-- Penggunaan Promosi -->
+            <!-- Jumlah Kegiatan Pengguna -->
             <div class="col-md-6">
+                <h3>Jumlah Responden Berdasarkan Wilayah</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Wilayah</th>
+                            <th>Jumlah Responden</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($jumlahRespondenWilayah as $kegiatan)
+                            <tr>
+                                <td>{{ $kegiatan->nama_wilayah }}</td>
+                                <td>{{ $kegiatan->jumlah_responden }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Jumlah Responden per Hari -->
+            <div class="col-md-6">
+                <h3>Jumlah Responden per Hari</h3>
+                <canvas id="respondenPerHariChart" class="w-100"></canvas>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+
+
+             <!-- Penggunaan APK -->
+             <div class="col-md-6">
                 <h3>Penggunaan Brosur, Stiker, dan Kartu Coblos</h3>
                 <table class="table table-bordered">
                     <thead>
@@ -121,35 +152,6 @@
                 </table>
             </div>
 
-            <!-- Jumlah Responden per Hari -->
-            <div class="col-md-6">
-                <h3>Jumlah Responden per Hari</h3>
-                <canvas id="respondenPerHariChart" class="w-100"></canvas>
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <!-- Jumlah Kegiatan Pengguna -->
-            <div class="col-md-6">
-                <h3>Jumlah Kegiatan Berdasarkan Pengguna</h3>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>User</th>
-                            <th>Jumlah Kegiatan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($jumlahKegiatanPengguna as $kegiatan)
-                            <tr>
-                                <td>{{ $kegiatan->user_id }}</td>
-                                <td>{{ $kegiatan->jumlah_kegiatan }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-
             <!-- Rata-rata Responden per User -->
             <div class="col-md-6">
                 <h3>Rata-rata Responden per User</h3>
@@ -163,7 +165,7 @@
                     <tbody>
                         @foreach ($rataRataRespondenPerUser as $responden)
                             <tr>
-                                <td>{{ $responden->user_id }}</td>
+                                <td>{{ $responden->user->name }}</td>
                                 <td>{{ $responden->rata_rata_responden }}</td>
                             </tr>
                         @endforeach

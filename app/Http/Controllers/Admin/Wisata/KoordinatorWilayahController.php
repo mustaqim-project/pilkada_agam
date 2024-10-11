@@ -91,7 +91,8 @@ class KoordinatorWilayahController extends Controller
         )->first();
 
         // 12. Rata-rata Responden per User
-        $rataRataRespondenPerUser = KanvasingWisata::select('user_id', DB::raw('COUNT(*) / COUNT(DISTINCT user_id) AS rata_rata_responden'))
+        $rataRataRespondenPerUser = KanvasingWisata::with('user:id,name')
+            ->select('user_id', DB::raw('COUNT(*) / COUNT(DISTINCT user_id) AS rata_rata_responden'))
             ->groupBy('user_id')
             ->get();
 
