@@ -65,6 +65,7 @@ class RoleUserController extends Controller
                 // Menambahkan kode_bank dan no_rek
                 $user->kode_bank = $request->kode_bank;
                 $user->no_rek = $request->no_rek;
+                $user->jum_gaji = $request->jum_gaji;
 
                 $user->save();
 
@@ -110,6 +111,7 @@ class RoleUserController extends Controller
         // Memperbarui kode_bank dan no_rek
         $user->kode_bank = $request->kode_bank;
         $user->no_rek = $request->no_rek;
+        $user->jum_gaji = $request->jum_gaji;
 
         if ($request->has('password') && !empty($request->password)) {
             $user->password = bcrypt($request->password);

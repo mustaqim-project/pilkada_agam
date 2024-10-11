@@ -54,7 +54,7 @@
                             @foreach ($banks as $bank)
                                 <option value="{{ $bank->kode_bank }}"
                                     {{ old('kode_bank') == $bank->kode_bank ? 'selected' : '' }}>
-                                    {{ $bank->name }}
+                                    {{ $bank->nama_bank }}
                                 </option>
                             @endforeach
                         </select>
@@ -68,6 +68,14 @@
                         <label for="no_rek">{{ __('admin.No Rekening') }}</label>
                         <input type="text" class="form-control" name="no_rek" value="{{ old('no_rek') }}">
                         @error('no_rek')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jum_gaji">{{ __('admin.Jumlah Gaji Perperiode') }}</label>
+                        <input type="text" class="form-control" name="jum_gaji" value="{{ old('jum_gaji') }}">
+                        @error('jum_gaji')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>

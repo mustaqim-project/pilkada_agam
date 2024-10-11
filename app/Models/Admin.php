@@ -30,6 +30,7 @@ class Admin extends Authenticatable
         'tim_id',
         'kode_bank',  // Menyimpan kode bank
         'no_rek',
+        'jum_gaji',
         'jabatan_id',
         'password',
         'status',
