@@ -55,6 +55,7 @@ class Admin extends Authenticatable
         return $this->belongsTo(Admin::class, 'atasan_id');
     }
 
+
     public function tim()
     {
         return $this->belongsTo(tim::class, 'tim_id');
