@@ -9,6 +9,7 @@ use App\Mail\RoleUserCreateMail;
 use App\Models\Admin;
 use App\Models\tim;
 use App\Models\jabatan;
+use App\Models\Bank;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -43,7 +44,7 @@ class RoleUserController extends Controller
         $admins = Admin::all();
         $teams = tim::all(); // Fetching teams
         $positions = jabatan::all(); // Fetching Jabatan positions
-        $banks = jabatan::all(); // Fetching Jabatan positions
+        $banks = Bank::all(); // Fetching Jabatan positions
 
         return view('admin.role-user.create', compact('roles', 'admins', 'teams', 'positions', 'banks'));
     }
