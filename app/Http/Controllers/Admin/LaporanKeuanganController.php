@@ -21,7 +21,6 @@ class LaporanKeuanganController extends Controller
         $periodes = periode::all();
         $jenisPembiayaans = jenis_pembiayaan::all();
 
-        dd("kjashdkjfhalsjdhfnkljk");
         return view('admin.laporan_keuangan.keuangan', compact('laporanKeuangan', 'anggarans', 'periodes', 'jenisPembiayaans'));
     }
 
