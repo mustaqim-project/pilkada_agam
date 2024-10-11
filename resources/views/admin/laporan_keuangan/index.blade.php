@@ -143,7 +143,7 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form id="editLaporanForm" method="POST" action="" enctype="multipart/form-data">
+                <form id="editLaporanForm" method="POST" action="{{ route('laporan-keuangan.update') }}" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="_method" id="editMethod" value="PUT">
                     <input type="hidden" name="laporan_id" id="edit_laporan_id" value="">
@@ -175,18 +175,15 @@
                         </div>
                         <div class="form-group">
                             <label for="edit_jenis_pembiayaan_id">Jenis Pembiayaan</label>
-                            <select name="jenis_pembiayaan_id" id="edit_jenis_pembiayaan_id" class="form-control"
-                                required>
+                            <select name="jenis_pembiayaan_id" id="edit_jenis_pembiayaan_id" class="form-control" required>
                                 @foreach ($jenisPembiayaans as $jenisPembiayaan)
-                                    <option value="{{ $jenisPembiayaan->id }}">{{ $jenisPembiayaan->nama_pembiayaan }}
-                                    </option>
+                                    <option value="{{ $jenisPembiayaan->id }}">{{ $jenisPembiayaan->nama_pembiayaan }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="edit_jumlah_digunakan">Jumlah Digunakan</label>
-                            <input type="number" name="jumlah_digunakan" id="edit_jumlah_digunakan"
-                                class="form-control" required>
+                            <input type="number" name="jumlah_digunakan" id="edit_jumlah_digunakan" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="edit_keterangan">Keterangan</label>
@@ -194,8 +191,7 @@
                         </div>
                         <div class="form-group">
                             <label for="edit_bukti_pembayaran">Bukti Pembayaran</label>
-                            <input type="file" name="bukti_pembayaran" id="edit_bukti_pembayaran"
-                                class="form-control">
+                            <input type="file" name="bukti_pembayaran" id="edit_bukti_pembayaran" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="edit_status">Status Pembayaran</label>
@@ -211,6 +207,7 @@
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
