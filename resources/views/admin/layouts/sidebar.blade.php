@@ -608,7 +608,7 @@
                     </li>
                 @endif
 
-                {{-- @if (canAccess(['koordinator wilayah wisata']))
+                @if (canAccess(['koordinator wilayah wisata']))
                     <li class="dropdown {{ setSidebarActive(['admin.timwisata.*']) }}">
                         <a href="#" class="nav-link has-dropdown">
                             <i class="fas fa-users"></i>
@@ -641,7 +641,7 @@
                             @endif
                         </ul>
                     </li>
-                @endif --}}
+                @endif
 
 
 
