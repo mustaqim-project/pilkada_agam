@@ -20,7 +20,13 @@
                     <tbody>
                         @foreach ($jumlahRespondenJenisKelamin as $responden)
                             <tr>
-                                <td>{{ $responden->jenis_kelamin }}</td>
+                                <td>
+                                    @if ($responden->jenis_kelamin == 'L')
+                                        Laki - Laki
+                                    @elseif ($responden->jenis_kelamin == 'P')
+                                        Perempuan
+                                    @endif
+                                </td>
                                 <td>{{ $responden->jumlah_responden }}</td>
                             </tr>
                         @endforeach
@@ -49,7 +55,7 @@
                     <tbody>
                         @foreach ($jumlahRespondenPekerjaan as $pekerjaan)
                             <tr>
-                                <td>{{ $pekerjaan->pekerjaan_id }}</td>
+                                <td>{{ $pekerjaan->name }}</td>
                                 <td>{{ $pekerjaan->jumlah_responden }}</td>
                             </tr>
                         @endforeach
@@ -70,7 +76,7 @@
                     <tbody>
                         @foreach ($jumlahRespondenKecamatan as $kecamatan)
                             <tr>
-                                <td>{{ $kecamatan->kecematan_id }}</td>
+                                <td>{{ $kecamatan->nama_kecematan }}</td>
                                 <td>{{ $kecamatan->jumlah_responden }}</td>
                             </tr>
                         @endforeach
@@ -94,7 +100,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Jenis Promosi</th>
+                            <th>Jenis APK</th>
                             <th>Total Penggunaan</th>
                         </tr>
                     </thead>
