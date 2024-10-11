@@ -40,16 +40,18 @@
                             </li>
                         @endif
 
-                        @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
-                            <li class="{{ setSidebarActive(['admin.periode.index']) }}">
-                                <a class="nav-link" href="{{ route('admin.periode.index') }}">{{ __('Periode') }}</a>
-                            </li>
-                        @endif
 
                         @if (canAccess(['JenisPembiayaan index', 'JenisPembiayaan create', 'JenisPembiayaan update', 'JenisPembiayaan delete']))
                             <li class="{{ setSidebarActive(['admin.jenis-pembiayaan.index']) }}">
                                 <a class="nav-link"
                                     href="{{ route('admin.jenis-pembiayaan.index') }}">{{ __('Jenis Pembiayaan') }}</a>
+                            </li>
+                        @endif
+
+
+                        @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
+                            <li class="{{ setSidebarActive(['admin.periode.index']) }}">
+                                <a class="nav-link" href="{{ route('admin.periode.index') }}">{{ __('Periode') }}</a>
                             </li>
                         @endif
 
@@ -59,9 +61,54 @@
                                     href="{{ route('admin.laporan-keuangan.index') }}">{{ __('Laporan Keuangan') }}</a>
                             </li>
                         @endif
+
+                        @if (canAccess(['LaporanKeuangan index', 'LaporanKeuangan create', 'LaporanKeuangan update', 'LaporanKeuangan delete']))
+                            <li class="{{ setSidebarActive(['admin.laporan-keuangan.index']) }}">
+                                <a class="nav-link"
+                                    href="{{ route('admin.laporan-keuangan.index') }}">{{ __('Pembiayaan Keuangan') }}</a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
             @endif
+
+
+            @if (canAccess(['Keuangan show']))
+            <li class="menu-header">{{ __('admin.Keuangan') }}</li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-wave"></i>
+                    <span>{{ __('Gaji') }}</span></a>
+                <ul class="dropdown-menu">
+                    @if (canAccess(['Anggaran index', 'Anggaran create', 'Anggaran update', 'Anggaran delete']))
+                        <li class="{{ setSidebarActive(['admin.anggaran.index']) }}">
+                            <a class="nav-link"
+                                href="{{ route('admin.anggaran.index') }}">{{ __('Anggaran') }}</a>
+                        </li>
+                    @endif
+
+                    @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
+                        <li class="{{ setSidebarActive(['admin.periode.index']) }}">
+                            <a class="nav-link" href="{{ route('admin.periode.index') }}">{{ __('Periode') }}</a>
+                        </li>
+                    @endif
+
+                    @if (canAccess(['JenisPembiayaan index', 'JenisPembiayaan create', 'JenisPembiayaan update', 'JenisPembiayaan delete']))
+                        <li class="{{ setSidebarActive(['admin.jenis-pembiayaan.index']) }}">
+                            <a class="nav-link"
+                                href="{{ route('admin.jenis-pembiayaan.index') }}">{{ __('Jenis Pembiayaan') }}</a>
+                        </li>
+                    @endif
+
+                    @if (canAccess(['LaporanKeuangan index', 'LaporanKeuangan create', 'LaporanKeuangan update', 'LaporanKeuangan delete']))
+                        <li class="{{ setSidebarActive(['admin.laporan-keuangan.index']) }}">
+                            <a class="nav-link"
+                                href="{{ route('admin.laporan-keuangan.index') }}">{{ __('Laporan Keuangan') }}</a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
+
 
             @if (canAccess(['Tim Pusat']))
 

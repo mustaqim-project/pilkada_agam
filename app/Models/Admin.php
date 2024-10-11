@@ -21,9 +21,8 @@ class Admin extends Authenticatable
     protected $guard = 'admin';
     protected $table = 'admins';
     protected $primaryKey = 'id';
-    // Kolom yang dapat diisi (fillable)
 
-    public $incrementing = true;  // Aktifkan auto increment
+    public $incrementing = true;
 
     protected $fillable = [
         'image',
@@ -31,7 +30,7 @@ class Admin extends Authenticatable
         'email',
         'atasan_id',
         'tim_id',
-        'kode_bank',  // Menyimpan kode bank
+        'kode_bank',
         'no_rek',
         'jum_gaji',
         'jabatan_id',
