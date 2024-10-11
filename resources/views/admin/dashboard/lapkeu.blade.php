@@ -11,7 +11,7 @@
             <table class="table">
                 <tr>
                     <th>Total Anggaran</th>
-                    <td>{{ number_format($totalAnggaranKeseluruhan, 2) }}</td>
+                    <td>{{ number_format(floatval($totalAnggaranKeseluruhan), 2) }}</td>
                 </tr>
             </table>
         </div>
@@ -46,9 +46,9 @@
                     @foreach($sisaAnggaranPerTim as $tim)
                     <tr>
                         <td>{{ $tim->tim }}</td>
-                        <td>{{ number_format($tim->total_anggaran, 2) }}</td>
-                        <td>{{ number_format($tim->total_anggaran_digunakan, 2) }}</td>
-                        <td>{{ number_format($tim->sisa_anggaran, 2) }}</td>
+                        <td>{{ number_format(floatval($tim->total_anggaran), 2) }}</td>
+                        <td>{{ number_format(floatval($tim->total_anggaran_digunakan), 2) }}</td>
+                        <td>{{ number_format(floatval($tim->sisa_anggaran), 2) }}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -88,7 +88,7 @@
                         <td>{{ $pembayaran->tim }}</td>
                         <td>{{ $pembayaran->nama_periode }}</td>
                         <td>{{ $pembayaran->nama_rincian }}</td>
-                        <td>{{ number_format($pembayaran->jumlah_digunakan, 2) }}</td>
+                        <td>{{ number_format(floatval($pembayaran->jumlah_digunakan), 2) }}</td>
                         <td>{{ $pembayaran->status_pembayaran }}</td>
                     </tr>
                     @endforeach
@@ -140,7 +140,7 @@
                         <td>{{ $laporan->tim }}</td>
                         <td>{{ $laporan->nama_periode }}</td>
                         <td>{{ $laporan->nama_rincian }}</td>
-                        <td>{{ number_format($laporan->jumlah_digunakan, 2) }}</td>
+                        <td>{{ number_format(floatval($laporan->jumlah_digunakan), 2) }}</td>
                         <td>{{ $laporan->status_pembayaran }}</td>
                         <td>
                             @if($laporan->bukti_pembayaran)
@@ -159,123 +159,148 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-// Script untuk Chart.js
-const totalAnggaranPerTimCtx = document.getElementById('totalAnggaranPerTimChart').getContext('2d');
-const totalAnggaranDigunakanPerTimCtx = document.getElementById('totalAnggaranDigunakanPerTimChart').getContext('2d');
-const penggunaanPerJenisPembiayaanCtx = document.getElementById('penggunaanPerJenisPembiayaanChart').getContext('2d');
-const penggunaanPeriodeCtx = document.getElementById('penggunaanPeriodeChart').getContext('2d');
-const rekapitulasiAnggaranCtx = document.getElementById('rekapitulasiAnggaranChart').getContext('2d');
-const penggunaanPerPembiayaanDetailCtx = document.getElementById('penggunaanPerPembiayaanDetailChart').getContext('2d');
-const anggaranDigunakanVsTotalCtx = document.getElementById('anggaranDigunakanVsTotalChart').getContext('2d');
+    // Script untuk Chart.js
+    const totalAnggaranPerTimCtx = document.getElementById('totalAnggaranPerTimChart').getContext('2d');
+    const totalAnggaranDigunakanPerTimCtx = document.getElementById('totalAnggaranDigunakanPerTimChart').getContext('2d');
+    const penggunaanPerJenisPembiayaanCtx = document.getElementById('penggunaanPerJenisPembiayaanChart').getContext('2d');
+    const penggunaanPeriodeCtx = document.getElementById('penggunaanPeriodeChart').getContext('2d');
+    const rekapitulasiAnggaranCtx = document.getElementById('rekapitulasiAnggaranChart').getContext('2d');
+    const penggunaanPerPembiayaanDetailCtx = document.getElementById('penggunaanPerPembiayaanDetailChart').getContext('2d');
+    const anggaranDigunakanVsTotalCtx = document.getElementById('anggaranDigunakanVsTotalChart').getContext('2d');
 
-// Contoh data untuk chart (sesuaikan dengan data dari backend)
-const totalAnggaranPerTimData = {
-    labels: {!! json_encode($totalAnggaranPerTim->pluck('tim')) !!},
-    datasets: [{
-        label: 'Total Anggaran per Tim',
-        data: {!! json_encode($totalAnggaranPerTim->pluck('total_anggaran')) !!},
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
-    }]
-};
-
-const totalAnggaranDigunakanPerTimData = {
-    labels: {!! json_encode($totalAnggaranDigunakanPerTim->pluck('tim')) !!},
-    datasets: [{
-        label: 'Total Anggaran Digunakan per Tim',
-        data: {!! json_encode($totalAnggaranDigunakanPerTim->pluck('total_anggaran_digunakan')) !!},
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1
-    }]
-};
-
-// Chart untuk Total Anggaran per Tim
-new Chart(totalAnggaranPerTimCtx, {
-    type: 'pie',
-    data: totalAnggaranPerTimData,
-});
-
-// Chart untuk Total Anggaran Digunakan per Tim
-new Chart(totalAnggaranDigunakanPerTimCtx, {
-    type: 'bar',
-    data: totalAnggaranDigunakanPerTimData,
-});
-
-// Chart untuk Penggunaan Anggaran per Jenis Pembiayaan
-new Chart(penggunaanPerJenisPembiayaanCtx, {
-    type: 'doughnut',
-    data: {
-        labels: {!! json_encode($penggunaanPerJenisPembiayaan->pluck('nama_pembiayaan')) !!},
+    // Contoh data untuk chart (sesuaikan dengan data dari backend)
+    const totalAnggaranPerTimData = {
+        labels: {!! json_encode($totalAnggaranPerTim->pluck('tim')) !!},
         datasets: [{
-            label: 'Penggunaan per Jenis Pembiayaan',
-            data: {!! json_encode($penggunaanPerJenisPembiayaan->pluck('jumlah')) !!},
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+            label: 'Total Anggaran per Tim',
+            data: {!! json_encode($totalAnggaranPerTim->pluck('total_anggaran')) !!},
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
         }]
-    }
-});
+    };
 
-// Chart untuk Penggunaan Anggaran per Periode
-new Chart(penggunaanPeriodeCtx, {
-    type: 'line',
-    data: {
-        labels: {!! json_encode($penggunaanPeriode->pluck('nama_periode')) !!},
+    const totalAnggaranDigunakanPerTimData = {
+        labels: {!! json_encode($totalAnggaranDigunakanPerTim->pluck('tim')) !!},
         datasets: [{
-            label: 'Penggunaan per Periode',
-            data: {!! json_encode($penggunaanPeriode->pluck('jumlah')) !!},
-            fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
+            label: 'Total Anggaran Digunakan per Tim',
+            data: {!! json_encode($totalAnggaranDigunakanPerTim->pluck('total_anggaran_digunakan')) !!},
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
         }]
-    }
-});
+    };
 
-// Chart untuk Rekapitulasi Anggaran
-new Chart(rekapitulasiAnggaranCtx, {
-    type: 'bar',
-    data: {
-        labels: ['Total Anggaran', 'Total Digunakan', 'Sisa Anggaran'],
-        datasets: [{
-            label: 'Rekapitulasi Anggaran',
-            data: [
-                {!! json_encode($rekapitulasiAnggaran['total']) !!},
-                {!! json_encode($rekapitulasiAnggaran['digunakan']) !!},
-                {!! json_encode($rekapitulasiAnggaran['sisa']) !!}
-            ],
-            backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
-        }]
-    }
-});
+    // Chart untuk Total Anggaran per Tim
+    new Chart(totalAnggaranPerTimCtx, {
+        type: 'pie',
+        data: totalAnggaranPerTimData,
+    });
 
-// Chart untuk Penggunaan per Pembiayaan Detail
-new Chart(penggunaanPerPembiayaanDetailCtx, {
-    type: 'bar',
-    data: {
-        labels: {!! json_encode($penggunaanPerPembiayaanDetail->pluck('nama_detail')) !!},
-        datasets: [{
-            label: 'Penggunaan per Pembiayaan Detail',
-            data: {!! json_encode($penggunaanPerPembiayaanDetail->pluck('jumlah')) !!},
-            backgroundColor: '#FF6384',
-        }]
-    }
-});
+    // Chart untuk Total Anggaran Digunakan per Tim
+    new Chart(totalAnggaranDigunakanPerTimCtx, {
+        type: 'bar',
+        data: totalAnggaranDigunakanPerTimData,
+    });
 
-// Chart untuk Anggaran Digunakan vs Total
-new Chart(anggaranDigunakanVsTotalCtx, {
-    type: 'bar',
-    data: {
-        labels: {!! json_encode($anggaranDigunakanVsTotal->pluck('tim')) !!},
-        datasets: [{
-            label: 'Anggaran Digunakan',
-            data: {!! json_encode($anggaranDigunakanVsTotal->pluck('total_digunakan')) !!},
-            backgroundColor: '#FF6384',
-        }, {
-            label: 'Total Anggaran',
-            data: {!! json_encode($anggaranDigunakanVsTotal->pluck('total_anggaran')) !!},
-            backgroundColor: '#36A2EB',
-        }]
-    }
-});
+    // Chart untuk Penggunaan Anggaran per Jenis Pembiayaan
+    new Chart(penggunaanPerJenisPembiayaanCtx, {
+        type: 'doughnut',
+        data: {
+            labels: {!! json_encode($penggunaanPerJenisPembiayaan->pluck('jenis_pembiayaan')) !!},
+            datasets: [{
+                label: 'Penggunaan Anggaran per Jenis Pembiayaan',
+                data: {!! json_encode($penggunaanPerJenisPembiayaan->pluck('jumlah')) !!},
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(54, 162, 235, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+    });
+
+    // Chart untuk Penggunaan Anggaran per Periode
+    new Chart(penggunaanPeriodeCtx, {
+        type: 'line',
+        data: {
+            labels: {!! json_encode($penggunaanPeriode->pluck('periode')) !!},
+            datasets: [{
+                label: 'Penggunaan Anggaran per Periode',
+                data: {!! json_encode($penggunaanPeriode->pluck('jumlah')) !!},
+                fill: false,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                tension: 0.1
+            }]
+        },
+    });
+
+    // Chart untuk Rekapitulasi Anggaran
+    new Chart(rekapitulasiAnggaranCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Total Anggaran', 'Total Digunakan', 'Sisa Anggaran'],
+            datasets: [{
+                label: 'Rekapitulasi Anggaran',
+                data: [
+                    {!! json_encode($rekapitulasiAnggaran->total_anggaran) !!},
+                    {!! json_encode($rekapitulasiAnggaran->total_digunakan) !!},
+                    {!! json_encode($rekapitulasiAnggaran->sisa_anggaran) !!}
+                ],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+    });
+
+    // Chart untuk Penggunaan per Pembiayaan Detail
+    new Chart(penggunaanPerPembiayaanDetailCtx, {
+        type: 'horizontalBar',
+        data: {
+            labels: {!! json_encode($penggunaanPerPembiayaanDetail->pluck('detail')) !!},
+            datasets: [{
+                label: 'Penggunaan per Pembiayaan Detail',
+                data: {!! json_encode($penggunaanPerPembiayaanDetail->pluck('jumlah')) !!},
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+    });
+
+    // Chart untuk Anggaran Digunakan vs Total Anggaran per Tim
+    new Chart(anggaranDigunakanVsTotalCtx, {
+        type: 'bar',
+        data: {
+            labels: {!! json_encode($anggaranDigunakanVsTotal->pluck('tim')) !!},
+            datasets: [{
+                label: 'Total Anggaran',
+                data: {!! json_encode($anggaranDigunakanVsTotal->pluck('total_anggaran')) !!},
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            },
+            {
+                label: 'Anggaran Digunakan',
+                data: {!! json_encode($anggaranDigunakanVsTotal->pluck('jumlah_digunakan')) !!},
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            }]
+        },
+    });
 </script>
 @endsection
