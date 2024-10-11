@@ -32,14 +32,17 @@ class DashLapKeuController extends Controller
             ->get();
 
         // Sisa Anggaran per Tim
-        $sisaAnggaranPerTim = DB::table('anggaran as a')
-            ->join('tims as t', 'a.tim_id', '=', 't.id')
-            ->leftJoin('periode as p', 'a.id', '=', 'p.anggaran_id')
-            ->leftJoin('penggunaan_anggaran as pa', 'p.id', '=', 'pa.periode_id')
-            ->select('t.name as tim',
-                DB::raw('SUM(a.total_anggaran) AS total_anggaran'),
-                DB::raw('SUM(pa.jumlah_digunakan) AS total_anggaran_digunakan'),
-                DB::raw('(SUM(a.total_anggaran) - SUM(pa.jumlah_digunakan)) AS sisa_anggaran'))
+        $sisaAnggaranPerTim = DB::table('tims as t')
+            ->leftJoin(DB::raw('(SELECT tim_id, SUM(total_anggaran) AS total_anggaran FROM anggaran GROUP BY tim_id) a'), 'a.tim_id', '=', 't.id')
+            ->leftJoin(DB::raw('(SELECT pa.anggaran_id, SUM(pa.jumlah_digunakan) AS jumlah_digunakan FROM penggunaan_anggaran pa JOIN periode p ON pa.periode_id = p.id GROUP BY pa.anggaran_id) pa'), function($join) {
+                $join->on('a.tim_id', '=', DB::raw('(SELECT tim_id FROM anggaran WHERE id = pa.anggaran_id)'));
+            })
+            ->select(
+                't.name as tim',
+                DB::raw('COALESCE(SUM(a.total_anggaran), 0) AS total_anggaran'),
+                DB::raw('COALESCE(SUM(pa.jumlah_digunakan), 0) AS total_anggaran_digunakan'),
+                DB::raw('COALESCE(SUM(a.total_anggaran), 0) - COALESCE(SUM(pa.jumlah_digunakan), 0) AS sisa_anggaran')
+            )
             ->groupBy('t.name')
             ->get();
 
