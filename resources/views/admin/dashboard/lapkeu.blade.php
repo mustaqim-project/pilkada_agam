@@ -235,7 +235,7 @@
                 labels: {!! json_encode($penggunaanPeriode->pluck('nama_periode')) !!},
                 datasets: [{
                     label: 'Penggunaan per Periode',
-                    data: {!! json_encode($penggunaanPeriode->pluck('jumlah')) !!},
+                    data: {!! json_encode($penggunaanPeriode->pluck('total_digunakan')) !!},
                     fill: false,
                     borderColor: 'rgb(75, 192, 192)',
                     tension: 0.1
