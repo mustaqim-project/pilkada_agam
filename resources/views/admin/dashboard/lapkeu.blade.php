@@ -33,7 +33,7 @@
 
         <div class="row mb-4">
             <!-- Sisa Anggaran per Tim -->
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <h3>Sisa Anggaran per Tim</h3>
                 <table class="table table-bordered">
                     <thead>
@@ -62,13 +62,13 @@
         </div>
 
         <div class="row mb-4">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h3>Penggunaan Anggaran per Jenis Pembiayaan</h3>
                 <canvas id="penggunaanPerJenisPembiayaanChart" class="w-100"></canvas>
             </div>
 
             <!-- Penggunaan Anggaran per Periode -->
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h3>Penggunaan Anggaran per Periode</h3>
                 <canvas id="penggunaanPeriodeChart" class="w-100"></canvas>
             </div>
