@@ -142,10 +142,11 @@ class KoordinatorWilayahController extends Controller
 
     public function create()
     {
-        $assignees = Admin::where('id', '<>', Auth::id())->get();
+        $atasans = Admin::where('id', '<>', Auth::id())->get(); // Menampilkan semua atasan kecuali admin saat ini
 
-        return view('admin.reports.create', compact('assignees'));
+        return view('admin.reports.create', compact('atasans'));
     }
+
 
     public function store(Request $request)
     {

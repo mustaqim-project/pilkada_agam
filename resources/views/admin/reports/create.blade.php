@@ -10,10 +10,10 @@
             <form action="{{ route('admin.reports.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="assigned_to">Dikirim ke</label>
-                    <select name="assigned_to" id="assigned_to" class="form-control" required>
-                        @foreach ($assignees as $assignee)
-                            <option value="{{ $assignee->id }}">{{ $assignee->name }}</option>
+                    <label for="atasan_id">Dikirim ke Atasan</label>
+                    <select name="atasan_id" id="atasan_id" class="form-control" required>
+                        @foreach ($atasans as $atasan)
+                            <option value="{{ $atasan->id }}">{{ $atasan->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -30,8 +30,6 @@
 
                 <button type="submit" class="btn btn-primary">Kirim Laporan</button>
             </form>
-
-
         </div>
     </section>
 
