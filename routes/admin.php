@@ -361,7 +361,7 @@ Route::resource('bank', BankController::class);
 
 
 
-Route::get('/laporan-keuangan/dashboard', [DashLapKeuController::class, 'index']);
+Route::get('/laporan-keuangan/dashboard', [DashLapKeuController::class, 'index'])->name('keuangan.AdminDashboard');
 
 
 });
