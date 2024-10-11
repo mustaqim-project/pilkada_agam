@@ -220,7 +220,6 @@
     $(document).ready(function () {
 
 
-        $(document).ready(function() {
             $("#tableLapKeu").dataTable({
                 "columnDefs": [{
                     "sortable": false, // Menonaktifkan sorting pada kolom tertentu
@@ -230,24 +229,24 @@
                     [0, 'asc'] // Mengatur sorting default pada kolom pertama secara ascending
                 ]
             });
-        });
 
 
-        $('#tableLapKeu').on('click', '.btn-warning', function () {
-            var id = $(this).data('id');
-            // Fetch existing data for the selected id
-            $.ajax({
-                url: '/admin/laporan-keuangan/' + id,
-                method: 'GET',
-                success: function (data) {
-                    $('#edit_laporan_id').val(data.id);
-                    $('#edit_anggaran_id').val(data.anggaran_id);
-                    $('#edit_periode_id').val(data.periode_id);
-                    $('#edit_jenis_pembiayaan_id').val(data.jenis_pembiayaan_id);
-                    $('#edit_jumlah_digunakan').val(data.jumlah_digunakan);
-                    $('#edit_keterangan').val(data.keterangan);
-                    $('#edit_status').val(data.status);
-                }
+
+        $('#editModalLapKeu').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
+
+            $.get(`/admin/laporan-keuangan/${id}/edit`, function(data) {
+                $('#edit_laporan_id').val(data.id);
+                $('#edit_anggaran_id').val(data.anggaran_id);
+                $('#edit_periode_id').val(data.periode_id);
+                $('#edit_jenis_pembiayaan_id').val(data.jenis_pembiayaan_id);
+                $('#edit_jumlah_digunakan').val(data.jumlah_digunakan);
+                $('#edit_keterangan').val(data.keterangan);
+                $('#edit_status').val(data.status);
+                $('#editModalLapKeu').modal('show');
+            }).fail(function() {
+                alert('Error fetching data. Please try again.');
             });
         });
     });
