@@ -18,7 +18,7 @@
                         <label for="">{{ __('admin.User Name') }}</label>
                         <input type="text" class="form-control" name="name">
                         @error('name')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -26,7 +26,7 @@
                         <label for="">{{ __('admin.Email') }}</label>
                         <input type="email" class="form-control" name="email">
                         @error('email')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -34,7 +34,7 @@
                         <label for="">{{ __('admin.Password') }}</label>
                         <input type="password" class="form-control" name="password">
                         @error('password')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -42,9 +42,36 @@
                         <label for="">{{ __('admin.Confirm Password') }}</label>
                         <input type="password" class="form-control" name="password_confirmation">
                         @error('password_confirmation')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    <!-- Select for kode_bank -->
+                    <div class="form-group">
+                        <label for="kode_bank">{{ __('admin.Kode Bank') }}</label>
+                        <select name="kode_bank" class="form-control select2">
+                            <option value="">{{ __('admin.--Select--') }}</option>
+                            @foreach ($banks as $bank)
+                                <option value="{{ $bank->kode_bank }}"
+                                    {{ old('kode_bank') == $bank->kode_bank ? 'selected' : '' }}>
+                                    {{ $bank->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('kode_bank')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <!-- Input for no_rek -->
+                    <div class="form-group">
+                        <label for="no_rek">{{ __('admin.No Rekening') }}</label>
+                        <input type="text" class="form-control" name="no_rek" value="{{ old('no_rek') }}">
+                        @error('no_rek')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
 
                     <div class="form-group">
                         <label for="">{{ __('admin.Atasan') }}</label>
@@ -55,7 +82,7 @@
                             @endforeach
                         </select>
                         @error('atasan_id')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -68,7 +95,7 @@
                             @endforeach
                         </select>
                         @error('tim_id')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -81,7 +108,7 @@
                             @endforeach
                         </select>
                         @error('jabatan_id')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -94,7 +121,7 @@
                             @endforeach
                         </select>
                         @error('role')
-                        <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
