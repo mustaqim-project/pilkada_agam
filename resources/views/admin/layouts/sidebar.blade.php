@@ -83,7 +83,7 @@
                         @if (canAccess(['LaporanKeuangan index', 'LaporanKeuangan create', 'LaporanKeuangan update', 'LaporanKeuangan delete']))
                             <li class="{{ setSidebarActive(['admin.laporan-keuangan.index']) }}">
                                 <a class="nav-link"
-                                    href="{{ route('admin.laporan-keuangan.index') }}">{{ __('Laporan Keuangan') }}</a>
+                                    href="{{ route('admin.keuangan.AdminDashboard') }}">{{ __('Dashboard Keuangan') }}</a>
                             </li>
                         @endif
 
