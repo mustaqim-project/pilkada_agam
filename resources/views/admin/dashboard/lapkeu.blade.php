@@ -1,5 +1,6 @@
 @extends('admin.layouts.master')
 
+@extends('admin.layouts.master')
 
 @section('content')
     <section class="section">
@@ -161,72 +162,40 @@
 
     </section>
     <script>
-        "use strict";
+        const ctxs = {
+            totalAnggaranPerTim: document.getElementById('totalAnggaranPerTimChart').getContext('2d'),
+            totalAnggaranDigunakanPerTim: document.getElementById('totalAnggaranDigunakanPerTimChart').getContext('2d'),
+            penggunaanPerJenisPembiayaan: document.getElementById('penggunaanPerJenisPembiayaanChart').getContext('2d'),
+            penggunaanPeriode: document.getElementById('penggunaanPeriodeChart').getContext('2d'),
+            rekapitulasiAnggaran: document.getElementById('rekapitulasiAnggaranChart').getContext('2d'),
+            penggunaanPerPembiayaanDetail: document.getElementById('penggunaanPerPembiayaanDetailChart').getContext(
+                '2d'),
+            anggaranDigunakanVsTotal: document.getElementById('anggaranDigunakanVsTotalChart').getContext('2d'),
+        };
 
-        const totalAnggaranPerTimCtx = document.getElementById('totalAnggaranPerTimChart').getContext('2d');
-        new Chart(totalAnggaranPerTimCtx, {
-            type: 'pie',
-            data: {
+        // Contoh data untuk chart (sesuaikan dengan data dari backend)
+        const chartsData = {
+            totalAnggaranPerTim: {
                 labels: {!! json_encode($totalAnggaranPerTim->pluck('tim')) !!},
                 datasets: [{
                     label: 'Total Anggaran per Tim',
                     data: {!! json_encode($totalAnggaranPerTim->pluck('total_anggaran')) !!},
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
+                    borderWidth: 1,
                 }]
             },
-            options: {
-                responsive: true,
-                legend: {
-                    position: 'bottom',
-                },
-            }
-        });
-
-        const totalAnggaranDigunakanPerTimCtx = document.getElementById('totalAnggaranDigunakanPerTimChart').getContext(
-            '2d');
-        new Chart(totalAnggaranDigunakanPerTimCtx, {
-            type: 'bar',
-            data: {
+            totalAnggaranDigunakanPerTim: {
                 labels: {!! json_encode($totalAnggaranDigunakanPerTim->pluck('tim')) !!},
                 datasets: [{
                     label: 'Total Anggaran Digunakan per Tim',
                     data: {!! json_encode($totalAnggaranDigunakanPerTim->pluck('total_anggaran_digunakan')) !!},
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
+                    borderWidth: 1,
                 }]
             },
-            options: {
-                responsive: true,
-                legend: {
-                    display: false,
-                },
-                scales: {
-                    yAxes: [{
-                        gridLines: {
-                            drawBorder: false,
-                            color: '#f2f2f2',
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            display: false,
-                        }
-                    }]
-                },
-            }
-        });
-
-        const penggunaanPerJenisPembiayaanCtx = document.getElementById('penggunaanPerJenisPembiayaanChart').getContext(
-            '2d');
-        new Chart(penggunaanPerJenisPembiayaanCtx, {
-            type: 'doughnut',
-            data: {
+            penggunaanPerJenisPembiayaan: {
                 labels: {!! json_encode($penggunaanPerJenisPembiayaan->pluck('nama_pembiayaan')) !!},
                 datasets: [{
                     label: 'Penggunaan per Jenis Pembiayaan',
@@ -234,18 +203,7 @@
                     backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
                 }]
             },
-            options: {
-                responsive: true,
-                legend: {
-                    position: 'bottom',
-                },
-            }
-        });
-
-        const penggunaanPeriodeCtx = document.getElementById('penggunaanPeriodeChart').getContext('2d');
-        new Chart(penggunaanPeriodeCtx, {
-            type: 'line',
-            data: {
+            penggunaanPeriode: {
                 labels: {!! json_encode($penggunaanPeriode->pluck('nama_periode')) !!},
                 datasets: [{
                     label: 'Penggunaan per Periode',
@@ -253,39 +211,9 @@
                     fill: false,
                     borderColor: 'rgb(75, 192, 192)',
                     tension: 0.1,
-                    borderWidth: 2,
-                    pointBackgroundColor: '#ffffff',
-                    pointRadius: 4,
                 }]
             },
-            options: {
-                responsive: true,
-                legend: {
-                    display: false,
-                },
-                scales: {
-                    yAxes: [{
-                        gridLines: {
-                            drawBorder: false,
-                            color: '#f2f2f2',
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            display: false,
-                        }
-                    }]
-                },
-            }
-        });
-
-        const rekapitulasiAnggaranCtx = document.getElementById('rekapitulasiAnggaranChart').getContext('2d');
-        new Chart(rekapitulasiAnggaranCtx, {
-            type: 'bar',
-            data: {
+            rekapitulasiAnggaran: {
                 labels: ['Total Anggaran', 'Total Digunakan', 'Sisa Anggaran'],
                 datasets: [{
                     label: 'Rekapitulasi Anggaran',
@@ -297,35 +225,7 @@
                     backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
                 }]
             },
-            options: {
-                responsive: true,
-                legend: {
-                    display: false,
-                },
-                scales: {
-                    yAxes: [{
-                        gridLines: {
-                            drawBorder: false,
-                            color: '#f2f2f2',
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            display: false,
-                        }
-                    }]
-                },
-            }
-        });
-
-        const penggunaanPerPembiayaanDetailCtx = document.getElementById('penggunaanPerPembiayaanDetailChart').getContext(
-            '2d');
-        new Chart(penggunaanPerPembiayaanDetailCtx, {
-            type: 'bar',
-            data: {
+            penggunaanPerPembiayaanDetail: {
                 labels: {!! json_encode($penggunaanPerPembiayaanDetail->pluck('nama_detail')) !!},
                 datasets: [{
                     label: 'Penggunaan per Pembiayaan Detail',
@@ -333,34 +233,7 @@
                     backgroundColor: '#FF6384',
                 }]
             },
-            options: {
-                responsive: true,
-                legend: {
-                    display: false,
-                },
-                scales: {
-                    yAxes: [{
-                        gridLines: {
-                            drawBorder: false,
-                            color: '#f2f2f2',
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            display: false,
-                        }
-                    }]
-                },
-            }
-        });
-
-        const anggaranDigunakanVsTotalCtx = document.getElementById('anggaranDigunakanVsTotalChart').getContext('2d');
-        new Chart(anggaranDigunakanVsTotalCtx, {
-            type: 'bar',
-            data: {
+            anggaranDigunakanVsTotal: {
                 labels: {!! json_encode($anggaranDigunakanVsTotal->pluck('tim')) !!},
                 datasets: [{
                     label: 'Anggaran Digunakan',
@@ -372,28 +245,48 @@
                     backgroundColor: '#36A2EB',
                 }]
             },
-            options: {
-                responsive: true,
-                legend: {
-                    display: true,
-                },
-                scales: {
-                    yAxes: [{
-                        gridLines: {
-                            drawBorder: false,
-                            color: '#f2f2f2',
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                        }
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            display: false,
-                        }
-                    }]
-                },
-            }
+        };
+
+        // Chart untuk Total Anggaran per Tim
+        new Chart(ctxs.totalAnggaranPerTim, {
+            type: 'pie',
+            data: chartsData.totalAnggaranPerTim,
+        });
+
+        // Chart untuk Total Anggaran Digunakan per Tim
+        new Chart(ctxs.totalAnggaranDigunakanPerTim, {
+            type: 'bar',
+            data: chartsData.totalAnggaranDigunakanPerTim,
+        });
+
+        // Chart untuk Penggunaan Anggaran per Jenis Pembiayaan
+        new Chart(ctxs.penggunaanPerJenisPembiayaan, {
+            type: 'doughnut',
+            data: chartsData.penggunaanPerJenisPembiayaan,
+        });
+
+        // Chart untuk Penggunaan Anggaran per Periode
+        new Chart(ctxs.penggunaanPeriode, {
+            type: 'line',
+            data: chartsData.penggunaanPeriode,
+        });
+
+        // Chart untuk Rekapitulasi Anggaran
+        new Chart(ctxs.rekapitulasiAnggaran, {
+            type: 'bar',
+            data: chartsData.rekapitulasiAnggaran,
+        });
+
+        // Chart untuk Penggunaan per Pembiayaan Detail
+        new Chart(ctxs.penggunaanPerPembiayaanDetail, {
+            type: 'bar',
+            data: chartsData.penggunaanPerPembiayaanDetail,
+        });
+
+        // Chart untuk Anggaran Digunakan vs Total
+        new Chart(ctxs.anggaranDigunakanVsTotal, {
+            type: 'bar',
+            data: chartsData.anggaranDigunakanVsTotal,
         });
     </script>
 @endsection
