@@ -33,10 +33,27 @@ class DashLapKeuController extends Controller
 
         // Sisa Anggaran per Tim
         $sisaAnggaranPerTim = DB::table('tims as t')
-            ->leftJoin(DB::raw('(SELECT tim_id, SUM(total_anggaran) AS total_anggaran FROM anggaran GROUP BY tim_id) a'), 'a.tim_id', '=', 't.id')
-            ->leftJoin(DB::raw('(SELECT pa.anggaran_id, SUM(pa.jumlah_digunakan) AS jumlah_digunakan FROM penggunaan_anggaran pa JOIN periode p ON pa.periode_id = p.id GROUP BY pa.anggaran_id) pa'), function($join) {
-                $join->on('a.tim_id', '=', DB::raw('(SELECT tim_id FROM anggaran WHERE id = pa.anggaran_id)'));
-            })
+            ->leftJoin(
+                DB::raw('(SELECT
+                tim_id,
+                SUM(total_anggaran) AS total_anggaran
+                FROM anggaran
+                GROUP BY tim_id) AS a'),
+                'a.tim_id',
+                '=',
+                't.id'
+            )
+            ->leftJoin(
+                DB::raw('(SELECT
+                p.anggaran_id,
+                SUM(pa.jumlah_digunakan) AS jumlah_digunakan
+                FROM penggunaan_anggaran pa
+                JOIN periode p ON pa.periode_id = p.id
+                GROUP BY p.anggaran_id) AS pa'),
+                'a.tim_id',
+                '=',
+                DB::raw('(SELECT tim_id FROM anggaran WHERE id = pa.anggaran_id)')
+            )
             ->select(
                 't.name as tim',
                 DB::raw('COALESCE(SUM(a.total_anggaran), 0) AS total_anggaran'),
@@ -45,6 +62,7 @@ class DashLapKeuController extends Controller
             )
             ->groupBy('t.name')
             ->get();
+
 
         // Penggunaan Anggaran per Jenis Pembiayaan
         $penggunaanPerJenisPembiayaan = DB::table('penggunaan_anggaran as pa')
@@ -78,10 +96,12 @@ class DashLapKeuController extends Controller
             ->join('periode as p', 'pa.periode_id', '=', 'p.id')
             ->join('anggaran as a', 'p.anggaran_id', '=', 'a.id')
             ->join('tims as t', 'a.tim_id', '=', 't.id')
-            ->select('t.name as tim',
+            ->select(
+                't.name as tim',
                 DB::raw('SUM(p.anggaran_periode) AS total_anggaran_periode'),
                 DB::raw('SUM(pa.jumlah_digunakan) AS total_digunakan'),
-                DB::raw('(SUM(p.anggaran_periode) - SUM(pa.jumlah_digunakan)) AS sisa_anggaran'))
+                DB::raw('(SUM(p.anggaran_periode) - SUM(pa.jumlah_digunakan)) AS sisa_anggaran')
+            )
             ->groupBy('t.name')
             ->get();
 
