@@ -1,7 +1,5 @@
 @extends('admin.layouts.master')
 
-@extends('admin.layouts.master')
-
 @section('content')
 <section class="section">
     <div class="section-header">
@@ -161,7 +159,8 @@
     </div>
 
 </section>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ asset('admin/assets/modules/chart.min.js') }}"></script>
+
 <script>
 // Script untuk Chart.js
 const totalAnggaranPerTimCtx = document.getElementById('totalAnggaranPerTimChart').getContext('2d');
