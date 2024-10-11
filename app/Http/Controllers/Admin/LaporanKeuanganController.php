@@ -71,7 +71,6 @@ class LaporanKeuanganController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $request->validate([
             'anggaran_id' => 'required',
             'periode_id' => 'required',
@@ -83,21 +82,24 @@ class LaporanKeuanganController extends Controller
 
         $laporan = laporan_keuangan::findOrFail($id);
 
-        $status = $request->status ?? 'unpaid'; // Default to 'Unpaid'
-        $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran', $laporan->bukti_pembayaran)?? '';
+        // Atur status default ke 'unpaid' jika null
+        $status = $request->status ?? 'unpaid';
+
+        // Jika tidak ada file yang di-upload, set ke string kosong
+        $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran', $laporan->bukti_pembayaran) ?? '';
 
         $laporan->update([
             'anggaran_id' => $request->anggaran_id,
             'periode_id' => $request->periode_id,
             'jenis_pembiayaan_id' => $request->jenis_pembiayaan_id,
             'jumlah_digunakan' => $request->jumlah_digunakan,
-            'status' => $request->status,
-            'bukti_pembayaran' => $imagePath,
+            'status' => $status, // Menggunakan variabel $status yang diperbaiki
+            'bukti_pembayaran' => $imagePath, // Menggunakan string kosong jika null
         ]);
-        // return redirect()->route('admin.laporan-keuangan.index')->with('success', 'Laporan berhasil diperbarui.');
-        return back()->with('success', 'Laporan berhasil diperbarui.');
 
+        return back()->with('success', 'Laporan berhasil diperbarui.');
     }
+
 
     public function destroy($id)
     {
