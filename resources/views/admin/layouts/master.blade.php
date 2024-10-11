@@ -74,8 +74,13 @@
     <script src="{{ asset('admin/assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('admin/assets/modules/moment.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/stisla.js') }}"></script>
-    <script src="{{ asset('assets/modules/chart.min.js') }}"></script>
-
+    <!-- JS Libraies -->
+    <script src="{{ asset('admin/assets/modules/simple-weather/jquery.simpleWeather.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/modules/chart.min.js')}}"></script>
+    <script src="{{ asset('admin/assets/modules/jqvmap/dist/jquery.vmap.min.js')}}"></script>
+    <script src="{{ asset('admin/assets/modules/jqvmap/dist/maps/jquery.vmap.world.js')}}"></script>
+    <script src="{{ asset('admin/assets/modules/summernote/summernote-bs4.js')}}"></script>
+    <script src="{{ asset('admin/assets/modules/chocolat/dist/js/jquery.chocolat.min.js')}}"></script>
     <!-- JS Libraies -->
     <script src="{{ asset('admin/assets/modules/summernote/summernote-bs4.js') }}"></script>
     <script src="{{ asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
