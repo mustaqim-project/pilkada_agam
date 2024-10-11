@@ -83,7 +83,8 @@ class LaporanKeuanganController extends Controller
 
         $laporan = laporan_keuangan::findOrFail($id);
 
-        $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran', $laporan->bukti_pembayaran);
+        $status = $request->status ?? 'unpaid'; // Default to 'Unpaid'
+        $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran', $laporan->bukti_pembayaran)?? '';
 
         $laporan->update([
             'anggaran_id' => $request->anggaran_id,
