@@ -27,6 +27,7 @@
                                 <th>Jumlah Digunakan</th>
                                 <th>Keterangan</th>
                                 <th>Status</th>
+                                <th>Bukti Pembayaran</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -40,6 +41,7 @@
                                     <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
                                     <td>{{ $laporan->keterangan }}</td>
                                     <td>{{ ucfirst($laporan->status) }}</td>
+                                    <td><img src="{{ asset($laporan->bukti_pembayaran) }}" width="100" alt=""></td>
                                     <td>
                                         <button type="button" class="btn btn-warning" data-toggle="modal"
                                             data-target="#editModalLapKeu" data-id="{{ $laporan->id }}">
