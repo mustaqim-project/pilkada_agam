@@ -70,6 +70,8 @@ class LaporanKeuanganController extends Controller
 
     public function update(Request $request, $id)
     {
+
+        dd($request);
         $request->validate([
             'anggaran_id' => 'required',
             'periode_id' => 'required',
