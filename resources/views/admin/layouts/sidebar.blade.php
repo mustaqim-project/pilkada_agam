@@ -194,24 +194,24 @@
                     </li>
                 @endif
 
-                @if (canAccess(['Tim Inti Wisata']))
-                    <li class="dropdown {{ setSidebarActive(['admin.timpuswisata.*']) }}">
+                @if (canAccess(['Tim Wisata Pusat']))
+                    <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.*']) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
                             <span>{{ __('TIM Wisata') }}</span></a>
                         <ul class="dropdown-menu">
 
                             {{-- Ketua Tim --}}
                             @if (canAccess(['Tim Pusat ketua_tim_dashboard']))
-                                <li class="dropdown {{ setSidebarActive(['admin.timpuswisata.ketua.*']) }}">
+                                <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.ketua.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpuswisata.ketua.dashboard']) }}">
+                                        <li class="{{ setSidebarActive(['admin.timpusatwisata.ketua.dashboard']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpuswisata.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                                href="{{ route('admin.timpusatwisata.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li class="{{ setSidebarActive(['Tim Pusat ketua_tim_laporan']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpuswisata.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.timpusatwisata.ketua.laporan') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -219,16 +219,16 @@
 
                             {{-- Admin --}}
                             @if (canAccess(['Tim Pusat admin_dashboard']))
-                                <li class="dropdown {{ setSidebarActive(['admin.timpuswisata.admin.*']) }}">
+                                <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.admin.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpuswisata.admin.dashboard']) }}">
+                                        <li class="{{ setSidebarActive(['admin.timpusatwisata.admin.dashboard']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpuswisata.admin.dashboard') }}">{{ __('Dashboard') }}</a>
+                                                href="{{ route('admin.timpusatwisata.admin.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li class="{{ setSidebarActive(['Tim Pusat admin_laporan']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpuswisata.admin.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.timpusatwisata.admin.laporan') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -242,9 +242,9 @@
                                     'Tim Pusat DS keuangan_update',
                                     'Tim Pusat DS keuangan_delete',
                                 ]))
-                                <li class="{{ setSidebarActive(['admin.timpuswisata.index']) }}">
+                                <li class="{{ setSidebarActive(['admin.timpusatwisata.index']) }}">
                                     <a class="nav-link"
-                                        href="{{ route('admin.timpuswisata.index') }}">{{ __('Keuangan DS') }}</a>
+                                        href="{{ route('admin.timpusatwisata.index') }}">{{ __('Keuangan DS') }}</a>
                                 </li>
                             @endif
 
