@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="mb-4">Dashboard Keuangan</h1>
+    dd($rekapitulasiAnggaran);
 
     <div class="row mb-4">
         <!-- Total Anggaran Keseluruhan -->
@@ -11,6 +12,7 @@
             <table class="table">
                 <tr>
                     <th>Total Anggaran</th>
+                    <th>{{ dd($rekapitulasiAnggaran); }}</th>
 
                     <td>Rp {{ number_format($totalAnggaranKeseluruhan->total_anggaran_keseluruhan, 0, ',', '.') }}</td>
                 </tr>
