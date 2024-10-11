@@ -62,6 +62,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('admin.users.index')->with('success', 'Tim berhasil ditambahkan.');
+        // return redirect()->route('admin.users.index')->with('success', 'Tim berhasil ditambahkan.');
+        return back()->with('success', 'Tim berhasil ditambahkan.');
+
     }
 }
