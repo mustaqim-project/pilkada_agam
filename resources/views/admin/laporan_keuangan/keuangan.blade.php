@@ -220,10 +220,10 @@
             $("#tableLapKeu").dataTable({
                 "columnDefs": [{
                     "sortable": false, // Menonaktifkan sorting pada kolom tertentu
-                    "targets": [2] // Indeks kolom ke-2 (mulai dari 0)
+                    "targets": [6] // Indeks kolom ke-2 (mulai dari 0)
                 }],
                 "order": [
-                    [0, 'asc'] // Mengatur sorting default pada kolom pertama secara ascending
+                    [0, 'desc'] // Mengatur sorting default pada kolom pertama secara ascending
                 ]
             });
         });
