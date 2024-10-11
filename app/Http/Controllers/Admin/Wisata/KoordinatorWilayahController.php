@@ -36,8 +36,8 @@ class KoordinatorWilayahController extends Controller
             ->get();
 
         // 5. Jumlah Responden per Kelurahan
-        $jumlahRespondenKelurahan = KanvasingWisata::select('kelurahan', DB::raw('COUNT(*) AS jumlah_responden'))
-            ->groupBy('kelurahan')
+        $jumlahRespondenKelurahan = KanvasingWisata::select('kelurahan_id', DB::raw('COUNT(*) AS jumlah_responden'))
+            ->groupBy('kelurahan_id')
             ->get();
 
         // 6. Peta Lokasi Responden
