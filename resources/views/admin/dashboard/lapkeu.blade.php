@@ -11,7 +11,7 @@
             <table class="table">
                 <tr>
                     <th>Total Anggaran</th>
-                    <td>{{ number_format($totalAnggaranKeseluruhan, 2) }}</td>
+                    <td>Rp {{ number_format($totalAnggaranKeseluruhan, 0, ',', '.') }}</td>
                 </tr>
             </table>
         </div>
@@ -46,9 +46,9 @@
                     @foreach($sisaAnggaranPerTim as $tim)
                     <tr>
                         <td>{{ $tim->tim }}</td>
-                        <td>{{ number_format($tim->total_anggaran, 2) }}</td>
-                        <td>{{ number_format($tim->total_anggaran_digunakan, 2) }}</td>
-                        <td>{{ number_format($tim->sisa_anggaran, 2) }}</td>
+                        <td>Rp {{ number_format($tim->total_anggaran, 0, ',', '.') }}</td>
+                        <td>Rp {{ number_format($tim->total_anggaran_digunakan, 0, ',', '.') }}</td>
+                        <td>Rp {{ number_format($tim->sisa_anggaran, 0, ',', '.') }}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -88,7 +88,7 @@
                         <td>{{ $pembayaran->tim }}</td>
                         <td>{{ $pembayaran->nama_periode }}</td>
                         <td>{{ $pembayaran->nama_rincian }}</td>
-                        <td>{{ number_format($pembayaran->jumlah_digunakan, 2) }}</td>
+                        <td>Rp {{ number_format($pembayaran->jumlah_digunakan, 0, ',', '.') }}</td>
                         <td>{{ $pembayaran->status_pembayaran }}</td>
                     </tr>
                     @endforeach
@@ -140,7 +140,7 @@
                         <td>{{ $laporan->tim }}</td>
                         <td>{{ $laporan->nama_periode }}</td>
                         <td>{{ $laporan->nama_rincian }}</td>
-                        <td>{{ number_format($laporan->jumlah_digunakan, 2) }}</td>
+                        <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
                         <td>{{ $laporan->status_pembayaran }}</td>
                         <td>
                             @if($laporan->bukti_pembayaran)
