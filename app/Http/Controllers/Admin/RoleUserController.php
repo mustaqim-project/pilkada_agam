@@ -43,8 +43,9 @@ class RoleUserController extends Controller
         $admins = Admin::all();
         $teams = tim::all(); // Fetching teams
         $positions = jabatan::all(); // Fetching Jabatan positions
+        $banks = jabatan::all(); // Fetching Jabatan positions
 
-        return view('admin.role-user.create', compact('roles', 'admins', 'teams', 'positions'));
+        return view('admin.role-user.create', compact('roles', 'admins', 'teams', 'positions', 'banks'));
     }
 
     /**
@@ -52,32 +53,33 @@ class RoleUserController extends Controller
      */
     public function store(AdminRoleUserStoreRequest $request) : RedirectResponse
     {
+            try {
+                $user = new Admin();
+                $user->image = '';  // Atur sesuai kebutuhan upload image
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->password = bcrypt($request->password);
+                $user->status = 1;
 
-        try {
-            $user = new Admin();
-            $user->image = '';
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->password);
-            $user->status = 1;
-            $user->save();
+                // Menambahkan kode_bank dan no_rek
+                $user->kode_bank = $request->kode_bank;
+                $user->no_rek = $request->no_rek;
 
-            /** assign the role to user */
-            $user->assignRole($request->role);
+                $user->save();
 
-            /** send mail to the user */
-            Mail::to($request->email)->send(new RoleUserCreateMail($request->email, $request->password));
+                /** assign the role to user */
+                $user->assignRole($request->role);
 
-            toast(__('admin.Created Successfully!'), 'success');
+                /** send mail to the user */
+                Mail::to($request->email)->send(new RoleUserCreateMail($request->email, $request->password));
 
-            return redirect()->route('admin.role-users.index');
+                toast(__('admin.Created Successfully!'), 'success');
 
-        } catch (\Throwable $th) {
-            throw $th;
+                return redirect()->route('admin.role-users.index');
+            } catch (\Throwable $th) {
+                throw $th;
+            }
         }
-
-
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -94,8 +96,7 @@ class RoleUserController extends Controller
      */
     public function update(AdminRoleUserUpdateRequest $request, string $id)
     {
-
-        if($request->has('password') && !empty($request->password)){
+        if ($request->has('password') && !empty($request->password)) {
             $request->validate([
                 'password' => ['confirmed', 'min:6']
             ]);
@@ -105,12 +106,15 @@ class RoleUserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
 
-        if($request->has('password') && !empty($request->password)){
+        // Memperbarui kode_bank dan no_rek
+        $user->kode_bank = $request->kode_bank;
+        $user->no_rek = $request->no_rek;
+
+        if ($request->has('password') && !empty($request->password)) {
             $user->password = bcrypt($request->password);
         }
 
         $user->save();
-
 
         /** assign the role to user */
         $user->syncRoles($request->role);

@@ -5,7 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Report;
 use App\Models\tim;
-use App\Models\Jabatan;
+use App\Models\jabatan;
 use App\Models\Bank;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -59,7 +59,7 @@ class Admin extends Authenticatable
 
     public function jabatan()
     {
-        return $this->belongsTo(Jabatan::class, 'jabatan_id');
+        return $this->belongsTo(jabatan::class, 'jabatan_id');
     }
 
     public function reports()
