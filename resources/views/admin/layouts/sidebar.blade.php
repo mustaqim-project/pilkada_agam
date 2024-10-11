@@ -137,7 +137,6 @@
 
                 <li class="menu-header">{{ __('admin.TIM PUSAT') }}</li>
                 @if (canAccess(['Tim DS PUSAT']))
-
                     <li class="dropdown {{ setSidebarActive(['admin.timpusatds.*']) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
                             <span>{{ __('TIM DS') }}</span></a>
@@ -193,8 +192,9 @@
 
                         </ul>
                     </li>
+                @endif
 
-
+                @if (canAccess(['Tim Inti Wisata']))
                     <li class="dropdown {{ setSidebarActive(['admin.timpuswisata.*']) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
                             <span>{{ __('TIM Wisata') }}</span></a>
@@ -251,6 +251,7 @@
                         </ul>
                     </li>
                 @endif
+
             @endif
 
             @if (canAccess(['Tim Inti']))
@@ -284,13 +285,16 @@
                             {{-- Koordinator Wilayah --}}
                             @if (canAccess(['koordinator wilayah']))
                                 <li class="dropdown {{ setSidebarActive(['admin.timds.koordinator.wilayah.*']) }}">
-                                    <a href="#" class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
+                                    <a href="#"
+                                        class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timds.koordinator.wilayah.dashboard']) }}">
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timds.koordinator.wilayah.dashboard']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timds.koordinator.wilayah.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
-                                        <li class="{{ setSidebarActive(['admin.timds.koordinator.wilayah.laporan']) }}">
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timds.koordinator.wilayah.laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timds.koordinator.wilayah.laporan') }}">{{ __('Laporan') }}</a>
                                         </li>
@@ -301,14 +305,16 @@
                             {{-- Koordinator Kecamatan --}}
                             @if (canAccess(['koordinator kecamatan']))
                                 <li class="dropdown {{ setSidebarActive(['admin.timds.koordinator.kecamatan.*']) }}">
-                                    <a href="#" class="nav-link has-dropdown">{{ __('Koordinator Kecamatan') }}</a>
+                                    <a href="#"
+                                        class="nav-link has-dropdown">{{ __('Koordinator Kecamatan') }}</a>
                                     <ul class="dropdown-menu">
                                         <li
                                             class="{{ setSidebarActive(['admin.timds.koordinator.kecamatan.dashboard']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timds.koordinator.kecamatan.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
-                                        <li class="{{ setSidebarActive(['admin.timds.koordinator.kecamatan.laporan']) }}">
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timds.koordinator.kecamatan.laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timds.koordinator.kecamatan.laporan') }}">{{ __('Laporan') }}</a>
                                         </li>
@@ -319,13 +325,16 @@
                             {{-- Koordinator Nagari --}}
                             @if (canAccess(['koordinator nagari']))
                                 <li class="dropdown {{ setSidebarActive(['admin.timds.koordinator.nagari.*']) }}">
-                                    <a href="#" class="nav-link has-dropdown">{{ __('Koordinator Nagari') }}</a>
+                                    <a href="#"
+                                        class="nav-link has-dropdown">{{ __('Koordinator Nagari') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timds.koordinator.nagari.dashboard']) }}">
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timds.koordinator.nagari.dashboard']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timds.koordinator.nagari.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
-                                        <li class="{{ setSidebarActive(['admin.timds.koordinator.nagari.laporan']) }}">
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timds.koordinator.nagari.laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timds.koordinator.nagari.laporan') }}">{{ __('Laporan') }}</a>
                                         </li>
@@ -599,7 +608,7 @@
                     </li>
                 @endif
 
-                @if (canAccess(['koordinator wilayah wisata']))
+                {{-- @if (canAccess(['koordinator wilayah wisata']))
                     <li class="dropdown {{ setSidebarActive(['admin.timwisata.*']) }}">
                         <a href="#" class="nav-link has-dropdown">
                             <i class="fas fa-users"></i>
@@ -632,7 +641,7 @@
                             @endif
                         </ul>
                     </li>
-                @endif
+                @endif --}}
 
 
 
@@ -921,7 +930,7 @@
                         </li>
                     @endif
                 @endif
-                @endif
+            @endif
 
 
         </ul>
