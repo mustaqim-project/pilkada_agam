@@ -57,7 +57,7 @@ class KanvasingWisataController extends Controller
         ]);
 
         // Upload foto kegiatan
-        $imagePath = $this->handleFileUpload($request, 'foto_kegiatan', 'uploads/foto_kegiatan');
+        $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
 
         // Menyimpan data ke database
         $kanvasingWisata = KanvasingWisata::create(array_merge($request->all(), [
@@ -109,7 +109,7 @@ class KanvasingWisataController extends Controller
         $kanvasingWisata = KanvasingWisata::findOrFail($id);
 
         // Upload foto kegiatan jika ada file baru
-        $imagePath = $this->handleFileUpload($request, 'foto_kegiatan', 'uploads/foto_kegiatan');
+        $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
 
         // Update data
         $kanvasingWisata->update(array_merge($request->all(), [
