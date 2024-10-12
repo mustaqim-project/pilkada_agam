@@ -164,17 +164,6 @@
                         @enderror
                     </div>
 
-                    <!-- Input Nomor KK -->
-                    <div class="input-style has-icon input-style-1 input-required mt-4">
-                        <i class="input-icon fa fa-user color-theme"></i>
-                        <span>Nomor KK</span>
-                        <em>(*Wajib Diisi)</em>
-                        <input id="no_kk" class="input" type="text" name="no_kk" :value="old('no_kk')"
-                            placeholder="Nomor KK" required />
-                        @error('no_kk')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
 
                     <!-- Input Nomor KTP -->
                     <div class="input-style has-icon input-style-1 input-required mt-4">
@@ -249,131 +238,18 @@
                         @enderror
                     </div>
 
-                    <!-- Input Brosur -->
+                  <!-- Input Tanggal Berangkat -->
                     <div class="input-style has-icon input-style-1 input-required mt-4">
-                        <span>Brosur</span>
+                        <i class="input-icon fa fa-calendar color-theme"></i>
+                        <span>Tanggal Berangkat</span>
                         <em>(*Wajib Diisi)</em>
-                        <select name="brosur" required>
-                            <option value="">Brosur</option>
-                            <option value="1">Ya</option>
-                            <option value="0">Tidak</option>
-                        </select>
-                        @error('brosur')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <!-- Input Stiker -->
-                    <div class="input-style has-icon input-style-1 input-required mt-4">
-                        <span>Stiker</span>
-                        <em>(*Wajib Diisi)</em>
-                        <select name="stiker" required>
-                            <option value="">Stiker</option>
-
-                            <option value="1">Ya</option>
-                            <option value="0">Tidak</option>
-                        </select>
-                        @error('stiker')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <!-- Input Kartu Coblos -->
-                    <div class="input-style has-icon input-style-1 input-required mt-4">
-                        <span>Kartu Coblos</span>
-                        <em>(*Wajib Diisi)</em>
-                        <select name="kartu_coblos" required>
-                            <option value="">Kartu Coblos</option>
-
-                            <option value="1">Ya</option>
-                            <option value="0">Tidak</option>
-                        </select>
-                        @error('kartu_coblos')
+                        <input type="date" name="jadwal" required />
+                        @error('jadwal')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
 
-                    <!-- Lokasi Saya -->
-                    <div class="input-style has-icon input-style-1 mt-4">
-                        <i class="input-icon fa fa-map-pin color-theme"></i>
-                        <span>Lokasi Saya</span>
-                        <input id="location_name" class="input" type="text" name="location_name" readonly
-                            value="{{ old('location_name') }}" placeholder="Lokasi Saya" />
-                        @error('location_name')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <!-- Longitude -->
-                    <div class="input-style has-icon input-style-1 mt-4">
-                        <span>Longitude</span>
-                        <em>(*Wajib Diisi)</em>
-                        <input id="longitude" class="input" type="text" name="longitude" readonly
-                            value="{{ old('longitude') }}" />
-                        @error('longitude')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <!-- Latitude -->
-                    <div class="input-style has-icon input-style-1 mt-4">
-                        <span>Latitude</span>
-                        <em>(*Wajib Diisi)</em>
-                        <input id="latitude" class="input" type="text" name="latitude" readonly
-                            value="{{ old('latitude') }}" />
-                        @error('latitude')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-
-
-                    <label class="mt-5">Upload Foto Kegiatan</label>
-                    <em>(*Wajib Diisi)</em>
-
-                    <!-- Image Preview -->
-                    <div class="mt-4">
-                        <img id="image_preview" class="img-fluid" src="" alt="Image Preview"
-                            style="display:none;" />
-                    </div>
-
-                    <!-- Pilihan Akses -->
-                    <div class="mt-4">
-                        <select id="accessChoice" class="bg-highlight shadow-s rounded-s"
-                            onchange="handleAccessChoice()">
-                            <option value="">Pilih Upload Dari Kamera / Galeri</option>
-                            <option value="camera">Dari Kamera</option>
-                            <option value="gallery">Dari Galeri</option>
-                        </select>
-                    </div>
-
-                    <!-- Input untuk Kamera (dengan capture untuk kamera) -->
-                    <input class="upload-file mt-3 bg-highlight shadow-s rounded-s" type="file" id="cameraInput"
-                        name="foto_kegiatan" accept="image/*" capture="camera" style="display:none;" />
-
-                    <!-- Input untuk Galeri -->
-                    <input class="upload-file mt-3 bg-highlight shadow-s rounded-s" type="file" id="galleryInput"
-                        name="foto_kegiatan" accept="image/*" style="display:none;" />
-
-
-                </div>
-            </div>
-
-            <div class="card card-style">
-                <div class="content">
-                    <h3 class="font-700">Get Coordinates</h3>
-                    <a href="#"
-                        class="get-location btn btn-full btn-m bg-red2-dark rounded-sm text-uppercase shadow-l font-900">Get
-                        my Location</a>
-                    <p class="location-coordinates"></p>
-
-                </div>
-                <div class="responsive-iframe add-iframe">
-                    <iframe class="location-map"
-                        src='https://maps.google.com/?ie=UTF8&amp;ll=47.595131,-122.330414&amp;spn=0.006186,0.016512&amp;t=h&amp;z=17&amp;output=embed'></iframe>
-                </div>
-            </div>
 
             <button type="submit" class="btn btn-full btn-highlight">Simpan</button>
         </form>
