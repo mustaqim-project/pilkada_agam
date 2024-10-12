@@ -10,7 +10,7 @@ class Kecematan extends Model
     use HasFactory;
 
     // Nama tabel jika tidak sesuai dengan konvensi Laravel
-    protected $table = 'kecematan';
+    protected $table = 'kecamatan';
 
     // Atribut yang dapat diisi secara massal
     protected $fillable = [
