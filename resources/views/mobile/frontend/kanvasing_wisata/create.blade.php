@@ -141,13 +141,13 @@
                     <div class="input-style has-icon input-style-1 input-required">
                         <span>Kecamatan</span>
                         <em>(*Wajib Diisi)</em>
-                        <select name="kecamatan_id" id="kecamatan_id" required>
+                        <select name="kecematan_id" id="kecematan_id" required>
                             <option value="">Pilih Kecamatan</option>
                             @foreach ($kecamatans as $kecamatan)
                                 <option value="{{ $kecamatan->id }}">{{ $kecamatan->nama_kecamatan }}</option>
                             @endforeach
                         </select>
-                        @error('kecamatan_id')
+                        @error('kecematan_id')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -215,8 +215,8 @@
                         <em>(*Wajib Diisi)</em>
                         <select name="jenis_kelamin" required>
                             <option value="">Pilih Jenis Kelamin</option>
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
+                            <option value="L">Laki-laki</option>
+                            <option value="P">Perempuan</option>
                         </select>
                         @error('jenis_kelamin')
                             <div class="text-danger">{{ $message }}</div>
