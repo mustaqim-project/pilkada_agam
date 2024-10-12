@@ -136,9 +136,10 @@
                     <!-- user id -->
                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
-                    <!-- Input Kecamatan -->
-                    <div class="form-group">
-                        <label for="kecematan_id">Kecamatan</label>
+
+                    <div class="input-style has-icon input-style-1 input-required">
+                        <span>Kecamatan</span>
+                        <em>(*Wajib Diisi)</em>
                         <select name="kecamatan_id" id="kecamatan_id" required>
                             <option value="">Pilih Kecamatan</option>
                             @foreach ($kecamatans as $kecamatan)
@@ -149,6 +150,8 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
+
 
                     <!-- Input Kelurahan -->
                     <div class="form-group">
