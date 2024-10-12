@@ -254,6 +254,7 @@
                         <span>Brosur</span>
                         <em>(*Wajib Diisi)</em>
                         <select name="brosur" required>
+                            <option value="">Brosur</option>
                             <option value="1">Ya</option>
                             <option value="0">Tidak</option>
                         </select>
@@ -267,6 +268,8 @@
                         <span>Stiker</span>
                         <em>(*Wajib Diisi)</em>
                         <select name="stiker" required>
+                            <option value="">Stiker</option>
+
                             <option value="1">Ya</option>
                             <option value="0">Tidak</option>
                         </select>
@@ -280,6 +283,8 @@
                         <span>Kartu Coblos</span>
                         <em>(*Wajib Diisi)</em>
                         <select name="kartu_coblos" required>
+                            <option value="">Kartu Coblos</option>
+
                             <option value="1">Ya</option>
                             <option value="0">Tidak</option>
                         </select>
