@@ -8,6 +8,7 @@ use App\Models\Kecematan;
 use App\Models\Kelurahan;
 use App\Models\pekerjaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 use App\Traits\FileUploadTrait;
 
@@ -30,11 +31,11 @@ class KanvasingWisataController extends Controller
         $kecamatans = Kecematan::all();
         $pekerjaans  = pekerjaan::all();
 
-        return view('mobile.frontend.kanvasing_wisata.create', compact('kecamatans','pekerjaans'));
+        return view('mobile.frontend.kanvasing_wisata.create', compact('kecamatans', 'pekerjaans'));
     }
 
 
-    // Method untuk menyimpan data baru
+
     public function store(Request $request)
     {
         $request->validate([
@@ -56,19 +57,44 @@ class KanvasingWisataController extends Controller
             'latitude' => 'required|numeric',
         ]);
 
+        // Menyimpan payload ke log
+        Log::info('Incoming request payload:', $request->all());
+
         // Upload foto kegiatan
         $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
 
-        // Menyimpan data ke database
-        $kanvasingWisata = KanvasingWisata::create(array_merge($request->all(), [
-            'foto_kegiatan' => $imagePath,
-        ]));
+        // Membuat instance KanvasingWisata baru
+        $kanvasingWisata = new KanvasingWisata();
+        $kanvasingWisata->user_id = $request->user_id;
+        $kanvasingWisata->kecematan_id = $request->kecematan_id;
+        $kanvasingWisata->kelurahan_id = $request->kelurahan_id;
+        $kanvasingWisata->no_kk = $request->no_kk;
+        $kanvasingWisata->no_ktp = $request->no_ktp;
+        $kanvasingWisata->nama_responden = $request->nama_responden;
+        $kanvasingWisata->tgl_lahir = $request->tgl_lahir;
+        $kanvasingWisata->jenis_kelamin = $request->jenis_kelamin;
+        $kanvasingWisata->pekerjaan_id = $request->pekerjaan_id;
+        $kanvasingWisata->alamat = $request->alamat;
+        $kanvasingWisata->foto_kegiatan = !empty($imagePath) ? $imagePath : null; // Menyimpan foto_kegiatan jika ada
+        $kanvasingWisata->brosur = $request->brosur;
+        $kanvasingWisata->stiker = $request->stiker;
+        $kanvasingWisata->kartu_coblos = $request->kartu_coblos;
+        $kanvasingWisata->longitude = $request->longitude;
+        $kanvasingWisata->latitude = $request->latitude;
 
-        return response()->json([
-            'message' => 'Data berhasil disimpan!',
-            'data' => $kanvasingWisata
-        ], 201);
+        // Menyimpan data ke database
+        $kanvasingWisata->save();
+
+        // Log status penyimpanan data
+        Log::info('Data stored successfully:', [
+            'kanvasing_wisata_id' => $kanvasingWisata->id,
+            'payload' => $kanvasingWisata
+        ]);
+
+        // Mengalihkan ke rute kanvasing_wisata.create
+        return redirect()->route('kanvasing_wisata.create')->with('message', 'Data berhasil disimpan!');
     }
+
 
     // Method untuk menampilkan detail data berdasarkan ID
     public function show($id)
