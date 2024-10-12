@@ -87,6 +87,20 @@ class KanvasingWisataController extends Controller
         // Menyimpan data ke database
         $kanvasingWisata->save();
 
+
+        // Menyimpan data ke model data_ganda
+        $dataGanda = new \App\Models\data_ganda();
+        $dataGanda->kecamatan = $request->kecematan_id; // Sesuaikan dengan data kecamatan
+        $dataGanda->nagari = $request->kelurahan_id; // Sesuaikan dengan data kelurahan
+        $dataGanda->no_ktp = $request->no_ktp;
+        $dataGanda->no_kk = $request->no_kk;
+        $dataGanda->nama_responden = $request->nama_responden;
+        $dataGanda->alamat = $request->alamat;
+        $dataGanda->longitude = $request->longitude;
+        $dataGanda->latitude = $request->latitude;
+
+        // Menyimpan data ke database
+        $dataGanda->save();
         // Log status penyimpanan data
         Log::info('Data stored successfully:', [
             'kanvasing_wisata_id' => $kanvasingWisata->id,
