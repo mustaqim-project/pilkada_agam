@@ -164,14 +164,21 @@
                         @enderror
                     </div>
 
-                    <!-- Input Nomor KK -->
-                    <div class="form-group">
-                        <label for="no_kk">Nomor KK</label>
-                        <input type="text" name="no_kk" required maxlength="16" placeholder="Nomor KK" />
+
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <i class="input-icon fa fa-user color-theme"></i>
+                        <span>Nomor KK</span>
+                        <em>(*Wajib Diisi)</em>
+                        <input id="no_kk" class="input" type="text" name="no_kk" :value="old('no_kk')"
+                            placeholder="Nomor KK" />
                         @error('no_kk')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
+
+
+
 
                     <!-- Input Nomor KTP -->
                     <div class="form-group">
