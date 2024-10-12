@@ -639,6 +639,81 @@
                                     </ul>
                                 </li>
                             @endif
+
+                            @if (canAccess(['koordinator kecematan wisata']))
+                                <li
+                                    class="dropdown {{ setSidebarActive(['admin.timwisata.koordinator.wilayah.*']) }}">
+                                    <a href="#" class="nav-link has-dropdown">
+                                        {{ __('Koordinator Kecematan') }}
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timwisata.koordinator.wilayah.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timwisata.koordinator.wilayah.dashboard') }}">
+                                                {{ __('Dashboard') }}
+                                            </a>
+                                        </li>
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timwisata.koordinator.wilayah.laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timwisata.koordinator.wilayah.laporan') }}">
+                                                {{ __('Laporan') }}
+                                            </a>
+                                        </li>
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timwisata.koordinator.wilayah.laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timwisata.koordinator.wilayah.laporan') }}">
+                                                {{ __('Input Data Wisata') }}
+                                            </a>
+                                        </li>
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timwisata.koordinator.wilayah.laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timwisata.koordinator.wilayah.laporan') }}">
+                                                {{ __('Absesnsi Wisata') }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li
+                                    class="dropdown {{ setSidebarActive(['admin.timwisata.koordinator.wilayah.*']) }}">
+                                    <a href="#" class="nav-link has-dropdown">
+                                        {{ __('Admin Kecematan') }}
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timwisata.koordinator.wilayah.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timwisata.koordinator.wilayah.dashboard') }}">
+                                                {{ __('Dashboard') }}
+                                            </a>
+                                        </li>
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timwisata.koordinator.wilayah.laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timwisata.koordinator.wilayah.laporan') }}">
+                                                {{ __('Laporan') }}
+                                            </a>
+                                        </li>
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timwisata.koordinator.wilayah.laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timwisata.koordinator.wilayah.laporan') }}">
+                                                {{ __('Input Data Wisata') }}
+                                            </a>
+                                        </li>
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timwisata.koordinator.wilayah.laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timwisata.koordinator.wilayah.laporan') }}">
+                                                {{ __('Absesnsi Wisata') }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                 @endif
