@@ -11,7 +11,6 @@ class pekerjaan extends Model
 
     protected $table = 'pekerjaans';
     protected $primaryKey = 'id';
-    protected $keyType = 'bigint';
 
     protected $fillable = [
         'name',
