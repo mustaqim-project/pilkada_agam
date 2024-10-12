@@ -96,43 +96,6 @@
     </div>
 
 
-    <!-- Homepage Slider -->
-    <div class="single-slider-boxed text-center owl-no-dots owl-carousel">
-        <div class="card rounded-l shadow-l" data-card-height="320">
-            <div class="card-bottom">
-                <h1 class="font-24 font-700">Kandidat Unggulan Pilkada 2024</h1>
-                <p class="boxed-text-xl">
-                    Kenali kandidat-kandidat unggulan dalam Pilkada 2024 dan visi misi yang mereka tawarkan untuk
-                    kemajuan daerah.
-                </p>
-            </div>
-            <div class="card-overlay bg-gradient-fade"></div>
-            <div class="card-bg owl-lazy" data-src="https://example.com/kandidat.jpg"></div>
-        </div>
-        <div class="card rounded-l shadow-l" data-card-height="320">
-            <div class="card-bottom">
-                <h1 class="font-24 font-700">Persiapan Tahapan Pemilihan</h1>
-                <p class="boxed-text-xl">
-                    Pelajari lebih lanjut tentang tahapan Pilkada yang sedang berlangsung dan apa yang perlu
-                    diperhatikan sebagai pemilih.
-                </p>
-            </div>
-            <div class="card-overlay bg-gradient-fade"></div>
-            <div class="card-bg owl-lazy" data-src="https://example.com/tahapan.jpg"></div>
-        </div>
-        <div class="card rounded-l shadow-l" data-card-height="320">
-            <div class="card-bottom">
-                <h1 class="font-24 font-700">Pantauan dan Hasil Sementara</h1>
-                <p class="boxed-text-xl">
-                    Ikuti perkembangan terbaru mengenai hasil sementara Pilkada dari berbagai daerah di Indonesia.
-                </p>
-            </div>
-            <div class="card-overlay bg-gradient-fade"></div>
-            <div class="card-bg owl-lazy" data-src="https://example.com/hasil-sementara.jpg"></div>
-        </div>
-    </div>
-
-
 
     <div id="menu-install-pwa-android" class="menu menu-box-bottom menu-box-detached rounded-l android-banner" data-menu-height="350" data-menu-effect="menu-parallax">
         <div class="boxed-text-l mt-4">
