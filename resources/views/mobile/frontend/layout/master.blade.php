@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
-    <title>Sikadsis</title>
+    <title>AgamGerakCepat</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ asset('mobile/styles/bootstrap.css') }}">
@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="{{ asset('mobile/fonts/css/fontawesome-all.min.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900|Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
     <link rel="manifest" href="{{ asset('mobile/_manifest.json') }}" data-pwa-version="set_in_manifest_and_pwa_js">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('mobile/images/logobulat.png') }}">
-    <link rel="icon" href="{{ asset('mobile/images/logobulat.png') }}" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('mobile/images/logo.png') }}">
+    <link rel="icon" href="{{ asset('mobile/images/logo.png') }}" type="image/png">
 
     <!-- Leaflet Styles -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
