@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Admin\KanvasingPkhController;
 use App\Http\Controllers\Admin\KanvasingParpolController;
 use App\Http\Controllers\Admin\KanvasingAisyiahController;
+use App\Http\Controllers\User\Wisata\KanvasingWisataController;
 
 
 
@@ -53,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::put('kanvasing-jj/update/{id}', [KanvasingJjController::class, 'update'])->name('kanvasing-jj.update');
 
 
+    Route::resource('kanvasing_wisata', KanvasingWisataController::class);
 
 
 

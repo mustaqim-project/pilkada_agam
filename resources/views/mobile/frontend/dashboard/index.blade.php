@@ -43,7 +43,7 @@
         } elseif ($timId == 4) {
             $kanvasingRoute = route('kanvasingaisyiah.create');
         } elseif ($timId == 5) {
-            $kanvasingRoute = route('kanvasingwisata.create');
+            $kanvasingRoute = route('kanvasing_wisata.create');
         }
     @endphp
 
