@@ -30,36 +30,35 @@
 
 
     <!-- Homepage Slider -->
+    @php
+        $timId = auth()->user()->tim_id; // Ambil tim_id dari pengguna yang sedang terautentikasi
+    @endphp
+
     <div class="content text-center">
         <div class="card card-style ml-0 mr-0 bg-white">
             <div class="row mt-3 pt-1 mb-3">
                 <div class="col-4 text-center">
-                    <a href="#">
-                    {{-- <a href="{{ route('kanvasing.create') }}"> --}}
+                    <a href="{{ $timId == 1 ? route('kanvasingds.create') : ($timId == 2 ? route('kanvasingpkh.create') : ($timId == 3 ? route('kanvasingmm.create') : ($timId == 4 ? route('kanvasingaisyiah.create') : ($timId == 5 ? route('kanvasingwisata.create') : '#'))))) }}">
                         <i class="ml-3 mr-3" data-feather="user" style="color: #FF5733;"></i>
-                        <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">Kunjungan Warga</h5>
+                        <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">Kanvasing</h5>
                     </a>
                 </div>
                 <div class="col-4 text-center">
                     <a href="#">
-                    {{-- <a href="{{ route('analisis.read') }}"> --}}
                         <i class="ml-3 mr-3" data-feather="pie-chart" style="color: #33B5FF;"></i>
-                        <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">
-                            Analisis Suara</h5>
+                        <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">Gaji</h5>
                     </a>
                 </div>
                 <div class="col-4 text-center">
                     <a href="#">
-                    {{-- <a href="{{ route('manajement.read') }}"> --}}
                         <i class="ml-3 mr-3" data-feather="users" style="color: #FFC733;"></i>
-                        <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">
-                            Manajemen Pilkada</h5>
+                        <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">List Kanvasing</h5>
                     </a>
                 </div>
-
             </div>
         </div>
     </div>
+
 
     <div class="content mt-0">
         <div class="row">
@@ -81,71 +80,7 @@
         </div>
     </div>
 
-    <div class="card mt-4 preload-img" data-src="admin/mobile/myhr/images/sikad.png">
-        <div class="card-body">
-            <h5 class="color-white font-16 font-500" style="font-size: 1rem;">Fitur Lainnya</h5>
 
-            <div class="card card-style ml-0 mr-0 bg-white">
-                <div class="row mt-3 pt-1 mb-3">
-                    <div class="col-4 text-center">
-                        <a href="#">
-                            <i class="ml-3 mr-3" data-feather="map-pin" style="color: #FF33A8;"></i>
-                            <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">Peta
-                                Wilayah Kampanye</h5>
-                        </a>
-                    </div>
-                    <div class="col-4 text-center">
-                        <a href="#">
-                            <i class="ml-3 mr-3" data-feather="calendar" style="color: #33FF57;"></i>
-                            <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">Jadwal
-                                Kampanye</h5>
-                        </a>
-                    </div>
-                    <div class="col-4 text-center">
-                        <a href="#">
-                            <i class="ml-3 mr-3" data-feather="file-text" style="color: #8E44AD;"></i>
-                            <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">Laporan
-                                Aktivitas Kampanye</h5>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="row mt-3 pt-1 mb-3">
-
-                    <div class="col-4 text-center">
-                        <a href="#">
-                            <i class="ml-3 mr-3" data-feather="bar-chart-2" style="color: #33B5FF;"></i>
-                            <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">Rekam Jejak
-                                Kandidat</h5>
-                        </a>
-                    </div>
-
-
-                    <div class="col-4 text-center">
-                        <a href="#">
-                            <i class="ml-3 mr-3" data-feather="activity" style="color: #2ECC71;"></i>
-                            <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">
-                                Sentiment Analysis</h5>
-                        </a>
-                    </div>
-                    <div class="col-4 text-center">
-                        <a href="#">
-                            <i class="ml-3 mr-3" data-feather="dollar-sign" style="color: #3498DB;"></i>
-                            <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">
-                                Keuangan</h5>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-overlay bg-highlight opacity-95"></div>
-        <div class="card-overlay dark-mode-tint"></div>
-    </div>
-
-    <div class="content mb-2">
-        <h5 class="float-left font-16 font-500">Berita Pilkada</h5>
-        <div class="clearfix"></div>
-    </div>
     <!-- Homepage Slider -->
     <div class="single-slider-boxed text-center owl-no-dots owl-carousel">
         <div class="card rounded-l shadow-l" data-card-height="320">
