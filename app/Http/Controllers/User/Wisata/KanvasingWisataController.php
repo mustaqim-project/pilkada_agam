@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User\Wisata;
 
 use App\Http\Controllers\Controller;
 use App\Models\KanvasingWisata;
+use App\Models\Kecematan;
 use Illuminate\Http\Request;
 
 use App\Traits\FileUploadTrait;
@@ -24,7 +25,9 @@ class KanvasingWisataController extends Controller
     // Method untuk menampilkan form pembuatan data baru
     public function create()
     {
-        return view('mobile.frontend.kanvasing_wisata.create');
+        $kecamatans  = Kecematan::all();
+
+        return view('mobile.frontend.kanvasing_wisata.create', compact('kecamatans '));
     }
 
     // Method untuk menyimpan data baru
