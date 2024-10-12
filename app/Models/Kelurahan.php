@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+Use App\Models\Kecematan;
 class Kelurahan extends Model
 {
     use HasFactory;
 
-    // Nama tabel jika tidak sesuai dengan konvensi Laravel
     protected $table = 'kelurahan';
 
-    // Atribut yang dapat diisi secara massal
     protected $fillable = [
         'nama_kelurahan',
         'kecamatan_id',
@@ -21,6 +19,6 @@ class Kelurahan extends Model
     // Relasi belongsTo ke model Kecamatan
     public function kecamatan()
     {
-        return $this->belongsTo(Kecamatan::class, 'kecamatan_id');
+        return $this->belongsTo(Kecematan::class, 'kecamatan_id');
     }
 }

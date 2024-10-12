@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\Wisata;
 use App\Http\Controllers\Controller;
 use App\Models\KanvasingWisata;
 use App\Models\Kecematan;
+use App\Models\Kelurahan;
 use Illuminate\Http\Request;
 
 use App\Traits\FileUploadTrait;
@@ -128,5 +129,12 @@ class KanvasingWisataController extends Controller
         return response()->json([
             'message' => 'Data berhasil dihapus!'
         ], 200);
+    }
+
+
+    public function getKelurahans(Request $request)
+    {
+        $kelurahans = Kelurahan::where('kecamatan_id', $request->kecamatan_id)->get(); // Ambil kelurahan berdasarkan kecamatan_id
+        return response()->json($kelurahans);
     }
 }

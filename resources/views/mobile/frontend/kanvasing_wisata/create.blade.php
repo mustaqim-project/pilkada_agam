@@ -139,13 +139,13 @@
                     <!-- Input Kecamatan -->
                     <div class="form-group">
                         <label for="kecematan_id">Kecamatan</label>
-                        <select name="kecematan_id" required>
+                        <select name="kecamatan_id" id="kecamatan_id" required>
                             <option value="">Pilih Kecamatan</option>
                             @foreach ($kecamatans as $kecamatan)
                                 <option value="{{ $kecamatan->id }}">{{ $kecamatan->name }}</option>
                             @endforeach
                         </select>
-                        @error('kecematan_id')
+                        @error('kecamatan_id')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -153,11 +153,9 @@
                     <!-- Input Kelurahan -->
                     <div class="form-group">
                         <label for="kelurahan_id">Kelurahan</label>
-                        <select name="kelurahan_id" required>
+                        <select name="kelurahan_id" id="kelurahan_id" required>
                             <option value="">Pilih Kelurahan</option>
-                            @foreach ($kelurahans as $kelurahan)
-                                <option value="{{ $kelurahan->id }}">{{ $kelurahan->name }}</option>
-                            @endforeach
+                            <!-- Kelurahan akan diisi menggunakan JavaScript/Ajax -->
                         </select>
                         @error('kelurahan_id')
                             <div class="text-danger">{{ $message }}</div>
@@ -465,95 +463,27 @@
                 }
             });
 
-            $.ajax({
-                url: 'https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json',
-                method: 'GET',
-                success: function(data) {
-                    let provinsiDropdown = $('#provinsi');
-                    data.forEach(function(provinsi) {
-                        provinsiDropdown.append('<option value="' + provinsi.id + '">' +
-                            provinsi.name + '</option>');
-                    });
-                }
-            });
 
-            // Load kabupaten/kota when a provinsi is selected
-            $('#provinsi').change(function() {
-                let provinsiId = $(this).val();
-                $('#kabupaten_kota').html('<option value="">Pilih Kabupaten/Kota</option>');
-                if (provinsiId) {
+
+
+            $('#kecamatan_id').change(function() {
+                var kecamatanId = $(this).val();
+                $('#kelurahan_id').empty().append(
+                    '<option value="">Pilih Kelurahan</option>'); // Kosongkan dropdown kelurahan
+
+                if (kecamatanId) {
                     $.ajax({
-                        url: `https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${provinsiId}.json`,
+                        url: '/kelurahans/' + kecamatanId,
                         method: 'GET',
                         success: function(data) {
-                            data.forEach(function(kabupaten) {
-                                $('#kabupaten_kota').append('<option value="' +
-                                    kabupaten.id + '">' + kabupaten.name +
+                            $.each(data, function(index, kelurahan) {
+                                $('#kelurahan_id').append('<option value="' + kelurahan
+                                    .id + '">' + kelurahan.nama_kelurahan +
                                     '</option>');
                             });
                         }
                     });
                 }
-            });
-
-            // Load kecamatan when a kabupaten/kota is selected
-            $('#kabupaten_kota').change(function() {
-                let kabupatenId = $(this).val();
-                $('#kecamatan').html('<option value="">Pilih Kecamatan</option>');
-                if (kabupatenId) {
-                    $.ajax({
-                        url: `https://www.emsifa.com/api-wilayah-indonesia/api/districts/${kabupatenId}.json`,
-                        method: 'GET',
-                        success: function(data) {
-                            data.forEach(function(kecamatan) {
-                                $('#kecamatan').append('<option value="' + kecamatan
-                                    .id + '">' + kecamatan.name + '</option>');
-                            });
-                        }
-                    });
-                }
-            });
-
-            // Load kelurahan when a kecamatan is selected
-            $('#kecamatan').change(function() {
-                let kecamatanId = $(this).val();
-                $('#kelurahan').html('<option value="">Pilih Kelurahan</option>');
-                if (kecamatanId) {
-                    $.ajax({
-                        url: `https://www.emsifa.com/api-wilayah-indonesia/api/villages/${kecamatanId}.json`,
-                        method: 'GET',
-                        success: function(data) {
-                            data.forEach(function(kelurahan) {
-                                $('#kelurahan').append('<option value="' + kelurahan
-                                    .id + '">' + kelurahan.name + '</option>');
-                            });
-                        }
-                    });
-                }
-            });
-
-            $('#provinsi, #kabupaten_kota, #tipe_cakada_id').change(function() {
-                let provinsi = $('#provinsi').val();
-                let kabupatenKota = $('#kabupaten_kota').val();
-                let tipeCakada = $('#tipe_cakada_id').val();
-
-                $.ajax({
-                    url: "{{ route('getCakadaByFilters') }}",
-                    method: 'GET',
-                    data: {
-                        provinsi: provinsi,
-                        kabupaten_kota: kabupatenKota,
-                        tipe_cakada_id: tipeCakada
-                    },
-                    success: function(response) {
-                        let options = '<option value="">Pilih Nama Kandidat</option>';
-                        $.each(response, function(index, cakada) {
-                            options +=
-                                `<option value="${cakada.id}">${cakada.nama_calon_kepala}-${cakada.nama_calon_wakil}</option>`;
-                        });
-                        $('#cakada_id').html(options);
-                    }
-                });
             });
 
         });

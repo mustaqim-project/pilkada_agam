@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('kanvasing_wisata', KanvasingWisataController::class);
 
 
+    Route::get('/kelurahans/{kecamatan_id}', [KanvasingWisataController::class, 'getKelurahans'])->name('kelurahans.get');
 
 
 
