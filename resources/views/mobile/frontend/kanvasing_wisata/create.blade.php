@@ -350,11 +350,11 @@
 
                     <!-- Input untuk Kamera (dengan capture untuk kamera) -->
                     <input class="upload-file mt-3 bg-highlight shadow-s rounded-s" type="file" id="cameraInput"
-                        name="foto" accept="image/*" capture="camera" style="display:none;" />
+                        name="foto_kegiatan" accept="image/*" capture="camera" style="display:none;" />
 
                     <!-- Input untuk Galeri -->
                     <input class="upload-file mt-3 bg-highlight shadow-s rounded-s" type="file" id="galleryInput"
-                        name="foto" accept="image/*" style="display:none;" />
+                        name="foto_kegiatan" accept="image/*" style="display:none;" />
 
 
                 </div>
@@ -471,7 +471,7 @@
             }
 
             // Profile picture preview
-            const profilePictureInput = $('#foto');
+            const profilePictureInput = $('#foto_kegiatan');
             const imagePreview = $('#image_preview');
 
             profilePictureInput.on('change', function() {
