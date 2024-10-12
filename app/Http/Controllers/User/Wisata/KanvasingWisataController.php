@@ -38,6 +38,8 @@ class KanvasingWisataController extends Controller
 
     public function store(Request $request)
     {
+
+        dd($request);
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'kecematan_id' => 'required',
