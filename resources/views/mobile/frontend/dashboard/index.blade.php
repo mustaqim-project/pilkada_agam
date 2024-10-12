@@ -32,13 +32,26 @@
     <!-- Homepage Slider -->
     @php
         $timId = auth()->user()->tim_id; // Ambil tim_id dari pengguna yang sedang terautentikasi
+        $kanvasingRoute = '#'; // Default route jika tidak ada tim_id yang cocok
+
+        if ($timId == 1) {
+            $kanvasingRoute = route('kanvasingds.create');
+        } elseif ($timId == 2) {
+            $kanvasingRoute = route('kanvasingpkh.create');
+        } elseif ($timId == 3) {
+            $kanvasingRoute = route('kanvasingmm.create');
+        } elseif ($timId == 4) {
+            $kanvasingRoute = route('kanvasingaisyiah.create');
+        } elseif ($timId == 5) {
+            $kanvasingRoute = route('kanvasingwisata.create');
+        }
     @endphp
 
     <div class="content text-center">
         <div class="card card-style ml-0 mr-0 bg-white">
             <div class="row mt-3 pt-1 mb-3">
                 <div class="col-4 text-center">
-                    <a href="{{ $timId == 1 ? route('kanvasingds.create') : ($timId == 2 ? route('kanvasingpkh.create') : ($timId == 3 ? route('kanvasingmm.create') : ($timId == 4 ? route('kanvasingaisyiah.create') : ($timId == 5 ? route('kanvasingwisata.create') : '#'))))) }}">
+                    <a href="{{ $kanvasingRoute }}">
                         <i class="ml-3 mr-3" data-feather="user" style="color: #FF5733;"></i>
                         <h5 class="color-black font-13 font-500 line-height-s" style="font-size: 0.8125rem;">Kanvasing</h5>
                     </a>
@@ -58,6 +71,7 @@
             </div>
         </div>
     </div>
+
 
 
 
