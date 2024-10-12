@@ -142,7 +142,7 @@
                         <select name="kecamatan_id" id="kecamatan_id" required>
                             <option value="">Pilih Kecamatan</option>
                             @foreach ($kecamatans as $kecamatan)
-                                <option value="{{ $kecamatan->id }}">{{ $kecamatan->name }}</option>
+                                <option value="{{ $kecamatan->id }}">{{ $kecamatan->nama_kecamatan }}</option>
                             @endforeach
                         </select>
                         @error('kecamatan_id')
@@ -155,7 +155,6 @@
                         <label for="kelurahan_id">Kelurahan</label>
                         <select name="kelurahan_id" id="kelurahan_id" required>
                             <option value="">Pilih Kelurahan</option>
-                            <!-- Kelurahan akan diisi menggunakan JavaScript/Ajax -->
                         </select>
                         @error('kelurahan_id')
                             <div class="text-danger">{{ $message }}</div>
