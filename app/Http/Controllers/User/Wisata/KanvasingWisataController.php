@@ -24,7 +24,7 @@ class KanvasingWisataController extends Controller
     // Method untuk menampilkan form pembuatan data baru
     public function create()
     {
-        return view('kanvasing_wisata.create');
+        return view('mobile.frontend.kanvasing_wisata.create');
     }
 
     // Method untuk menyimpan data baru
