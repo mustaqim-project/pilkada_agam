@@ -137,6 +137,7 @@
                     <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
 
+                    <!-- Input Kecamatan -->
                     <div class="input-style has-icon input-style-1 input-required">
                         <span>Kecamatan</span>
                         <em>(*Wajib Diisi)</em>
@@ -151,11 +152,10 @@
                         @enderror
                     </div>
 
-
-
                     <!-- Input Kelurahan -->
-                    <div class="form-group">
-                        <label for="kelurahan_id">Kelurahan</label>
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <span>Kelurahan</span>
+                        <em>(*Wajib Diisi)</em>
                         <select name="kelurahan_id" id="kelurahan_id" required>
                             <option value="">Pilih Kelurahan</option>
                         </select>
@@ -164,25 +164,23 @@
                         @enderror
                     </div>
 
-
+                    <!-- Input Nomor KK -->
                     <div class="input-style has-icon input-style-1 input-required mt-4">
                         <i class="input-icon fa fa-user color-theme"></i>
                         <span>Nomor KK</span>
                         <em>(*Wajib Diisi)</em>
                         <input id="no_kk" class="input" type="text" name="no_kk" :value="old('no_kk')"
-                            placeholder="Nomor KK" />
+                            placeholder="Nomor KK" required />
                         @error('no_kk')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
-
-
-
-
                     <!-- Input Nomor KTP -->
-                    <div class="form-group">
-                        <label for="no_ktp">Nomor KTP</label>
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <i class="input-icon fa fa-id-card color-theme"></i>
+                        <span>Nomor KTP</span>
+                        <em>(*Wajib Diisi)</em>
                         <input type="text" name="no_ktp" required maxlength="16" placeholder="Nomor KTP" />
                         @error('no_ktp')
                             <div class="text-danger">{{ $message }}</div>
@@ -190,8 +188,10 @@
                     </div>
 
                     <!-- Input Nama Responden -->
-                    <div class="form-group">
-                        <label for="nama_responden">Nama Responden</label>
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <i class="input-icon fa fa-user color-theme"></i>
+                        <span>Nama Responden</span>
+                        <em>(*Wajib Diisi)</em>
                         <input type="text" name="nama_responden" required maxlength="255" placeholder="Nama Responden" />
                         @error('nama_responden')
                             <div class="text-danger">{{ $message }}</div>
@@ -199,8 +199,10 @@
                     </div>
 
                     <!-- Input Tanggal Lahir -->
-                    <div class="form-group">
-                        <label for="tgl_lahir">Tanggal Lahir</label>
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <i class="input-icon fa fa-calendar color-theme"></i>
+                        <span>Tanggal Lahir</span>
+                        <em>(*Wajib Diisi)</em>
                         <input type="date" name="tgl_lahir" required />
                         @error('tgl_lahir')
                             <div class="text-danger">{{ $message }}</div>
@@ -208,8 +210,9 @@
                     </div>
 
                     <!-- Input Jenis Kelamin -->
-                    <div class="form-group">
-                        <label for="jenis_kelamin">Jenis Kelamin</label>
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <span>Jenis Kelamin</span>
+                        <em>(*Wajib Diisi)</em>
                         <select name="jenis_kelamin" required>
                             <option value="">Pilih Jenis Kelamin</option>
                             <option value="Laki-laki">Laki-laki</option>
@@ -221,8 +224,9 @@
                     </div>
 
                     <!-- Input Pekerjaan -->
-                    <div class="form-group">
-                        <label for="pekerjaan_id">Pekerjaan</label>
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <span>Pekerjaan</span>
+                        <em>(*Wajib Diisi)</em>
                         <select name="pekerjaan_id" required>
                             <option value="">Pilih Pekerjaan</option>
                             @foreach ($pekerjaans as $pekerjaan)
@@ -235,8 +239,10 @@
                     </div>
 
                     <!-- Input Alamat -->
-                    <div class="form-group">
-                        <label for="alamat">Alamat</label>
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <i class="input-icon fa fa-home color-theme"></i>
+                        <span>Alamat</span>
+                        <em>(*Wajib Diisi)</em>
                         <input type="text" name="alamat" required maxlength="255" placeholder="Alamat" />
                         @error('alamat')
                             <div class="text-danger">{{ $message }}</div>
@@ -244,8 +250,9 @@
                     </div>
 
                     <!-- Input Brosur -->
-                    <div class="form-group">
-                        <label for="brosur">Brosur</label>
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <span>Brosur</span>
+                        <em>(*Wajib Diisi)</em>
                         <select name="brosur" required>
                             <option value="1">Ya</option>
                             <option value="0">Tidak</option>
@@ -256,8 +263,9 @@
                     </div>
 
                     <!-- Input Stiker -->
-                    <div class="form-group">
-                        <label for="stiker">Stiker</label>
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <span>Stiker</span>
+                        <em>(*Wajib Diisi)</em>
                         <select name="stiker" required>
                             <option value="1">Ya</option>
                             <option value="0">Tidak</option>
@@ -268,8 +276,9 @@
                     </div>
 
                     <!-- Input Kartu Coblos -->
-                    <div class="form-group">
-                        <label for="kartu_coblos">Kartu Coblos</label>
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <span>Kartu Coblos</span>
+                        <em>(*Wajib Diisi)</em>
                         <select name="kartu_coblos" required>
                             <option value="1">Ya</option>
                             <option value="0">Tidak</option>
@@ -278,6 +287,7 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
 
                     <!-- Lokasi Saya -->
                     <div class="input-style has-icon input-style-1 mt-4">
