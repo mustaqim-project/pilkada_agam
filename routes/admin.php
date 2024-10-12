@@ -52,6 +52,8 @@ use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\DashLapKeuController;
 use App\Http\Controllers\Admin\Wisata\KoordinatorWilayahController;
 use App\Http\Controllers\Admin\Wisata\TimPusatWisataController;
+use App\Http\Controllers\Admin\Wisata\AdminKecematanWisataController;
+use App\Http\Controllers\Admin\Wisata\KoordinatorKecematanWisataController;
 
 
 
@@ -398,5 +400,30 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         // Route untuk halaman laporan Koordinator Wilayah
         Route::get('/laporan', [KoordinatorWilayahController::class, 'laporan'])
             ->name('timwisata.koordinator.wilayah.laporan');
+    });
+
+    Route::prefix('timwisata/koordinator/kecematan')->group(function () {
+
+        // Route untuk halaman dashboard Koordinator Kecematan
+        Route::get('/dashboard', [KoordinatorKecematanWisataController::class, 'dashboard'])
+            ->name('timwisata.koordinator.kecematan.dashboard');
+
+        // Route untuk halaman laporan Koordinator Kecematan
+        Route::get('/laporan', [KoordinatorKecematanWisataController::class, 'laporan'])
+            ->name('timwisata.koordinator.kecematan.laporan');
+    });
+    Route::prefix('timwisata/admin/kecematan')->group(function () {
+
+        // Route untuk halaman dashboard Admin Kecematan
+        Route::get('/dashboard', [AdminKecematanWisataController::class, 'dashboard'])
+            ->name('timwisata.admin.kecematan.dashboard');
+
+        // Route untuk halaman laporan Admin Kecematan
+        Route::get('/laporan', [AdminKecematanWisataController::class, 'laporan'])
+            ->name('timwisata.admin.kecematan.laporan');
+        Route::get('/inputdata', [AdminKecematanWisataController::class, 'Kanvasing'])
+            ->name('timwisata.admin.kecematan.InputData');
+        Route::get('/absesnsi', [AdminKecematanWisataController::class, 'Absensi'])
+            ->name('timwisata.admin.kecematan.Absensi');
     });
 });
