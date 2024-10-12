@@ -423,7 +423,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
             ->name('timwisata.admin.kecematan.laporan');
         Route::get('/inputdata', [AdminKecematanWisataController::class, 'Kanvasing'])
             ->name('timwisata.admin.kecematan.InputData');
-        Route::get('/absesnsi', [AdminKecematanWisataController::class, 'Absensi'])
+        Route::get('/absensi', [AdminKecematanWisataController::class, 'Absensi'])
             ->name('timwisata.admin.kecematan.Absensi');
     });
 });
