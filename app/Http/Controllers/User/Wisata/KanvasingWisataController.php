@@ -7,6 +7,7 @@ use App\Models\KanvasingWisata;
 use App\Models\Kecematan;
 use App\Models\Kelurahan;
 use App\Models\pekerjaan;
+use App\Models\data_ganda;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -89,7 +90,7 @@ class KanvasingWisataController extends Controller
 
 
         // Menyimpan data ke model data_ganda
-        $dataGanda = new \App\Models\data_ganda();
+        $dataGanda = new data_ganda();
         $dataGanda->kecamatan = $request->kecematan_id; // Sesuaikan dengan data kecamatan
         $dataGanda->nagari = $request->kelurahan_id; // Sesuaikan dengan data kelurahan
         $dataGanda->no_ktp = $request->no_ktp;

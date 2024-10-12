@@ -25,7 +25,6 @@ class data_ganda extends Model
     ];
 
 
-    protected $keyType = 'bigint';
 
     public $timestamps = true;
 }
