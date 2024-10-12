@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\KanvasingWisata;
 use App\Models\Kecematan;
 use App\Models\Kelurahan;
+use App\Models\pekerjaan;
 use Illuminate\Http\Request;
 
 use App\Traits\FileUploadTrait;
@@ -27,8 +28,9 @@ class KanvasingWisataController extends Controller
     public function create()
     {
         $kecamatans = Kecematan::all();
+        $pekerjaans  = pekerjaan::all();
 
-        return view('mobile.frontend.kanvasing_wisata.create', compact('kecamatans'));
+        return view('mobile.frontend.kanvasing_wisata.create', compact('kecamatans','pekerjaans'));
     }
 
 
