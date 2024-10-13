@@ -212,10 +212,6 @@ class AdminKecematanWisataController extends Controller
     {
 
 
-        $userId = Auth::guard('admin')->user()->id;
-
-
-        dd('Authenticated User ID:', $userId);
 
         $request->validate([
             'kecematan_id' => 'required',
