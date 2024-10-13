@@ -14,7 +14,6 @@
             </div>
 
             <div class="card-body">
-                <div class="table-responsive">
                     <table class="table table-striped" id="tableWisata">
                         <thead>
                             <tr>
@@ -41,7 +40,6 @@
                         </tbody>
 
                     </table>
-                </div>
             </div>
         </div>
     </section>
