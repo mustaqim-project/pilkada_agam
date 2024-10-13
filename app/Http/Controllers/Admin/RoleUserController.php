@@ -54,34 +54,40 @@ class RoleUserController extends Controller
      */
     public function store(AdminRoleUserStoreRequest $request) : RedirectResponse
     {
-            try {
-                $user = new Admin();
-                $user->image = '';  // Atur sesuai kebutuhan upload image
-                $user->name = $request->name;
-                $user->email = $request->email;
-                $user->password = bcrypt($request->password);
-                $user->status = 1;
+        try {
+            $user = new Admin();
+            $user->image = '';  // Atur sesuai kebutuhan upload image
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->status = 1;
 
-                // Menambahkan kode_bank dan no_rek
-                $user->kode_bank = $request->kode_bank;
-                $user->no_rek = $request->no_rek;
-                $user->jum_gaji = $request->jum_gaji;
+            // Menambahkan kode_bank, no_rek, jum_gaji
+            $user->kode_bank = $request->kode_bank;
+            $user->no_rek = $request->no_rek;
+            $user->jum_gaji = $request->jum_gaji;
 
-                $user->save();
+            // Menambahkan atasan_id, tim_id, jabatan_id
+            $user->atasan_id = $request->atasan_id;  // Pastikan ini ada dalam permintaan
+            $user->tim_id = $request->tim_id;        // Pastikan ini ada dalam permintaan
+            $user->jabatan_id = $request->jabatan_id; // Pastikan ini ada dalam permintaan
 
-                /** assign the role to user */
-                $user->assignRole($request->role);
+            $user->save();
 
-                /** send mail to the user */
-                Mail::to($request->email)->send(new RoleUserCreateMail($request->email, $request->password));
+            /** assign the role to user */
+            $user->assignRole($request->role);
 
-                toast(__('admin.Created Successfully!'), 'success');
+            /** send mail to the user */
+            Mail::to($request->email)->send(new RoleUserCreateMail($request->email, $request->password));
 
-                return redirect()->route('admin.role-users.index');
-            } catch (\Throwable $th) {
-                throw $th;
-            }
+            toast(__('admin.Created Successfully!'), 'success');
+
+            return redirect()->route('admin.role-users.index');
+        } catch (\Throwable $th) {
+            throw $th; // Sebaiknya, log error di sini untuk keperluan debugging
         }
+    }
+
 
     /**
      * Show the form for editing the specified resource.
