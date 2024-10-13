@@ -122,57 +122,6 @@
             </div>
         </div>
 
-        <div class="row mb-4">
-
-
-             <!-- Penggunaan APK -->
-             <div class="col-md-6">
-                <h3>Penggunaan Brosur, Stiker, dan Kartu Coblos</h3>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Jenis APK</th>
-                            <th>Total Penggunaan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Brosur</td>
-                            <td>{{ $jumlahPenggunaanPromosi->total_brosur }}</td>
-                        </tr>
-                        <tr>
-                            <td>Stiker</td>
-                            <td>{{ $jumlahPenggunaanPromosi->total_stiker }}</td>
-                        </tr>
-                        <tr>
-                            <td>Kartu Coblos</td>
-                            <td>{{ $jumlahPenggunaanPromosi->total_kartu_coblos }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Rata-rata Responden per User -->
-            <div class="col-md-6">
-                <h3>Rata-rata Responden per User</h3>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>User</th>
-                            <th>Rata-rata Responden</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($rataRataRespondenPerUser as $responden)
-                            <tr>
-                                <td>{{ $responden->user->name }}</td>
-                                <td>{{ $responden->rata_rata_responden }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
     </section>
 
