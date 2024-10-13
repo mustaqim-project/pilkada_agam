@@ -421,9 +421,33 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         // Route untuk halaman laporan Admin Kecematan
         Route::get('/laporan', [AdminKecematanWisataController::class, 'laporan'])
             ->name('timwisata.admin.kecematan.laporan');
+
+        // Route untuk halaman input data Kanvasing
         Route::get('/inputdata', [AdminKecematanWisataController::class, 'Kanvasing'])
             ->name('timwisata.admin.kecematan.InputData');
+
+        // Route untuk halaman absensi
         Route::get('/absensi', [AdminKecematanWisataController::class, 'Absensi'])
             ->name('timwisata.admin.kecematan.absensi');
+
+        // Route untuk menyimpan data wisata
+        Route::post('/wisata/store', [AdminKecematanWisataController::class, 'storeWisata'])
+            ->name('timwisata.admin.kecematan.storeWisata');
+
+        // Route untuk memperbarui status hadir
+        Route::post('/wisata/toggle-hadir', [AdminKecematanWisataController::class, 'toggleHadir'])
+            ->name('timwisata.admin.kecematan.toggleHadir');
+
+        // Route untuk memperbarui data wisata
+        Route::put('/wisata/update/{id}', [AdminKecematanWisataController::class, 'updateWisata'])
+            ->name('timwisata.admin.kecematan.updateWisata');
+
+        // Route untuk menghapus data wisata
+        Route::delete('/wisata/delete/{id}', [AdminKecematanWisataController::class, 'destroy'])
+            ->name('timwisata.admin.kecematan.deleteWisata');
+
+        // Route untuk mengambil data kelurahan berdasarkan kecamatan
+        Route::post('/get-kelurahans', [AdminKecematanWisataController::class, 'getKelurahans'])
+            ->name('timwisata.admin.kecematan.getKelurahans');
     });
 });

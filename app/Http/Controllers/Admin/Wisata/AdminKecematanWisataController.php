@@ -12,6 +12,7 @@ use App\Models\Admin;
 use App\Models\Kecematan;
 use App\Models\Kelurahan;
 use App\Models\pekerjaan;
+use App\Models\data_ganda;
 
 use App\Traits\FileUploadTrait;
 class AdminKecematanWisataController extends Controller
@@ -201,7 +202,6 @@ class AdminKecematanWisataController extends Controller
     public function storeWisata(Request $request)
     {
 
-        // dd($request);
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'kecematan_id' => 'required',
@@ -218,7 +218,6 @@ class AdminKecematanWisataController extends Controller
 
         $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
 
-        // Membuat instance KanvasingWisata baru
         $kanvasingWisata = new KanvasingWisata();
         $kanvasingWisata->user_id = $request->user_id;
         $kanvasingWisata->kecematan_id = $request->kecematan_id;
@@ -233,12 +232,7 @@ class AdminKecematanWisataController extends Controller
         $kanvasingWisata->status = $request->status == 0 ;
         $kanvasingWisata->hadir = $request->hadir == 0 ;
 
-        // $kanvasingWisata->foto_kegiatan = !empty($imagePath) ? $imagePath : null;
-        // $kanvasingWisata->brosur = $request->brosur;
-        // $kanvasingWisata->stiker = $request->stiker;
-        // $kanvasingWisata->kartu_coblos = $request->kartu_coblos;
-        // $kanvasingWisata->longitude = $request->longitude;
-        // $kanvasingWisata->latitude = $request->latitude;
+
 
         $kanvasingWisata->save();
 
@@ -251,8 +245,8 @@ class AdminKecematanWisataController extends Controller
         $data_ganda->alamat = $request->alamat;
         $data_ganda->save();
 
+        return back()->with('success', 'Data berhasil ditambahkan.');
 
-        return redirect()->route('kanvasing_wisata.create')->with('message', 'Data berhasil disimpan!');
     }
 
 
@@ -295,10 +289,9 @@ class AdminKecematanWisataController extends Controller
             'foto_kegiatan' => $imagePath ?? $kanvasingWisata->foto_kegiatan,
         ]));
 
-        return response()->json([
-            'message' => 'Data berhasil diperbarui!',
-            'data' => $kanvasingWisata
-        ], 200);
+        return back()->with('success', 'Data berhasil diperbarui.');
+
+
     }
 
 
@@ -306,10 +299,8 @@ class AdminKecematanWisataController extends Controller
     {
         $kanvasingWisata = KanvasingWisata::findOrFail($id);
         $kanvasingWisata->delete();
+        return back()->with('success', 'Data berhasil dihapus.');
 
-        return response()->json([
-            'message' => 'Data berhasil dihapus!'
-        ], 200);
     }
 
 
