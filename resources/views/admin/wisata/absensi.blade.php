@@ -35,7 +35,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $wisata->nama_responden }}</td>
                                     <td>{{ $wisata->no_ktp }}</td>
-                                    <td>{{ $wisata->kecamatan->nama_kecamatan }}</td>
+                                    <td>{{ $wisata->kecematan->nama_kecamatan }}</td>
                                     <td>{{ $wisata->pekerjaan->name }}</td>
                                     <td>{{ $wisata->jadwal }}</td>
                                     <td>{{ $wisata->status ? 'Onsite' : 'Booking' }}</td>
