@@ -182,11 +182,11 @@
         $('#kecematan_id').change(function() {
                 var kecamatanId = $(this).val();
                 $('#kelurahan_id').empty().append(
-                    '<option value="">Pilih Kelurahan</option>');
+                    '<option value="">Pilih Kelurahan</option>'); // Kosongkan dropdown kelurahan
 
                 if (kecamatanId) {
                     $.ajax({
-                        url: 'admin/timwisata/admin/kecematan/admin/wisata/kelurahans/' + kecamatanId,
+                        url: 'admin/timwisata/admin/kecematan/wisata/kelurahans/' + kecamatanId,
                         method: 'GET',
                         success: function(data) {
                             $.each(data, function(index, kelurahan) {
