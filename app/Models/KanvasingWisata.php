@@ -48,9 +48,15 @@ class KanvasingWisata extends Model
     }
 
     // Relasi belongsTo ke model Kecamatan
-    public function kecamatan()
+    public function kecematan()
     {
-        return $this->belongsTo(Kecematan::class, 'kecematan_id');
+        return $this->belongsTo(Kecematan::class, 'kecematan_id'); // Ganti 'kecematan_id' dengan nama kolom yang sesuai
+    }
+
+    // Relasi ke model Pekerjaan
+    public function pekerjaan()
+    {
+        return $this->belongsTo(Pekerjaan::class, 'pekerjaan_id'); // Ganti 'pekerjaan_id' dengan nama kolom yang sesuai
     }
 
     // Relasi belongsTo ke model Kelurahan
@@ -59,9 +65,5 @@ class KanvasingWisata extends Model
         return $this->belongsTo(Kelurahan::class, 'kelurahan_id');
     }
 
-    // Relasi belongsTo ke model Pekerjaan
-    public function pekerjaan()
-    {
-        return $this->belongsTo(pekerjaan::class, 'pekerjaan_id');
-    }
+
 }
