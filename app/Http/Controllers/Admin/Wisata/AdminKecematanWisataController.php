@@ -185,27 +185,38 @@ class AdminKecematanWisataController extends Controller
 
     public function Kanvasing()
     {
-        $wisatas = KanvasingWisata::with(['kecematan', 'pekerjaan'])->get();
+        // Get the authenticated user's ID
+        $user_id = Auth::guard('admin')->user()->id;
 
+        // Retrieve the KanvasingWisata records for the logged-in user
+        $wisatas = KanvasingWisata::with(['kecematan', 'pekerjaan'])
+            ->where('user_id', $user_id) // Filter by user_id
+            ->get();
 
         $kecamatans = Kecematan::all();
-        $pekerjaans  = pekerjaan::all();
+        $pekerjaans = Pekerjaan::all(); // Make sure the class name is correct
 
-
-        return view('admin.wisata.kanvasing', compact('wisatas','kecamatans', 'pekerjaans'));
+        return view('admin.wisata.kanvasing', compact('wisatas', 'kecamatans', 'pekerjaans'));
     }
 
     public function Absensi()
     {
+        // Get the authenticated user's ID
+        $user_id = Auth::guard('admin')->user()->id;
+
         $today = Carbon::today();
         $kecamatans = Kecematan::all();
-        $pekerjaans  = pekerjaan::all();
+        $pekerjaans = Pekerjaan::all(); // Make sure the class name is correct
+
+        // Retrieve the KanvasingWisata records for the logged-in user on today's date
         $wisatas = KanvasingWisata::with(['kecematan', 'pekerjaan'])
-            ->whereDate('jadwal', $today) // Filter berdasarkan tanggal
+            ->where('user_id', $user_id) // Filter by user_id
+            ->whereDate('jadwal', $today) // Filter based on date
             ->get();
 
-        return view('admin.wisata.absensi', compact('wisatas','kecamatans', 'pekerjaans'));
+        return view('admin.wisata.absensi', compact('wisatas', 'kecamatans', 'pekerjaans'));
     }
+
 
 
     public function storeWisata(Request $request)
