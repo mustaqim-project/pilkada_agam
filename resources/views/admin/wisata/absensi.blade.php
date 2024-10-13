@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Kanvasing Wisata</h1>
+            <h1>Absensi Wisata</h1>
         </div>
 
         <div class="card card-primary">
@@ -39,7 +39,14 @@
                                     <td>{{ $wisata->pekerjaan->name }}</td>
                                     <td>{{ $wisata->jadwal }}</td>
                                     <td>{{ $wisata->status ? 'Onsite' : 'Booking' }}</td>
-                                    <td>{{ $wisata->hadir ? 'Ya' : 'Tidak' }}</td>
+                                    <td>
+                                        <label class="custom-switch mt-2">
+                                            <input {{ $wisata->hadir === 1 ? 'checked' : '' }}
+                                                data-id="{{ $wisata->id }}" data-name="status"
+                                                value="1" type="checkbox" class="custom-switch-input toggle-status">
+                                            <span class="custom-switch-indicator"></span>
+                                        </label>
+                                    </td>
                                     <td>
                                         <!-- Tombol Edit Wisata -->
                                         <button type="button" class="btn btn-warning" data-toggle="modal"
@@ -138,10 +145,10 @@
                         </div>
 
                         <!-- Hidden input for Status with default value 0 -->
-                        <input type="hidden" name="status" value="0">
+                        <input type="hidden" name="status" value="1">
 
                         <!-- Hidden input for Hadir with default value 0 -->
-                        <input type="hidden" name="hadir" value="0">
+                        <input type="hidden" name="hadir" value="1">
 
 
                     </div>
@@ -204,6 +211,36 @@
         });
 
         $(document).ready(function() {
+
+            $('.toggle-status').on('click', function(){
+                let id = $(this).data('id');
+                let name = $(this).data('name');
+                let status = $(this).prop('checked') ? 1 : 0;
+
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route(' admin.timwisata.admin.kecematan.toggleHadir') }}",
+                    data: {
+                        id:id,
+                        name:name,
+                        status:status
+                    },
+                    success: function(data){
+                        if(data.status === 'success'){
+                            Toast.fire({
+                                icon: 'success',
+                                title: data.message
+                            })
+                        }
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                })
+            })
+
+
+
             $('#kecematan_id').change(function() {
                 var kecamatanId = $(this).val();
                 $('#kelurahan_id').empty().append(
