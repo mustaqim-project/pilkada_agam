@@ -211,14 +211,10 @@ class AdminKecematanWisataController extends Controller
     public function storeWisata(Request $request)
     {
 
-        if (!auth()->check()) {
-            return response()->json(['message' => 'User is not authenticated'], 401);
-        }
 
-        // Ambil ID pengguna yang terautentikasi
-        $userId = auth()->id();
+        $userId = Auth::guard('admin')->user()->id;
 
-        // Debug ID pengguna
+
         dd('Authenticated User ID:', $userId);
 
         $request->validate([
@@ -238,7 +234,7 @@ class AdminKecematanWisataController extends Controller
 
 
         $kanvasingWisata = new KanvasingWisata();
-        $kanvasingWisata->user_id = auth()->id();
+        $kanvasingWisata->user_id = Auth::guard('admin')->user()->id;
         $kanvasingWisata->kecematan_id = $request->kecematan_id;
         $kanvasingWisata->kelurahan_id = $request->kelurahan_id;
         $kanvasingWisata->no_ktp = $request->no_ktp;
