@@ -183,7 +183,7 @@
 
                 if (kecamatanId) {
                     $.ajax({
-                        url: 'admin/timwisata/admin/kecematan/wisata/kelurahans/' + kecamatanId,
+                        url: 'wisata/kelurahans/' + kecamatanId,
                         method: 'GET',
                         success: function(data) {
                             $.each(data, function(index, kelurahan) {
