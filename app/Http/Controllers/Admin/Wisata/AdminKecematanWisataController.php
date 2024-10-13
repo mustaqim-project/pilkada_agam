@@ -25,40 +25,6 @@ class AdminKecematanWisataController extends Controller
     public function dashboard()
     {
 
-
-            // Ambil data dari database
-            $data = DB::table('kanvasing_wisata')->select('status', 'hadir')->get();
-
-            // Inisialisasi variabel untuk menghitung kehadiran
-            $totalBooking = 0;
-            $totalOnsite = 0;
-            $hadirBooking = 0;
-            $hadirOnsite = 0;
-
-            foreach ($data as $item) {
-                // Hitung total berdasarkan status
-                if ($item->status == 0) { // Status Booking
-                    $totalBooking++;
-                    if ($item->hadir == 1) {
-                        $hadirBooking++;
-                    }
-                } elseif ($item->status == 1) { // Status Onsite
-                    $totalOnsite++;
-                    if ($item->hadir == 1) {
-                        $hadirOnsite++;
-                    }
-                }
-            }
-
-            // Hitung persentase
-            $persentaseHadirBooking = $totalBooking > 0 ? ($hadirBooking / $totalBooking) * 100 : 0;
-            $persentaseHadirOnsite = $totalOnsite > 0 ? ($hadirOnsite / $totalOnsite) * 100 : 0;
-            $persentaseTidakHadirBooking = $totalBooking > 0 ? ((($totalBooking - $hadirBooking) / $totalBooking) * 100) : 0;
-            $persentaseTidakHadirOnsite = $totalOnsite > 0 ? ((($totalOnsite - $hadirOnsite) / $totalOnsite) * 100) : 0;
-
-
-
-
         $jumlahRespondenJenisKelamin = KanvasingWisata::select('jenis_kelamin', DB::raw('COUNT(*) AS jumlah_responden'))
             ->groupBy('jenis_kelamin')
             ->get();
@@ -169,11 +135,7 @@ class AdminKecematanWisataController extends Controller
             'jumlahKeseluruhanTerupdate',
             'aktivitasPerPromosi',
             'rataRataRespondenPerUser',
-            'jumlahRespondenWilayah',
-            'persentaseHadirBooking',
-            'persentaseHadirOnsite',
-            'persentaseTidakHadirBooking',
-            'persentaseTidakHadirOnsite',
+            'jumlahRespondenWilayah'
         ));
     }
 
