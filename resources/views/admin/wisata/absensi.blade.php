@@ -38,7 +38,7 @@
                                 <td>{{ $wisata->kecematan->nama_kecamatan }}</td>
                                 <td>{{ $wisata->pekerjaan->name }}</td>
                                 <td>{{ $wisata->jadwal }}</td>
-                                <td>{{ $wisata->status ? 'Booking' : 'Onsite' }}</td>
+                                <td>{{ $wisata->status ? 'Onsite' : 'Booking' }}</td>
                                 <td>{{ $wisata->hadir ? 'Ya' : 'Tidak' }}</td>
                                 <td>
                                     <!-- Tombol Edit Wisata -->
@@ -134,10 +134,7 @@
                     <!-- Hidden input for Hadir with default value 0 -->
                     <input type="hidden" name="hadir" value="0">
 
-                    <div class="form-group">
-                        <label for="foto_kegiatan" class="form-label">Foto Kegiatan</label>
-                        <input type="file" name="foto_kegiatan" id="foto_kegiatan" class="form-control">
-                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -182,11 +179,11 @@
         $('#kecematan_id').change(function() {
                 var kecamatanId = $(this).val();
                 $('#kelurahan_id').empty().append(
-                    '<option value="">Pilih Kelurahan</option>'); // Kosongkan dropdown kelurahan
+                    '<option value="">Pilih Kelurahan</option>');
 
                 if (kecamatanId) {
                     $.ajax({
-                        url: 'admin/timwisata/admin/kecematan/wisata/kelurahans/' + kecamatanId,
+                        url: + kecamatanId,
                         method: 'GET',
                         success: function(data) {
                             $.each(data, function(index, kelurahan) {
