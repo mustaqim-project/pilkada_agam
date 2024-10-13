@@ -211,8 +211,16 @@ class AdminKecematanWisataController extends Controller
     public function storeWisata(Request $request)
     {
 
+        if (!auth()->check()) {
+            return response()->json(['message' => 'User is not authenticated'], 401);
+        }
+
+        // Ambil ID pengguna yang terautentikasi
         $userId = auth()->id();
+
+        // Debug ID pengguna
         dd('Authenticated User ID:', $userId);
+
         $request->validate([
             'kecematan_id' => 'required',
             'kelurahan_id' => 'required',
