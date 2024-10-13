@@ -447,7 +447,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
             ->name('timwisata.admin.kecematan.deleteWisata');
 
         // Route untuk mengambil data kelurahan berdasarkan kecamatan
-        Route::post('/get-kelurahans', [AdminKecematanWisataController::class, 'getKelurahans'])
+        Route::post('/wisata/kelurahans/{kecamatan_id}', [AdminKecematanWisataController::class, 'getKelurahans'])
             ->name('timwisata.admin.kecematan.getKelurahans');
     });
 });

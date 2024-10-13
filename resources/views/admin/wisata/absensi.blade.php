@@ -86,7 +86,7 @@
                     </div>
                     <div class="form-group">
                         <label for="kelurahan_id" class="form-label">Kecamatan</label>
-                        <select name="kelurahan_id" id="kelurahan_id" required>
+                        <select name="kelurahan_id" id="kelurahan_id" class="form-control" required>
                             <option value="">Pilih Kelurahan</option>
                         </select>
                     </div>
@@ -186,7 +186,7 @@
 
                 if (kecamatanId) {
                     $.ajax({
-                        url: '/kelurahans/' + kecamatanId,
+                        url: 'admin/wisata/kelurahans/' + kecamatanId,
                         method: 'GET',
                         success: function(data) {
                             $.each(data, function(index, kelurahan) {
