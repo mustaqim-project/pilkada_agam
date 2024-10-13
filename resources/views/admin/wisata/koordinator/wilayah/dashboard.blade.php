@@ -5,7 +5,41 @@
         <div class="section-header">
             <h1>Dashboard Wisata - Data Responden</h1>
         </div>
-
+        <h1>Dashboard Kehadiran</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Hadir</th>
+                    <th>Tidak Hadir</th>
+                    <th>Persentase Hadir (%)</th>
+                    <th>Persentase Tidak Hadir (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($persentaseKehadiran as $data)
+                <tr>
+                    <td>{{ $data->status == 0 ? 'Booking' : 'Onsite' }}</td>
+                    <td>{{ $data->total }}</td>
+                    <td>{{ $data->hadir }}</td>
+                    <td>{{ $data->tidak_hadir }}</td>
+                    <td>{{ number_format($data->persentase_hadir, 2) }}</td>
+                    <td>{{ number_format($data->persentase_tidak_hadir, 2) }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <th>{{ array_sum(array_column($persentaseKehadiran, 'total')) }}</th>
+                    <th>{{ array_sum(array_column($persentaseKehadiran, 'hadir')) }}</th>
+                    <th>{{ array_sum(array_column($persentaseKehadiran, 'tidak_hadir')) }}</th>
+                    <th>100.00</th> <!-- Karena total persentase harus 100% -->
+                    <th>0.00</th> <!-- Tidak ada persentase tidak hadir -->
+                </tr>
+            </tfoot>
+        </table>
         <div class="row mb-4">
             <!-- Total Responden Berdasarkan Jenis Kelamin -->
             <div class="col-md-6">
