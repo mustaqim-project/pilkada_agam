@@ -42,8 +42,8 @@
                                     <td>
                                         <label class="custom-switch mt-2">
                                             <input {{ $wisata->hadir === 1 ? 'checked' : '' }}
-                                                data-id="{{ $wisata->id }}" data-name="status"
-                                                value="1" type="checkbox" class="custom-switch-input toggle-status">
+                                                data-id="{{ $wisata->id }}" data-name="hadir"
+                                                value="1" type="checkbox" class="custom-switch-input toggle-hadir">
                                             <span class="custom-switch-indicator"></span>
                                         </label>
                                     </td>
@@ -212,7 +212,7 @@
 
         $(document).ready(function() {
 
-            $('.toggle-status').on('click', function(){
+            $('.toggle-hadir').on('click', function(){
                 let id = $(this).data('id');
                 let name = $(this).data('name');
                 let status = $(this).prop('checked') ? 1 : 0;
