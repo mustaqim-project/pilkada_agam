@@ -277,6 +277,8 @@ class AdminKecematanWisataController extends Controller
         $data_ganda->no_ktp = $request->no_ktp;
         $data_ganda->nama_responden = $request->nama_responden;
         $data_ganda->alamat = $request->alamat;
+        $data_ganda->longitude = 0;
+        $data_ganda->latitude = 0;
         $data_ganda->save();
 
         return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
