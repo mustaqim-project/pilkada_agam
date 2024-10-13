@@ -29,18 +29,31 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-
                     <div class="form-group">
-                        <label for="">{{ __('admin.Password') }}</label>
-                        <input type="password" class="form-control" name="password">
+                        <label for="password">{{ __('admin.Password') }}</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" name="password" id="password">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
+                                    <i class="fa fa-eye" id="eyeIcon"></i>
+                                </span>
+                            </div>
+                        </div>
                         @error('password')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="">{{ __('admin.Confirm Password') }}</label>
-                        <input type="password" class="form-control" name="password_confirmation">
+                        <label for="password_confirmation">{{ __('admin.Confirm Password') }}</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="togglePasswordConfirmation" style="cursor: pointer;">
+                                    <i class="fa fa-eye" id="eyeIconConfirmation"></i>
+                                </span>
+                            </div>
+                        </div>
                         @error('password_confirmation')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -138,4 +151,27 @@
             </div>
         </div>
     </section>
+
+
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            const isPasswordVisible = passwordInput.type === 'text';
+
+            passwordInput.type = isPasswordVisible ? 'password' : 'text';
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');
+        });
+
+        document.getElementById('togglePasswordConfirmation').addEventListener('click', function () {
+            const passwordConfirmationInput = document.getElementById('password_confirmation');
+            const eyeIconConfirmation = document.getElementById('eyeIconConfirmation');
+            const isPasswordVisible = passwordConfirmationInput.type === 'text';
+
+            passwordConfirmationInput.type = isPasswordVisible ? 'password' : 'text';
+            eyeIconConfirmation.classList.toggle('fa-eye');
+            eyeIconConfirmation.classList.toggle('fa-eye-slash');
+        });
+    </script>
 @endsection
