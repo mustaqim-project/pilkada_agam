@@ -228,7 +228,6 @@ class AdminKecematanWisataController extends Controller
             'hadir' => 'required|boolean',
         ]);
 
-        $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
 
         $kanvasingWisata = new KanvasingWisata();
         $kanvasingWisata->user_id = auth()->id();
@@ -289,14 +288,11 @@ class AdminKecematanWisataController extends Controller
             'jadwal' => 'required|date',
             'status' => 'required|boolean',
             'hadir' => 'required|boolean',
-            'foto_kegiatan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $kanvasingWisata = KanvasingWisata::findOrFail($id);
 
-        $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
 
-        // Update data sesuai request dan handle foto jika ada
         $kanvasingWisata->user_id = $request->user_id;
         $kanvasingWisata->kecematan_id = $request->kecematan_id;
         $kanvasingWisata->kelurahan_id = $request->kelurahan_id;
@@ -310,10 +306,7 @@ class AdminKecematanWisataController extends Controller
         $kanvasingWisata->status = $request->status == 1 ? 1 : 0;
         $kanvasingWisata->hadir = $request->hadir == 1 ? 1 : 0;
 
-        // Jika ada foto baru, simpan path-nya, jika tidak gunakan yang lama
-        if ($imagePath) {
-            $kanvasingWisata->foto_kegiatan = $imagePath;
-        }
+
 
         $kanvasingWisata->save();
 

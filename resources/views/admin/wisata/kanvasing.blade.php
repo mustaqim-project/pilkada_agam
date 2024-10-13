@@ -134,10 +134,7 @@
                     <!-- Hidden input for Hadir with default value 0 -->
                     <input type="hidden" name="hadir" value="0">
 
-                    <div class="form-group">
-                        <label for="foto_kegiatan" class="form-label">Foto Kegiatan</label>
-                        <input type="file" name="foto_kegiatan" id="foto_kegiatan" class="form-control">
-                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
