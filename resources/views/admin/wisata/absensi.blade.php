@@ -20,13 +20,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nama Responden</th>
-                                <th>No KTP</th>
-                                <th>Kecamatan</th>
-                                <th>Pekerjaan</th>
-                                <th>Jadwal</th>
-                                <th>Status</th>
                                 <th>Hadir</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,11 +28,6 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $wisata->nama_responden }}</td>
-                                    <td>{{ $wisata->no_ktp }}</td>
-                                    <td>{{ $wisata->kecematan->nama_kecamatan }}</td>
-                                    <td>{{ $wisata->pekerjaan->name }}</td>
-                                    <td>{{ $wisata->jadwal }}</td>
-                                    <td>{{ $wisata->status ? 'Onsite' : 'Booking' }}</td>
                                     <td>
                                         <label class="custom-switch mt-2">
                                             <input {{ $wisata->hadir === 1 ? 'checked' : '' }} data-id="{{ $wisata->id }}"
@@ -46,22 +35,6 @@
                                                 class="custom-switch-input toggle-hadir">
                                             <span class="custom-switch-indicator"></span>
                                         </label>
-                                    </td>
-                                    <td>
-                                        <!-- Tombol Edit Wisata -->
-                                        <button type="button" class="btn btn-warning" data-toggle="modal"
-                                            data-target="#modalEditWisata" data-id="{{ $wisata->id }}">
-                                            Edit
-                                        </button>
-                                        <!-- Tombol Hapus Wisata -->
-                                        <form
-                                            action="{{ route('admin.timwisata.admin.kecematan.deleteWisata', $wisata->id) }}"
-                                            method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Yakin ingin menghapus wisata ini?')">Hapus</button>
-                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
