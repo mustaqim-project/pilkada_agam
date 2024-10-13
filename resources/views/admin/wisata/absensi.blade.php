@@ -219,7 +219,7 @@
 
                 $.ajax({
                     method: 'GET',
-                    url: "{{ route(' admin.timwisata.admin.kecematan.toggleHadir') }}",
+                    url: "{{ route('admin.timwisata.admin.kecematan.toggleHadir') }}",
                     data: {
                         id:id,
                         name:name,
