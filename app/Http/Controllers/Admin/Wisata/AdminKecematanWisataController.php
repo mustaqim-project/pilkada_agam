@@ -9,10 +9,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Report;
 use App\Models\Admin;
+use App\Models\Kecematan;
+use App\Models\Kelurahan;
+use App\Models\pekerjaan;
 
-
+use App\Traits\FileUploadTrait;
 class AdminKecematanWisataController extends Controller
 {
+
+    use FileUploadTrait;
+
     public function dashboard()
     {
         $jumlahRespondenJenisKelamin = KanvasingWisata::select('jenis_kelamin', DB::raw('COUNT(*) AS jumlah_responden'))
@@ -171,5 +177,145 @@ class AdminKecematanWisataController extends Controller
     {
         $report = Report::with(['creator', 'assignee'])->findOrFail($id);
         return view('admin.reports.show', compact('report'));
+    }
+
+
+    public function Kanvasing()
+    {
+        $kecamatans = Kecematan::all();
+        $pekerjaans  = pekerjaan::all();
+
+        return view('admin.wisata.kanvasing', compact('kecamatans', 'pekerjaans'));
+    }
+
+    public function Absensi()
+    {
+        $wisatas = KanvasingWisata::all();
+        $kecamatans = Kecematan::all();
+        $pekerjaans  = pekerjaan::all();
+
+        return view('admin.wisata.absensi', compact('wisatas','kecamatans', 'pekerjaans'));
+    }
+
+
+    public function storeWisata(Request $request)
+    {
+
+        // dd($request);
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'kecematan_id' => 'required',
+            'kelurahan_id' => 'required',
+            'no_ktp' => 'required|string|max:16',
+            'nama_responden' => 'required|string|max:255',
+            'tgl_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|string|max:10',
+            'pekerjaan_id' => 'required',
+            'alamat' => 'required|string|max:255',
+            'jadwal' => 'required|date',
+        ]);
+
+
+        $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
+
+        // Membuat instance KanvasingWisata baru
+        $kanvasingWisata = new KanvasingWisata();
+        $kanvasingWisata->user_id = $request->user_id;
+        $kanvasingWisata->kecematan_id = $request->kecematan_id;
+        $kanvasingWisata->kelurahan_id = $request->kelurahan_id;
+        $kanvasingWisata->no_ktp = $request->no_ktp;
+        $kanvasingWisata->nama_responden = $request->nama_responden;
+        $kanvasingWisata->tgl_lahir = $request->tgl_lahir;
+        $kanvasingWisata->jenis_kelamin = $request->jenis_kelamin;
+        $kanvasingWisata->pekerjaan_id = $request->pekerjaan_id;
+        $kanvasingWisata->alamat = $request->alamat;
+        $kanvasingWisata->jadwal = $request->jadwal;
+        $kanvasingWisata->status = $request->status == 0 ;
+        $kanvasingWisata->hadir = $request->hadir == 0 ;
+
+        // $kanvasingWisata->foto_kegiatan = !empty($imagePath) ? $imagePath : null;
+        // $kanvasingWisata->brosur = $request->brosur;
+        // $kanvasingWisata->stiker = $request->stiker;
+        // $kanvasingWisata->kartu_coblos = $request->kartu_coblos;
+        // $kanvasingWisata->longitude = $request->longitude;
+        // $kanvasingWisata->latitude = $request->latitude;
+
+        $kanvasingWisata->save();
+
+
+        $data_ganda = new data_ganda();
+        $data_ganda->kecematan = $request->kecematan_id;
+        $data_ganda->nagari = $request->kelurahan_id;
+        $data_ganda->no_ktp = $request->no_ktp;
+        $data_ganda->nama_responden = $request->nama_responden;
+        $data_ganda->alamat = $request->alamat;
+        $data_ganda->save();
+
+
+        return redirect()->route('kanvasing_wisata.create')->with('message', 'Data berhasil disimpan!');
+    }
+
+
+
+
+    public function toggleHadir(Request $request)
+    {
+        try {
+            $wisata = KanvasingWisata::findOrFail($request->id);
+            $wisata->{$request->nama_responden} = $request->hadir;
+            $wisata->save();
+
+            return response(['status' => 'success', 'message' => __('admin.Updated successfully!')]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function updateWisata(Request $request, $id)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'kecematan_id' => 'required',
+            'kelurahan_id' => 'required',
+            'no_kk' => 'required|string|max:16',
+            'nama_responden' => 'required|string|max:255',
+            'tgl_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|string|max:10',
+            'pekerjaan_id' => 'required',
+            'alamat' => 'required|string|max:255',
+            'foto_kegiatan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+
+        ]);
+
+        $kanvasingWisata = KanvasingWisata::findOrFail($id);
+
+        $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
+
+        $kanvasingWisata->update(array_merge($request->all(), [
+            'foto_kegiatan' => $imagePath ?? $kanvasingWisata->foto_kegiatan,
+        ]));
+
+        return response()->json([
+            'message' => 'Data berhasil diperbarui!',
+            'data' => $kanvasingWisata
+        ], 200);
+    }
+
+
+    public function destroy($id)
+    {
+        $kanvasingWisata = KanvasingWisata::findOrFail($id);
+        $kanvasingWisata->delete();
+
+        return response()->json([
+            'message' => 'Data berhasil dihapus!'
+        ], 200);
+    }
+
+
+    public function getKelurahans(Request $request)
+    {
+        $kelurahans = Kelurahan::where('kecamatan_id', $request->kecamatan_id)->get();
+        return response()->json($kelurahans);
     }
 }

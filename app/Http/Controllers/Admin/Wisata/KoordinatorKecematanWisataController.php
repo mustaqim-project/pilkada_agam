@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Report;
 use App\Models\Admin;
-use App\Models\Kecematan;
-use App\Models\Kelurahan;
-use App\Models\pekerjaan;
+
 
 class KoordinatorKecematanWisataController extends Controller
 {
@@ -176,21 +174,6 @@ class KoordinatorKecematanWisataController extends Controller
     }
 
 
-    public function kanvasing()
-    {
-        $kecamatans = Kecematan::all();
-        $pekerjaans  = pekerjaan::all();
 
-        return view('admin.wisata.kanvasing', compact('kecamatans', 'pekerjaans'));
-    }
-
-    public function absensi()
-    {
-        $wisatas = KanvasingWisata::all();
-        $kecamatans = Kecematan::all();
-        $pekerjaans  = pekerjaan::all();
-
-        return view('admin.wisata.absensi', compact('wisatas','kecamatans', 'pekerjaans'));
-    }
 
 }
