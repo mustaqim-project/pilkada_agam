@@ -608,7 +608,7 @@
                     </li>
                 @endif
 
-                @if (canAccess(['koordinator wilayah wisata']))
+                @if (canAccess(['Tim Inti Wisata']))
                     <li class="dropdown {{ setSidebarActive(['admin.timwisata.*']) }}">
                         <a href="#" class="nav-link has-dropdown">
                             <i class="fas fa-users"></i>
@@ -677,6 +677,9 @@
                                         </li>
                                     </ul>
                                 </li>
+                                @endif
+                                @if (canAccess(['koordinator admin wisata']))
+
                                 <li
                                     class="dropdown {{ setSidebarActive(['admin.timwisata.admin.kecematan.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">
@@ -714,6 +717,9 @@
                                     </ul>
                                 </li>
                             @endif
+
+
+
                         </ul>
                     </li>
                 @endif
