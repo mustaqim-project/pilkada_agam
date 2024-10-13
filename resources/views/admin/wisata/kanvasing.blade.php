@@ -85,8 +85,10 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="kelurahan_id" class="form-label">Kelurahan</label>
-                        <input type="text" name="kelurahan_id" id="kelurahan_id" class="form-control" required>
+                        <label for="kelurahan_id" class="form-label">Kecamatan</label>
+                        <select name="kelurahan_id" id="kelurahan_id" required>
+                            <option value="">Pilih Kelurahan</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="no_ktp" class="form-label">No KTP</label>
@@ -94,7 +96,7 @@
                     </div>
                     <div class="form-group">
                         <label for="nama_responden" class="form-label">Nama Responden</label>
-                        <input type="text" name="nama_responden" id="nama_responden" class="form-control" required>
+                        <input type="text" name="nama_responden" id="nama_responden" class="form-control" required maxlength="255">
                     </div>
                     <div class="form-group">
                         <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
@@ -119,26 +121,19 @@
                     </div>
                     <div class="form-group">
                         <label for="alamat" class="form-label">Alamat</label>
-                        <input type="text" name="alamat" id="alamat" class="form-control" required>
+                        <input type="text" name="alamat" id="alamat" class="form-control" required maxlength="255">
                     </div>
                     <div class="form-group">
                         <label for="jadwal" class="form-label">Jadwal</label>
                         <input type="date" name="jadwal" id="jadwal" class="form-control" required>
                     </div>
-                    <div class="form-group">
-                        <label for="status" class="form-label">Status</label>
-                        <select name="status" id="status" class="form-control" required>
-                            <option value="1">Aktif</option>
-                            <option value="0">Nonaktif</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="hadir" class="form-label">Hadir</label>
-                        <select name="hadir" id="hadir" class="form-control" required>
-                            <option value="1">Ya</option>
-                            <option value="0">Tidak</option>
-                        </select>
-                    </div>
+
+                    <!-- Hidden input for Status with default value 0 -->
+                    <input type="hidden" name="status" value="0">
+
+                    <!-- Hidden input for Hadir with default value 0 -->
+                    <input type="hidden" name="hadir" value="0">
+
                     <div class="form-group">
                         <label for="foto_kegiatan" class="form-label">Foto Kegiatan</label>
                         <input type="file" name="foto_kegiatan" id="foto_kegiatan" class="form-control">
@@ -152,6 +147,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Modal Edit Wisata -->
 <div class="modal fade" id="modalEditWisata" tabindex="-1" aria-labelledby="modalEditWisataLabel" aria-hidden="true">
@@ -183,31 +179,25 @@
 @push('scripts')
 <script>
     $(document).ready(function () {
-        // Handle edit button click
-        $('#modalEditWisata').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var id = button.data('id');
+        $('#kecematan_id').change(function() {
+                var kecamatanId = $(this).val();
+                $('#kelurahan_id').empty().append(
+                    '<option value="">Pilih Kelurahan</option>'); // Kosongkan dropdown kelurahan
 
-            // Set the action attribute in the form to the correct URL
-            $('#formEditWisata').attr('action', '/admin/wisata/' + id);
-
-            // Fetch and fill in the form with existing data
-            $.get('/admin/wisata/' + id + '/edit', function (data) {
-                var wisata = data.wisata;
-                // Populate the form fields dynamically using jQuery
-                $('#formEditWisata .modal-body').html(`
-                    <div class="form-group">
-                        <label for="edit_nama_responden" class="form-label">Nama Responden</label>
-                        <input type="text" name="nama_responden" id="edit_nama_responden" class="form-control" value="${wisata.nama_responden}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_no_ktp" class="form-label">No KTP</label>
-                        <input type="text" name="no_ktp" id="edit_no_ktp" class="form-control" value="${wisata.no_ktp}" required maxlength="16">
-                    </div>
-                    <!-- Add more fields as necessary -->
-                `);
+                if (kecamatanId) {
+                    $.ajax({
+                        url: '/kelurahans/' + kecamatanId,
+                        method: 'GET',
+                        success: function(data) {
+                            $.each(data, function(index, kelurahan) {
+                                $('#kelurahan_id').append('<option value="' + kelurahan
+                                    .id + '">' + kelurahan.nama_kelurahan +
+                                    '</option>');
+                            });
+                        }
+                    });
+                }
             });
-        });
     });
 </script>
 @endpush

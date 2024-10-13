@@ -221,6 +221,7 @@ class AdminKecematanWisataController extends Controller
             'tgl_lahir' => 'required|date',
             'jenis_kelamin' => 'required|string|max:10',
             'pekerjaan_id' => 'required',
+            'foto_kegiatan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'alamat' => 'required|string|max:255',
             'jadwal' => 'required|date',
             'status' => 'required|boolean',
