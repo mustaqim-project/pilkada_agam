@@ -74,15 +74,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="user_id" class="form-label">User</label>
-                        <select name="user_id" id="user_id" class="form-control" required>
-                            <option value="">Pilih User</option>
-                            @foreach($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+
                     <div class="form-group">
                         <label for="kecematan_id" class="form-label">Kecamatan</label>
                         <select name="kecematan_id" id="kecematan_id" class="form-control" required>
