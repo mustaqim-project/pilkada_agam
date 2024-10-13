@@ -210,9 +210,7 @@ class AdminKecematanWisataController extends Controller
 
     public function storeWisata(Request $request)
     {
-
-
-
+        // Validasi inputan
         $request->validate([
             'kecematan_id' => 'required',
             'kelurahan_id' => 'required',
@@ -228,7 +226,21 @@ class AdminKecematanWisataController extends Controller
             'hadir' => 'required|boolean',
         ]);
 
+        // Cek apakah no_ktp sudah ada
+        $existingKTP = KanvasingWisata::where('no_ktp', $request->no_ktp)->first();
+        if ($existingKTP) {
+            return redirect()->back()->with('error', 'Data sudah tersedia.')->withInput();
+        }
 
+        // Cek usia
+        $birthDate = new \Carbon\Carbon($request->tgl_lahir);
+        $age = $birthDate->diffInYears(now());
+
+        if ($age < 17 || $age > 35) {
+            return redirect()->back()->with('error', 'Usia melebihi atau kurang dari 17-35 tahun.')->withInput();
+        }
+
+        // Jika validasi berhasil, simpan data
         $kanvasingWisata = new KanvasingWisata();
         $kanvasingWisata->user_id = Auth::guard('admin')->user()->id;
         $kanvasingWisata->kecematan_id = $request->kecematan_id;
@@ -253,8 +265,10 @@ class AdminKecematanWisataController extends Controller
         $data_ganda->alamat = $request->alamat;
         $data_ganda->save();
 
-        return back()->with('success', 'Data berhasil ditambahkan.');
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
     }
+
+
 
 
 
