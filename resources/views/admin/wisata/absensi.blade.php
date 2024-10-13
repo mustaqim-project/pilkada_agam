@@ -46,7 +46,7 @@
                                         Edit
                                     </button>
                                     <!-- Tombol Hapus Wisata -->
-                                    <form action="{{ route('admin.wisata.destroy', $wisata->id) }}" method="POST" style="display: inline;">
+                                    <form action="{{ route('admin.timwisata.admin.kecematan.deleteWisata', $wisata->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus wisata ini?')">Hapus</button>
@@ -65,7 +65,7 @@
 <div class="modal fade" id="modalTambahWisata" tabindex="-1" aria-labelledby="modalTambahWisataLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ route('admin.wisata.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.timwisata.admin.kecematan.storeWisata') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTambahWisataLabel">Tambah Wisata</h5>
