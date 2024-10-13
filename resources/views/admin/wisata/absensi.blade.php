@@ -35,15 +35,15 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $wisata->nama_responden }}</td>
                                     <td>{{ $wisata->no_ktp }}</td>
-                                    <td>{{ $wisata->kecematan->nama_kecamatan }}</td>
+                                    <td>{{ $wisata->kecamatan->nama_kecamatan }}</td>
                                     <td>{{ $wisata->pekerjaan->name }}</td>
                                     <td>{{ $wisata->jadwal }}</td>
                                     <td>{{ $wisata->status ? 'Onsite' : 'Booking' }}</td>
                                     <td>
                                         <label class="custom-switch mt-2">
-                                            <input {{ $wisata->hadir === 1 ? 'checked' : '' }}
-                                                data-id="{{ $wisata->id }}" data-name="hadir"
-                                                value="1" type="checkbox" class="custom-switch-input toggle-hadir">
+                                            <input {{ $wisata->hadir === 1 ? 'checked' : '' }} data-id="{{ $wisata->id }}"
+                                                data-name="hadir" value="1" type="checkbox"
+                                                class="custom-switch-input toggle-hadir">
                                             <span class="custom-switch-indicator"></span>
                                         </label>
                                     </td>
@@ -66,6 +66,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -211,33 +212,33 @@
         });
 
         $(document).ready(function() {
-
-            $('.toggle-hadir').on('click', function(){
+            $('.toggle-hadir').on('click', function() {
                 let id = $(this).data('id');
-                let name = $(this).data('name');
                 let status = $(this).prop('checked') ? 1 : 0;
 
                 $.ajax({
-                    method: 'GET',
+                    method: 'POST', // Ubah menjadi POST untuk lebih sesuai dengan tindakan
                     url: "{{ route('admin.timwisata.admin.kecematan.toggleHadir') }}",
                     data: {
-                        id:id,
-                        name:name,
-                        status:status
+                        id: id,
+                        hadir: status, // Kirim status hadir
+                        _token: '{{ csrf_token() }}' // Tambahkan token CSRF
                     },
-                    success: function(data){
-                        if(data.status === 'success'){
+                    success: function(data) {
+                        if (data.status === 'success') {
                             Toast.fire({
                                 icon: 'success',
                                 title: data.message
-                            })
+                            });
                         }
                     },
-                    error: function(error){
+                    error: function(error) {
                         console.log(error);
                     }
-                })
-            })
+                });
+            });
+
+
 
 
 

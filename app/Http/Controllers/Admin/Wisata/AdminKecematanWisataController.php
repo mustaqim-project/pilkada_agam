@@ -278,14 +278,15 @@ class AdminKecematanWisataController extends Controller
     {
         try {
             $wisata = KanvasingWisata::findOrFail($request->id);
-            $wisata->{$request->nama_responden} = $request->hadir;
+            $wisata->hadir = $request->hadir;
             $wisata->save();
 
             return response(['status' => 'success', 'message' => __('admin.Updated successfully!')]);
         } catch (\Throwable $th) {
-            throw $th;
+            return response(['status' => 'error', 'message' => __('admin.Update failed!')], 500); // Tangani error
         }
     }
+
 
     public function updateWisata(Request $request, $id)
     {
