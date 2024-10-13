@@ -187,18 +187,24 @@ class AdminKecematanWisataController extends Controller
     {
         $wisatas = KanvasingWisata::with(['kecematan', 'pekerjaan'])->get();
 
-        return view('admin.wisata.kanvasing', compact('wisatas'));
+
+        $kecamatans = Kecematan::all();
+        $pekerjaans  = pekerjaan::all();
+
+
+        return view('admin.wisata.kanvasing', compact('wisatas','kecamatans', 'pekerjaans'));
     }
 
     public function Absensi()
     {
         $today = Carbon::today();
-
+        $kecamatans = Kecematan::all();
+        $pekerjaans  = pekerjaan::all();
         $wisatas = KanvasingWisata::with(['kecematan', 'pekerjaan'])
             ->whereDate('jadwal', $today) // Filter berdasarkan tanggal
             ->get();
 
-        return view('admin.wisata.absensi', compact('wisatas'));
+        return view('admin.wisata.absensi', compact('wisatas','kecamatans', 'pekerjaans'));
     }
 
 
