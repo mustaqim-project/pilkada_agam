@@ -16,6 +16,7 @@ use App\Models\data_ganda;
 use Carbon\Carbon;
 
 use App\Traits\FileUploadTrait;
+
 class AdminKecematanWisataController extends Controller
 {
 
@@ -187,8 +188,6 @@ class AdminKecematanWisataController extends Controller
         $wisatas = KanvasingWisata::with(['kecematan', 'pekerjaan'])->get();
 
         return view('admin.wisata.kanvasing', compact('wisatas'));
-
-
     }
 
     public function Absensi()
@@ -206,8 +205,9 @@ class AdminKecematanWisataController extends Controller
     public function storeWisata(Request $request)
     {
 
+        $userId = auth()->id();
+        dd('Authenticated User ID:', $userId);
         $request->validate([
-            'user_id' => 'required|exists:users,id',
             'kecematan_id' => 'required',
             'kelurahan_id' => 'required',
             'no_ktp' => 'required|string|max:16',
@@ -221,11 +221,10 @@ class AdminKecematanWisataController extends Controller
             'hadir' => 'required|boolean',
         ]);
 
-
         $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
 
         $kanvasingWisata = new KanvasingWisata();
-        $kanvasingWisata->user_id = $request->user_id;
+        $kanvasingWisata->user_id = auth()->id();
         $kanvasingWisata->kecematan_id = $request->kecematan_id;
         $kanvasingWisata->kelurahan_id = $request->kelurahan_id;
         $kanvasingWisata->no_ktp = $request->no_ktp;
@@ -238,10 +237,7 @@ class AdminKecematanWisataController extends Controller
         $kanvasingWisata->status = $request->status == 1 ? 1 : 0;
         $kanvasingWisata->hadir = $request->hadir == 1 ? 1 : 0;
 
-
-
         $kanvasingWisata->save();
-
 
         $data_ganda = new data_ganda();
         $data_ganda->kecematan = $request->kecematan_id;
@@ -252,8 +248,8 @@ class AdminKecematanWisataController extends Controller
         $data_ganda->save();
 
         return back()->with('success', 'Data berhasil ditambahkan.');
-
     }
+
 
 
 
@@ -324,7 +320,6 @@ class AdminKecematanWisataController extends Controller
         $kanvasingWisata = KanvasingWisata::findOrFail($id);
         $kanvasingWisata->delete();
         return back()->with('success', 'Data berhasil dihapus.');
-
     }
 
 

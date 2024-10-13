@@ -74,7 +74,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
 
                     <div class="form-group">
                         <label for="kecematan_id" class="form-label">Kecamatan</label>
