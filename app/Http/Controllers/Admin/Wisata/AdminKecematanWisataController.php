@@ -13,6 +13,7 @@ use App\Models\Kecematan;
 use App\Models\Kelurahan;
 use App\Models\pekerjaan;
 use App\Models\data_ganda;
+use Carbon\Carbon;
 
 use App\Traits\FileUploadTrait;
 class AdminKecematanWisataController extends Controller
@@ -192,7 +193,11 @@ class AdminKecematanWisataController extends Controller
 
     public function Absensi()
     {
-        $wisatas = KanvasingWisata::with(['kecematan', 'pekerjaan'])->get();
+        $today = Carbon::today();
+
+        $wisatas = KanvasingWisata::with(['kecematan', 'pekerjaan'])
+            ->whereDate('jadwal', $today) // Filter berdasarkan tanggal
+            ->get();
 
         return view('admin.wisata.absensi', compact('wisatas'));
     }
