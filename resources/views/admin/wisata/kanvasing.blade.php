@@ -38,7 +38,7 @@
                                 <td>{{ $wisata->kecematan->nama_kecamatan }}</td>
                                 <td>{{ $wisata->pekerjaan->name }}</td>
                                 <td>{{ $wisata->jadwal }}</td>
-                                <td>{{ $wisata->status ? 'Booking' : 'Onsite' }}</td>
+                                <td>{{ $wisata->status ? 'Onsite' : 'Booking' }}</td>
                                 <td>{{ $wisata->hadir ? 'Ya' : 'Tidak' }}</td>
                                 <td>
                                     <!-- Tombol Edit Wisata -->
