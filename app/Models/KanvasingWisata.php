@@ -24,6 +24,7 @@ class KanvasingWisata extends Model
         'nama_responden',
         'tgl_lahir',
         'jenis_kelamin',
+        'no_hp',
         'pekerjaan_id',
         'alamat',
         'foto_kegiatan',

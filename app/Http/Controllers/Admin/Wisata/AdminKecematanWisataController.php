@@ -230,6 +230,7 @@ class AdminKecematanWisataController extends Controller
             'tgl_lahir' => 'required|date',
             'jenis_kelamin' => 'required|string|max:10',
             'pekerjaan_id' => 'required',
+            'no_hp' => 'required',
             'foto_kegiatan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'alamat' => 'required|string|max:255',
             'jadwal' => 'required|date',
@@ -259,6 +260,7 @@ class AdminKecematanWisataController extends Controller
         $kanvasingWisata->no_ktp = $request->no_ktp;
         $kanvasingWisata->nama_responden = $request->nama_responden;
         $kanvasingWisata->tgl_lahir = $request->tgl_lahir;
+        $kanvasingWisata->no_hp = $request->no_hp;
         $kanvasingWisata->jenis_kelamin = $request->jenis_kelamin;
         $kanvasingWisata->pekerjaan_id = $request->pekerjaan_id;
         $kanvasingWisata->alamat = $request->alamat;
