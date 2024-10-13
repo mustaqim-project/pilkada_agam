@@ -20,7 +20,6 @@ class KanvasingWisata extends Model
         'user_id',
         'kecematan_id',
         'kelurahan_id',
-        'no_kk',
         'no_ktp',
         'nama_responden',
         'tgl_lahir',
@@ -28,19 +27,18 @@ class KanvasingWisata extends Model
         'pekerjaan_id',
         'alamat',
         'foto_kegiatan',
-        'brosur',
-        'stiker',
-        'kartu_coblos',
-        'longitude',
-        'latitude',
+        'jadwal',
+        'hadir',
+        'status',
+
     ];
 
     // Casting tipe data secara otomatis
     protected $casts = [
         'tgl_lahir' => 'date',
-        'brosur' => 'boolean',
-        'stiker' => 'boolean',
-        'kartu_coblos' => 'boolean',
+        'jadwal' => 'date',
+        'hadir' => 'boolean',
+        'status' => 'boolean',
     ];
 
     // Relasi belongsTo ke model User
