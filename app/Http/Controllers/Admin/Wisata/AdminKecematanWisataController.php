@@ -183,21 +183,18 @@ class AdminKecematanWisataController extends Controller
 
     public function Kanvasing()
     {
-        $kecamatans = Kecematan::all();
-        $pekerjaans  = pekerjaan::all();
-        $wisatas = KanvasingWisata::all();
+        $wisatas = KanvasingWisata::with(['kecematan', 'pekerjaan'])->get();
+
+        return view('admin.wisata.kanvasing', compact('wisatas'));
 
 
-        return view('admin.wisata.kanvasing', compact('wisatas','kecamatans', 'pekerjaans'));
     }
 
     public function Absensi()
     {
-        $wisatas = KanvasingWisata::all();
-        $kecamatans = Kecematan::all();
-        $pekerjaans  = pekerjaan::all();
+        $wisatas = KanvasingWisata::with(['kecematan', 'pekerjaan'])->get();
 
-        return view('admin.wisata.absensi', compact('wisatas','kecamatans', 'pekerjaans'));
+        return view('admin.wisata.absensi', compact('wisatas'));
     }
 
 
