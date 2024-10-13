@@ -179,7 +179,7 @@
         $('#kecematan_id').change(function() {
                 var kecamatanId = $(this).val();
                 $('#kelurahan_id').empty().append(
-                    '<option value="">Pilih Kelurahan</option>'); // Kosongkan dropdown kelurahan
+                    '<option value="">Pilih Kelurahan</option>');
 
                 if (kecamatanId) {
                     $.ajax({
