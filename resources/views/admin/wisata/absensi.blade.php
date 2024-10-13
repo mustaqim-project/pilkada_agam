@@ -18,7 +18,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nama Responden</th>
+                                <th>Nama</th>
                                 <th>Hadir</th>
                             </tr>
                         </thead>
