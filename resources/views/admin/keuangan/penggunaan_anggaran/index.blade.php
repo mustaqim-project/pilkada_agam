@@ -231,29 +231,35 @@
 @endsection
 
 @section('script')
+    <!-- Include SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const successMessage = '{{ session('success') }}';
             const errorMessage = '{{ session('error') }}';
 
             if (successMessage) {
-                Toast.fire({
+                Swal.fire({
                     icon: 'success',
-                    title: successMessage
+                    title: 'Berhasil',
+                    text: successMessage,
+                    confirmButtonText: 'OK'
                 });
             }
 
             if (errorMessage) {
-                Toast.fire({
+                Swal.fire({
                     icon: 'error',
-                    title: errorMessage
+                    title: 'Error',
+                    text: errorMessage,
+                    confirmButtonText: 'OK'
                 });
             }
         });
 
-
         $(document).ready(function() {
-
             $("#tablePenggunaanAnggaran").dataTable({
                 "columnDefs": [{
                     "sortable": false,
@@ -266,3 +272,4 @@
         });
     </script>
 @endsection
+
