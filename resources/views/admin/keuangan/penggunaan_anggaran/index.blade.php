@@ -48,23 +48,14 @@
                             <td><img src="{{ $item->bukti_pembayaran }}" alt="Bukti" width="100"></td>
                             <td>{{ $item->keterangan }}</td>
                             <td>
-                                <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#detailModal{{ $item->id }}">
-                                        <i class="fas fa-eye"></i> <!-- Ikon untuk 'Lihat' -->
-                                    </button>
-                                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal{{ $item->id }}">
-                                        <i class="fas fa-edit"></i> <!-- Ikon untuk 'Edit' -->
-                                    </button>
-                                    <form action="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                            <i class="fas fa-trash"></i> <!-- Ikon untuk 'Hapus' -->
-                                        </button>
-                                    </form>
-                                </div>
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#detailModal{{ $item->id }}">Lihat</button>
+                                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal{{ $item->id }}">Edit</button>
+                                <form action="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                </form>
                             </td>
-
                         </tr>
 
                         <!-- Modal Detail -->
@@ -203,6 +194,11 @@
     </div>
 </div>
 
+@endsection
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 @endsection
 
 
