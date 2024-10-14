@@ -209,7 +209,16 @@
 @section('script')
 <script>
     $(document).ready(function() {
-        $('#tablePenggunaanAnggaran').DataTable();
+
+            $("#tablePenggunaanAnggaran").dataTable({
+                "columnDefs": [{
+                    "sortable": false,
+                    "targets": [5]
+                }],
+                "order": [
+                    [0, 'desc']
+                ]
+            });
     });
 </script>
 @endsection
