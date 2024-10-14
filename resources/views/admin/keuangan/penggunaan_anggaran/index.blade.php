@@ -213,7 +213,7 @@
             $("#tablePenggunaanAnggaran").dataTable({
                 "columnDefs": [{
                     "sortable": false,
-                    "targets": [5]
+                    "targets": [2, 3]
                 }],
                 "order": [
                     [0, 'desc']
