@@ -277,8 +277,29 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::resource('jenis-pembiayaan', JenisPembiayaanController::class);
     Route::resource('anggaran', AnggaranController::class);
     Route::resource('periode', PeriodeController::class);
-    Route::resource('PenggunaanAnggaran', PenggunaanAnggaranController::class);
-    Route::resource('DetailPembiayaan', DetailPembiayaanController::class);
+
+
+    Route::prefix('keuangan')->as('admin.keuangan.')->group(function () {
+        Route::resource('penggunaan-anggaran', PenggunaanAnggaranController::class)->names([
+            'index' => 'penggunaan_anggaran.index',
+            'create' => 'penggunaan_anggaran.create',
+            'store' => 'penggunaan_anggaran.store',
+            'show' => 'penggunaan_anggaran.show',
+            'edit' => 'penggunaan_anggaran.edit',
+            'update' => 'penggunaan_anggaran.update',
+            'destroy' => 'penggunaan_anggaran.destroy',
+        ]);
+
+        Route::resource('detail-pembiayaan', DetailPembiayaanController::class)->names([
+            'index' => 'detail_pembiayaan.index',
+            'create' => 'detail_pembiayaan.create',
+            'store' => 'detail_pembiayaan.store',
+            'show' => 'detail_pembiayaan.show',
+            'edit' => 'detail_pembiayaan.edit',
+            'update' => 'detail_pembiayaan.update',
+            'destroy' => 'detail_pembiayaan.destroy',
+        ]);
+    });
     // Route::resource('laporan-keuangan', LaporanKeuanganController::class);
     // Route::get('laporan-keuangan/keuangan', [LaporanKeuanganController::class, 'keuangan'])->name('laporan-keuangan.keuangan'); // Menambahkan route ini
 
