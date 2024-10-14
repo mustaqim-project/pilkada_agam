@@ -54,6 +54,8 @@ use App\Http\Controllers\Admin\Wisata\KoordinatorWilayahController;
 use App\Http\Controllers\Admin\Wisata\TimPusatWisataController;
 use App\Http\Controllers\Admin\Wisata\AdminKecematanWisataController;
 use App\Http\Controllers\Admin\Wisata\KoordinatorKecematanWisataController;
+use App\Http\Controllers\Admin\Keuangan\DetailPembiayaanController;
+use App\Http\Controllers\Admin\Keuangan\PenggunaanAnggaranController;
 
 
 
@@ -275,6 +277,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::resource('jenis-pembiayaan', JenisPembiayaanController::class);
     Route::resource('anggaran', AnggaranController::class);
     Route::resource('periode', PeriodeController::class);
+    Route::resource('PenggunaanAnggaran', PenggunaanAnggaranController::class);
+    Route::resource('DetailPembiayaan', DetailPembiayaanController::class);
     // Route::resource('laporan-keuangan', LaporanKeuanganController::class);
     // Route::get('laporan-keuangan/keuangan', [LaporanKeuanganController::class, 'keuangan'])->name('laporan-keuangan.keuangan'); // Menambahkan route ini
 
