@@ -67,8 +67,7 @@
                                                 method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger delete-item"
-                                                    >
+                                                <button type="submit" class="btn btn-danger delete-item">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
@@ -120,7 +119,8 @@
             aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                 <div class="modal-content">
-                    <form action="{{ route('admin.keuangan.penggunaan_anggaran.update', $item->id) }}" method="POST">
+                    <form action="{{ route('admin.keuangan.penggunaan_anggaran.update', $item->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="modal-header">
@@ -156,8 +156,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                                <input type="text" class="form-control" name="bukti_pembayaran"
-                                    value="{{ $item->bukti_pembayaran }}">
+                                <input type="file" class="form-control" name="bukti_pembayaran">
+                                @if ($item->bukti_pembayaran)
+                                    <small>Current: <a href="{{ asset($item->bukti_pembayaran) }}"
+                                            target="_blank">View</a></small>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
@@ -179,7 +182,8 @@
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <form action="{{ route('admin.keuangan.penggunaan_anggaran.store') }}" method="POST">
+                <form action="{{ route('admin.keuangan.penggunaan_anggaran.store') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="tambahModalLabel">Tambah Penggunaan Anggaran</h5>
@@ -209,7 +213,7 @@
                         </div>
                         <div class="form-group">
                             <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                            <input type="text" class="form-control" name="bukti_pembayaran">
+                            <input type="file" class="form-control" name="bukti_pembayaran">
                         </div>
                         <div class="form-group">
                             <label for="keterangan">Keterangan</label>

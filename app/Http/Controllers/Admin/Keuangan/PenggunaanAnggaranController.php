@@ -5,15 +5,18 @@ namespace App\Http\Controllers\Admin\Keuangan;
 use App\Http\Controllers\Controller;
 use App\Models\PenggunaanAnggaran;
 use Illuminate\Http\Request;
+use App\Traits\FileUploadTrait;
+use Illuminate\Support\Facades\Auth;
 
 class PenggunaanAnggaranController extends Controller
 {
+    use FileUploadTrait;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // Menampilkan semua data dari tabel 'penggunaan_anggaran'
         $penggunaanAnggaran = PenggunaanAnggaran::all();
         return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran'));
     }
@@ -23,7 +26,6 @@ class PenggunaanAnggaranController extends Controller
      */
     public function create()
     {
-        // Menampilkan form untuk membuat data baru
         return view('admin.keuangan.penggunaan_anggaran.create');
     }
 
@@ -42,10 +44,22 @@ class PenggunaanAnggaranController extends Controller
             'keterangan' => 'nullable|string',
         ]);
 
-        // Simpan data baru ke database
-        PenggunaanAnggaran::create($request->all());
+        // Cek apakah bukti pembayaran sudah ada
+        if ($request->hasFile('bukti_pembayaran')) {
+            $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran');
+        }
 
-        // Redirect ke halaman index dengan pesan sukses
+        // Simpan data baru ke database
+        $penggunaanAnggaran = new PenggunaanAnggaran();
+        $penggunaanAnggaran->periode_id = $request->periode_id;
+        $penggunaanAnggaran->detail_pembiayaan_id = $request->detail_pembiayaan_id;
+        $penggunaanAnggaran->jumlah_digunakan = $request->jumlah_digunakan;
+        $penggunaanAnggaran->status_pembayaran = $request->status_pembayaran;
+        $penggunaanAnggaran->bukti_pembayaran = isset($imagePath) ? $imagePath : null;
+        $penggunaanAnggaran->keterangan = $request->keterangan;
+
+        $penggunaanAnggaran->save();
+
         return redirect()->route('admin.keuangan.penggunaan_anggaran.index')
                          ->with('success', 'Data penggunaan anggaran berhasil ditambahkan.');
     }
@@ -55,7 +69,6 @@ class PenggunaanAnggaranController extends Controller
      */
     public function show($id)
     {
-        // Menampilkan detail dari data tertentu
         $penggunaanAnggaran = PenggunaanAnggaran::findOrFail($id);
         return view('admin.keuangan.penggunaan_anggaran.show', compact('penggunaanAnggaran'));
     }
@@ -65,7 +78,6 @@ class PenggunaanAnggaranController extends Controller
      */
     public function edit($id)
     {
-        // Menampilkan form edit untuk data tertentu
         $penggunaanAnggaran = PenggunaanAnggaran::findOrFail($id);
         return view('admin.keuangan.penggunaan_anggaran.edit', compact('penggunaanAnggaran'));
     }
@@ -85,11 +97,22 @@ class PenggunaanAnggaranController extends Controller
             'keterangan' => 'nullable|string',
         ]);
 
-        // Update data di database
         $penggunaanAnggaran = PenggunaanAnggaran::findOrFail($id);
-        $penggunaanAnggaran->update($request->all());
 
-        // Redirect ke halaman index dengan pesan sukses
+        // Update data dengan input baru
+        $penggunaanAnggaran->periode_id = $request->periode_id;
+        $penggunaanAnggaran->detail_pembiayaan_id = $request->detail_pembiayaan_id;
+        $penggunaanAnggaran->jumlah_digunakan = $request->jumlah_digunakan;
+        $penggunaanAnggaran->status_pembayaran = $request->status_pembayaran;
+        $penggunaanAnggaran->keterangan = $request->keterangan;
+
+        // Cek apakah ada file bukti pembayaran baru
+        if ($request->hasFile('bukti_pembayaran')) {
+            $penggunaanAnggaran->bukti_pembayaran = $this->handleFileUpload($request, 'bukti_pembayaran');
+        }
+
+        $penggunaanAnggaran->save();
+
         return redirect()->route('admin.keuangan.penggunaan_anggaran.index')
                          ->with('success', 'Data penggunaan anggaran berhasil diupdate.');
     }
@@ -99,11 +122,9 @@ class PenggunaanAnggaranController extends Controller
      */
     public function destroy($id)
     {
-        // Hapus data dari database
         $penggunaanAnggaran = PenggunaanAnggaran::findOrFail($id);
         $penggunaanAnggaran->delete();
 
-        // Redirect ke halaman index dengan pesan sukses
         return redirect()->route('admin.keuangan.penggunaan_anggaran.index')
                          ->with('success', 'Data penggunaan anggaran berhasil dihapus.');
     }
