@@ -53,17 +53,8 @@
                                     <td>{{ $item->keterangan }}</td>
 
                                     <td>
-                                        <a href="{{ route('admin.news.edit', $item->id) }}"
-                                            class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                                        <a href="{{ route('admin.news.destroy', $item->id) }}"
-                                            class="btn btn-danger delete-item"><i
-                                                class="fas fa-trash-alt"></i></a>
-                                        <a href="{{ route('admin.news-copy', $item->id) }}"
-                                            class="btn btn-primary"><i class="fas fa-copy"></i></i></a>
-                                    </td>
-                                    <td>
                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                            <button class="btn btn-info btn-sm" data-toggle="modal"
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal"
                                                 data-target="#detailModal{{ $item->id }}">
                                                 <i class="fas fa-eye"></i>
                                             </button>
