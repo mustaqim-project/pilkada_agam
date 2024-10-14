@@ -75,7 +75,7 @@
 <!-- Modal Detail -->
 @foreach ($penggunaanAnggaran as $item)
     <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel{{ $item->id }}" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="detailModalLabel{{ $item->id }}">Detail Penggunaan Anggaran</h5>
@@ -104,7 +104,7 @@
 <!-- Modal Edit -->
 @foreach ($penggunaanAnggaran as $item)
     <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form action="{{ route('admin.keuangan.penggunaan_anggaran.update', $item->id) }}" method="POST">
                     @csrf
@@ -156,7 +156,7 @@
 
 <!-- Modal Tambah -->
 <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form action="{{ route('admin.keuangan.penggunaan_anggaran.store') }}" method="POST">
                 @csrf
