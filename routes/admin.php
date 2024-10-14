@@ -279,7 +279,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
     Route::resource('periode', PeriodeController::class);
 
 
-    Route::prefix('keuangan')->as('admin.keuangan.')->group(function () {
+    Route::prefix('keuangan')->as('keuangan.')->group(function () {
         Route::resource('penggunaan-anggaran', PenggunaanAnggaranController::class)->names([
             'index' => 'penggunaan_anggaran.index',
             'create' => 'penggunaan_anggaran.create',
