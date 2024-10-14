@@ -15,17 +15,6 @@
                 </div>
             </div>
 
-            @if (session('success'))
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil',
-                        text: "{{ session('success') }}",
-                        confirmButtonText: 'OK'
-                    });
-                </script>
-            @endif
-
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped" id="tablePenggunaanAnggaran">
@@ -245,7 +234,6 @@
                     icon: 'success',
                     title: 'Berhasil',
                     text: successMessage,
-                    confirmButtonText: 'OK'
                 });
             }
 
@@ -254,7 +242,6 @@
                     icon: 'error',
                     title: 'Error',
                     text: errorMessage,
-                    confirmButtonText: 'OK'
                 });
             }
         });
