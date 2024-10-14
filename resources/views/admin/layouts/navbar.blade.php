@@ -11,7 +11,7 @@
     <ul class="navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-          <img alt="image" src="{{ auth()->guard('admin')->user()->image }}" class="rounded-circle mr-1">
+          <img alt="image" src="{{ asset(auth()->guard('admin')->user()->image) }}" class="rounded-circle mr-1">
           <div class="d-sm-none d-lg-inline-block">{{ __('admin.Hi') }}, {{ auth()->guard('admin')->user()->name }}</div>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
