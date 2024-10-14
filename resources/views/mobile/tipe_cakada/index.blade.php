@@ -110,7 +110,7 @@
                                 <form action="{{ route('tipe_cakada.destroy', $tipe->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus tipe ini?')">Hapus</button>
+                                    <button type="submit" class="btn btn-danger delete-item" >Hapus</button>
                                 </form>
                             </div>
                         </td>

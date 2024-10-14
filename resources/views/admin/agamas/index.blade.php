@@ -42,7 +42,7 @@
                                 <form action="{{ route('admin.agamas.destroy', $agama->id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');" aria-label="Delete {{ $agama->name }}">
+                                    <button type="submit" class="btn btn-danger delete-item"  aria-label="Delete {{ $agama->name }}">
                                         Delete
                                     </button>
                                 </form>

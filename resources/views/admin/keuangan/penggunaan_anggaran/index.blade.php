@@ -51,6 +51,16 @@
                                     <td>{{ $item->status_pembayaran == 1 ? 'Lunas' : 'Belum Lunas' }}</td>
                                     <td><img src="{{ $item->bukti_pembayaran }}" alt="Bukti" width="100"></td>
                                     <td>{{ $item->keterangan }}</td>
+
+                                    <td>
+                                        <a href="{{ route('admin.news.edit', $item->id) }}"
+                                            class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('admin.news.destroy', $item->id) }}"
+                                            class="btn btn-danger delete-item"><i
+                                                class="fas fa-trash-alt"></i></a>
+                                        <a href="{{ route('admin.news-copy', $item->id) }}"
+                                            class="btn btn-primary"><i class="fas fa-copy"></i></i></a>
+                                    </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
                                             <button class="btn btn-info btn-sm" data-toggle="modal"
@@ -67,7 +77,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger delete-item"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                    >
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>

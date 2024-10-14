@@ -51,8 +51,8 @@
                                             method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger" type="submit"
-                                                onclick="return confirm('Yakin ingin menghapus laporan ini?')">Hapus</button>
+                                            <button class="btn btn-danger delete-item" type="submit"
+                                                >Hapus</button>
                                         </form>
                                     </td>
                                 </tr>

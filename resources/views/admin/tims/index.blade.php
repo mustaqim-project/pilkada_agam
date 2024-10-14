@@ -35,7 +35,7 @@
                                 <form action="{{ route('admin.tims.destroy', $tim->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                                    <button class="btn btn-danger delete-item" type="submit" >Delete</button>
                                 </form>
                             </td>
                         </tr>

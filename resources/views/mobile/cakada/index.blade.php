@@ -99,7 +99,7 @@
                                         <form action="{{ route('cakada.destroy', $cakada->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                            <button type="submit" class="btn btn-danger delete-item">Hapus</button>
                                         </form>
                                     </div>
                                 </td>
