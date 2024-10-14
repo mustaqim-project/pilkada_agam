@@ -227,6 +227,26 @@
 
 @section('script')
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const successMessage = '{{ session('success') }}';
+            const errorMessage = '{{ session('error') }}';
+
+            if (successMessage) {
+                Toast.fire({
+                    icon: 'success',
+                    title: successMessage
+                });
+            }
+
+            if (errorMessage) {
+                Toast.fire({
+                    icon: 'error',
+                    title: errorMessage
+                });
+            }
+        });
+
+
         $(document).ready(function() {
 
             $("#tablePenggunaanAnggaran").dataTable({
