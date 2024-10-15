@@ -21,7 +21,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Jenis Pembiayaan ID</th>
+                                <th>Jenis Pembiayaan</th>
                                 <th>Nama Rincian</th>
                                 <th>Aksi</th>
                             </tr>

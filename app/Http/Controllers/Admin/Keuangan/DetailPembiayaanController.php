@@ -14,7 +14,7 @@ class DetailPembiayaanController extends Controller
     {
         $jenisPembiayaans = jenis_pembiayaan::all();
         $detailPembiayaan = DetailPembiayaan::with('jenisPembiayaan')->get();
-
+dd($detailPembiayaan);
         return view('admin.keuangan.detail_pembiayaan.index', compact('detailPembiayaan', 'jenisPembiayaans'));
     }
 
