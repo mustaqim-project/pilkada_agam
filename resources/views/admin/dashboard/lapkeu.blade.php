@@ -221,7 +221,7 @@
         // Data dari PHP ke dalam JavaScript
 const labels = {!! json_encode($labels) !!};
 const data = {!! json_encode($data) !!};
-
+console.log(data);
 // Chart.js Pie Chart
 const totalAnggaranPerTimData = {
     labels: labels, // Nama tim dari PHP
