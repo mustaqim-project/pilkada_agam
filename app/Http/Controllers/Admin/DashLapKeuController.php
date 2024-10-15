@@ -15,9 +15,11 @@ class DashLapKeuController extends Controller
             ->select(DB::raw('SUM(total_anggaran) AS total_anggaran_keseluruhan'))
             ->first();
 
-            $totalAnggaranPerTim = DB::table('anggaran as a')
+        // Total Anggaran per Tim
+        // Bagian PHP (Tetap seperti ini)
+        $totalAnggaranPerTim = DB::table('anggaran as a')
             ->join('tims as t', 'a.tim_id', '=', 't.id')
-            ->selectRaw("t.name as tim, CONCAT('Rp ', FORMAT(SUM(a.total_anggaran), 0, 'id_ID')) AS total_anggaran")
+            ->selectRaw("t.name as tim, SUM(a.total_anggaran) AS total_anggaran")
             ->groupBy('t.name')
             ->get();
 
@@ -87,15 +89,15 @@ class DashLapKeuController extends Controller
         // ->get();
 
         $penggunaanPeriode = DB::table('tims as t')
-        ->leftJoin('anggaran as a', 't.id', '=', 'a.tim_id')
-        ->leftJoin('periode as p', 'a.id', '=', 'p.anggaran_id')
-        ->leftJoin('penggunaan_anggaran as pa', 'p.id', '=', 'pa.periode_id')
-        ->select('t.name as tim', 'p.nama_periode', DB::raw('COALESCE(SUM(pa.jumlah_digunakan), 0) AS total_digunakan'))
-        ->whereNotNull('p.nama_periode')  // Menyaring periode yang tidak null
-        ->groupBy('t.name', 'p.nama_periode')
-        ->orderBy('p.nama_periode')
-        ->orderBy('t.name')
-        ->get();
+            ->leftJoin('anggaran as a', 't.id', '=', 'a.tim_id')
+            ->leftJoin('periode as p', 'a.id', '=', 'p.anggaran_id')
+            ->leftJoin('penggunaan_anggaran as pa', 'p.id', '=', 'pa.periode_id')
+            ->select('t.name as tim', 'p.nama_periode', DB::raw('COALESCE(SUM(pa.jumlah_digunakan), 0) AS total_digunakan'))
+            ->whereNotNull('p.nama_periode')  // Menyaring periode yang tidak null
+            ->groupBy('t.name', 'p.nama_periode')
+            ->orderBy('p.nama_periode')
+            ->orderBy('t.name')
+            ->get();
 
 
         // Status Pembayaran
