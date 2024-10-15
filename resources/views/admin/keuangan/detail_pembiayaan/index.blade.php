@@ -100,7 +100,8 @@
                             <select name="jenis_pembiayaan_id" class="form-control" required>
                                 <option value="">-- Pilih Jenis Pembiayaan --</option>
                                 @foreach ($jenisPembiayaans as $jenis)
-                                    <option value="{{ $jenis->id }}" {{ old('jenis_pembiayaan_id') == $jenis->id ? 'selected' : '' }}>
+                                    <option value="{{ $jenis->id }}"
+                                        {{ old('jenis_pembiayaan_id') == $jenis->id ? 'selected' : '' }}>
                                         {{ $jenis->nama_pembiayaan }}
                                     </option>
                                 @endforeach
@@ -158,4 +159,25 @@
             </div>
         </div>
     @endforeach
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const successMessage = '{{ session('success') }}';
+            const errorMessage = '{{ session('error') }}';
+
+            if (successMessage) {
+                Toast.fire({
+                    icon: 'success',
+                    title: successMessage
+                });
+            }
+
+            if (errorMessage) {
+                Toast.fire({
+                    icon: 'error',
+                    title: errorMessage
+                });
+            }
+        });
+    </script>
 @endsection
