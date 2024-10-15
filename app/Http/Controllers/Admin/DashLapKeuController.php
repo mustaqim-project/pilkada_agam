@@ -26,10 +26,6 @@ class DashLapKeuController extends Controller
         $labels = $totalAnggaranPerTim->pluck('tim');
         $data = $totalAnggaranPerTim->pluck('total_anggaran');
 
-        $data = array_map(function($value) {
-            return (float) str_replace('.', '', $value); // Menghapus titik dan mengubah ke float
-        }, $data);
-
 
         // Total Anggaran yang Sudah Dikeluarkan per Tim
         $totalAnggaranDigunakanPerTim = DB::table('penggunaan_anggaran as pa')
