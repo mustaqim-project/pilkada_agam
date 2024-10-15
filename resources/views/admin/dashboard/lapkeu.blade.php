@@ -98,7 +98,7 @@
                                 <td>{{ $pembayaran->nama_rincian }}</td>
                                 <td>Rp {{ number_format($pembayaran->jumlah_digunakan, 0, ',', '.') }}</td>
                                 <td>
-                                    @if($pembayaran->status_pembayaran == 1)
+                                    @if ($pembayaran->status_pembayaran == 1)
                                         Lunas
                                     @elseif($pembayaran->status_pembayaran == 0)
                                         Belum Dibayar
@@ -106,7 +106,7 @@
                                         Status Tidak Diketahui
                                     @endif
                                 </td>
-                                                            </tr>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -158,7 +158,7 @@
                                 <td>{{ $laporan->nama_rincian }}</td>
                                 <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
                                 <td>
-                                    @if($laporan->status_pembayaran == 1)
+                                    @if ($laporan->status_pembayaran == 1)
                                         Lunas
                                     @elseif($laporan->status_pembayaran == 0)
                                         Belum Dibayar
@@ -185,6 +185,15 @@
     <script src="{{ asset('admin/assets/modules/chart.min.js') }}"></script>
 
     <script>
+        function formatRupiah(angka) {
+            const rupiah = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(angka);
+            return rupiah;
+        }
+
         // Script untuk Chart.js
         const totalAnggaranPerTimCtx = document.getElementById('totalAnggaranPerTimChart').getContext('2d');
         const totalAnggaranDigunakanPerTimCtx = document.getElementById('totalAnggaranDigunakanPerTimChart').getContext(
@@ -245,7 +254,21 @@
             }
         });
 
-        // Chart untuk Penggunaan Anggaran per Periode
+        // // Chart untuk Penggunaan Anggaran per Periode
+        // new Chart(penggunaanPeriodeCtx, {
+        //     type: 'line',
+        //     data: {
+        //         labels: {!! json_encode($penggunaanPeriode->pluck('nama_periode')) !!},
+        //         datasets: [{
+        //             label: 'Penggunaan per Periode',
+        //             data: {!! json_encode($penggunaanPeriode->pluck('total_digunakan')) !!},
+        //             fill: false,
+        //             borderColor: 'rgb(75, 192, 192)',
+        //             tension: 0.1
+        //         }]
+        //     }
+        // });
+
         new Chart(penggunaanPeriodeCtx, {
             type: 'line',
             data: {
@@ -257,10 +280,30 @@
                     borderColor: 'rgb(75, 192, 192)',
                     tension: 0.1
                 }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        ticks: {
+                            // Menggunakan format Rupiah pada sumbu Y
+                            callback: function(value, index, values) {
+                                return formatRupiah(value);
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            // Menggunakan format Rupiah di tooltip
+                            label: function(tooltipItem) {
+                                return formatRupiah(tooltipItem.raw);
+                            }
+                        }
+                    }
+                }
             }
-        });
-
-        // Chart untuk Rekapitulasi Anggaran
+        }); // Chart untuk Rekapitulasi Anggaran
         new Chart(rekapitulasiAnggaranCtx, {
             type: 'bar',
             data: {
