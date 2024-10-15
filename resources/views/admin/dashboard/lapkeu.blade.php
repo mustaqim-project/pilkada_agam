@@ -257,13 +257,17 @@ new Chart(totalAnggaranPerTimCtx, {
                     label: function(context) {
                         let value = context.raw;
                         // Format angka sebagai Rupiah
-                        return context.label + ': ' + new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(value);
+                        return context.label + ': ' + new Intl.NumberFormat('id-ID', {
+                            style: 'currency',
+                            currency: 'IDR'
+                        }).format(value);
                     }
                 }
             }
         }
     }
 });
+
 
         const totalAnggaranDigunakanPerTimData = {
             labels: {!! json_encode($totalAnggaranDigunakanPerTim->pluck('tim')) !!},

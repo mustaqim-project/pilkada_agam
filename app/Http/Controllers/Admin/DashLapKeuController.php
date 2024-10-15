@@ -15,22 +15,21 @@ class DashLapKeuController extends Controller
             ->select(DB::raw('SUM(total_anggaran) AS total_anggaran_keseluruhan'))
             ->first();
 
-// Total Anggaran per Tim
-$totalAnggaranPerTim = DB::table('anggaran as a')
-    ->join('tims as t', 'a.tim_id', '=', 't.id')
-    ->selectRaw("t.name as tim, CONCAT(SUM(a.total_anggaran), '') AS total_anggaran") // Menggunakan CONCAT untuk format string
-    ->groupBy('t.name')
-    ->get();
+        // Total Anggaran per Tim
+        // Bagian PHP (Tetap seperti ini)
+        $totalAnggaranPerTim = DB::table('anggaran as a')
+            ->join('tims as t', 'a.tim_id', '=', 't.id')
+            ->selectRaw("t.name as tim, SUM(a.total_anggaran) AS total_anggaran")
+            ->groupBy('t.name')
+            ->get();
 
-    $labels = $totalAnggaranPerTim->pluck('tim');
-    $data = $totalAnggaranPerTim->pluck('total_anggaran');
+        $labels = $totalAnggaranPerTim->pluck('tim');
+        $data = $totalAnggaranPerTim->pluck('total_anggaran');
 
-    // Memformat data ke dalam bentuk 000.000.000
-    $data = $data->map(function ($item) {
-        return number_format($item, 0, '.', '.'); // Format tanpa desimal dan menggunakan titik sebagai pemisah ribuan
-    });
+        $data = array_map(function($value) {
+            return (float) str_replace('.', '', $value); // Menghapus titik dan mengubah ke float
+        }, $data);
 
-dd($data);
 
         // Total Anggaran yang Sudah Dikeluarkan per Tim
         $totalAnggaranDigunakanPerTim = DB::table('penggunaan_anggaran as pa')
