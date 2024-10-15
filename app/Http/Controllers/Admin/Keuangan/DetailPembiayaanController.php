@@ -55,7 +55,7 @@ class DetailPembiayaanController extends Controller
     }
 
     // Menghapus data berdasarkan ID
-    public function destroy($id)
+    public function destroy(string $id)
     {
         $detailPembiayaan = DetailPembiayaan::findOrFail($id);
         $detailPembiayaan->delete();
