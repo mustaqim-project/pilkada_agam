@@ -40,9 +40,9 @@
                                                 data-target="#editModal{{ $item->id }}" class="btn btn-warning">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}" class="btn btn-danger delete-item" data-id="{{ $item->id }}">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </a>
+                                            <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
+                                                class="btn btn-danger delete-item"><i
+                                                    class="fas fa-trash-alt"></i></a>
                                             {{-- <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
                                                 class="btn btn-danger delete-item">
                                                 <i class="fas fa-trash-alt"></i>
