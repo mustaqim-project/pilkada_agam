@@ -131,24 +131,5 @@
         </div>
     @endforeach
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const successMessage = '{{ session('toast') }}';
-            const errorMessage = '{{ session('error') }}';
 
-            if (successMessage) {
-                Toast.fire({
-                    icon: 'success',
-                    title: successMessage
-                });
-            }
-
-            if (errorMessage) {
-                Toast.fire({
-                    icon: 'error',
-                    title: errorMessage
-                });
-            }
-        });
-    </script>
 @endsection
