@@ -58,7 +58,6 @@ class DetailPembiayaanController extends Controller
     public function destroy($id)
     {
 
-        dd("ajsdgfvhgajskhdlfjo");
         $detailPembiayaan = DetailPembiayaan::findOrFail($id);
         $detailPembiayaan->delete();
 
