@@ -17,7 +17,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="tablePenggunaanAnggaran">
+                    <table class="table table-striped" id="tablePembiayaan">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -112,3 +112,47 @@
         </div>
     </div>
 @endsection
+
+
+@section('script')
+<!-- Include SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const successMessage = '{{ session('success') }}';
+        const errorMessage = '{{ session('error') }}';
+
+        if (successMessage) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: successMessage,
+            });
+        }
+
+        if (errorMessage) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage,
+            });
+        }
+    });
+
+    $(document).ready(function() {
+        $("#tablePembiayaan").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }],
+            "order": [
+                [0, 'desc']
+            ]
+        });
+    });
+</script>
+@endsection
+
+
