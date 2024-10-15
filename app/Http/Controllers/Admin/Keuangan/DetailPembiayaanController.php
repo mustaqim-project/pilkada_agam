@@ -53,7 +53,10 @@ class DetailPembiayaanController extends Controller
         $detailPembiayaan = DetailPembiayaan::findOrFail($id);
         $detailPembiayaan->delete();
 
-        return redirect()->route('admin.keuangan.detail_pembiayaan.index')
-            ->with('toast_success', 'Data berhasil dihapus!');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data berhasil dihapus!'
+        ]);
     }
+
 }

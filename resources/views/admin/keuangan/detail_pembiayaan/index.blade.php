@@ -143,25 +143,21 @@
     @endforeach
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const successMessage = '{{ session('
-                    toast ') }}';
-            const errorMessage = '{{ session('
-                    error ') }}';
-
-            if (successMessage) {
+        document.addEventListener('DOMContentLoaded', function() {
+            @if(Session::has('toast_success'))
                 Toast.fire({
                     icon: 'success',
-                    title: successMessage
+                    title: '{{ Session::get('toast_success') }}'
                 });
-            }
+            @endif
 
-            if (errorMessage) {
+            @if(Session::has('toast_error'))
                 Toast.fire({
                     icon: 'error',
-                    title: errorMessage
+                    title: '{{ Session::get('toast_error') }}'
                 });
-            }
+            @endif
         });
     </script>
+
 @endsection
