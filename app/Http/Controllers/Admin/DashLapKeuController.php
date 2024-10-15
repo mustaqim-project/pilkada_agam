@@ -16,15 +16,15 @@ class DashLapKeuController extends Controller
             ->first();
 
         // Total Anggaran per Tim
-        // Bagian PHP (Tetap seperti ini)
         $totalAnggaranPerTim = DB::table('anggaran as a')
-            ->join('tims as t', 'a.tim_id', '=', 't.id')
-            ->selectRaw("t.name as tim, SUM(a.total_anggaran) AS total_anggaran")
-            ->groupBy('t.name')
-            ->get();
+        ->join('tims as t', 'a.tim_id', '=', 't.id')
+        ->selectRaw("t.name as tim, SUM(a.total_anggaran) AS total_anggaran") // Jangan format di sini
+        ->groupBy('t.name')
+        ->get();
 
-        $labels = $totalAnggaranPerTim->pluck('tim');
-        $data = $totalAnggaranPerTim->pluck('total_anggaran');
+    $labels = $totalAnggaranPerTim->pluck('tim');
+    $data = $totalAnggaranPerTim->pluck('total_anggaran'); // Data tetap dalam format angka
+
 
 
         // Total Anggaran yang Sudah Dikeluarkan per Tim
