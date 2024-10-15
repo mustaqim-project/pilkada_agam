@@ -36,7 +36,7 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->periode->nama_periode }}  - {{ $item->periode->anggaran->tim->name }}</td>
                                     <td>{{ $item->detailPembiayaan->nama_rincian }}</td>
-                                    <td>{{ $item->jumlah_digunakan }}</td>
+                                    <td>{{ 'Rp' . number_format($item->jumlah_digunakan, 0, ',', '.') }}</td>
                                     <td>{{ $item->status_pembayaran == 1 ? 'Lunas' : 'Belum Lunas' }}</td>
                                     <td><img src="{{ asset($item->bukti_pembayaran) }}" alt="Bukti" width="100"></td>
                                     <td>{{ $item->keterangan }}</td>
@@ -87,7 +87,7 @@
                         <p><strong>ID:</strong> {{ $item->id }}</p>
                         <p><strong>Nama Periode:</strong> {{ $item->periode->nama_periode }} - {{ $item->periode->anggaran->tim->name }}</p>
                         <p><strong>Nama Rincian Pembiayaan:</strong> {{ $item->detailPembiayaan->nama_rincian }}</p>
-                        <p><strong>Jumlah Digunakan:</strong> {{ $item->jumlah_digunakan }}</p>
+                        <p><strong>Jumlah Digunakan:</strong> {{ 'Rp' . number_format($item->jumlah_digunakan, 0, ',', '.') }}</p>
                         <p><strong>Status Pembayaran:</strong>
                             {{ $item->status_pembayaran == 1 ? 'Lunas' : 'Belum Lunas' }}</p>
                         <p><strong>Bukti Pembayaran:</strong></p>
