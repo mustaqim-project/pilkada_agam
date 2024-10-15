@@ -72,12 +72,23 @@ class DashLapKeuController extends Controller
             ->groupBy('jp.nama_pembiayaan')
             ->get();
 
-        // Penggunaan Anggaran per Periode
+        // // Penggunaan Anggaran per Periode
+        // $penggunaanPeriode = DB::table('tims as t')
+        // ->leftJoin('anggaran as a', 't.id', '=', 'a.tim_id')
+        // ->leftJoin('periode as p', 'a.id', '=', 'p.anggaran_id')
+        // ->leftJoin('penggunaan_anggaran as pa', 'p.id', '=', 'pa.periode_id')
+        // ->select('t.name as tim', 'p.nama_periode', DB::raw('COALESCE(SUM(pa.jumlah_digunakan), 0) AS total_digunakan'))
+        // ->groupBy('t.name', 'p.nama_periode')
+        // ->orderBy('p.nama_periode')
+        // ->orderBy('t.name')
+        // ->get();
+
         $penggunaanPeriode = DB::table('tims as t')
         ->leftJoin('anggaran as a', 't.id', '=', 'a.tim_id')
         ->leftJoin('periode as p', 'a.id', '=', 'p.anggaran_id')
         ->leftJoin('penggunaan_anggaran as pa', 'p.id', '=', 'pa.periode_id')
         ->select('t.name as tim', 'p.nama_periode', DB::raw('COALESCE(SUM(pa.jumlah_digunakan), 0) AS total_digunakan'))
+        ->whereNotNull('p.nama_periode')  // Menyaring periode yang tidak null
         ->groupBy('t.name', 'p.nama_periode')
         ->orderBy('p.nama_periode')
         ->orderBy('t.name')

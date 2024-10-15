@@ -254,7 +254,25 @@
             }
         });
 
-        // // Chart untuk Penggunaan Anggaran per Periode
+        // Chart untuk Penggunaan Anggaran per Periode
+        new Chart(penggunaanPeriodeCtx, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode(
+                    $penggunaanPeriode->map(function ($item) {
+                        return $item->tim . ' - ' . $item->nama_periode;
+                    }),
+                ) !!}, // Menggabungkan tim dan nama periode
+                datasets: [{
+                    label: 'Penggunaan per Periode',
+                    data: {!! json_encode($penggunaanPeriode->pluck('total_digunakan')) !!}, // Total penggunaan
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            }
+        });
+
         // new Chart(penggunaanPeriodeCtx, {
         //     type: 'line',
         //     data: {
@@ -269,41 +287,7 @@
         //     }
         // });
 
-        new Chart(penggunaanPeriodeCtx, {
-            type: 'line',
-            data: {
-                labels: {!! json_encode($penggunaanPeriode->pluck('nama_periode')) !!},
-                datasets: [{
-                    label: 'Penggunaan per Periode',
-                    data: {!! json_encode($penggunaanPeriode->pluck('total_digunakan')) !!},
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        ticks: {
-                            // Menggunakan format Rupiah pada sumbu Y
-                            callback: function(value, index, values) {
-                                return formatRupiah(value);
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            // Menggunakan format Rupiah di tooltip
-                            label: function(tooltipItem) {
-                                return formatRupiah(tooltipItem.raw);
-                            }
-                        }
-                    }
-                }
-            }
-        }); // Chart untuk Rekapitulasi Anggaran
+        // Chart untuk Rekapitulasi Anggaran
         new Chart(rekapitulasiAnggaranCtx, {
             type: 'bar',
             data: {
