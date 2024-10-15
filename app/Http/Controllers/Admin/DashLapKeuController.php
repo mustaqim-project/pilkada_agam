@@ -22,8 +22,13 @@ $totalAnggaranPerTim = DB::table('anggaran as a')
     ->groupBy('t.name')
     ->get();
 
-$labels = $totalAnggaranPerTim->pluck('tim');
-$data = $totalAnggaranPerTim->pluck('total_anggaran'); // Data tetap dalam format string
+    $labels = $totalAnggaranPerTim->pluck('tim');
+    $data = $totalAnggaranPerTim->pluck('total_anggaran');
+
+    // Memformat data ke dalam bentuk 000.000.000
+    $data = $data->map(function ($item) {
+        return number_format($item, 0, '.', '.'); // Format tanpa desimal dan menggunakan titik sebagai pemisah ribuan
+    });
 
 
 
