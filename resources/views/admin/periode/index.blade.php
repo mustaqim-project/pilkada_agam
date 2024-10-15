@@ -80,7 +80,7 @@
                                 @foreach ($anggarans as $anggaran)
                                     <option value="{{ $anggaran->id }}">
                                         {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} -
-                                        Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
+                                        Rp {{ number_format($anggaran->total_anggaran, 0, ',', '.') }}
                                     </option>
                                 @endforeach
                             </select>
@@ -135,7 +135,7 @@
                                 @foreach ($anggarans as $anggaran)
                                     <option value="{{ $anggaran->id }}">
                                         {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} -
-                                        Rp {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}
+                                        Rp {{ number_format($anggaran->total_anggaran, 0, ',', '.') }}
                                     </option>
                                 @endforeach
                             </select>

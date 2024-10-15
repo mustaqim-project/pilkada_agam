@@ -97,8 +97,16 @@
                                 <td>{{ $pembayaran->nama_periode }}</td>
                                 <td>{{ $pembayaran->nama_rincian }}</td>
                                 <td>Rp {{ number_format($pembayaran->jumlah_digunakan, 0, ',', '.') }}</td>
-                                <td>{{ $pembayaran->status_pembayaran }}</td>
-                            </tr>
+                                <td>
+                                    @if($pembayaran->status_pembayaran == 1)
+                                        Lunas
+                                    @elseif($pembayaran->status_pembayaran == 0)
+                                        Belum Dibayar
+                                    @else
+                                        Status Tidak Diketahui
+                                    @endif
+                                </td>
+                                                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -149,7 +157,16 @@
                                 <td>{{ $laporan->nama_periode }}</td>
                                 <td>{{ $laporan->nama_rincian }}</td>
                                 <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
-                                <td>{{ $laporan->status_pembayaran }}</td>
+                                <td>
+                                    @if($laporan->status_pembayaran == 1)
+                                        Lunas
+                                    @elseif($laporan->status_pembayaran == 0)
+                                        Belum Dibayar
+                                    @else
+                                        Status Tidak Diketahui
+                                    @endif
+                                </td>
+
                                 <td>
                                     @if ($laporan->bukti_pembayaran)
                                         <a href="{{ asset($laporan->bukti_pembayaran) }}" target="_blank">Download</a>

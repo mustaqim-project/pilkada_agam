@@ -85,7 +85,7 @@
                                 @foreach ($anggarans as $anggaran)
                                     <option value="{{ $anggaran->id }}">
                                         {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} - Rp
-                                        {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}</option>
+                                        {{ number_format($anggaran->total_anggaran, 0, ',', '.') }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -94,7 +94,7 @@
                             <select name="periode_id" id="periode_id" class="form-control" required>
                                 @foreach ($periodes as $periode)
                                     <option value="{{ $periode->id }}">{{ $periode->nama_periode }} - Rp
-                                        {{ number_format($periode->anggaran_periode, 2, ',', '.') }}</option>
+                                        {{ number_format($periode->anggaran_periode, 0, ',', '.') }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -160,7 +160,7 @@
                                 @foreach ($anggarans as $anggaran)
                                     <option value="{{ $anggaran->id }}">
                                         {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} - Rp
-                                        {{ number_format($anggaran->total_anggaran, 2, ',', '.') }}</option>
+                                        {{ number_format($anggaran->total_anggaran, 0, ',', '.') }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -169,7 +169,7 @@
                             <select name="periode_id" id="edit_periode_id" class="form-control" required>
                                 @foreach ($periodes as $periode)
                                     <option value="{{ $periode->id }}">{{ $periode->nama_periode }} - Rp
-                                        {{ number_format($periode->anggaran_periode, 2, ',', '.') }}</option>
+                                        {{ number_format($periode->anggaran_periode, 0, ',', '.') }}</option>
                                 @endforeach
                             </select>
                         </div>
