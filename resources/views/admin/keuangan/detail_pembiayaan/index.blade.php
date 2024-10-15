@@ -34,19 +34,12 @@
                                     <td>{{ $item->nama_rincian }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                            <a href="#" data-toggle="modal"
-                                                data-target="#editModal{{ $item->id }}" class="btn btn-warning">
+                                            <a href="#" data-toggle="modal" data-target="#editModal{{ $item->id }}" class="btn btn-warning">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form
-                                                action="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
-                                                method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger delete-item">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </form>
+                                            <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}" class="btn btn-danger delete-item">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -59,8 +52,7 @@
     </section>
 
     <!-- Modal Tambah -->
-    <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <form action="{{ route('admin.keuangan.detail_pembiayaan.store') }}" method="POST">
@@ -77,8 +69,7 @@
                             <select name="jenis_pembiayaan_id" class="form-control" required>
                                 <option value="">-- Pilih Jenis Pembiayaan --</option>
                                 @foreach ($jenisPembiayaans as $jenis)
-                                    <option value="{{ $jenis->id }}"
-                                        {{ old('jenis_pembiayaan_id') == $jenis->id ? 'selected' : '' }}>
+                                    <option value="{{ $jenis->id }}" {{ old('jenis_pembiayaan_id') == $jenis->id ? 'selected' : '' }}>
                                         {{ $jenis->nama_pembiayaan }}
                                     </option>
                                 @endforeach
@@ -87,8 +78,7 @@
 
                         <div class="form-group">
                             <label for="nama_rincian">Nama Rincian</label>
-                            <input type="text" name="nama_rincian" class="form-control"
-                                value="{{ old('nama_rincian') }}" required>
+                            <input type="text" name="nama_rincian" class="form-control" value="{{ old('nama_rincian') }}" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -102,8 +92,7 @@
 
     <!-- Modal Edit -->
     @foreach ($detailPembiayaan as $item)
-        <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog"
-            aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
+        <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <form action="{{ route('admin.keuangan.detail_pembiayaan.update', $item->id) }}" method="POST">
@@ -121,8 +110,7 @@
                                 <select name="jenis_pembiayaan_id" class="form-control" required>
                                     <option value="">-- Pilih Jenis Pembiayaan --</option>
                                     @foreach ($jenisPembiayaans as $jenis)
-                                        <option value="{{ $jenis->id }}"
-                                            {{ $item->jenis_pembiayaan_id == $jenis->id ? 'selected' : '' }}>
+                                        <option value="{{ $jenis->id }}" {{ $item->jenis_pembiayaan_id == $jenis->id ? 'selected' : '' }}>
                                             {{ $jenis->nama_pembiayaan }}
                                         </option>
                                     @endforeach
@@ -130,8 +118,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="nama_rincian">Nama Rincian</label>
-                                <input type="text" name="nama_rincian" class="form-control"
-                                    value="{{ $item->nama_rincian }}" required>
+                                <input type="text" name="nama_rincian" class="form-control" value="{{ $item->nama_rincian }}" required>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -159,7 +146,6 @@
             if (errorMessage) {
                 Toast.fire({
                     icon: 'error',
-                    title
                     title: errorMessage
                 });
             }
