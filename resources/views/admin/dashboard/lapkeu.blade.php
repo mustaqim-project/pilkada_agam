@@ -308,10 +308,10 @@
         new Chart(penggunaanPerPembiayaanDetailCtx, {
             type: 'bar',
             data: {
-                labels: {!! json_encode($penggunaanPerPembiayaanDetail->pluck('nama_detail')) !!},
+                labels: {!! json_encode($penggunaanPerPembiayaanDetail->pluck('nama_rincian')) !!},
                 datasets: [{
                     label: 'Penggunaan per Pembiayaan Detail',
-                    data: {!! json_encode($penggunaanPerPembiayaanDetail->pluck('jumlah')) !!},
+                    data: {!! json_encode($penggunaanPerPembiayaanDetail->pluck('total_digunakan')) !!},
                     backgroundColor: '#FF6384',
                 }]
             }
