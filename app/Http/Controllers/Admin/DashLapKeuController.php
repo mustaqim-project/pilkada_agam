@@ -30,7 +30,7 @@ $totalAnggaranPerTim = DB::table('anggaran as a')
         return number_format($item, 0, '.', '.'); // Format tanpa desimal dan menggunakan titik sebagai pemisah ribuan
     });
 
-
+dd($data);
 
         // Total Anggaran yang Sudah Dikeluarkan per Tim
         $totalAnggaranDigunakanPerTim = DB::table('penggunaan_anggaran as pa')
