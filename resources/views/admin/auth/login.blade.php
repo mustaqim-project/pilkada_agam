@@ -119,7 +119,7 @@
                         </div>
 
                         <div class="simple-footer">
-                            {{ __('admin.Copyright') }} &copy; {{ __('admin.WebSolutionUs 2023') }}
+                            {{ __('admin.Copyright') }} &copy; {{ __('admin.Sikadsis.com 2024') }}
                         </div>
                     </div>
                 </div>

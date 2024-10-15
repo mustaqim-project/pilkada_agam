@@ -14,7 +14,6 @@ class DetailPembiayaanController extends Controller
     {
         $jenisPembiayaans = jenis_pembiayaan::all();
         $detailPembiayaan = DetailPembiayaan::with('jenisPembiayaan')->get();
-// dd($detailPembiayaan);
         return view('admin.keuangan.detail_pembiayaan.index', compact('detailPembiayaan', 'jenisPembiayaans'));
     }
 
@@ -57,6 +56,9 @@ class DetailPembiayaanController extends Controller
     // Menghapus data berdasarkan ID
     public function destroy(string $id)
     {
+
+        dd($id);
+
         $detailPembiayaan = DetailPembiayaan::findOrFail($id);
         $detailPembiayaan->delete();
 

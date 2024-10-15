@@ -43,6 +43,7 @@
                                             <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
                                                 class="btn btn-danger delete-item">
                                                 <i class="fas fa-trash-alt"></i>
+                                            </a>
 
                                         </div>
                                     </td>
