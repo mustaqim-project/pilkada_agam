@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-Use App\Models\Periode;
+Use App\Models\periode;
 Use App\Models\DetailPembiayaan;
 
 class PenggunaanAnggaran extends Model
@@ -36,7 +36,7 @@ class PenggunaanAnggaran extends Model
     // Relasi ke tabel 'periode' (asumsi ada model dan tabel terkait)
     public function periode()
     {
-        return $this->belongsTo(Periode::class, 'periode_id');
+        return $this->belongsTo(periode::class, 'periode_id');
     }
 
     // Relasi ke tabel 'detail_pembiayaan' (asumsi ada model dan tabel terkait)

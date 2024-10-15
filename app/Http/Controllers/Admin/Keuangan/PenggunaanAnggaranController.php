@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Keuangan;
 
 use App\Http\Controllers\Controller;
 use App\Models\PenggunaanAnggaran;
+use App\Models\periode;
+use App\Models\DetailPembiayaan;
 use Illuminate\Http\Request;
 use App\Traits\FileUploadTrait;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +19,12 @@ class PenggunaanAnggaranController extends Controller
      */
     public function index()
     {
-        $penggunaanAnggaran = PenggunaanAnggaran::all();
-        return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran'));
+        $penggunaanAnggaran = PenggunaanAnggaran::with(['periode', 'detailPembiayaan'])->get();
+
+        $periodes = periode::all();
+        $DetailPembiayaans = DetailPembiayaan::all();
+
+        return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran', 'periodes', 'DetailPembiayaans'));
     }
 
     /**

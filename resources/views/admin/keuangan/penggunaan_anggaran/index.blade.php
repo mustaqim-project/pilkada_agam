@@ -21,8 +21,8 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Periode ID</th>
-                                <th>Detail Pembiayaan ID</th>
+                                <th>Nama Periode</th>
+                                <th>Nama Rincian Pembiayaan</th>
                                 <th>Jumlah Digunakan</th>
                                 <th>Status Pembayaran</th>
                                 <th>Bukti Pembayaran</th>
@@ -34,11 +34,11 @@
                             @foreach ($penggunaanAnggaran as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->periode_id }}</td>
-                                    <td>{{ $item->detail_pembiayaan_id }}</td>
+                                    <td>{{ $item->periode->nama_periode }}</td>
+                                    <td>{{ $item->detailPembiayaan->nama_rincian }}</td>
                                     <td>{{ $item->jumlah_digunakan }}</td>
                                     <td>{{ $item->status_pembayaran == 1 ? 'Lunas' : 'Belum Lunas' }}</td>
-                                    <td><img src="{{ $item->bukti_pembayaran }}" alt="Bukti" width="100"></td>
+                                    <td><img src="{{ asset($item->bukti_pembayaran) }}" alt="Bukti" width="100"></td>
                                     <td>{{ $item->keterangan }}</td>
 
                                     <td>
@@ -85,82 +85,18 @@
                     </div>
                     <div class="modal-body">
                         <p><strong>ID:</strong> {{ $item->id }}</p>
-                        <p><strong>Periode ID:</strong> {{ $item->periode_id }}</p>
-                        <p><strong>Detail Pembiayaan ID:</strong> {{ $item->detail_pembiayaan_id }}</p>
+                        <p><strong>Nama Periode:</strong> {{ $item->periode->nama_periode }}</p>
+                        <p><strong>Nama Rincian Pembiayaan:</strong> {{ $item->detailPembiayaan->nama_rincian }}</p>
                         <p><strong>Jumlah Digunakan:</strong> {{ $item->jumlah_digunakan }}</p>
                         <p><strong>Status Pembayaran:</strong>
                             {{ $item->status_pembayaran == 1 ? 'Lunas' : 'Belum Lunas' }}</p>
                         <p><strong>Bukti Pembayaran:</strong></p>
-                        <img src="{{ $item->bukti_pembayaran }}" alt="Bukti" width="100">
+                        <img src="{{ asset($item->bukti_pembayaran) }}" alt="Bukti" width="100">
                         <p><strong>Keterangan:</strong> {{ $item->keterangan }}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
-
-    <!-- Modal Edit -->
-    @foreach ($penggunaanAnggaran as $item)
-        <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog"
-            aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <form action="{{ route('admin.keuangan.penggunaan_anggaran.update', $item->id) }}" method="POST"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Penggunaan Anggaran</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="periode_id">Periode ID</label>
-                                <input type="number" class="form-control" name="periode_id"
-                                    value="{{ $item->periode_id }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="detail_pembiayaan_id">Detail Pembiayaan ID</label>
-                                <input type="number" class="form-control" name="detail_pembiayaan_id"
-                                    value="{{ $item->detail_pembiayaan_id }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="jumlah_digunakan">Jumlah Digunakan</label>
-                                <input type="text" class="form-control" name="jumlah_digunakan"
-                                    value="{{ $item->jumlah_digunakan }}" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="status_pembayaran">Status Pembayaran</label>
-                                <select class="form-control" name="status_pembayaran">
-                                    <option value="1" {{ $item->status_pembayaran == 1 ? 'selected' : '' }}>Lunas
-                                    </option>
-                                    <option value="0" {{ $item->status_pembayaran == 0 ? 'selected' : '' }}>Belum
-                                        Lunas</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                                <input type="file" class="form-control" name="bukti_pembayaran">
-                                @if ($item->bukti_pembayaran)
-                                    <small>Current: <a href="{{ asset($item->bukti_pembayaran) }}"
-                                            target="_blank">View</a></small>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <label for="keterangan">Keterangan</label>
-                                <textarea class="form-control" name="keterangan">{{ $item->keterangan }}</textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -182,12 +118,20 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="periode_id">Periode ID</label>
-                            <input type="number" class="form-control" name="periode_id" required>
+                            <label for="periode_id">Nama Periode</label>
+                            <select class="form-control" name="periode_id" required>
+                                @foreach ($periodes as $periode)
+                                    <option value="{{ $periode->id }}">{{ $periode->nama_periode }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="detail_pembiayaan_id">Detail Pembiayaan ID</label>
-                            <input type="number" class="form-control" name="detail_pembiayaan_id" required>
+                            <label for="detail_pembiayaan_id">Nama Rincian Pembiayaan</label>
+                            <select class="form-control" name="detail_pembiayaan_id" required>
+                                @foreach ($detailPembiayaans as $detail)
+                                    <option value="{{ $detail->id }}">{{ $detail->nama_rincian }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="jumlah_digunakan">Jumlah Digunakan</label>
@@ -217,46 +161,132 @@
             </div>
         </div>
     </div>
-@endsection
+
+
+    @foreach ($penggunaanAnggaran as $item)
+        <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <form action="{{ route('admin.keuangan.penggunaan_anggaran.update', $item->id) }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Penggunaan Anggaran</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="periode_id">Nama Periode</label>
+                                <select class="form-control" name="periode_id" required>
+                                    @foreach ($periodes as $periode)
+                                        <option value="{{ $periode->id }}"
+                                            {{ $periode->id == $item->periode_id ? 'selected' : '' }}>
+                                            {{ $periode->nama_periode }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="detail_pembiayaan_id">Nama Rincian Pembiayaan</label>
+                                <select class="form-control" name="detail_pembiayaan_id" required>
+                                    @foreach ($detailPembiayaans as $detail)
+                                        <option value="{{ $detail->id }}"
+                                            {{ $detail->id == $item->detail_pembiayaan_id ? 'selected' : '' }}>
+                                            {{ $detail->nama_rincian }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="jumlah_digunakan">Jumlah Digunakan</label>
+                                <input type="text" class="form-control" name="jumlah_digunakan"
+                                    value="{{ $item->jumlah_digunakan }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="status_pembayaran">Status Pembayaran</label>
+                                <select class="form-control" name="status_pembayaran">
+                                    <option value="1" {{ $item->status_pembayaran == 1 ? 'selected' : '' }}>Lunas
+                                    </option>
+                                    <option value="0" {{ $item->status_pembayaran == 0 ? 'selected' : '' }}>Belum
+                                        Lunas</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bukti_pembayaran">Bukti Pembayaran</label>
+                                <input type="file" class="form-control" name="bukti_pembayaran">
+                                @if ($item->bukti_pembayaran)
+                                    <img src="{{ asset($item->bukti_pembayaran) }}" alt="Bukti" width="100">
+                                @endif
+                            </div>
+
+                            <div class="form-group">
+                                <label for="keterangan">Keterangan</label>
+                                <textarea class="form-control" name="keterangan">{{ $item->keterangan }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+
 
 @section('script')
-    <!-- Include SweetAlert2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+<!-- Include SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const successMessage = '{{ session('success') }}';
-            const errorMessage = '{{ session('error') }}';
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const successMessage = '{{ session('success') }}';
+        const errorMessage = '{{ session('error') }}';
 
-            if (successMessage) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Berhasil',
-                    text: successMessage,
-                });
-            }
-
-            if (errorMessage) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: errorMessage,
-                });
-            }
-        });
-
-        $(document).ready(function() {
-            $("#tablePenggunaanAnggaran").dataTable({
-                "columnDefs": [{
-                    "sortable": false,
-                    "targets": [2, 3]
-                }],
-                "order": [
-                    [0, 'desc']
-                ]
+        if (successMessage) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: successMessage,
             });
+        }
+
+        if (errorMessage) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: errorMessage,
+            });
+        }
+    });
+
+    $(document).ready(function() {
+        $("#tablePenggunaanAnggaran").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }],
+            "order": [
+                [0, 'desc']
+            ]
         });
-    </script>
+    });
+</script>
 @endsection
 
+
+@endsection
