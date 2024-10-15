@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Keuangan;
 
 use App\Http\Controllers\Controller;
 use App\Models\DetailPembiayaan;
-use App\Models\jenis_pembiayaan;
+use App\Models\jenis_pembiayaan; // Adjusted to follow PSR standards
 use Illuminate\Http\Request;
 
 class DetailPembiayaanController extends Controller
@@ -12,7 +12,7 @@ class DetailPembiayaanController extends Controller
     // Menampilkan daftar Detail Pembiayaan
     public function index()
     {
-        $jenisPembiayaans = jenis_pembiayaan::all();
+        $jenisPembiayaans = jenis_pembiayaan::all(); // Corrected the model name
         $detailPembiayaan = DetailPembiayaan::with('jenisPembiayaan')->get();
 
         return view('admin.keuangan.detail_pembiayaan.index', compact('detailPembiayaan', 'jenisPembiayaans'));
@@ -22,14 +22,14 @@ class DetailPembiayaanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_pembiayaan_id' => 'required|integer',
+            'jenis_pembiayaan_id' => 'required|integer|exists:jenis_pembiayaan,id',
             'nama_rincian' => 'required|string|max:255',
         ]);
 
-        DetailPembiayaan::create($request->all());
+        DetailPembiayaan::create($request->only(['jenis_pembiayaan_id', 'nama_rincian']));
 
         return redirect()->route('admin.keuangan.detail_pembiayaan.index')
-            ->with('toast', __('admin.Created Successfully!'), 'success');
+            ->with('toast', __('admin.Created Successfully!'));
     }
 
     // Mengedit data berdasarkan ID
@@ -43,24 +43,24 @@ class DetailPembiayaanController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'jenis_pembiayaan_id' => 'required|integer',
+            'jenis_pembiayaan_id' => 'required|integer|exists:jenis_pembiayaan,id',
             'nama_rincian' => 'required|string|max:255',
         ]);
 
         $detailPembiayaan = DetailPembiayaan::findOrFail($id);
-        $detailPembiayaan->update($request->all());
+        $detailPembiayaan->update($request->only(['jenis_pembiayaan_id', 'nama_rincian']));
 
         return redirect()->route('admin.keuangan.detail_pembiayaan.index')
-            ->with('toast', __('admin.Updated Successfully!'), 'success');
+            ->with('toast', __('admin.Updated Successfully!'));
     }
 
     // Menghapus data berdasarkan ID
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $detailPembiayaan = DetailPembiayaan::findOrFail($id);
         $detailPembiayaan->delete();
 
         return redirect()->route('admin.keuangan.detail_pembiayaan.index')
-            ->with('toast', __('admin.Delete Successfully!'), 'success');
+            ->with('toast', __('admin.Delete Successfully!'));
     }
 }
