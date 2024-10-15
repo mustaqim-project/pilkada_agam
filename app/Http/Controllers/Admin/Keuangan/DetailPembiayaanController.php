@@ -29,7 +29,7 @@ class DetailPembiayaanController extends Controller
         DetailPembiayaan::create($request->all());
 
         return redirect()->route('admin.keuangan.detail_pembiayaan.index')
-                         ->with('toast', __('admin.Created Successfully!'), 'success');
+            ->with('toast', __('admin.Created Successfully!'), 'success');
     }
 
     // Mengedit data berdasarkan ID
@@ -51,7 +51,7 @@ class DetailPembiayaanController extends Controller
         $detailPembiayaan->update($request->all());
 
         return redirect()->route('admin.keuangan.detail_pembiayaan.index')
-                         ->with('toast', __('admin.Updated Successfully!'), 'success');
+            ->with('toast', __('admin.Updated Successfully!'), 'success');
     }
 
     // Menghapus data berdasarkan ID
@@ -61,6 +61,6 @@ class DetailPembiayaanController extends Controller
         $detailPembiayaan->delete();
 
         return redirect()->route('admin.keuangan.detail_pembiayaan.index')
-                         ->with('toast', __('admin.Deleted Successfully!'), 'success');
+            ->with('toast', __('admin.Delete Successfully!'), 'success');
     }
 }
