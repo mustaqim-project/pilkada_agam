@@ -29,7 +29,7 @@ class DetailPembiayaanController extends Controller
         DetailPembiayaan::create($request->all());
 
         return redirect()->route('admin.keuangan.detail_pembiayaan.index')
-                         ->with('success', 'Data berhasil ditambahkan.');
+                         ->with('toast', __('admin.Created Successfully!'), 'success')->width('330');
     }
 
     // Mengedit data berdasarkan ID
@@ -51,17 +51,16 @@ class DetailPembiayaanController extends Controller
         $detailPembiayaan->update($request->all());
 
         return redirect()->route('admin.keuangan.detail_pembiayaan.index')
-                         ->with('success', 'Data berhasil diupdate.');
+                         ->with('toast', __('admin.Updated Successfully!'), 'success')->width('330');
     }
 
     // Menghapus data berdasarkan ID
     public function destroy($id)
     {
-
         $detailPembiayaan = DetailPembiayaan::findOrFail($id);
         $detailPembiayaan->delete();
 
         return redirect()->route('admin.keuangan.detail_pembiayaan.index')
-                         ->with('success', 'Data berhasil dihapus.');
+                         ->with('toast', __('admin.Deleted Successfully!'), 'success')->width('330');
     }
 }
