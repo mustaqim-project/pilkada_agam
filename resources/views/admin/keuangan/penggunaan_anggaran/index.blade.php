@@ -121,7 +121,7 @@
                             <label for="periode_id">Nama Periode</label>
                             <select class="form-control" name="periode_id" required>
                                 @foreach ($periodes as $periode)
-                                    <option value="{{ $periode->id }}">{{ $periode->nama_periode }}</option>
+                                    <option value="{{ $periode->id }}">{{ $periode->nama_periode }} {{ $periode->anggaran->tim->name }}</option>
                                 @endforeach
                             </select>
                         </div>
