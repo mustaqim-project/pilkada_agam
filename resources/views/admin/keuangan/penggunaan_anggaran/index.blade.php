@@ -121,7 +121,8 @@
                             <label for="periode_id">Nama Periode</label>
                             <select class="form-control" name="periode_id" required>
                                 @foreach ($periodes as $periode)
-                                    <option value="{{ $periode->id }}">{{ $periode->nama_periode }} {{ $periode->anggaran->tim->name }}</option>
+                                    <option value="{{ $periode->id }}">{{ $periode->nama_periode }}
+                                        {{ $periode->anggaran->tim->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -248,45 +249,43 @@
 
 
 @section('script')
-<!-- Include SweetAlert2 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <!-- Include SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const successMessage = '{{ session('success') }}';
-        const errorMessage = '{{ session('error') }}';
-
-        if (successMessage) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil',
-                text: successMessage,
-            });
-        }
-
-        if (errorMessage) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: errorMessage,
-            });
-        }
-    });
-
-    $(document).ready(function() {
-        $("#tablePenggunaanAnggaran").dataTable({
-            "columnDefs": [{
-                "sortable": false,
-                "targets": [2, 3]
-            }],
-            "order": [
-                [0, 'desc']
-            ]
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            @elseif (session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: '{{ session('error') }}',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            @endif
         });
-    });
-</script>
+
+
+        $(document).ready(function() {
+            $("#tablePenggunaanAnggaran").dataTable({
+                "columnDefs": [{
+                    "sortable": false,
+                    "targets": [2, 3]
+                }],
+                "order": [
+                    [0, 'desc']
+                ]
+            });
+        });
+    </script>
 @endsection
-
-
 @endsection
