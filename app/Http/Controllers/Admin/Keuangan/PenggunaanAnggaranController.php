@@ -20,11 +20,10 @@ class PenggunaanAnggaranController extends Controller
     public function index()
     {
         $penggunaanAnggaran = PenggunaanAnggaran::with(['periode', 'detailPembiayaan'])->get();
+        $periodes = Periode::all();
+        $detailPembiayaans = DetailPembiayaan::all();
 
-        $periodes = periode::all();
-        $DetailPembiayaans = DetailPembiayaan::all();
-
-        return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran', 'periodes', 'DetailPembiayaans'));
+        return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran', 'periodes', 'detailPembiayaans'));
     }
 
     /**
