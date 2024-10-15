@@ -49,9 +49,9 @@
                         @endif
 
                         @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
-                            <li class="{{ setSidebarActive(['admin.periode.index']) }}">
+                            <li class="{{ setSidebarActive(['admin.keuangan.detail_pembiayaan.index']) }}">
                                 <a class="nav-link"
-                                    href="{{ route('admin.periode.index') }}">{{ __('Detail Pembiayaan') }}</a>
+                                    href="{{ route('admin.keuangan.detail_pembiayaan.index') }}">{{ __('Detail Pembiayaan') }}</a>
                             </li>
                         @endif
 
@@ -64,13 +64,13 @@
                         @endif
 
                         @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
-                            <li class="{{ setSidebarActive(['admin.periode.index']) }}">
+                            <li class="{{ setSidebarActive(['admin.keuangan.penggunaan_anggaran.index']) }}">
                                 <a class="nav-link"
-                                    href="{{ route('admin.periode.index') }}">{{ __('Penggunaan Anggaran') }}</a>
+                                    href="{{ route('admin.keuangan.penggunaan_anggaran.index') }}">{{ __('Penggunaan Anggaran') }}</a>
                             </li>
                         @endif
 
-                        @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
+                        {{-- @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
                             <li class="{{ setSidebarActive(['admin.periode.index']) }}">
                                 <a class="nav-link"
                                     href="{{ route('admin.periode.index') }}">{{ __('Laporan Keuangan') }}</a>
@@ -82,7 +82,7 @@
                                 <a class="nav-link"
                                     href="{{ route('admin.laporan-keuangan.keuangan') }}">{{ __('Pembiayaan ') }}</a>
                             </li>
-                        @endif
+                        @endif --}}
 
                         @if (canAccess(['LaporanKeuangan index', 'LaporanKeuangan create', 'LaporanKeuangan update', 'LaporanKeuangan delete']))
                             <li class="{{ setSidebarActive(['admin.laporan-keuangan.index']) }}">
