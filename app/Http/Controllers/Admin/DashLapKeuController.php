@@ -16,13 +16,15 @@ class DashLapKeuController extends Controller
             ->first();
 
         // Total Anggaran per Tim
-        $totalAnggaranPerTim = DB::table('anggaran as a')
+        $penggunaanPerTim = DB::table('anggaran as a')
             ->join('tims as t', 'a.tim_id', '=', 't.id')
             ->select('t.name as tim', DB::raw('SUM(a.total_anggaran) AS total_anggaran'))
             ->groupBy('t.name')
             ->get();
-            $labels = $penggunaanPerTim->pluck('tim'); // Mengambil nama tim
-            $data = $penggunaanPerTim->pluck('total_anggaran'); // Mengamb
+
+        // Ambil labels (nama tim) dan data (total anggaran)
+        $labels = $penggunaanPerTim->pluck('tim');
+        $data = $penggunaanPerTim->pluck('total_anggaran');
         // Total Anggaran yang Sudah Dikeluarkan per Tim
         $totalAnggaranDigunakanPerTim = DB::table('penggunaan_anggaran as pa')
             ->join('periode as p', 'pa.periode_id', '=', 'p.id')
@@ -85,15 +87,15 @@ class DashLapKeuController extends Controller
         // ->get();
 
         $penggunaanPeriode = DB::table('tims as t')
-        ->leftJoin('anggaran as a', 't.id', '=', 'a.tim_id')
-        ->leftJoin('periode as p', 'a.id', '=', 'p.anggaran_id')
-        ->leftJoin('penggunaan_anggaran as pa', 'p.id', '=', 'pa.periode_id')
-        ->select('t.name as tim', 'p.nama_periode', DB::raw('COALESCE(SUM(pa.jumlah_digunakan), 0) AS total_digunakan'))
-        ->whereNotNull('p.nama_periode')  // Menyaring periode yang tidak null
-        ->groupBy('t.name', 'p.nama_periode')
-        ->orderBy('p.nama_periode')
-        ->orderBy('t.name')
-        ->get();
+            ->leftJoin('anggaran as a', 't.id', '=', 'a.tim_id')
+            ->leftJoin('periode as p', 'a.id', '=', 'p.anggaran_id')
+            ->leftJoin('penggunaan_anggaran as pa', 'p.id', '=', 'pa.periode_id')
+            ->select('t.name as tim', 'p.nama_periode', DB::raw('COALESCE(SUM(pa.jumlah_digunakan), 0) AS total_digunakan'))
+            ->whereNotNull('p.nama_periode')  // Menyaring periode yang tidak null
+            ->groupBy('t.name', 'p.nama_periode')
+            ->orderBy('p.nama_periode')
+            ->orderBy('t.name')
+            ->get();
 
 
         // Status Pembayaran
