@@ -30,7 +30,7 @@
                             @foreach ($detailPembiayaan as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->jenis_pembiayaan_id }}</td>
+                                    <td>{{ $item->jenisPembiayaan->nama_pembiayaan }}</td>
                                     <td>{{ $item->nama_rincian }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
