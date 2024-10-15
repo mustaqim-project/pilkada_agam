@@ -217,9 +217,7 @@
         //         borderWidth: 1
         //     }]
         // };
-        // Ambil labels (nama tim) dan data (total anggaran)
-        $labels = $penggunaanPerTim - > pluck('tim');
-        $data = $penggunaanPerTim - > pluck('total_anggaran');
+
         // Data dari PHP ke dalam JavaScript
         const labels = {!! json_encode($labels) !!};
         const data = {!! json_encode($data) !!};

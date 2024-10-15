@@ -21,7 +21,8 @@ class DashLapKeuController extends Controller
             ->select('t.name as tim', DB::raw('SUM(a.total_anggaran) AS total_anggaran'))
             ->groupBy('t.name')
             ->get();
-
+            $labels = $penggunaanPerTim->pluck('tim'); // Mengambil nama tim
+            $data = $penggunaanPerTim->pluck('total_anggaran'); // Mengamb
         // Total Anggaran yang Sudah Dikeluarkan per Tim
         $totalAnggaranDigunakanPerTim = DB::table('penggunaan_anggaran as pa')
             ->join('periode as p', 'pa.periode_id', '=', 'p.id')
@@ -154,7 +155,9 @@ class DashLapKeuController extends Controller
             'rekapitulasiAnggaran',
             'penggunaanPerPembiayaanDetail',
             'anggaranDigunakanVsTotal',
-            'laporanPembayaran'
+            'laporanPembayaran',
+            'labels',
+            'data'
         ));
     }
 }
