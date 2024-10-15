@@ -15,15 +15,15 @@ class DashLapKeuController extends Controller
             ->select(DB::raw('SUM(total_anggaran) AS total_anggaran_keseluruhan'))
             ->first();
 
-        // Total Anggaran per Tim
-        $totalAnggaranPerTim = DB::table('anggaran as a')
-        ->join('tims as t', 'a.tim_id', '=', 't.id')
-        ->selectRaw("t.name as tim, SUM(a.total_anggaran) AS total_anggaran") // Jangan format di sini
-        ->groupBy('t.name')
-        ->get();
+// Total Anggaran per Tim
+$totalAnggaranPerTim = DB::table('anggaran as a')
+    ->join('tims as t', 'a.tim_id', '=', 't.id')
+    ->selectRaw("t.name as tim, CONCAT(SUM(a.total_anggaran), '') AS total_anggaran") // Menggunakan CONCAT untuk format string
+    ->groupBy('t.name')
+    ->get();
 
-    $labels = $totalAnggaranPerTim->pluck('tim');
-    $data = $totalAnggaranPerTim->pluck('total_anggaran'); // Data tetap dalam format angka
+$labels = $totalAnggaranPerTim->pluck('tim');
+$data = $totalAnggaranPerTim->pluck('total_anggaran'); // Data tetap dalam format string
 
 
 

@@ -219,57 +219,51 @@
         // };
 
         // Data dari PHP ke dalam JavaScript
-        const labels = {!! json_encode($labels) !!};
-        const data = {!! json_encode($data) !!}; // Data tetap angka asli
+const labels = {!! json_encode($labels) !!};
+const data = {!! json_encode($data) !!};
 
-        // Chart.js Pie Chart
-        const totalAnggaranPerTimData = {
-            labels: labels, // Nama tim dari PHP
-            datasets: [{
-                label: 'Total Anggaran',
-                data: data, // Total anggaran dari PHP
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.6)', // Merah
-                    'rgba(54, 162, 235, 0.6)', // Biru
-                    'rgba(255, 206, 86, 0.6)' // Kuning
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
+// Chart.js Pie Chart
+const totalAnggaranPerTimData = {
+    labels: labels, // Nama tim dari PHP
+    datasets: [{
+        label: 'Total Anggaran',
+        data: data, // Total anggaran dari PHP
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.6)', // Merah
+            'rgba(54, 162, 235, 0.6)', // Biru
+            'rgba(255, 206, 86, 0.6)'  // Kuning
+        ],
+        borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)'
+        ],
+        borderWidth: 1
+    }]
+};
 
-        // Membuat Pie Chart
-        new Chart(totalAnggaranPerTimCtx, {
-            type: 'pie',
-            data: totalAnggaranPerTimData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let value = context.raw;
-                                // Format angka sebagai Rupiah
-                                return context.label + ': ' + new Intl.NumberFormat('id-ID', {
-                                    style: 'currency',
-                                    currency: 'IDR',
-                                    minimumFractionDigits: 0 // Hilangkan angka desimal
-                                }).format(value);
-                            }
-                        }
+// Membuat Pie Chart
+new Chart(totalAnggaranPerTimCtx, {
+    type: 'pie',
+    data: totalAnggaranPerTimData,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        let value = context.raw;
+                        // Format angka sebagai Rupiah
+                        return context.label + ': ' + new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(value);
                     }
                 }
             }
-        });
-
-
+        }
+    }
+});
 
         const totalAnggaranDigunakanPerTimData = {
             labels: {!! json_encode($totalAnggaranDigunakanPerTim->pluck('tim')) !!},
