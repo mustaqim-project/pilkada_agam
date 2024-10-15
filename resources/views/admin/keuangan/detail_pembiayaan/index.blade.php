@@ -34,18 +34,17 @@
                                     <td>{{ $item->nama_rincian }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                            <button class="btn btn-info btn-sm" data-toggle="modal"
-                                                data-target="#detailModal{{ $item->id }}">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
-                                            <button class="btn btn-warning btn-sm" data-toggle="modal"
-                                                data-target="#editModal{{ $item->id }}">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
+
+                                            <a href="#" data-toggle="modal"
+                                                data-target="#detailModal{{ $item->id }}" class="btn btn-primary"><i
+                                                    class="fas fa-eye"></i></a>
+
+                                            <a href="#" data-toggle="modal"
+                                                data-target="#editModal{{ $item->id }}" class="btn btn-primary"><i
+                                                    class="fas fa-edit"></i></a>
 
                                             <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
-                                                class="btn btn-danger delete-item"><i
-                                                    class="fas fa-trash-alt"></i></a>
+                                                class="btn btn-danger delete-item"><i class="fas fa-trash-alt"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -98,11 +97,13 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="jenis_pembiayaan_id">Jenis Pembiayaan ID</label>
-                            <input type="number" name="jenis_pembiayaan_id" class="form-control" value="{{ old('jenis_pembiayaan_id') }}" required>
+                            <input type="number" name="jenis_pembiayaan_id" class="form-control"
+                                value="{{ old('jenis_pembiayaan_id') }}" required>
                         </div>
                         <div class="form-group">
                             <label for="nama_rincian">Nama Rincian</label>
-                            <input type="text" name="nama_rincian" class="form-control" value="{{ old('nama_rincian') }}" required>
+                            <input type="text" name="nama_rincian" class="form-control"
+                                value="{{ old('nama_rincian') }}" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -132,11 +133,13 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="jenis_pembiayaan_id">Jenis Pembiayaan ID</label>
-                                <input type="number" name="jenis_pembiayaan_id" class="form-control" value="{{ $item->jenis_pembiayaan_id }}" required>
+                                <input type="number" name="jenis_pembiayaan_id" class="form-control"
+                                    value="{{ $item->jenis_pembiayaan_id }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="nama_rincian">Nama Rincian</label>
-                                <input type="text" name="nama_rincian" class="form-control" value="{{ $item->nama_rincian }}" required>
+                                <input type="text" name="nama_rincian" class="form-control"
+                                    value="{{ $item->nama_rincian }}" required>
                             </div>
                         </div>
                         <div class="modal-footer">
