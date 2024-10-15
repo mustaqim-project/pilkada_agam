@@ -265,13 +265,32 @@
                 ) !!}, // Menggabungkan tim dan nama periode
                 datasets: [{
                     label: 'Penggunaan per Periode',
-                    data: {!! json_encode($penggunaanPeriode->pluck('total_digunakan')) !!}, // Total penggunaan
+                    data: {!! json_encode($penggunaanPeriode->pluck('total_digunakan')) !!}.map(value => value.toLocaleString('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR'
+                    }).replace('Rp', '')), // Format sebagai Rupiah
                     fill: false,
                     borderColor: 'rgb(75, 192, 192)',
                     tension: 0.1
                 }]
+            },
+            options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                // Format label tooltip
+                                return context.dataset.label + ': ' + context.raw.toLocaleString('id-ID', {
+                                    style: 'currency',
+                                    currency: 'IDR'
+                                }).replace('Rp', '');
+                            }
+                        }
+                    }
+                }
             }
         });
+
 
         // new Chart(penggunaanPeriodeCtx, {
         //     type: 'line',
