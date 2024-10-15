@@ -34,7 +34,7 @@
                             @foreach ($penggunaanAnggaran as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->periode->nama_periode }}</td>
+                                    <td>{{ $item->periode->nama_periode }}  - {{ $item->periode->anggaran->tim->name }}</td>
                                     <td>{{ $item->detailPembiayaan->nama_rincian }}</td>
                                     <td>{{ $item->jumlah_digunakan }}</td>
                                     <td>{{ $item->status_pembayaran == 1 ? 'Lunas' : 'Belum Lunas' }}</td>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="modal-body">
                         <p><strong>ID:</strong> {{ $item->id }}</p>
-                        <p><strong>Nama Periode:</strong> {{ $item->periode->nama_periode }} - {{ $item->periode->anggaran->tims->name }}</p>
+                        <p><strong>Nama Periode:</strong> {{ $item->periode->nama_periode }} - {{ $item->periode->anggaran->tim->name }}</p>
                         <p><strong>Nama Rincian Pembiayaan:</strong> {{ $item->detailPembiayaan->nama_rincian }}</p>
                         <p><strong>Jumlah Digunakan:</strong> {{ $item->jumlah_digunakan }}</p>
                         <p><strong>Status Pembayaran:</strong>
@@ -121,7 +121,7 @@
                             <label for="periode_id">Nama Periode</label>
                             <select class="form-control" name="periode_id" required>
                                 @foreach ($periodes as $periode)
-                                    <option value="{{ $periode->id }}">{{ $periode->nama_periode }}
+                                    <option value="{{ $periode->id }}">{{ $periode->nama_periode }} -
                                         {{ $periode->anggaran->tim->name }}</option>
                                 @endforeach
                             </select>
