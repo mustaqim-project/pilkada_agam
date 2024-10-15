@@ -35,12 +35,12 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
 
-                                            <a href="#" data-toggle="modal"
+                                            {{-- <a href="#" data-toggle="modal"
                                                 data-target="#detailModal{{ $item->id }}" class="btn btn-primary"><i
-                                                    class="fas fa-eye"></i></a>
+                                                    class="fas fa-eye"></i></a> --}}
 
                                             <a href="#" data-toggle="modal"
-                                                data-target="#editModal{{ $item->id }}" class="btn btn-primary"><i
+                                                data-target="#editModal{{ $item->id }}" class="btn btn-warning"><i
                                                     class="fas fa-edit"></i></a>
 
                                             <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
@@ -56,7 +56,7 @@
         </div>
     </section>
 
-    <!-- Modal Detail -->
+    {{-- <!-- Modal Detail -->
     @foreach ($detailPembiayaan as $item)
         <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1" role="dialog"
             aria-labelledby="detailModalLabel{{ $item->id }}" aria-hidden="true">
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
 
     <!-- Modal Tambah -->
     <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
@@ -96,10 +96,17 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="jenis_pembiayaan_id">Jenis Pembiayaan ID</label>
-                            <input type="number" name="jenis_pembiayaan_id" class="form-control"
-                                value="{{ old('jenis_pembiayaan_id') }}" required>
+                            <label for="jenis_pembiayaan_id">Jenis Pembiayaan</label>
+                            <select name="jenis_pembiayaan_id" class="form-control" required>
+                                <option value="">-- Pilih Jenis Pembiayaan --</option>
+                                @foreach ($jenisPembiayaans as $jenis)
+                                    <option value="{{ $jenis->id }}" {{ old('jenis_pembiayaan_id') == $jenis->id ? 'selected' : '' }}>
+                                        {{ $jenis->nama_pembiayaan }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
+
                         <div class="form-group">
                             <label for="nama_rincian">Nama Rincian</label>
                             <input type="text" name="nama_rincian" class="form-control"
