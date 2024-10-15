@@ -42,14 +42,10 @@
                                                 data-target="#editModal{{ $item->id }}">
                                                 <i class="fas fa-edit"></i>
                                             </button>
-                                            <form action="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
-                                                method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger delete-item">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
+
+                                            <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
+                                                class="btn btn-danger delete-item"><i
+                                                    class="fas fa-trash-alt"></i></a>
                                         </div>
                                     </td>
                                 </tr>
