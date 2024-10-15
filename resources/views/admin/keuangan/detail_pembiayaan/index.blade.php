@@ -9,7 +9,7 @@
         <div class="card card-primary">
             <div class="card-header">
                 <div class="card-header-actions">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createEditModal">
                         + Detail Pembiayaan
                     </button>
                 </div>
@@ -31,11 +31,12 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->jenisPembiayaan->nama_pembiayaan }}</td>
-                                    <!-- Ubah untuk menampilkan nama pembiayaan -->
                                     <td>{{ $item->nama_rincian }}</td>
                                     <td>
-                                        <button class="btn btn-info btn-sm" data-toggle="modal"
-                                            data-target="#editModal{{ $item->id }}">Edit</button>
+                                        <button class="btn btn-info btn-sm edit-button" data-id="{{ $item->id }}"
+                                            data-nama_rincian="{{ $item->nama_rincian }}"
+                                            data-jenis_pembiayaan_id="{{ $item->jenis_pembiayaan_id }}"
+                                            data-toggle="modal" data-target="#createEditModal">Edit</button>
                                         <form action="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
                                             method="POST" style="display:inline;">
                                             @csrf
@@ -44,7 +45,6 @@
                                         </form>
                                     </td>
                                 </tr>
-                                ...
                             @endforeach
                         </tbody>
                     </table>
@@ -53,29 +53,29 @@
         </div>
     </section>
 
-    {{-- Create Modal --}}
-    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel"
+    {{-- Add/Edit Modal --}}
+    <div class="modal fade" id="createEditModal" tabindex="-1" role="dialog" aria-labelledby="createEditModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="{{ route('admin.keuangan.detail_pembiayaan.store') }}" method="POST">
+                <form id="createEditForm" method="POST">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="createModalLabel">Tambah Detail Pembiayaan</h5>
+                        <h5 class="modal-title" id="createEditModalLabel">Tambah/Edit Detail Pembiayaan</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
+                        <input type="hidden" id="form-method" name="_method" value="POST">
                         <div class="form-group">
-                            <label for="jenis_pembiayaan_id">Jenis Pembiayaan ID</label>
-                            <input type="number" name="jenis_pembiayaan_id" class="form-control"
-                                value="{{ old('jenis_pembiayaan_id') }}" required>
+                            <label for="jenis_pembiayaan_id">Jenis Pembiayaan</label>
+                            <input type="number" id="jenis_pembiayaan_id" name="jenis_pembiayaan_id" class="form-control"
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="nama_rincian">Nama Rincian</label>
-                            <input type="text" name="nama_rincian" class="form-control" value="{{ old('nama_rincian') }}"
-                                required>
+                            <input type="text" id="nama_rincian" name="nama_rincian" class="form-control" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -89,9 +89,8 @@
 @endsection
 
 @section('script')
-    <!-- Include SweetAlert2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <!-- SweetAlert2 for notifications -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -115,6 +114,33 @@
             }
         });
 
+        // Script for Edit Modal
+        $(document).on('click', '.edit-button', function() {
+            const id = $(this).data('id');
+            const namaRincian = $(this).data('nama_rincian');
+            const jenisPembiayaanId = $(this).data('jenis_pembiayaan_id');
+
+            // Set form action for update
+            $('#createEditForm').attr('action', `/admin/keuangan/detail-pembiayaan/${id}`);
+            $('#form-method').val('PUT');  // Change method to PUT
+
+            // Set data into input fields
+            $('#nama_rincian').val(namaRincian);
+            $('#jenis_pembiayaan_id').val(jenisPembiayaanId);
+
+            // Change modal title
+            $('#createEditModalLabel').text('Edit Detail Pembiayaan');
+        });
+
+        // Reset form when modal is closed
+        $('#createEditModal').on('hidden.bs.modal', function() {
+            $('#createEditForm').trigger('reset');
+            $('#createEditForm').attr('action', '{{ route('admin.keuangan.detail_pembiayaan.store') }}');  // Set back to store route
+            $('#form-method').val('POST');  // Reset method to POST
+            $('#createEditModalLabel').text('Tambah Detail Pembiayaan');  // Reset modal title
+        });
+
+        // DataTable
         $(document).ready(function() {
             $("#tablePembiayaan").dataTable({
                 "columnDefs": [{
