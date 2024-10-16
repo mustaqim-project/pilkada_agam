@@ -27,6 +27,21 @@
                         <span>{{ __('admin.Dashboard Utama') }}</span></a></li>
             @endif
 
+            @if (canAccess(['Dashboard Keuangan']))
+                <li class="{{ setSidebarActive(['admin.laporan-keuangan.index']) }}">
+                    <a class="nav-link"
+                        href="{{ route('admin.keuangan.AdminDashboard') }}">{{ __('Dashboard Keuangan') }}</a>
+                </li>
+            @endif
+
+            @if (canAccess(['Dashboard Keuangan']))
+                <li class="{{ setSidebarActive(['admin.laporan-keuangan.index']) }}">
+                    <a class="nav-link"
+                        href="{{ route('admin.keuangan.AdminDashboard') }}">{{ __('Dashboard Kanvasing') }}</a>
+                </li>
+            @endif
+
+
             @if (canAccess(['Keuangan show']))
                 <li class="menu-header">{{ __('admin.Keuangan') }}</li>
                 <li class="dropdown">
@@ -67,27 +82,6 @@
                             <li class="{{ setSidebarActive(['admin.keuangan.penggunaan_anggaran.index']) }}">
                                 <a class="nav-link"
                                     href="{{ route('admin.keuangan.penggunaan_anggaran.index') }}">{{ __('Penggunaan Anggaran') }}</a>
-                            </li>
-                        @endif
-
-                        {{-- @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
-                            <li class="{{ setSidebarActive(['admin.periode.index']) }}">
-                                <a class="nav-link"
-                                    href="{{ route('admin.periode.index') }}">{{ __('Laporan Keuangan') }}</a>
-                            </li>
-                        @endif
-
-                        @if (canAccess(['LaporanKeuangan index', 'LaporanKeuangan create', 'LaporanKeuangan update', 'LaporanKeuangan delete']))
-                            <li class="{{ setSidebarActive(['admin.laporan-keuangan.index']) }}">
-                                <a class="nav-link"
-                                    href="{{ route('admin.laporan-keuangan.keuangan') }}">{{ __('Pembiayaan ') }}</a>
-                            </li>
-                        @endif --}}
-
-                        @if (canAccess(['LaporanKeuangan index', 'LaporanKeuangan create', 'LaporanKeuangan update', 'LaporanKeuangan delete']))
-                            <li class="{{ setSidebarActive(['admin.laporan-keuangan.index']) }}">
-                                <a class="nav-link"
-                                    href="{{ route('admin.keuangan.AdminDashboard') }}">{{ __('Dashboard Keuangan') }}</a>
                             </li>
                         @endif
 
@@ -135,7 +129,10 @@
 
             @if (canAccess(['Tim Pusat']))
 
+
                 <li class="menu-header">{{ __('admin.TIM PUSAT') }}</li>
+
+                {{-- TIM PUSAT DS --}}
                 @if (canAccess(['Tim DS PUSAT']))
                     <li class="dropdown {{ setSidebarActive(['admin.timpusatds.*']) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
@@ -194,10 +191,189 @@
                     </li>
                 @endif
 
+                {{-- TIM PUSAT WISATA --}}
                 @if (canAccess(['Tim Wisata Pusat']))
                     <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.*']) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
                             <span>{{ __('TIM Wisata') }}</span></a>
+                        <ul class="dropdown-menu">
+
+                            {{-- Ketua Tim --}}
+                            @if (canAccess(['Tim Pusat ketua_tim_dashboard']))
+                                <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.ketua.*']) }}">
+                                    <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="{{ setSidebarActive(['admin.timpusatwisata.ketua.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timpusatwisata.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li class="{{ setSidebarActive(['Tim Pusat ketua_tim_laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timpusatwisata.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+
+                            {{-- Admin --}}
+                            @if (canAccess(['Tim Pusat admin_dashboard']))
+                                <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.admin.*']) }}">
+                                    <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="{{ setSidebarActive(['admin.timpusatwisata.admin.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timpusatwisata.admin.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li class="{{ setSidebarActive(['Tim Pusat admin_laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timpusatwisata.admin.laporan') }}">{{ __('Laporan') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+
+
+                            {{-- Keuangan DS --}}
+                            @if (canAccess([
+                                    'Tim Pusat Wisata keuangan_index',
+                                    'Tim Pusat Wisata keuangan_create',
+                                    'Tim Pusat Wisata keuangan_update',
+                                    'Tim Pusat Wisata keuangan_delete',
+                                ]))
+                                <li class="{{ setSidebarActive(['admin.timpusatwisata.index']) }}">
+                                    <a class="nav-link"
+                                        href="{{ route('admin.timpusatwisata.index') }}">{{ __('Keuangan Wisata') }}</a>
+                                </li>
+                            @endif
+
+                        </ul>
+                    </li>
+                @endif
+
+                {{-- TIM PUSAT PKH --}}
+                @if (canAccess(['Tim PKH Pusat']))
+                    <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.*']) }}">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
+                            <span>{{ __('TIM PKH') }}</span></a>
+                        <ul class="dropdown-menu">
+
+                            {{-- Ketua Tim --}}
+                            @if (canAccess(['Tim Pusat ketua_tim_dashboard']))
+                                <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.ketua.*']) }}">
+                                    <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="{{ setSidebarActive(['admin.timpusatwisata.ketua.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timpusatwisata.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li class="{{ setSidebarActive(['Tim Pusat ketua_tim_laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timpusatwisata.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+
+                            {{-- Admin --}}
+                            @if (canAccess(['Tim Pusat admin_dashboard']))
+                                <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.admin.*']) }}">
+                                    <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="{{ setSidebarActive(['admin.timpusatwisata.admin.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timpusatwisata.admin.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li class="{{ setSidebarActive(['Tim Pusat admin_laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timpusatwisata.admin.laporan') }}">{{ __('Laporan') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+
+
+                            {{-- Keuangan DS --}}
+                            @if (canAccess([
+                                    'Tim Pusat Wisata keuangan_index',
+                                    'Tim Pusat Wisata keuangan_create',
+                                    'Tim Pusat Wisata keuangan_update',
+                                    'Tim Pusat Wisata keuangan_delete',
+                                ]))
+                                <li class="{{ setSidebarActive(['admin.timpusatwisata.index']) }}">
+                                    <a class="nav-link"
+                                        href="{{ route('admin.timpusatwisata.index') }}">{{ __('Keuangan Wisata') }}</a>
+                                </li>
+                            @endif
+
+                        </ul>
+                    </li>
+                @endif
+
+                 {{-- TIM PUSAT MUHAMMDIYAH --}}
+                 @if (canAccess(['Tim Muhammdiyah Pusat']))
+                    <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.*']) }}">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
+                            <span>{{ __('TIM Muhammdiyah') }}</span></a>
+                        <ul class="dropdown-menu">
+
+                            {{-- Ketua Tim --}}
+                            @if (canAccess(['Tim Pusat ketua_tim_dashboard']))
+                                <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.ketua.*']) }}">
+                                    <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="{{ setSidebarActive(['admin.timpusatwisata.ketua.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timpusatwisata.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li class="{{ setSidebarActive(['Tim Pusat ketua_tim_laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timpusatwisata.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+
+                            {{-- Admin --}}
+                            @if (canAccess(['Tim Pusat admin_dashboard']))
+                                <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.admin.*']) }}">
+                                    <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="{{ setSidebarActive(['admin.timpusatwisata.admin.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timpusatwisata.admin.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li class="{{ setSidebarActive(['Tim Pusat admin_laporan']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timpusatwisata.admin.laporan') }}">{{ __('Laporan') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+
+
+                            {{-- Keuangan DS --}}
+                            @if (canAccess([
+                                    'Tim Pusat Wisata keuangan_index',
+                                    'Tim Pusat Wisata keuangan_create',
+                                    'Tim Pusat Wisata keuangan_update',
+                                    'Tim Pusat Wisata keuangan_delete',
+                                ]))
+                                <li class="{{ setSidebarActive(['admin.timpusatwisata.index']) }}">
+                                    <a class="nav-link"
+                                        href="{{ route('admin.timpusatwisata.index') }}">{{ __('Keuangan Wisata') }}</a>
+                                </li>
+                            @endif
+
+                        </ul>
+                    </li>
+                @endif
+
+
+                 {{-- TIM PUSAT AISYIAH --}}
+                 @if (canAccess(['Tim Muhammdiyah Pusat']))
+                    <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.*']) }}">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
+                            <span>{{ __('TIM Aisyiah') }}</span></a>
                         <ul class="dropdown-menu">
 
                             {{-- Ketua Tim --}}
