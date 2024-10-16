@@ -93,7 +93,7 @@
                                     </td>
                                 </tr>
                                 <!-- Subtabel Periode dan Detail untuk Tim -->
-                                {{-- <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
+                                <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
                                     <td colspan="3">
                                         <table class="table table-bordered">
                                             @foreach ($periodes as $periode)
@@ -109,44 +109,35 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($periode as $item)
-                                                    <tr>
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $item->periode->nama_periode }} - {{ $item->periode->anggaran->tim->name }}</td>
-                                                        <td>{{ $item->detailPembiayaan->nama_rincian }}</td>
-                                                        <td>{{ 'Rp' . number_format($item->jumlah_digunakan, 0, ',', '.') }}</td>
-                                                        <td>{{ $item->status_pembayaran == 1 ? 'Lunas' : 'Belum Lunas' }}</td>
-                                                        <td><img src="{{ asset($item->bukti_pembayaran) }}" alt="Bukti" width="100"></td>
-                                                        <td>{{ $item->keterangan }}</td>
+                                                    @foreach ($periode->detailPembiayaan as $laporan)
+                                                    {{ dd($laporan) }}
 
-                                                        <td>
-                                                            <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                                                <!-- Tombol Detail -->
-                                                                <a href="#" data-toggle="modal"
-                                                                    data-target="#detailModal{{ $item->id }}" class="btn btn-primary"
-                                                                    aria-label="Lihat Detail {{ $item->name }}">
-                                                                    <i class="fas fa-eye"></i>
-                                                                </a>
-                                                                <!-- Tombol Edit -->
-                                                                <a href="#" data-toggle="modal"
-                                                                    data-target="#editModal{{ $item->id }}" class="btn btn-warning">
-                                                                    <i class="fas fa-edit"></i>
-                                                                </a>
-                                                                <!-- Tombol Hapus -->
-                                                                <a href="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}"
-                                                                    class="btn btn-danger delete-item">
-                                                                    <i class="fas fa-trash-alt"></i>
-                                                                </a>
-
-                                                            </div>
-                                                        </td>
-                                                    </tr>
+                                                        <tr>
+                                                            <td>{{ $laporan->nama_rincian }}</td>
+                                                            <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
+                                                            <td>
+                                                                @if ($laporan->status_pembayaran == 1)
+                                                                    Lunas
+                                                                @elseif($laporan->status_pembayaran == 0)
+                                                                    Belum Dibayar
+                                                                @else
+                                                                    Status Tidak Diketahui
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($laporan->bukti_pembayaran)
+                                                                    <a href="{{ asset($laporan->bukti_pembayaran) }}" target="_blank">Download</a>
+                                                                @else
+                                                                    -
+                                                                @endif
+                                                            </td>
+                                                        </tr>
                                                     @endforeach
                                                 </tbody>
                                             @endforeach
                                         </table>
                                     </td>
-                                </tr> --}}
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
