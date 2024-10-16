@@ -111,7 +111,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($laporanPembayaran -> $detailPembiayaan as $laporan)
+                                                    {{-- @foreach ($laporanPembayaran -> $detailPembiayaan as $laporan)
                                                             <tr>
                                                                 <td>{{ $laporan->nama_rincian }}</td>
                                                                 <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
@@ -133,7 +133,7 @@
                                                                 </td>
                                                             </tr>
 
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </tbody>
 
                                             @endforeach
