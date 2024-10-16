@@ -58,7 +58,7 @@ class PenggunaanAnggaranController extends Controller
         $penggunaanAnggaran->save();
 
         return redirect()->route('admin.keuangan.penggunaan_anggaran.index')
-            ->with('success', 'Data penggunaan anggaran berhasil ditambahkan.');
+            ->with('toast_success', 'Data penggunaan anggaran berhasil ditambahkan.');
     }
 
 
@@ -100,7 +100,7 @@ class PenggunaanAnggaranController extends Controller
         $penggunaanAnggaran->save();
 
         return redirect()->route('admin.keuangan.penggunaan_anggaran.index')
-            ->with('success', 'Data penggunaan anggaran berhasil diupdate.');
+            ->with('toast_success', 'Data penggunaan anggaran berhasil diupdate.');
     }
 
 
@@ -110,9 +110,13 @@ class PenggunaanAnggaranController extends Controller
     {
         $penggunaanAnggaran = PenggunaanAnggaran::findOrFail($id);
         $penggunaanAnggaran->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Data berhasil dihapus!'
-        ]);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Data berhasil dihapus!'
+        // ]);
+
+
+        return redirect()->route('admin.keuangan.penggunaan_anggaran.index')
+            ->with('toast_success', 'Data penggunaan anggaran berhasil dihapus.');
     }
 }

@@ -44,35 +44,21 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
                                             <!-- Tombol Detail -->
-
                                             <a href="#" data-toggle="modal"
-                                                data-target="#detailModal{{ $item->id }}" class="btn btn-primary"  aria-label="Lihat Detail {{ $item->name }}">
+                                                data-target="#detailModal{{ $item->id }}" class="btn btn-primary"
+                                                aria-label="Lihat Detail {{ $item->name }}">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             <!-- Tombol Edit -->
-
-
                                             <a href="#" data-toggle="modal"
                                                 data-target="#editModal{{ $item->id }}" class="btn btn-warning">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-
-
+                                            <!-- Tombol Hapus -->
                                             <a href="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}"
                                                 class="btn btn-danger delete-item">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
-                                            {{-- <!-- Tombol Hapus dengan konfirmasi -->
-                                            <form
-                                                action="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}"
-                                                method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    aria-label="Hapus {{ $item->name }}">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form> --}}
 
                                         </div>
                                     </td>
@@ -264,32 +250,23 @@
 @endsection
 
 @section('script')
-
-
-
-
     <!-- Include SweetAlert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
     <script>
-
         document.addEventListener('DOMContentLoaded', function() {
-            @if (session('success'))
-                Swal.fire({
+            @if (Session::has('toast_success'))
+                Toast.fire({
                     icon: 'success',
-                    title: 'Success!',
-                    text: '{{ session('success') }}',
-                    showConfirmButton: false,
-                    timer: 1500
+                    title: '{{ Session::get('toast_success') }}'
                 });
-            @elseif (session('error'))
-                Swal.fire({
+            @endif
+
+            @if (Session::has('toast_error'))
+                Toast.fire({
                     icon: 'error',
-                    title: 'Error!',
-                    text: '{{ session('error') }}',
-                    showConfirmButton: false,
-                    timer: 1500
+                    title: '{{ Session::get('toast_error') }}'
                 });
             @endif
         });
