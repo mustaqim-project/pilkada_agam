@@ -109,7 +109,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($periode as $item)
+                                                    @foreach ($laporanPembayaran as $item)
                                                             <tr>
                                                                 <td>{{ $item->detailPembiayaan->nama_rincian }}</td>
                                                                 <td>{{ 'Rp' . number_format($item->jumlah_digunakan, 0, ',', '.') }}</td>
