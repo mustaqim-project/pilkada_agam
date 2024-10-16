@@ -111,7 +111,7 @@
                                                 <tbody>
                                                     @foreach ($periode->detailPembiayaan as $laporan)
 
-                                                    var_dump($laporan);
+                                                    dump{{ $laporan }};
                                                             <tr>
                                                                 <td>{{ $laporan->nama_rincian }}</td>
                                                                 <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
