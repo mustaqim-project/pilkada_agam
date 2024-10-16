@@ -34,7 +34,7 @@
                             @foreach ($penggunaanAnggaran as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->periode->nama_periode }}  - {{ $item->periode->anggaran->tim->name }}</td>
+                                    <td>{{ $item->periode->nama_periode }} - {{ $item->periode->anggaran->tim->name }}</td>
                                     <td>{{ $item->detailPembiayaan->nama_rincian }}</td>
                                     <td>{{ 'Rp' . number_format($item->jumlah_digunakan, 0, ',', '.') }}</td>
                                     <td>{{ $item->status_pembayaran == 1 ? 'Lunas' : 'Belum Lunas' }}</td>
@@ -43,25 +43,27 @@
 
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                            <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                                data-target="#detailModal{{ $item->id }}">
+                                            <!-- Tombol Detail -->
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailModal{{ $item->id }}" aria-label="Lihat Detail {{ $item->name }}">
                                                 <i class="fas fa-eye"></i>
                                             </button>
-                                            <button class="btn btn-warning btn-sm" data-toggle="modal"
-                                                data-target="#editModal{{ $item->id }}" data-id="{{ $item->id }}">
+
+                                            <!-- Tombol Edit -->
+                                            <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal{{ $item->id }}" data-id="{{ $item->id }}" aria-label="Edit {{ $item->name }}">
                                                 <i class="fas fa-edit"></i>
                                             </button>
-                                            <form
-                                                action="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}"
-                                                method="POST" style="display:inline;">
+
+                                            <!-- Tombol Hapus dengan konfirmasi -->
+                                            <form action="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus item ini?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger delete-item">
+                                                <button type="submit" class="btn btn-danger delete-item" aria-label="Hapus {{ $item->name }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
                                         </div>
                                     </td>
+
                                 </tr>
                             @endforeach
                         </tbody>
@@ -85,9 +87,11 @@
                     </div>
                     <div class="modal-body">
                         <p><strong>ID:</strong> {{ $item->id }}</p>
-                        <p><strong>Nama Periode:</strong> {{ $item->periode->nama_periode }} - {{ $item->periode->anggaran->tim->name }}</p>
+                        <p><strong>Nama Periode:</strong> {{ $item->periode->nama_periode }} -
+                            {{ $item->periode->anggaran->tim->name }}</p>
                         <p><strong>Nama Rincian Pembiayaan:</strong> {{ $item->detailPembiayaan->nama_rincian }}</p>
-                        <p><strong>Jumlah Digunakan:</strong> {{ 'Rp' . number_format($item->jumlah_digunakan, 0, ',', '.') }}</p>
+                        <p><strong>Jumlah Digunakan:</strong>
+                            {{ 'Rp' . number_format($item->jumlah_digunakan, 0, ',', '.') }}</p>
                         <p><strong>Status Pembayaran:</strong>
                             {{ $item->status_pembayaran == 1 ? 'Lunas' : 'Belum Lunas' }}</p>
                         <p><strong>Bukti Pembayaran:</strong></p>
