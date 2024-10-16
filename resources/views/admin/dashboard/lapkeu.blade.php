@@ -113,27 +113,8 @@
             </div>
         </div>
 
-        <div class="row mb-4">
-            <!-- Rekapitulasi Anggaran Terpakai dan Sisa Anggaran -->
-            <div class="col-md-6">
-                <h3>Rekapitulasi Anggaran Terpakai dan Sisa Anggaran</h3>
-                <canvas id="rekapitulasiAnggaranChart" class="w-100"></canvas>
-            </div>
 
-            <!-- Penggunaan Anggaran per Pembiayaan Detail -->
-            <div class="col-md-6">
-                <h3>Penggunaan Anggaran per Pembiayaan Detail</h3>
-                <canvas id="penggunaanPerPembiayaanDetailChart" class="w-100"></canvas>
-            </div>
-        </div>
 
-        <div class="row mb-4">
-            <!-- Anggaran Digunakan vs Total Anggaran per Tim -->
-            <div class="col-md-12">
-                <h3>Anggaran Digunakan vs Total Anggaran per Tim</h3>
-                <canvas id="anggaranDigunakanVsTotalChart" class="w-100"></canvas>
-            </div>
-        </div>
 
         <div class="row mb-4">
             <!-- Laporan Pembayaran Lengkap -->
