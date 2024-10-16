@@ -109,8 +109,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($periode-> $item)
-                                                        @if ($laporan) <!-- Pengecekan untuk memastikan $laporan adalah objek yang valid -->
+                                                    @foreach ($periode as $item)
                                                             <tr>
                                                                 <td>{{ $item->detailPembiayaan->nama_rincian }}</td>
                                                                 <td>{{ 'Rp' . number_format($item->jumlah_digunakan, 0, ',', '.') }}</td>
@@ -140,12 +139,7 @@
                                                                     </div>
                                                                 </td>
                                                             </tr>
-                                                        @else
-                                                            <!-- Jika $laporan tidak valid, Anda bisa menampilkan baris kosong atau pesan -->
-                                                            <tr>
-                                                                <td colspan="4">Tidak ada rincian untuk periode ini.</td>
-                                                            </tr>
-                                                        @endif
+
                                                     @endforeach
                                                 </tbody>
 
