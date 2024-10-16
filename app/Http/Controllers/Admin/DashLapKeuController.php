@@ -145,13 +145,27 @@ class DashLapKeuController extends Controller
             ->get();
 
         // Laporan Pembayaran Lengkap
+        // $laporanPembayaran = DB::table('penggunaan_anggaran as pa')
+        //     ->join('detail_pembiayaan as dp', 'pa.detail_pembiayaan_id', '=', 'dp.id')
+        //     ->join('periode as p', 'pa.periode_id', '=', 'p.id')
+        //     ->join('anggaran as a', 'p.anggaran_id', '=', 'a.id')
+        //     ->join('tims as t', 'a.tim_id', '=', 't.id')
+        //     ->select('t.name as tim', 'p.nama_periode', 'dp.nama_rincian', 'pa.jumlah_digunakan', 'pa.status_pembayaran', 'pa.bukti_pembayaran')
+        //     ->get();
+
         $laporanPembayaran = DB::table('penggunaan_anggaran as pa')
             ->join('detail_pembiayaan as dp', 'pa.detail_pembiayaan_id', '=', 'dp.id')
             ->join('periode as p', 'pa.periode_id', '=', 'p.id')
             ->join('anggaran as a', 'p.anggaran_id', '=', 'a.id')
             ->join('tims as t', 'a.tim_id', '=', 't.id')
             ->select('t.name as tim', 'p.nama_periode', 'dp.nama_rincian', 'pa.jumlah_digunakan', 'pa.status_pembayaran', 'pa.bukti_pembayaran')
-            ->get();
+            ->orderBy('t.name')
+            ->orderBy('p.nama_periode')
+            ->get()
+            ->groupBy('tim')
+            ->map(function ($tim) {
+                return $tim->groupBy('nama_periode');
+            });
 
         return view('admin.dashboard.lapkeu', compact(
             'totalAnggaranKeseluruhan',

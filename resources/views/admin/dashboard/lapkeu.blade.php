@@ -64,7 +64,7 @@
 
 
 
-        <div class="row mb-4">
+        {{-- <div class="row mb-4">
             <!-- Laporan Pembayaran Lengkap -->
             <div class="col-md-12">
                 <h3>Laporan Pembayaran Lengkap</h3>
@@ -107,6 +107,66 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div> --}}
+        <div class="row mb-4">
+            <!-- Laporan Pembayaran Lengkap dengan Dropdown -->
+            <div class="col-md-12">
+                <h3>Laporan Pembayaran Lengkap</h3>
+                <div class="accordion" id="accordionLaporan">
+                    @foreach ($laporanPembayaran as $tim => $periodes)
+                        <div class="card">
+                            <div class="card-header" id="heading{{ $loop->index }}">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
+                                        Tim: {{ $tim }}
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapse{{ $loop->index }}" class="collapse" aria-labelledby="heading{{ $loop->index }}" data-parent="#accordionLaporan">
+                                <div class="card-body">
+                                    @foreach ($periodes as $periode => $details)
+                                        <h5>Periode: {{ $periode }}</h5>
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Rincian</th>
+                                                    <th>Jumlah Digunakan</th>
+                                                    <th>Status Pembayaran</th>
+                                                    <th>Bukti Pembayaran</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($details as $laporan)
+                                                    <tr>
+                                                        <td>{{ $laporan->nama_rincian }}</td>
+                                                        <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
+                                                        <td>
+                                                            @if ($laporan->status_pembayaran == 1)
+                                                                Lunas
+                                                            @elseif($laporan->status_pembayaran == 0)
+                                                                Belum Dibayar
+                                                            @else
+                                                                Status Tidak Diketahui
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($laporan->bukti_pembayaran)
+                                                                <a href="{{ asset($laporan->bukti_pembayaran) }}" target="_blank">Download</a>
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
 
