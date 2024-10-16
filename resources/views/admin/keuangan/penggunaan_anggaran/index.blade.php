@@ -20,7 +20,7 @@
                     <table class="table table-striped" id="tablePenggunaanAnggaran">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>#</th>
                                 <th>Nama Periode</th>
                                 <th>Nama Rincian Pembiayaan</th>
                                 <th>Jumlah Digunakan</th>

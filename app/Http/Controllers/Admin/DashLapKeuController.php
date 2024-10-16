@@ -54,6 +54,7 @@ class DashLapKeuController extends Controller
                 SUM(pa.jumlah_digunakan) AS jumlah_digunakan
                 FROM penggunaan_anggaran pa
                 JOIN periode p ON pa.periode_id = p.id
+                WHERE pa.status_pembayaran = 1
                 GROUP BY p.anggaran_id) AS pa'),
                 'a.tim_id',
                 '=',
@@ -66,7 +67,7 @@ class DashLapKeuController extends Controller
                 DB::raw('COALESCE(SUM(a.total_anggaran), 0) - COALESCE(SUM(pa.jumlah_digunakan), 0) AS sisa_anggaran')
             )
             ->groupBy('t.name')
-            ->get();
+            ->get();;
 
 
         // Penggunaan Anggaran per Jenis Pembiayaan
