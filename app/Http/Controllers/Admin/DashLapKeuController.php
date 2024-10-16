@@ -97,6 +97,7 @@ class DashLapKeuController extends Controller
             ->leftJoin('penggunaan_anggaran as pa', 'p.id', '=', 'pa.periode_id')
             ->select('t.name as tim', 'p.nama_periode', DB::raw('COALESCE(SUM(pa.jumlah_digunakan), 0) AS total_digunakan'))
             ->whereNotNull('p.nama_periode')  // Menyaring periode yang tidak null
+            ->where('pa.status_pembayaran', 1)  // Menambahkan kondisi status_pembayaran = 1
             ->groupBy('t.name', 'p.nama_periode')
             ->orderBy('p.nama_periode')
             ->orderBy('t.name')
@@ -117,6 +118,7 @@ class DashLapKeuController extends Controller
             ->join('periode as p', 'pa.periode_id', '=', 'p.id')
             ->join('anggaran as a', 'p.anggaran_id', '=', 'a.id')
             ->join('tims as t', 'a.tim_id', '=', 't.id')
+            ->where('pa.status_pembayaran', 1)  // Menambahkan kondisi status_pembayaran = 1
             ->select(
                 't.name as tim',
                 DB::raw('SUM(p.anggaran_periode) AS total_anggaran_periode'),

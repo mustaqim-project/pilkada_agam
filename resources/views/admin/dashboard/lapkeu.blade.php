@@ -60,7 +60,7 @@
             <!-- Penggunaan Anggaran per Jenis Pembiayaan -->
 
         </div>
-
+{{--
         <div class="row mb-4">
             <div class="col-md-6">
                 <h3>Penggunaan Anggaran per Jenis Pembiayaan</h3>
@@ -73,10 +73,10 @@
                 <canvas id="penggunaanPeriodeChart" class="w-100"></canvas>
             </div>
         </div>
+ --}}
 
 
-
-        <div class="row mb-4">
+        {{-- <div class="row mb-4">
             <!-- Status Pembayaran -->
             <div class="col-md-12">
                 <h3>Status Pembayaran</h3>
@@ -133,7 +133,7 @@
                 <h3>Anggaran Digunakan vs Total Anggaran per Tim</h3>
                 <canvas id="anggaranDigunakanVsTotalChart" class="w-100"></canvas>
             </div>
-        </div>
+        </div> --}}
 
         <div class="row mb-4">
             <!-- Laporan Pembayaran Lengkap -->
