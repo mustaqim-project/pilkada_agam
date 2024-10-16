@@ -35,18 +35,18 @@ class DashboardUtamaController extends Controller
     public function index()
     {
         $counts = [
-            'tim' => tim::count(),
-            'anggaran' => anggaran::count(),
-            'periode' => periode::count(),
-            'jenis_pembiayaan' => jenis_pembiayaan::count(),
-            'laporan_kegiatan' => laporan_kegiatan::count(),
-            'kanvasing_ds' => kanvasing_ds::count(),
-            'kanvasing_pkh' => kanvasing_pkh::count(),
-            'kanvasing_mm' => kanvasing_mm::count(),
-            'kanvasing_aisyiah' => kanvasing_aisyiah::count(),
-            'kanvasing_parpol' => kanvasing_parpol::count(),
-            'kanvasing_jj' => KanvasingWisata::count(),
-            'data_ganda' => data_ganda::select('no_ktp')->groupBy('no_ktp')->havingRaw('COUNT(no_ktp) > 1')->get()->count(),
+            'Tim' => tim::count(),
+            'Anggaran' => anggaran::count(),
+            'Periode' => periode::count(),
+            'Jenis Pembiayaan' => jenis_pembiayaan::count(),
+            'Laporan Kegiatan' => laporan_kegiatan::count(),
+            'Kanvasing DS' => kanvasing_ds::count(),
+            'Kanvasing PKH' => kanvasing_pkh::count(),
+            'Kanvasing Muhammdiyah' => kanvasing_mm::count(),
+            'Kanvasing Aisyiah' => kanvasing_aisyiah::count(),
+            'Kanvasing Parpol' => kanvasing_parpol::count(),
+            'Kanvasing Wisata' => KanvasingWisata::count(),
+            'Data Ganda' => data_ganda::select('no_ktp')->groupBy('no_ktp')->havingRaw('COUNT(no_ktp) > 1')->get()->count(),
         ];
 
         return view('admin.dashboard.dashboard-utama', compact('counts'));
