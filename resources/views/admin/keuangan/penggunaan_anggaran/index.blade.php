@@ -93,7 +93,7 @@
                                     </td>
                                 </tr>
                                 <!-- Subtabel Periode dan Detail untuk Tim -->
-                                <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
+                                {{-- <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
                                     <td colspan="3">
                                         <table class="table table-bordered">
                                             @foreach ($periodes as $periode)
@@ -146,7 +146,7 @@
                                             @endforeach
                                         </table>
                                     </td>
-                                </tr>
+                                </tr> --}}
                             @endforeach
                         </tbody>
                     </table>
