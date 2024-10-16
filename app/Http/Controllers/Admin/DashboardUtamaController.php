@@ -46,7 +46,7 @@ class DashboardUtamaController extends Controller
             'kanvasing_aisyiah' => kanvasing_aisyiah::count(),
             'kanvasing_parpol' => kanvasing_parpol::count(),
             'kanvasing_jj' => KanvasingWisata::count(),
-            'data_ganda' => data_ganda::count(),
+            'data_ganda' => data_ganda::select('no_ktp')->groupBy('no_ktp')->havingRaw('COUNT(no_ktp) > 1')->get()->count(),
         ];
 
         return view('admin.dashboard.dashboard-utama', compact('counts'));
