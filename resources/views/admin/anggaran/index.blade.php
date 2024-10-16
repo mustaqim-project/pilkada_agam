@@ -23,7 +23,6 @@
                             <th>#</th>
                             <th>Tim</th>
                             <th>Total Anggaran</th>
-                            <th>Jumlah Periode</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -33,7 +32,6 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $anggaran->tim->name }}</td>
                                 <td>Rp {{ number_format($anggaran->total_anggaran, 2) }}</td>
-                                <td>{{ $anggaran->jumlah_periode }}</td>
                                 <td>
                                     <!-- Tombol Edit Anggaran -->
                                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalEditAnggaran" data-id="{{ $anggaran->id }}">
@@ -81,10 +79,7 @@
                         <label for="total_anggaran" class="form-label">Total Anggaran</label>
                         <input type="number" name="total_anggaran" id="total_anggaran" class="form-control" required>
                     </div>
-                    <div class="form-group">
-                        <label for="jumlah_periode" class="form-label">Jumlah Periode</label>
-                        <input type="number" name="jumlah_periode" id="jumlah_periode" class="form-control" required>
-                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -122,10 +117,7 @@
                         <label for="edit_total_anggaran" class="form-label">Total Anggaran</label>
                         <input type="number" name="total_anggaran" id="edit_total_anggaran" class="form-control" required>
                     </div>
-                    <div class="form-group">
-                        <label for="edit_jumlah_periode" class="form-label">Jumlah Periode</label>
-                        <input type="number" name="jumlah_periode" id="edit_jumlah_periode" class="form-control" required>
-                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

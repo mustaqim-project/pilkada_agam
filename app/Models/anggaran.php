@@ -14,7 +14,6 @@ class anggaran extends Model
     protected $fillable = [
         'tim_id',
         'total_anggaran',
-        'jumlah_periode',
     ];
     protected $casts = [
         'created_at' => 'datetime',

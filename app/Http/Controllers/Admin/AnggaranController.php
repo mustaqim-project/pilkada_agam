@@ -34,7 +34,6 @@ class AnggaranController extends Controller
         $request->validate([
             'tim_id' => 'required|exists:tims,id',
             'total_anggaran' => 'required|numeric',
-            'jumlah_periode' => 'required|integer',
         ]);
 
         anggaran::create($request->all());
@@ -52,7 +51,6 @@ class AnggaranController extends Controller
         $request->validate([
             'tim_id' => 'required|exists:tims,id',
             'total_anggaran' => 'required|numeric',
-            'jumlah_periode' => 'required|integer',
         ]);
 
         $anggaran = anggaran::findOrFail($id);
