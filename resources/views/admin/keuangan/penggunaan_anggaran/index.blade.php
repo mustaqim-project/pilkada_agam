@@ -65,7 +65,7 @@
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            <div class="btn-group" role="group" aria-label="Tombol Aksi">
+                                                            {{-- <div class="btn-group" role="group" aria-label="Tombol Aksi">
                                                                 <!-- Tombol Detail -->
                                                                 <a href="#" data-toggle="modal"
                                                                     data-target="#detailModal{{ $item->id }}" class="btn btn-primary"
@@ -83,7 +83,7 @@
                                                                     <i class="fas fa-trash-alt"></i>
                                                                 </a>
 
-                                                            </div>
+                                                            </div> --}}
                                                         </td>
                                                     </tr>
                                                 @endforeach
