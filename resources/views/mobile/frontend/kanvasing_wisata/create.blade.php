@@ -223,16 +223,71 @@
                         @enderror
                     </div>
 
-                  <!-- Input Tanggal Berangkat -->
-                    <div class="input-style has-icon input-style-1 input-required mt-4">
-                        <i class="input-icon fa fa-calendar color-theme"></i>
-                        <span>Tanggal Berangkat</span>
-                        <em>(*Wajib Diisi)</em>
-                        <input type="date" name="jadwal" required />
-                        @error('jadwal')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                    <label class="mt-5">Upload Foto Kegiatan</label>
+                    <em>(*Wajib Diisi)</em>
+
+                    <!-- Image Preview -->
+                    <div class="mt-4">
+                        <img id="image_preview" src="" alt="Image Preview" style="display:none;" />
                     </div>
+
+                    <!-- Pilihan Akses -->
+                    <div class="mt-4">
+                        <select id="accessChoice" class="bg-highlight shadow-s rounded-s" onchange="handleAccessChoice()">
+                            <option value="">Pilih Upload Dari Kamera / Galeri</option>
+                            <option value="camera">Dari Kamera</option>
+                            <option value="gallery">Dari Galeri</option>
+                        </select>
+                    </div>
+
+                    <!-- Hidden Input for File Upload -->
+                    <input type="file" id="foto_kegiatan" name="foto_kegiatan" accept="image/*" style="display:none;">
+
+
+
+                    <!-- deskripsi -->
+                    <label class="mt-5">Kendala dilapangan jika ada!</label>
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <i class="input-icon fa fa-address-card color-theme"></i>
+                        <x-text-input id="deskripsi" class="input" type="text" name="deskripsi" :value="old('deskripsi')" placeholder="Kendala dilapangan jika ada!" />
+                        <x-input-error :messages="$errors->get('deskripsi')" class="mt-2" />
+                    </div>
+                    <!-- Lokasi Saya -->
+                    <div class="input-style has-icon input-style-1 mt-4">
+                        <i class="input-icon fa fa-map-pin color-theme"></i>
+                        <span>Lokasi Saya</span>
+                        <x-text-input id="location_name" class="input" type="text" name="location_name" readonly :value="old('location_name')" placeholder="Lokasi Saya" />
+                        <x-input-error :messages="$errors->get('location_name')" class="mt-2" />
+                    </div>
+                    <!-- Lokasi Saya -->
+                    <div class="input-style has-icon input-style-1 mt-4">
+                        <span>Longitude</span>
+                        <em>(*Wajib Diisi)</em>
+                        <x-text-input id="lang" class="input" type="text" name="lang" readonly :value="old('lang')" />
+                        <x-input-error :messages="$errors->get('lang')" class="mt-2" />
+                    </div>
+                    <div class="input-style has-icon input-style-1 mt-4">
+                        <span>Latitude</span>
+                        <em>(*Wajib Diisi)</em>
+                        <x-text-input id="lat" class="input" type="text" name="lat" readonly :value="old('lat')" />
+                        <x-input-error :messages="$errors->get('lat')" class="mt-2" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-style">
+                <div class="content">
+                    <h3 class="font-700">Get Coordinates</h3>
+                    <a href="#" class="get-location btn btn-full btn-m bg-red2-dark rounded-sm text-uppercase shadow-l font-900">Get
+                        my Location</a>
+                    <p class="location-coordinates"></p>
+
+                </div>
+                <div class="responsive-iframe add-iframe">
+                    <iframe class="location-map" src='https://maps.google.com/?ie=UTF8&amp;ll=47.595131,-122.330414&amp;spn=0.006186,0.016512&amp;t=h&amp;z=17&amp;output=embed'></iframe>
+                </div>
+            </div>
+
 
 
 

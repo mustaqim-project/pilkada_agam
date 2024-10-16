@@ -85,6 +85,8 @@ class KanvasingWisataController extends Controller
             $kanvasingWisata = new kanvasing_aisyiah();
         } else {
             $kanvasingWisata = new KanvasingWisata();
+            $kanvasingWisata->jadwal = $request->jadwal;
+
         }
 
         $kanvasingWisata->user_id = $request->user_id;
@@ -96,7 +98,6 @@ class KanvasingWisataController extends Controller
         $kanvasingWisata->jenis_kelamin = $request->jenis_kelamin;
         $kanvasingWisata->pekerjaan_id = $request->pekerjaan_id;
         $kanvasingWisata->alamat = $request->alamat;
-        $kanvasingWisata->jadwal = $request->jadwal;
         $kanvasingWisata->status = $request->status == 0;
         $kanvasingWisata->hadir = $request->hadir == 0;
         $kanvasingWisata->foto_kegiatan = $imagePath ?? null;
