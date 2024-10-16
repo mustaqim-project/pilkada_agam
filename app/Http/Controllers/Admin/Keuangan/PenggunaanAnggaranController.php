@@ -9,6 +9,7 @@ use App\Models\DetailPembiayaan;
 use Illuminate\Http\Request;
 use App\Traits\FileUploadTrait;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PenggunaanAnggaranController extends Controller
 {
