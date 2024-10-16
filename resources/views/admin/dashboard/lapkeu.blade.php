@@ -117,11 +117,11 @@
                     @foreach ($laporanPembayaran as $tim => $periodes)
                         <div class="card">
                             <div class="card-header" id="heading{{ $loop->index }}">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
+                                <h3 class="mb-0">
+                                    <button class="btn" type="button" data-toggle="collapse" data-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
                                         Tim: {{ $tim }}
                                     </button>
-                                </h5>
+                                </h3>
                             </div>
                             <div id="collapse{{ $loop->index }}" class="collapse" aria-labelledby="heading{{ $loop->index }}" data-parent="#accordionLaporan">
                                 <div class="card-body">
