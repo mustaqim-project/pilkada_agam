@@ -56,8 +56,84 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Penggunaan Anggaran per Jenis Pembiayaan -->
+
         </div>
 
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h3>Penggunaan Anggaran per Jenis Pembiayaan</h3>
+                <canvas id="penggunaanPerJenisPembiayaanChart" class="w-100"></canvas>
+            </div>
+
+            <!-- Penggunaan Anggaran per Periode -->
+            <div class="col-md-6">
+                <h3>Penggunaan Anggaran per Periode</h3>
+                <canvas id="penggunaanPeriodeChart" class="w-100"></canvas>
+            </div>
+        </div>
+
+
+
+        <div class="row mb-4">
+            <!-- Status Pembayaran -->
+            <div class="col-md-12">
+                <h3>Status Pembayaran</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tim</th>
+                            <th>Periode</th>
+                            <th>Rincian</th>
+                            <th>Jumlah Digunakan</th>
+                            <th>Status Pembayaran</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($statusPembayaran as $pembayaran)
+                            <tr>
+                                <td>{{ $pembayaran->tim }}</td>
+                                <td>{{ $pembayaran->nama_periode }}</td>
+                                <td>{{ $pembayaran->nama_rincian }}</td>
+                                <td>Rp {{ number_format($pembayaran->jumlah_digunakan, 0, ',', '.') }}</td>
+                                <td>
+                                    @if ($pembayaran->status_pembayaran == 1)
+                                        Lunas
+                                    @elseif($pembayaran->status_pembayaran == 0)
+                                        Belum Dibayar
+                                    @else
+                                        Status Tidak Diketahui
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <!-- Rekapitulasi Anggaran Terpakai dan Sisa Anggaran -->
+            <div class="col-md-6">
+                <h3>Rekapitulasi Anggaran Terpakai dan Sisa Anggaran</h3>
+                <canvas id="rekapitulasiAnggaranChart" class="w-100"></canvas>
+            </div>
+
+            <!-- Penggunaan Anggaran per Pembiayaan Detail -->
+            <div class="col-md-6">
+                <h3>Penggunaan Anggaran per Pembiayaan Detail</h3>
+                <canvas id="penggunaanPerPembiayaanDetailChart" class="w-100"></canvas>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <!-- Anggaran Digunakan vs Total Anggaran per Tim -->
+            <div class="col-md-12">
+                <h3>Anggaran Digunakan vs Total Anggaran per Tim</h3>
+                <canvas id="anggaranDigunakanVsTotalChart" class="w-100"></canvas>
+            </div>
+        </div>
 
         <div class="row mb-4">
             <!-- Laporan Pembayaran Lengkap -->
