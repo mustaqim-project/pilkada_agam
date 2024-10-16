@@ -14,7 +14,7 @@
                     </button>
                 </div>
             </div>
-{{--
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped" id="tablePenggunaanAnggaran">
@@ -67,90 +67,12 @@
                         </tbody>
                     </table>
                 </div>
-            </div> --}}
-
-            <div class="row mb-4">
-                <!-- Laporan Pembayaran Lengkap dalam Bentuk Tabel -->
-                <div class="col-md-12">
-                    <h3>Laporan Pembayaran Lengkap</h3>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nama Tim</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($laporanPembayaran as $tim => $periodes)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $tim }}</td>
-                                    <td>
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTim{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseTim{{ $loop->iteration }}">
-                                            <i class="fas fa-chevron-down"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <!-- Subtabel Periode dan Detail untuk Tim -->
-                                <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
-                                    <td colspan="3">
-                                        <table class="table table-bordered">
-                                            @foreach ($periodes as $periode)
-                                                <thead>
-                                                    <tr>
-                                                        <th colspan="4">Periode: {{ $periode->periode->nama_periode }}</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Rincian</th>
-                                                        <th>Jumlah Digunakan</th>
-                                                        <th>Status Pembayaran</th>
-                                                        <th>Bukti Pembayaran</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($periode->detailPembiayaan as $laporan)
-
-                                                    dump{{ $laporan }};
-                                                            <tr>
-                                                                <td>{{ $laporan->nama_rincian }}</td>
-                                                                <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
-                                                                <td>
-                                                                    @if ($laporan->status_pembayaran == 1)
-                                                                        Lunas
-                                                                    @elseif($laporan->status_pembayaran == 0)
-                                                                        Belum Dibayar
-                                                                    @else
-                                                                        Status Tidak Diketahui
-                                                                    @endif
-                                                                </td>
-                                                                <td>
-                                                                    @if ($laporan->bukti_pembayaran)
-                                                                        <a href="{{ asset($laporan->bukti_pembayaran) }}" target="_blank">Download</a>
-                                                                    @else
-                                                                        -
-                                                                    @endif
-                                                                </td>
-                                                            </tr>
-
-                                                    @endforeach
-                                                </tbody>
-
-                                            @endforeach
-                                        </table>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
             </div>
-
         </div>
     </section>
 
     <!-- Modal Detail -->
-    {{-- @foreach ($penggunaanAnggaran as $item)
+    @foreach ($penggunaanAnggaran as $item)
         <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1" role="dialog"
             aria-labelledby="detailModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -180,10 +102,10 @@
                 </div>
             </div>
         </div>
-    @endforeach --}}
+    @endforeach
 
     <!-- Modal Tambah -->
-    {{-- <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
+    <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -241,10 +163,10 @@
                 </form>
             </div>
         </div>
-    </div> --}}
+    </div>
 
 
-    {{-- @foreach ($penggunaanAnggaran as $item)
+    @foreach ($penggunaanAnggaran as $item)
         <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog"
             aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -324,7 +246,7 @@
                 </div>
             </div>
         </div>
-    @endforeach --}}
+    @endforeach
 
 
     <script>
