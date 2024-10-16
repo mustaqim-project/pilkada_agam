@@ -32,9 +32,11 @@ class DashLapKeuController extends Controller
             ->join('periode as p', 'pa.periode_id', '=', 'p.id')
             ->join('anggaran as a', 'p.anggaran_id', '=', 'a.id')
             ->join('tims as t', 'a.tim_id', '=', 't.id')
+            ->where('pa.status_pembayaran', 1)  // Menambahkan kondisi status_pembayaran = 1
             ->select('t.name as tim', DB::raw('SUM(pa.jumlah_digunakan) AS total_anggaran_digunakan'))
             ->groupBy('t.name')
             ->get();
+
 
         // Sisa Anggaran per Tim
         $sisaAnggaranPerTim = DB::table('tims as t')
