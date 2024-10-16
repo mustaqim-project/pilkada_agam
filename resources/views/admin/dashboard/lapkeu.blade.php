@@ -110,25 +110,37 @@
             </div>
         </div> --}}
         <div class="row mb-4">
-            <!-- Laporan Pembayaran Lengkap dengan Dropdown -->
+            <!-- Laporan Pembayaran Lengkap dalam Bentuk Tabel -->
             <div class="col-md-12">
                 <h3>Laporan Pembayaran Lengkap</h3>
-                <div class="accordion" id="accordionLaporan">
-                    @foreach ($laporanPembayaran as $tim => $periodes)
-                        <div class="card">
-                            <div class="card-header" id="heading{{ $loop->index }}">
-                                <h3 class="mb-0">
-                                    <button class="btn" type="button" data-toggle="collapse" data-target="#collapse{{ $loop->index }}" aria-expanded="true" aria-controls="collapse{{ $loop->index }}">
-                                        Tim: {{ $tim }}
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Tim</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($laporanPembayaran as $tim => $periodes)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $tim }}</td>
+                                <td>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTim{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseTim{{ $loop->iteration }}">
+                                        <i class="fas fa-chevron-down"></i>
                                     </button>
-                                </h3>
-                            </div>
-                            <div id="collapse{{ $loop->index }}" class="collapse" aria-labelledby="heading{{ $loop->index }}" data-parent="#accordionLaporan">
-                                <div class="card-body">
-                                    @foreach ($periodes as $periode => $details)
-                                        <h5>Periode: {{ $periode }}</h5>
-                                        <table class="table table-bordered">
+                                </td>
+                            </tr>
+                            <!-- Subtabel Periode dan Detail untuk Tim -->
+                            <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
+                                <td colspan="3">
+                                    <table class="table table-bordered">
+                                        @foreach ($periodes as $periode => $details)
                                             <thead>
+                                                <tr>
+                                                    <th colspan="4">Periode: {{ $periode }}</th>
+                                                </tr>
                                                 <tr>
                                                     <th>Rincian</th>
                                                     <th>Jumlah Digunakan</th>
@@ -160,13 +172,13 @@
                                                     </tr>
                                                 @endforeach
                                             </tbody>
-                                        </table>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+                                        @endforeach
+                                    </table>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
 
