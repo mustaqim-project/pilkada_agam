@@ -39,6 +39,7 @@ class PenggunaanAnggaranController extends Controller
             'periode_id' => 'required|integer',
             'detail_pembiayaan_id' => 'required|integer',
             'jumlah_digunakan' => 'required|string|max:255',
+            'bukti_pembayaran' => 'nullable|file|mimes:jpg,jpeg,png,gpg,webp|max:5000', // batas ukuran 2MB
         ]);
 
         // Cek apakah ada file bukti pembayaran
@@ -80,6 +81,8 @@ class PenggunaanAnggaranController extends Controller
             'periode_id' => 'required|integer',
             'detail_pembiayaan_id' => 'required|integer',
             'jumlah_digunakan' => 'required|string|max:255',
+            'bukti_pembayaran' => 'nullable|file|mimes:jpg,jpeg,png,gpg,webp|max:5000', // batas ukuran 2MB
+
         ]);
 
         $penggunaanAnggaran = PenggunaanAnggaran::findOrFail($id);
