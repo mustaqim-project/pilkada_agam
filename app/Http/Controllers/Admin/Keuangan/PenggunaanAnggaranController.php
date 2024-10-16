@@ -15,16 +15,28 @@ class PenggunaanAnggaranController extends Controller
     use FileUploadTrait;
 
 
+    // public function index()
+    // {
+    //     $penggunaanAnggaran = PenggunaanAnggaran::with([
+    //         'periode.anggaran.tim',  // Periode -> Anggaran -> Tim
+    //         'detailPembiayaan'       // Relasi ke DetailPembiayaan tetap
+    //     ])->get();
+    //     $periodes = periode::with('anggaran.tim')->get();
+    //     $detailPembiayaans = DetailPembiayaan::all();
+    //     // dd(vars: $penggunaanAnggaran);
+    //     return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran', 'periodes', 'detailPembiayaans'));
+    // }
     public function index()
     {
-        $penggunaanAnggaran = PenggunaanAnggaran::with([
-            'periode.anggaran.tim',  // Periode -> Anggaran -> Tim
-            'detailPembiayaan'       // Relasi ke DetailPembiayaan tetap
-        ])->get();
-        $periodes = periode::with('anggaran.tim')->get();
-        $detailPembiayaans = DetailPembiayaan::all();
-        // dd(vars: $penggunaanAnggaran);
-        return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran', 'periodes', 'detailPembiayaans'));
+        // Mengambil data penggunaan anggaran dengan relasi yang dibutuhkan
+        $laporanPembayaran = PenggunaanAnggaran::with(['periode.anggaran.tim'])
+            ->get()
+            ->groupBy(function ($item) {
+                return $item->periode->anggaran->tim->name; // Kelompokkan berdasarkan nama tim
+            });
+            $periodes = periode::with('anggaran.tim')->get();
+                $detailPembiayaans = DetailPembiayaan::all();
+        return view('admin.keuangan.penggunaan_anggaran.index', compact('laporanPembayaran', 'periodes', 'detailPembiayaans'));
     }
 
 
