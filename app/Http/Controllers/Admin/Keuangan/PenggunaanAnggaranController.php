@@ -110,9 +110,13 @@ class PenggunaanAnggaranController extends Controller
     {
         $penggunaanAnggaran = PenggunaanAnggaran::findOrFail($id);
         $penggunaanAnggaran->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Data berhasil dihapus!'
-        ]);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Data berhasil dihapus!'
+        // ]);
+
+
+        return redirect()->route('admin.keuangan.penggunaan_anggaran.index')
+            ->with('toast_success', 'Data penggunaan anggaran berhasil dihapus.');
     }
 }
