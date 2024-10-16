@@ -44,7 +44,6 @@ class DashboardUtamaController extends Controller
             'Kanvasing PKH' => kanvasing_pkh::count(),
             'Kanvasing Muhammdiyah' => kanvasing_mm::count(),
             'Kanvasing Aisyiah' => kanvasing_aisyiah::count(),
-            'Kanvasing Parpol' => kanvasing_parpol::count(),
             'Kanvasing Wisata' => KanvasingWisata::count(),
             'Data Ganda' => data_ganda::select('no_ktp')->groupBy('no_ktp')->havingRaw('COUNT(no_ktp) > 1')->get()->count(),
         ];
@@ -61,7 +60,6 @@ class DashboardUtamaController extends Controller
             'Kanvasing PKH' => kanvasing_pkh::count(),
             'Kanvasing Muhammdiyah' => kanvasing_mm::count(),
             'Kanvasing Aisyiah' => kanvasing_aisyiah::count(),
-            'Kanvasing Parpol' => kanvasing_parpol::count(),
             'Kanvasing Wisata' => KanvasingWisata::count(),
             'Data Ganda' => data_ganda::select('no_ktp')->groupBy('no_ktp')->havingRaw('COUNT(no_ktp) > 1')->get()->count(),
         ];
