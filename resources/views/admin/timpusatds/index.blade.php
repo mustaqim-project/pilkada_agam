@@ -8,6 +8,9 @@
         <div class="row mb-4">
             <div class="col-md-12">
                 <h3>Laporan Pembayaran Lengkap</h3>
+                <h3>Rp {{ number_format($totalKeseluruhan, 0, ',', '.') }}
+                </h3>
+
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -33,9 +36,12 @@
                                     <table class="table table-bordered">
                                         @foreach ($periodes as $periode => $details)
                                             <thead>
-                                                <tr>
-                                                    <th colspan="4">Periode: {{ $periode }}</th>
-                                                </tr>
+                                                @php
+                                                // Mencari jumlah untuk periode ini
+                                                $jumlahPeriode = $jumlahPerPeriode->firstWhere('nama_periode', $periode);
+                                                $totalPeriode = $jumlahPeriode ? $jumlahPeriode->total_jumlah : 0;
+                                            @endphp
+                                            <th colspan="4">Periode: {{ $periode }} (Total: Rp {{ number_format($totalPeriode, 0, ',', '.') }})</th>
                                                 <tr>
                                                     <th>Rincian</th>
                                                     <th>Jumlah Digunakan</th>
