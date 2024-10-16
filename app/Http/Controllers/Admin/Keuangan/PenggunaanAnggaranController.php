@@ -15,32 +15,32 @@ class PenggunaanAnggaranController extends Controller
     use FileUploadTrait;
 
 
-    // public function index()
-    // {
-    //     $penggunaanAnggaran = PenggunaanAnggaran::with([
-    //         'periode.anggaran.tim',  // Periode -> Anggaran -> Tim
-    //         'detailPembiayaan'       // Relasi ke DetailPembiayaan tetap
-    //     ])->get();
-    //     $periodes = periode::with('anggaran.tim')->get();
-    //     $detailPembiayaans = DetailPembiayaan::all();
-    //     // dd(vars: $penggunaanAnggaran);
-    //     return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran', 'periodes', 'detailPembiayaans'));
-    // }
     public function index()
     {
-        // Mengambil data penggunaan anggaran dengan relasi yang dibutuhkan
-        $laporanPembayaran = PenggunaanAnggaran::with(['periode.anggaran.tim','detailPembiayaan'])
-            ->get()
-            ->groupBy(function ($item) {
-                return $item->periode->anggaran->tim->name;
-            });
+        $penggunaanAnggaran = PenggunaanAnggaran::with([
+            'periode.anggaran.tim',  // Periode -> Anggaran -> Tim
+            'detailPembiayaan'       // Relasi ke DetailPembiayaan tetap
+        ])->get();
         $periodes = periode::with('anggaran.tim')->get();
         $detailPembiayaans = DetailPembiayaan::all();
-
-        // dd($laporanPembayaran);
-
-        return view('admin.keuangan.penggunaan_anggaran.index', compact('laporanPembayaran', 'periodes', 'detailPembiayaans'));
+        // dd(vars: $penggunaanAnggaran);
+        return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran', 'periodes', 'detailPembiayaans'));
     }
+    // public function index()
+    // {
+    //     // Mengambil data penggunaan anggaran dengan relasi yang dibutuhkan
+    //     $laporanPembayaran = PenggunaanAnggaran::with(['periode.anggaran.tim','detailPembiayaan'])
+    //         ->get()
+    //         ->groupBy(function ($item) {
+    //             return $item->periode->anggaran->tim->name;
+    //         });
+    //     $periodes = periode::with('anggaran.tim')->get();
+    //     $detailPembiayaans = DetailPembiayaan::all();
+
+    //     // dd($laporanPembayaran);
+
+    //     return view('admin.keuangan.penggunaan_anggaran.index', compact('laporanPembayaran', 'periodes', 'detailPembiayaans'));
+    // }
 
 
     public function create()
