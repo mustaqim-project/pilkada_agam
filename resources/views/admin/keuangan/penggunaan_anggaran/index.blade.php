@@ -15,7 +15,88 @@
                 </div>
             </div>
 
-            <div class="card-body">
+            <div class="col-md-12">
+                <h3>Laporan Pembayaran Lengkap</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Tim</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($laporanPembayaran as $tim => $periodes)
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTim{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseTim{{ $loop->iteration }}">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </td>
+                                <td>{{ $tim }}</td>
+                            </tr>
+                            <!-- Subtabel Periode dan Detail untuk Tim -->
+                            <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
+                                <td colspan="3">
+                                    <table class="table table-bordered">
+                                        @foreach ($periodes as $periode => $details)
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="4">Periode: {{ $periode }}</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Rincian</th>
+                                                    <th>Jumlah Digunakan</th>
+                                                    <th>Status Pembayaran</th>
+                                                    <th>Bukti Pembayaran</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($details as $item)
+                                                    <tr>
+                                                        <td>{{ $item->nama_rincian }}</td>
+                                                        <td>Rp {{ number_format($item->jumlah_digunakan, 0, ',', '.') }}</td>
+                                                        <td>
+                                                            @if ($item->status_pembayaran == 1)
+                                                                Lunas
+                                                            @elseif($item->status_pembayaran == 0)
+                                                                Belum Dibayar
+                                                            @else
+                                                                Status Tidak Diketahui
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <div class="btn-group" role="group" aria-label="Tombol Aksi">
+                                                                <!-- Tombol Detail -->
+                                                                <a href="#" data-toggle="modal"
+                                                                    data-target="#detailModal{{ $item->id }}" class="btn btn-primary"
+                                                                    aria-label="Lihat Detail {{ $item->name }}">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                                <!-- Tombol Edit -->
+                                                                <a href="#" data-toggle="modal"
+                                                                    data-target="#editModal{{ $item->id }}" class="btn btn-warning">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <!-- Tombol Hapus -->
+                                                                <a href="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}"
+                                                                    class="btn btn-danger delete-item">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </a>
+
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        @endforeach
+                                    </table>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            {{-- <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped" id="tablePenggunaanAnggaran">
                         <thead>
@@ -67,7 +148,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
 
