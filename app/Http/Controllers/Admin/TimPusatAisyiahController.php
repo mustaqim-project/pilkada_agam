@@ -1,46 +1,46 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Wisata;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TimPusatWisataController extends Controller
+class TimPusatAisyiahController extends Controller
 {
     public function ketuaDashboard()
     {
         // Logika untuk menampilkan dashboard ketua tim
-        return view('admin.timpusatwisata.ketua.dashboard');
+        return view('admin.timpusataisyiah.ketua.dashboard');
     }
 
     public function ketuaLaporan()
     {
         // Logika untuk menampilkan laporan ketua tim
-        return view('admin.timpusatwisata.ketua.laporan');
+        return view('admin.timpusataisyiah.ketua.laporan');
     }
 
     public function adminDashboard()
     {
         // Logika untuk menampilkan dashboard admin
-        return view('admin.timpusatwisata.admin.dashboard');
+        return view('admin.timpusataisyiah.admin.dashboard');
     }
 
     public function adminLaporan()
     {
         // Logika untuk menampilkan laporan admin
-        return view('admin.timpusatwisata.admin.laporan');
+        return view('admin.timpusataisyiah.admin.laporan');
     }
 
     public function index()
     {
         // Logika untuk menampilkan keuangan DS
-        return view('admin.timpusatwisata.index');
+        return view('admin.timpusataisyiah.index');
     }
 
     public function create()
     {
         // Logika untuk menampilkan form pembuatan data keuangan
-        return view('admin.timpusatwisata.create');
+        return view('admin.timpusataisyiah.create');
     }
 
     public function store(Request $request)
@@ -55,14 +55,14 @@ class TimPusatWisataController extends Controller
         // Logika untuk menyimpan data keuangan ke database
         // Model::create($validatedData); // Contoh menggunakan model
 
-        return redirect()->route('admin.timpusatwisata.index')->with('success', 'Data keuangan berhasil dibuat.');
+        return redirect()->route('admin.timpusataisyiah.index')->with('success', 'Data keuangan berhasil dibuat.');
     }
 
     public function edit($id)
     {
         // Logika untuk menampilkan form edit data keuangan
         // $data = Model::findOrFail($id); // Ambil data berdasarkan ID
-        return view('admin.timpusatwisata.edit', compact('data')); // Kirim data ke view
+        return view('admin.timpusataisyiah.edit', compact('data')); // Kirim data ke view
     }
 
     public function update(Request $request, $id)
@@ -78,7 +78,7 @@ class TimPusatWisataController extends Controller
         // $data = Model::findOrFail($id);
         // $data->update($validatedData); // Perbarui data
 
-        return redirect()->route('admin.timpusatwisata.index')->with('success', 'Data keuangan berhasil diperbarui.');
+        return redirect()->route('admin.timpusataisyiah.index')->with('success', 'Data keuangan berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -87,6 +87,6 @@ class TimPusatWisataController extends Controller
         // $data = Model::findOrFail($id);
         // $data->delete(); // Hapus data
 
-        return redirect()->route('admin.timpusatwisata.index')->with('success', 'Data keuangan berhasil dihapus.');
+        return redirect()->route('admin.timpusataisyiah.index')->with('success', 'Data keuangan berhasil dihapus.');
     }
 }

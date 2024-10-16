@@ -47,6 +47,9 @@ use App\Http\Controllers\Admin\HomeSectionSettingController;
 use App\Http\Controllers\Admin\AdminAuthenticationController;
 use App\Http\Controllers\Admin\DashboardUtamaController;
 use App\Http\Controllers\Admin\TimPusatController;
+use App\Http\Controllers\Admin\TimPusatAisyiahController;
+use App\Http\Controllers\Admin\TimPusatMMController;
+use App\Http\Controllers\Admin\TimPusatPkhController;
 use App\Http\Controllers\Admin\GajiController;
 use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\DashLapKeuController;
@@ -374,6 +377,62 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         Route::get('/', [TimPusatController::class, 'index'])->name('index');
     });
 
+    Route::group(['prefix' => 'timpusatpkh', 'as' => 'timpusatpkh.'], function () {
+        // Route untuk Ketua Tim
+        Route::group(['prefix' => 'ketua', 'as' => 'ketua.'], function () {
+            Route::get('dashboard', [TimPusatPkhController::class, 'ketuaDashboard'])->name('dashboard');
+            Route::get('laporan', [TimPusatPkhController::class, 'ketuaLaporan'])->name('laporan');
+        });
+
+        // Route untuk Admin
+        Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+            Route::get('dashboard', [TimPusatPkhController::class, 'adminDashboard'])->name('dashboard');
+            Route::get('laporan', [TimPusatPkhController::class, 'adminLaporan'])->name('laporan');
+        });
+
+        // Route untuk Keuangan DS
+        Route::get('/', [TimPusatPkhController::class, 'index'])->name('index');
+    });
+
+
+
+
+
+    Route::group(['prefix' => 'timpusatmm', 'as' => 'timpusatmm.'], function () {
+        // Route untuk Ketua Tim
+        Route::group(['prefix' => 'ketua', 'as' => 'ketua.'], function () {
+            Route::get('dashboard', [TimPusatMMController::class, 'ketuaDashboard'])->name('dashboard');
+            Route::get('laporan', [TimPusatMMController::class, 'ketuaLaporan'])->name('laporan');
+        });
+
+        // Route untuk Admin
+        Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+            Route::get('dashboard', [TimPusatMMController::class, 'adminDashboard'])->name('dashboard');
+            Route::get('laporan', [TimPusatMMController::class, 'adminLaporan'])->name('laporan');
+        });
+
+        // Route untuk Keuangan DS
+        Route::get('/', [TimPusatMMController::class, 'index'])->name('index');
+    });
+
+    Route::group(['prefix' => 'timpusatAisyiah', 'as' => 'timpusatAisyiah.'], function () {
+        // Route untuk Ketua Tim
+        Route::group(['prefix' => 'ketua', 'as' => 'ketua.'], function () {
+            Route::get('dashboard', [TimPusatAisyiahController::class, 'ketuaDashboard'])->name('dashboard');
+            Route::get('laporan', [TimPusatAisyiahController::class, 'ketuaLaporan'])->name('laporan');
+        });
+
+        // Route untuk Admin
+        Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+            Route::get('dashboard', [TimPusatAisyiahController::class, 'adminDashboard'])->name('dashboard');
+            Route::get('laporan', [TimPusatAisyiahController::class, 'adminLaporan'])->name('laporan');
+        });
+
+        // Route untuk Keuangan DS
+        Route::get('/', [TimPusatMMController::class, 'index'])->name('index');
+    });
+
+
 
     Route::group(['prefix' => 'timpusatwisata', 'as' => 'timpusatwisata.'], function () {
         // Route untuk Ketua Tim
@@ -391,6 +450,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         // Route untuk Keuangan DS
         Route::get('/', [TimPusatWisataController::class, 'index'])->name('index');
     });
+
 
 
 
