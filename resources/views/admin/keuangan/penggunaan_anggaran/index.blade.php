@@ -110,8 +110,11 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($periode->detailPembiayaan as $laporan)
-                                                    {{ dd($laporan) }}
+    {{-- Debugging output --}}
+    {{ dump($laporan) }} {{-- Ini akan menampilkan isi $laporan tanpa menghentikan eksekusi --}}
+@endforeach
 
+                                                    {{-- @foreach ($periode->detailPembiayaan as $laporan)
                                                         <tr>
                                                             <td>{{ $laporan->nama_rincian }}</td>
                                                             <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
@@ -132,7 +135,7 @@
                                                                 @endif
                                                             </td>
                                                         </tr>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </tbody>
                                             @endforeach
                                         </table>
