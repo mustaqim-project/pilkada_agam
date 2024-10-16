@@ -44,20 +44,25 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
                                             <!-- Tombol Detail -->
-                                            <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                                data-target="#detailModal{{ $item->id }}"
-                                                aria-label="Lihat Detail {{ $item->name }}">
+
+                                            <a href="#" data-toggle="modal"
+                                                data-target="#detailModal{{ $item->id }}" class="btn btn-primary"  aria-label="Lihat Detail {{ $item->name }}">
                                                 <i class="fas fa-eye"></i>
-                                            </button>
-
+                                            </a>
                                             <!-- Tombol Edit -->
-                                            <button class="btn btn-warning btn-sm" data-toggle="modal"
-                                                data-target="#editModal{{ $item->id }}" data-id="{{ $item->id }}"
-                                                aria-label="Edit {{ $item->name }}">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
 
-                                            <!-- Tombol Hapus dengan konfirmasi -->
+
+                                            <a href="#" data-toggle="modal"
+                                                data-target="#editModal{{ $item->id }}" class="btn btn-warning">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+
+
+                                            <a href="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}"
+                                                class="btn btn-danger delete-item">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                            {{-- <!-- Tombol Hapus dengan konfirmasi -->
                                             <form
                                                 action="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}"
                                                 method="POST" style="display:inline;">
@@ -67,7 +72,7 @@
                                                     aria-label="Hapus {{ $item->name }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                            </form>
+                                            </form> --}}
 
                                         </div>
                                     </td>
