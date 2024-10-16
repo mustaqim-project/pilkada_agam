@@ -32,8 +32,10 @@ class PenggunaanAnggaranController extends Controller
         $laporanPembayaran = PenggunaanAnggaran::with(['periode.anggaran.tim'])
             ->get()
             ->groupBy(function ($item) {
-                return $item->periode->anggaran->tim->name; // Kelompokkan berdasarkan nama tim
+                return $item->periode->anggaran->tim->name;
             });
+
+            dd($laporanPembayaran);
             $periodes = periode::with('anggaran.tim')->get();
                 $detailPembiayaans = DetailPembiayaan::all();
         return view('admin.keuangan.penggunaan_anggaran.index', compact('laporanPembayaran', 'periodes', 'detailPembiayaans'));
