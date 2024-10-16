@@ -12,11 +12,11 @@
                         <i class="fas fa-newspaper"></i>
                     </div>
                     @foreach ($counts as $model => $count)
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>{{ __('admin.Total News') }}</h4>
-                        </div>
-                        <div class="card-body">
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>{{ __('admin.Total News') }}</h4>
+                            </div>
+                            <div class="card-body">
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-body">
@@ -25,9 +25,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>
