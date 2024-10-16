@@ -111,7 +111,7 @@
                                                 <tbody>
                                                     @foreach ($periode->detailPembiayaan as $laporan)
                                                     @php
-                                                    {{ dd($laporan) }}
+                                                    {{ dump($laporan) }}
                                                 @endphp
                                                     @endforeach
                                                 </tbody>
