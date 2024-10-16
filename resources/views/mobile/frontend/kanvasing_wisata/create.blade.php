@@ -101,22 +101,7 @@
     </style>
 
 
-    @php
-        $timId = auth()->user()->tim_id; // Ambil tim_id dari pengguna yang sedang terautentikasi
-        $kanvasingRoute = '#'; // Default route jika tidak ada tim_id yang cocok
 
-        if ($timId == 1) {
-            $kanvasingRoute = route('kanvasingds.store');
-        } elseif ($timId == 2) {
-            $kanvasingRoute = route('kanvasingpkh.store');
-        } elseif ($timId == 3) {
-            $kanvasingRoute = route('kanvasingmm.store');
-        } elseif ($timId == 4) {
-            $kanvasingRoute = route('kanvasingaisyiah.store');
-        } elseif ($timId == 5) {
-            $kanvasingRoute = route('kanvasing_wisata.store');
-        }
-    @endphp
 
 
     <div class="page-content">
@@ -128,7 +113,7 @@
             <div class="card-overlay dark-mode-tint"></div>
             <div class="card-bg preload-img" data-src="admin/mobile/myhr/images/sikad.png"></div>
         </div>
-        <form method="POST" action="{{ $kanvasingRoute }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('kanvasing_wisata.store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="card card-style">
