@@ -34,9 +34,11 @@ class PenggunaanAnggaranController extends Controller
             ->groupBy(function ($item) {
                 return $item->periode->anggaran->tim->name;
             });
-// dd($laporanPembayaran);
             $periodes = periode::with('anggaran.tim')->get();
-                $detailPembiayaans = DetailPembiayaan::all();
+            $detailPembiayaans = DetailPembiayaan::all();
+
+            dd($periodes->detailPembiayaan);
+
         return view('admin.keuangan.penggunaan_anggaran.index', compact('laporanPembayaran', 'periodes', 'detailPembiayaans'));
     }
 
