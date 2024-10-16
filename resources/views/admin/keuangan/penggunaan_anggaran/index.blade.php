@@ -63,8 +63,7 @@
                                                 method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <!-- Laravel akan menangani ini sebagai DELETE meski method form adalah POST -->
-                                                <button type="submit" class="btn btn-danger delete-keuangan"
+                                                <button type="submit" class="btn btn-danger"
                                                     aria-label="Hapus {{ $item->name }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
@@ -260,40 +259,16 @@
 @endsection
 
 @section('script')
+
+
+
+
     <!-- Include SweetAlert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
     <script>
-        $('.delete-keuangan').on('click', function(e) {
-            e.preventDefault();
-            const form = $(this).closest('form');
 
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: 'Data ini akan dihapus!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: form.attr('action'),
-                        type: 'POST',
-                        data: form.serialize() + '&_method=DELETE', // Menambahkan method DELETE
-                        success: function(response) {
-                            // Tindakan setelah berhasil dihapus
-                            location.reload();
-                        },
-                        error: function(xhr) {
-                            // Tindakan jika terjadi kesalahan
-                            console.error(xhr.responseText);
-                        }
-                    });
-                }
-            });
-        });
         document.addEventListener('DOMContentLoaded', function() {
             @if (session('success'))
                 Swal.fire({
