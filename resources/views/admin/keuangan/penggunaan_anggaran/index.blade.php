@@ -33,7 +33,7 @@
                         <tbody>
                             @foreach ($penggunaanAnggaran as $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->periode->nama_periode }} - {{ $item->periode->anggaran->tim->name }}</td>
                                     <td>{{ $item->detailPembiayaan->nama_rincian }}</td>
                                     <td>{{ 'Rp' . number_format($item->jumlah_digunakan, 0, ',', '.') }}</td>
