@@ -35,9 +35,9 @@
             @endif
 
             @if (canAccess(['Dashboard Keuangan']))
-                <li class="{{ setSidebarActive(['admin.laporan-keuangan.index']) }}">
+                <li class="{{ setSidebarActive(['admin.dashboard-kanvasing.kanvasin']) }}">
                     <a class="nav-link"
-                        href="{{ route('admin.kanvasing.AdminDashboard') }}"> <i class="fas fa-fire"></i>{{ __('Dashboard Kanvasing') }}</a>
+                        href="{{ route('admin.dashboard-kanvasing.kanvasin') }}"> <i class="fas fa-fire"></i>{{ __('Dashboard Kanvasing') }}</a>
                 </li>
             @endif
 

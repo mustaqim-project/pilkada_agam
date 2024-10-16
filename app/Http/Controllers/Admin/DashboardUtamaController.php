@@ -51,4 +51,21 @@ class DashboardUtamaController extends Controller
 
         return view('admin.dashboard.dashboard-utama', compact('counts'));
     }
+
+
+
+    public function kanvasing()
+    {
+        $counts = [
+            'Kanvasing DS' => kanvasing_ds::count(),
+            'Kanvasing PKH' => kanvasing_pkh::count(),
+            'Kanvasing Muhammdiyah' => kanvasing_mm::count(),
+            'Kanvasing Aisyiah' => kanvasing_aisyiah::count(),
+            'Kanvasing Parpol' => kanvasing_parpol::count(),
+            'Kanvasing Wisata' => KanvasingWisata::count(),
+            'Data Ganda' => data_ganda::select('no_ktp')->groupBy('no_ktp')->havingRaw('COUNT(no_ktp) > 1')->get()->count(),
+        ];
+
+        return view('admin.dashboard.dashboard-kanvasing', compact('counts'));
+    }
 }
