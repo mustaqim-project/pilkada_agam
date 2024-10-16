@@ -30,14 +30,14 @@
             @if (canAccess(['Dashboard Keuangan']))
                 <li class="{{ setSidebarActive(['admin.laporan-keuangan.index']) }}">
                     <a class="nav-link"
-                        href="{{ route('admin.keuangan.AdminDashboard') }}">{{ __('Dashboard Keuangan') }}</a>
+                        href="{{ route('admin.keuangan.AdminDashboard') }}"> <i class="fas fa-fire"></i> {{ __('Dashboard Keuangan') }}</a>
                 </li>
             @endif
 
             @if (canAccess(['Dashboard Keuangan']))
                 <li class="{{ setSidebarActive(['admin.laporan-keuangan.index']) }}">
                     <a class="nav-link"
-                        href="{{ route('admin.keuangan.AdminDashboard') }}">{{ __('Dashboard Kanvasing') }}</a>
+                        href="{{ route('admin.keuangan.AdminDashboard') }}"> <i class="fas fa-fire"></i>{{ __('Dashboard Kanvasing') }}</a>
                 </li>
             @endif
 
@@ -91,7 +91,7 @@
 
 
             @if (canAccess(['Keuangan show']))
-                <li class="menu-header">{{ __('admin.Keuangan') }}</li>
+                <li class="menu-header">{{ __('admin.Gaji') }}</li>
                 <li class="dropdown">
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-wave"></i>
                         <span>{{ __('Gaji') }}</span></a>
