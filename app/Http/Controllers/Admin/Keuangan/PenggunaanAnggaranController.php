@@ -29,15 +29,15 @@ class PenggunaanAnggaranController extends Controller
     public function index()
     {
         // Mengambil data penggunaan anggaran dengan relasi yang dibutuhkan
-        $laporanPembayaran = PenggunaanAnggaran::with(['periode.anggaran.tim'])
+        $laporanPembayaran = PenggunaanAnggaran::with(['periode.anggaran.tim','detailPembiayaan'])
             ->get()
             ->groupBy(function ($item) {
                 return $item->periode->anggaran->tim->name;
             });
-            $periodes = periode::with('anggaran.tim')->get();
-            $detailPembiayaans = DetailPembiayaan::all();
+        $periodes = periode::with('anggaran.tim')->get();
+        $detailPembiayaans = DetailPembiayaan::all();
 
-            dd($periodes->detailPembiayaan);
+        dd($periodes->detailPembiayaan);
 
         return view('admin.keuangan.penggunaan_anggaran.index', compact('laporanPembayaran', 'periodes', 'detailPembiayaans'));
     }
