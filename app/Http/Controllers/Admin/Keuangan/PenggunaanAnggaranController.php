@@ -103,12 +103,16 @@ class PenggunaanAnggaranController extends Controller
             ->with('success', 'Data penggunaan anggaran berhasil diupdate.');
     }
 
+
+
+
     public function destroy($id)
     {
         $penggunaanAnggaran = PenggunaanAnggaran::findOrFail($id);
         $penggunaanAnggaran->delete();
-
-        return redirect()->route('admin.keuangan.penggunaan_anggaran.index')
-            ->with('success', 'Data penggunaan anggaran berhasil dihapus.');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data berhasil dihapus!'
+        ]);
     }
 }
