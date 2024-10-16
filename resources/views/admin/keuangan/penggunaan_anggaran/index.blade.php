@@ -54,16 +54,16 @@
                                             </button>
 
                                             <!-- Tombol Hapus dengan konfirmasi -->
-                                            <form action="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus item ini?');">
+                                            <form action="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}" method="POST" style="display:inline;">
                                                 @csrf
-                                                @method('DELETE')
+                                                @method('DELETE') <!-- Laravel akan menangani ini sebagai DELETE meski method form adalah POST -->
                                                 <button type="submit" class="btn btn-danger delete-item" aria-label="Hapus {{ $item->name }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
+
                                         </div>
                                     </td>
-
                                 </tr>
                             @endforeach
                         </tbody>
