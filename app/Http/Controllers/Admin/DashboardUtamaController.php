@@ -34,7 +34,6 @@ class DashboardUtamaController extends Controller
 
     public function index()
     {
-        // Menghitung data dari setiap model
         $counts = [
             'tim' => tim::count(),
             'anggaran' => anggaran::count(),
@@ -47,12 +46,6 @@ class DashboardUtamaController extends Controller
             'kanvasing_aisyiah' => kanvasing_aisyiah::count(),
             'kanvasing_parpol' => kanvasing_parpol::count(),
             'kanvasing_jj' => KanvasingWisata::count(),
-            'spanduk_ds' => spanduk_ds::count(),
-            'spanduk_pkh' => spanduk_pkh::count(),
-            'spanduk_mm' => spanduk_mm::count(),
-            'spanduk_aisyiah' => spanduk_aisyiah::count(),
-            // 'spanduk_parpol' => spanduk_parpol::count(),
-            'spanduk_jj' => spanduk_jj::count(),
             'data_ganda' => data_ganda::count(),
         ];
 
