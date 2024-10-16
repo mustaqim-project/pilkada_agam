@@ -118,19 +118,17 @@
                         <tr>
                             <th>#</th>
                             <th>Nama Tim</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($laporanPembayaran as $tim => $periodes)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $tim }}</td>
                                 <td>
                                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTim{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseTim{{ $loop->iteration }}">
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
                                 </td>
+                                <td>{{ $tim }}</td>
                             </tr>
                             <!-- Subtabel Periode dan Detail untuk Tim -->
                             <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
