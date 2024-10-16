@@ -7,8 +7,8 @@
         </div>
         <div class="row mb-4">
             <div class="col-md-12">
-                <h3>Laporan Pembayaran Lengkap</h3>
-                <h3>Rp {{ number_format($totalKeseluruhan, 0, ',', '.') }}
+                <h3>Laporan Pembayaran</h3>
+                <h3>Total : Rp {{ number_format($totalKeseluruhan, 0, ',', '.') }}
                 </h3>
 
                 <table class="table table-bordered">

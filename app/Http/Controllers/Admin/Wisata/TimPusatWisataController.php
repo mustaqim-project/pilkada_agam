@@ -36,9 +36,9 @@ class TimPusatWisataController extends Controller
     public function index()
     {
         $admin = Auth::guard('admin')->user();
-
         $timId = $admin->tim_id;
 
+        // Laporan pembayaran berdasarkan tim dan periode
         $laporanPembayaran = DB::table('penggunaan_anggaran as pa')
             ->join('detail_pembiayaan as dp', 'pa.detail_pembiayaan_id', '=', 'dp.id')
             ->join('periode as p', 'pa.periode_id', '=', 'p.id')
@@ -54,9 +54,26 @@ class TimPusatWisataController extends Controller
                 return $tim->groupBy('nama_periode');
             });
 
-        return view('admin.timpusatwisata.index', compact('laporanPembayaran'));
-    }
+        // Total keseluruhan
+        $totalKeseluruhan = DB::table('penggunaan_anggaran as pa')
+            ->join('detail_pembiayaan as dp', 'pa.detail_pembiayaan_id', '=', 'dp.id')
+            ->join('periode as p', 'pa.periode_id', '=', 'p.id')
+            ->join('anggaran as a', 'p.anggaran_id', '=', 'a.id')
+            ->where('a.tim_id', $timId) // Filter by tim_id
+            ->sum('pa.jumlah_digunakan'); // Total keseluruhan
 
+        // Jumlah per periode
+        $jumlahPerPeriode = DB::table('penggunaan_anggaran as pa')
+            ->join('periode as p', 'pa.periode_id', '=', 'p.id')
+            ->join('anggaran as a', 'p.anggaran_id', '=', 'a.id')
+            ->where('a.tim_id', $timId) // Filter by tim_id
+            ->select('p.nama_periode', DB::raw('SUM(pa.jumlah_digunakan) as total_jumlah'))
+            ->groupBy('p.nama_periode')
+            ->orderBy('p.nama_periode')
+            ->get();
+
+        return view('admin.timpusatwisata.index', compact('laporanPembayaran', 'totalKeseluruhan', 'jumlahPerPeriode'));
+    }
 
     public function create()
     {
