@@ -23,6 +23,7 @@ use App\Models\spanduk_aisyiah;
 // use App\Models\spanduk_parpol;
 use App\Models\spanduk_jj;
 use App\Models\data_ganda;
+use App\Models\KanvasingWisata;
 
 class DashboardUtamaController extends Controller
 {
@@ -45,7 +46,7 @@ class DashboardUtamaController extends Controller
             'kanvasing_mm' => kanvasing_mm::count(),
             'kanvasing_aisyiah' => kanvasing_aisyiah::count(),
             'kanvasing_parpol' => kanvasing_parpol::count(),
-            'kanvasing_jj' => kanvasing_jj::count(),
+            'kanvasing_jj' => KanvasingWisata::count(),
             'spanduk_ds' => spanduk_ds::count(),
             'spanduk_pkh' => spanduk_pkh::count(),
             'spanduk_mm' => spanduk_mm::count(),
