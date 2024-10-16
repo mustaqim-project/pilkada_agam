@@ -57,61 +57,9 @@
                 </table>
             </div>
 
-            <!-- Penggunaan Anggaran per Jenis Pembiayaan -->
 
         </div>
 
-        <div class="row mb-4">
-            <div class="col-md-6">
-                <h3>Penggunaan Anggaran per Jenis Pembiayaan</h3>
-                <canvas id="penggunaanPerJenisPembiayaanChart" class="w-100"></canvas>
-            </div>
-
-            <!-- Penggunaan Anggaran per Periode -->
-            <div class="col-md-6">
-                <h3>Penggunaan Anggaran per Periode</h3>
-                <canvas id="penggunaanPeriodeChart" class="w-100"></canvas>
-            </div>
-        </div>
-
-
-
-        <div class="row mb-4">
-            <!-- Status Pembayaran -->
-            <div class="col-md-12">
-                <h3>Status Pembayaran</h3>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Tim</th>
-                            <th>Periode</th>
-                            <th>Rincian</th>
-                            <th>Jumlah Digunakan</th>
-                            <th>Status Pembayaran</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($statusPembayaran as $pembayaran)
-                            <tr>
-                                <td>{{ $pembayaran->tim }}</td>
-                                <td>{{ $pembayaran->nama_periode }}</td>
-                                <td>{{ $pembayaran->nama_rincian }}</td>
-                                <td>Rp {{ number_format($pembayaran->jumlah_digunakan, 0, ',', '.') }}</td>
-                                <td>
-                                    @if ($pembayaran->status_pembayaran == 1)
-                                        Lunas
-                                    @elseif($pembayaran->status_pembayaran == 0)
-                                        Belum Dibayar
-                                    @else
-                                        Status Tidak Diketahui
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
 
 
@@ -179,25 +127,8 @@
         const totalAnggaranPerTimCtx = document.getElementById('totalAnggaranPerTimChart').getContext('2d');
         const totalAnggaranDigunakanPerTimCtx = document.getElementById('totalAnggaranDigunakanPerTimChart').getContext(
             '2d');
-        const penggunaanPerJenisPembiayaanCtx = document.getElementById('penggunaanPerJenisPembiayaanChart').getContext(
-            '2d');
-        const penggunaanPeriodeCtx = document.getElementById('penggunaanPeriodeChart').getContext('2d');
-        const rekapitulasiAnggaranCtx = document.getElementById('rekapitulasiAnggaranChart').getContext('2d');
-        const penggunaanPerPembiayaanDetailCtx = document.getElementById('penggunaanPerPembiayaanDetailChart').getContext(
-            '2d');
-        const anggaranDigunakanVsTotalCtx = document.getElementById('anggaranDigunakanVsTotalChart').getContext('2d');
 
-        // // Contoh data untuk chart (sesuaikan dengan data dari backend)
-        // const totalAnggaranPerTimData = {
-        //     labels: {!! json_encode($totalAnggaranPerTim->pluck('tim')) !!},
-        //     datasets: [{
-        //         label: 'Total Anggaran per Tim',
-        //         data: {!! json_encode($totalAnggaranPerTim->pluck('total_anggaran')) !!},
-        //         backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        //         borderColor: 'rgba(75, 192, 192, 1)',
-        //         borderWidth: 1
-        //     }]
-        // };
+
 
         // Data dari PHP ke dalam JavaScript
         const labels = {!! json_encode($labels) !!};
@@ -272,97 +203,6 @@
             data: totalAnggaranDigunakanPerTimData,
         });
 
-        // Chart untuk Penggunaan Anggaran per Jenis Pembiayaan
-        new Chart(penggunaanPerJenisPembiayaanCtx, {
-            type: 'doughnut',
-            data: {
-                labels: {!! json_encode($penggunaanPerJenisPembiayaan->pluck('nama_pembiayaan')) !!},
-                datasets: [{
-                    label: 'Penggunaan per Jenis Pembiayaan',
-                    data: {!! json_encode($penggunaanPerJenisPembiayaan->pluck('jumlah')) !!},
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                }]
-            }
-        });
 
-        // Chart untuk Penggunaan Anggaran per Periode
-        new Chart(penggunaanPeriodeCtx, {
-            type: 'line',
-            data: {
-                labels: {!! json_encode(
-                    $penggunaanPeriode->map(function ($item) {
-                        return $item->tim . ' - ' . $item->nama_periode;
-                    }),
-                ) !!}, // Menggabungkan tim dan nama periode
-                datasets: [{
-                    label: 'Penggunaan per Periode',
-                    data: {!! json_encode($penggunaanPeriode->pluck('total_digunakan')) !!}, // Total penggunaan
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                }]
-            }
-        });
-
-        // new Chart(penggunaanPeriodeCtx, {
-        //     type: 'line',
-        //     data: {
-        //         labels: {!! json_encode($penggunaanPeriode->pluck('nama_periode')) !!},
-        //         datasets: [{
-        //             label: 'Penggunaan per Periode',
-        //             data: {!! json_encode($penggunaanPeriode->pluck('total_digunakan')) !!},
-        //             fill: false,
-        //             borderColor: 'rgb(75, 192, 192)',
-        //             tension: 0.1
-        //         }]
-        //     }
-        // });
-
-        // Chart untuk Rekapitulasi Anggaran
-        new Chart(rekapitulasiAnggaranCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Total Anggaran', 'Total Digunakan', 'Sisa Anggaran'],
-                datasets: [{
-                    label: 'Rekapitulasi Anggaran',
-                    data: [
-                        {!! json_encode($rekapitulasiAnggaran->first()->total_anggaran_periode ?? 0) !!},
-                        {!! json_encode($rekapitulasiAnggaran->first()->total_digunakan ?? 0) !!},
-                        {!! json_encode($rekapitulasiAnggaran->first()->sisa_anggaran ?? 0) !!}
-                    ],
-                    backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
-                }]
-            }
-        });
-
-        // Chart untuk Penggunaan per Pembiayaan Detail
-        new Chart(penggunaanPerPembiayaanDetailCtx, {
-            type: 'bar',
-            data: {
-                labels: {!! json_encode($penggunaanPerPembiayaanDetail->pluck('nama_rincian')) !!},
-                datasets: [{
-                    label: 'Penggunaan per Pembiayaan Detail',
-                    data: {!! json_encode($penggunaanPerPembiayaanDetail->pluck('total_digunakan')) !!},
-                    backgroundColor: '#FF6384',
-                }]
-            }
-        });
-
-        // Chart untuk Anggaran Digunakan vs Total
-        new Chart(anggaranDigunakanVsTotalCtx, {
-            type: 'bar',
-            data: {
-                labels: {!! json_encode($anggaranDigunakanVsTotal->pluck('tim')) !!},
-                datasets: [{
-                    label: 'Anggaran Digunakan',
-                    data: {!! json_encode($anggaranDigunakanVsTotal->pluck('total_digunakan')) !!},
-                    backgroundColor: '#FF6384',
-                }, {
-                    label: 'Total Anggaran',
-                    data: {!! json_encode($anggaranDigunakanVsTotal->pluck('total_anggaran')) !!},
-                    backgroundColor: '#36A2EB',
-                }]
-            }
-        });
     </script>
 @endsection
