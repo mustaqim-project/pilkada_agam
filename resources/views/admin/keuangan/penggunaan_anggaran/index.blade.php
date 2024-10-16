@@ -98,7 +98,6 @@
                                         <table class="table table-bordered">
                                             @foreach ($periodes as $periode)
 
-                                            var_dump($periode);
                                                 <thead>
                                                     <tr>
                                                         <th colspan="4">Periode: {{ $periode->periode->nama_periode }}</th>
@@ -111,7 +110,9 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {{-- @foreach ($laporanPembayaran -> $detailPembiayaan as $laporan)
+                                                    @foreach ($laporanPembayaran -> detailPembiayaan as $laporan)
+                                                                                                var_dump($laporan);
+
                                                             <tr>
                                                                 <td>{{ $laporan->nama_rincian }}</td>
                                                                 <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
@@ -133,7 +134,7 @@
                                                                 </td>
                                                             </tr>
 
-                                                    @endforeach --}}
+                                                    @endforeach
                                                 </tbody>
 
                                             @endforeach
