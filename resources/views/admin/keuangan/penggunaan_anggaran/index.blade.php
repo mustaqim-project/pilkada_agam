@@ -44,20 +44,28 @@
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
                                             <!-- Tombol Detail -->
-                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#detailModal{{ $item->id }}" aria-label="Lihat Detail {{ $item->name }}">
+                                            <button class="btn btn-primary btn-sm" data-toggle="modal"
+                                                data-target="#detailModal{{ $item->id }}"
+                                                aria-label="Lihat Detail {{ $item->name }}">
                                                 <i class="fas fa-eye"></i>
                                             </button>
 
                                             <!-- Tombol Edit -->
-                                            <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editModal{{ $item->id }}" data-id="{{ $item->id }}" aria-label="Edit {{ $item->name }}">
+                                            <button class="btn btn-warning btn-sm" data-toggle="modal"
+                                                data-target="#editModal{{ $item->id }}" data-id="{{ $item->id }}"
+                                                aria-label="Edit {{ $item->name }}">
                                                 <i class="fas fa-edit"></i>
                                             </button>
 
                                             <!-- Tombol Hapus dengan konfirmasi -->
-                                            <form action="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                            <form
+                                                action="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}"
+                                                method="POST" style="display:inline;">
                                                 @csrf
-                                                @method('DELETE') <!-- Laravel akan menangani ini sebagai DELETE meski method form adalah POST -->
-                                                <button type="submit" class="btn btn-danger delete-item" aria-label="Hapus {{ $item->name }}">
+                                                @method('DELETE')
+                                                <!-- Laravel akan menangani ini sebagai DELETE meski method form adalah POST -->
+                                                <button type="submit" class="btn btn-danger delete-keuangan"
+                                                    aria-label="Hapus {{ $item->name }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
@@ -249,8 +257,7 @@
             </div>
         </div>
     @endforeach
-
-
+@endsection
 
 @section('script')
     <!-- Include SweetAlert2 -->
@@ -258,6 +265,35 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
     <script>
+        $('.delete-keuangan').on('click', function(e) {
+            e.preventDefault();
+            const form = $(this).closest('form');
+
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: 'Data ini akan dihapus!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: form.attr('action'),
+                        type: 'POST',
+                        data: form.serialize() + '&_method=DELETE', // Menambahkan method DELETE
+                        success: function(response) {
+                            // Tindakan setelah berhasil dihapus
+                            location.reload();
+                        },
+                        error: function(xhr) {
+                            // Tindakan jika terjadi kesalahan
+                            console.error(xhr.responseText);
+                        }
+                    });
+                }
+            });
+        });
         document.addEventListener('DOMContentLoaded', function() {
             @if (session('success'))
                 Swal.fire({
@@ -291,5 +327,4 @@
             });
         });
     </script>
-@endsection
 @endsection
