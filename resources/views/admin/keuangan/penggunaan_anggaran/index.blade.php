@@ -110,7 +110,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($periode as $item)
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $item->periode->nama_periode }} - {{ $item->periode->anggaran->tim->name }}</td>
                                                         <td>{{ $item->detailPembiayaan->nama_rincian }}</td>
@@ -141,7 +141,7 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </tbody>
                                             @endforeach
                                         </table>
