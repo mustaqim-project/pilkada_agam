@@ -190,7 +190,7 @@
     @endforeach --}}
 
     <!-- Modal Tambah -->
-    <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
+    {{-- <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
@@ -248,7 +248,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
     {{-- @foreach ($penggunaanAnggaran as $item)
