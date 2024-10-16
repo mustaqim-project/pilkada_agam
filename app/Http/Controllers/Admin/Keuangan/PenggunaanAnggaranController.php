@@ -21,9 +21,9 @@ class PenggunaanAnggaranController extends Controller
             'periode.anggaran.tim',  // Periode -> Anggaran -> Tim
             'detailPembiayaan'       // Relasi ke DetailPembiayaan tetap
         ])->get();
-                $periodes = periode::with('anggaran.tim')->get();
+        $periodes = periode::with('anggaran.tim')->get();
         $detailPembiayaans = DetailPembiayaan::all();
-// dd(vars: $penggunaanAnggaran);
+        // dd(vars: $penggunaanAnggaran);
         return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran', 'periodes', 'detailPembiayaans'));
     }
 

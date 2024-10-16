@@ -138,7 +138,7 @@
                         </div>
                         <div class="form-group">
                             <label for="jumlah_digunakan">Jumlah Digunakan</label>
-                            <input type="text" class="form-control" name="jumlah_digunakan" required>
+                            <input type="number" class="form-control" name="jumlah_digunakan" required>
                         </div>
                         <div class="form-group">
                             <label for="status_pembayaran">Status Pembayaran</label>
@@ -210,7 +210,7 @@
 
                             <div class="form-group">
                                 <label for="jumlah_digunakan">Jumlah Digunakan</label>
-                                <input type="text" class="form-control" name="jumlah_digunakan"
+                                <input type="number" class="form-control" name="jumlah_digunakan"
                                     value="{{ $item->jumlah_digunakan }}" required>
                             </div>
 
