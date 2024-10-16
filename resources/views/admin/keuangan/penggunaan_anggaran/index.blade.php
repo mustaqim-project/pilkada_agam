@@ -97,6 +97,8 @@
                                     <td colspan="3">
                                         <table class="table table-bordered">
                                             @foreach ($periodes as $periode)
+
+                                            var_dump($periode);
                                                 <thead>
                                                     <tr>
                                                         <th colspan="4">Periode: {{ $periode->periode->nama_periode }}</th>
