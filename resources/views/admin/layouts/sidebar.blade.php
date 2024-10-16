@@ -15,7 +15,7 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">{{ __('admin.Dashboard') }}</li>
-            <li class="active">
+            <li>
                 <a href="{{ route('admin.dashboard') }}" class="nav-link"><i
                         class="fas fa-fire"></i><span>{{ __('admin.Dashboard Blog') }}</span></a>
             </li>
