@@ -157,7 +157,7 @@
     </section>
 
     <!-- Modal Detail -->
-    @foreach ($penggunaanAnggaran as $item)
+    {{-- @foreach ($penggunaanAnggaran as $item)
         <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1" role="dialog"
             aria-labelledby="detailModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -187,7 +187,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
 
     <!-- Modal Tambah -->
     <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
@@ -251,7 +251,7 @@
     </div>
 
 
-    @foreach ($penggunaanAnggaran as $item)
+    {{-- @foreach ($penggunaanAnggaran as $item)
         <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog"
             aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -331,7 +331,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
 
 
     <script>
