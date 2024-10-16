@@ -4,25 +4,41 @@ namespace App\Http\Controllers\User\Wisata;
 
 use App\Http\Controllers\Controller;
 use App\Models\KanvasingWisata;
+use App\Models\kanvasing_ds;
+use App\Models\kanvasing_aisyiah;
+use App\Models\kanvasing_mm;
+use App\Models\kanvasing_pkh;
 use App\Models\Kecematan;
 use App\Models\Kelurahan;
 use App\Models\pekerjaan;
 use App\Models\data_ganda;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-
 use App\Traits\FileUploadTrait;
-
 
 class KanvasingWisataController extends Controller
 {
-
     use FileUploadTrait;
 
     // Method untuk menampilkan semua data
     public function index()
     {
-        $kanvasingWisata = KanvasingWisata::all();
+
+        $authUserId = auth()->id(); // Get the authenticated user's ID
+        $timId = auth()->user()->tim_id; // Get the user's team ID
+
+        if ($timId == 1) {
+            $kanvasingWisata = kanvasing_ds::where('user_id', $authUserId)->get();
+        } elseif ($timId == 2) {
+            $kanvasingWisata = kanvasing_pkh::where('user_id', $authUserId)->get();
+        } elseif ($timId == 3) {
+            $kanvasingWisata = kanvasing_mm::where('user_id', $authUserId)->get();
+        } elseif ($timId == 4) {
+            $kanvasingWisata = kanvasing_aisyiah::where('user_id', $authUserId)->get();
+        } else {
+            $kanvasingWisata = KanvasingWisata::where('user_id', $authUserId)->get();
+        }
+
         return response()->json($kanvasingWisata);
     }
 
@@ -30,17 +46,13 @@ class KanvasingWisataController extends Controller
     public function create()
     {
         $kecamatans = Kecematan::all();
-        $pekerjaans  = pekerjaan::all();
+        $pekerjaans = pekerjaan::all();
 
         return view('mobile.frontend.kanvasing_wisata.create', compact('kecamatans', 'pekerjaans'));
     }
 
-
-
     public function store(Request $request)
     {
-
-        // dd($request);
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'kecematan_id' => 'required',
@@ -51,14 +63,30 @@ class KanvasingWisataController extends Controller
             'jenis_kelamin' => 'required|string|max:10',
             'pekerjaan_id' => 'required',
             'alamat' => 'required|string|max:255',
-            'jadwal' => 'required|date',
+            'foto_kegiatan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            // 'brosur' => 'required|boolean',
+            // 'stiker' => 'required|boolean',
+            // 'kartu_coblos' => 'required|boolean',
+            'longitude' => 'required|numeric',
+            'latitude' => 'required|numeric',
         ]);
 
-
         $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
+        $timId = auth()->user()->tim_id;
 
-        // Membuat instance KanvasingWisata baru
-        $kanvasingWisata = new KanvasingWisata();
+        // Pemilihan model berdasarkan tim_id
+        if ($timId == 1) {
+            $kanvasingWisata = new kanvasing_ds();
+        } elseif ($timId == 2) {
+            $kanvasingWisata = new kanvasing_pkh();
+        } elseif ($timId == 3) {
+            $kanvasingWisata = new kanvasing_mm();
+        } elseif ($timId == 4) {
+            $kanvasingWisata = new kanvasing_aisyiah();
+        } else {
+            $kanvasingWisata = new KanvasingWisata();
+        }
+
         $kanvasingWisata->user_id = $request->user_id;
         $kanvasingWisata->kecematan_id = $request->kecematan_id;
         $kanvasingWisata->kelurahan_id = $request->kelurahan_id;
@@ -69,18 +97,16 @@ class KanvasingWisataController extends Controller
         $kanvasingWisata->pekerjaan_id = $request->pekerjaan_id;
         $kanvasingWisata->alamat = $request->alamat;
         $kanvasingWisata->jadwal = $request->jadwal;
-        $kanvasingWisata->status = $request->status == 0 ;
-        $kanvasingWisata->hadir = $request->hadir == 0 ;
-
-        // $kanvasingWisata->foto_kegiatan = !empty($imagePath) ? $imagePath : null;
+        $kanvasingWisata->status = $request->status == 0;
+        $kanvasingWisata->hadir = $request->hadir == 0;
+        $kanvasingWisata->foto_kegiatan = $imagePath ?? null;
         // $kanvasingWisata->brosur = $request->brosur;
         // $kanvasingWisata->stiker = $request->stiker;
         // $kanvasingWisata->kartu_coblos = $request->kartu_coblos;
-        // $kanvasingWisata->longitude = $request->longitude;
-        // $kanvasingWisata->latitude = $request->latitude;
+        $kanvasingWisata->longitude = $request->longitude;
+        $kanvasingWisata->latitude = $request->latitude;
 
         $kanvasingWisata->save();
-
 
         $data_ganda = new data_ganda();
         $data_ganda->kecematan = $request->kecematan_id;
@@ -90,17 +116,27 @@ class KanvasingWisataController extends Controller
         $data_ganda->alamat = $request->alamat;
         $data_ganda->save();
 
-
         return redirect()->route('kanvasing_wisata.create')->with('message', 'Data berhasil disimpan!');
     }
-
-
-
 
     public function toggleHadir(Request $request)
     {
         try {
-            $wisata = KanvasingWisata::findOrFail($request->id);
+            $timId = auth()->user()->tim_id;
+
+            // Pemilihan model berdasarkan tim_id
+            if ($timId == 1) {
+                $wisata = kanvasing_ds::findOrFail($request->id);
+            } elseif ($timId == 2) {
+                $wisata = kanvasing_pkh::findOrFail($request->id);
+            } elseif ($timId == 3) {
+                $wisata = kanvasing_mm::findOrFail($request->id);
+            } elseif ($timId == 4) {
+                $wisata = kanvasing_aisyiah::findOrFail($request->id);
+            } else {
+                $wisata = KanvasingWisata::findOrFail($request->id);
+            }
+
             $wisata->{$request->nama_responden} = $request->hadir;
             $wisata->save();
 
@@ -109,21 +145,19 @@ class KanvasingWisataController extends Controller
             throw $th;
         }
     }
-    // Method untuk menampilkan detail data berdasarkan ID
+
     public function show($id)
     {
         $kanvasingWisata = KanvasingWisata::findOrFail($id);
         return response()->json($kanvasingWisata);
     }
 
-    // Method untuk menampilkan form edit data
     public function edit($id)
     {
         $kanvasingWisata = KanvasingWisata::findOrFail($id);
         return view('kanvasing_wisata.edit', compact('kanvasingWisata'));
     }
 
-    // Method untuk memperbarui data berdasarkan ID
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -138,39 +172,50 @@ class KanvasingWisataController extends Controller
             'pekerjaan_id' => 'required',
             'alamat' => 'required|string|max:255',
             'foto_kegiatan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'brosur' => 'required|boolean',
-            'stiker' => 'required|boolean',
-            'kartu_coblos' => 'required|boolean',
+            // 'brosur' => 'required|boolean',
+            // 'stiker' => 'required|boolean',
+            // 'kartu_coblos' => 'required|boolean',
             'longitude' => 'required|numeric',
             'latitude' => 'required|numeric',
         ]);
 
-        $kanvasingWisata = KanvasingWisata::findOrFail($id);
+        $timId = auth()->user()->tim_id;
+
+        // Pemilihan model berdasarkan tim_id
+        if ($timId == 1) {
+            $kanvasingWisata = kanvasing_ds::findOrFail($id);
+        } elseif ($timId == 2) {
+            $kanvasingWisata = kanvasing_pkh::findOrFail($id);
+        } elseif ($timId == 3) {
+            $kanvasingWisata = kanvasing_mm::findOrFail($id);
+        } elseif ($timId == 4) {
+            $kanvasingWisata = kanvasing_aisyiah::findOrFail($id);
+        } else {
+            $kanvasingWisata = KanvasingWisata::findOrFail($id);
+        }
 
         // Upload foto kegiatan jika ada file baru
         $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
 
         // Update data
         $kanvasingWisata->update(array_merge($request->all(), [
-            'foto_kegiatan' => $imagePath ?? $kanvasingWisata->foto_kegiatan, // Tetap gunakan file lama jika tidak ada yang baru
+            'foto_kegiatan' => $imagePath ?? $kanvasingWisata->foto_kegiatan,
         ]));
 
         return response()->json([
             'message' => 'Data berhasil diperbarui!',
-            'data' => $kanvasingWisata
-        ], 200);
+            'kanvasingWisata' => $kanvasingWisata,
+        ]);
     }
-
 
     public function destroy($id)
     {
         $kanvasingWisata = KanvasingWisata::findOrFail($id);
         $kanvasingWisata->delete();
 
-        return response()->json([
-            'message' => 'Data berhasil dihapus!'
-        ], 200);
+        return response()->json(['message' => 'Data berhasil dihapus!']);
     }
+
 
 
     public function getKelurahans(Request $request)
