@@ -35,7 +35,6 @@ class PenggunaanAnggaranController extends Controller
                 return $item->periode->anggaran->tim->name;
             });
 
-            dd($laporanPembayaran);
             $periodes = periode::with('anggaran.tim')->get();
                 $detailPembiayaans = DetailPembiayaan::all();
         return view('admin.keuangan.penggunaan_anggaran.index', compact('laporanPembayaran', 'periodes', 'detailPembiayaans'));
