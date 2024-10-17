@@ -47,7 +47,8 @@
                     <div class="form-group">
                         <label for="password_confirmation">{{ __('admin.Confirm Password') }}</label>
                         <div class="input-group">
-                            <input type="password" class="form-control" name="password_confirmation" id="password_confirmation">
+                            <input type="password" class="form-control" name="password_confirmation"
+                                id="password_confirmation">
                             <div class="input-group-append">
                                 <span class="input-group-text" id="togglePasswordConfirmation" style="cursor: pointer;">
                                     <i class="fa fa-eye" id="eyeIconConfirmation"></i>
@@ -93,23 +94,9 @@
                         @enderror
                     </div>
 
-
-                    <div class="form-group">
-                        <label for="">{{ __('admin.Atasan') }}</label>
-                        <select name="atasan_id" class="select2 form-control">
-                            <option value="">{{ __('admin.--Select--') }}</option>
-                            @foreach ($admins as $admin)
-                                <option value="{{ $admin->id }}">{{ $admin->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('atasan_id')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-
                     <div class="form-group">
                         <label for="">{{ __('admin.Tim') }}</label>
-                        <select name="tim_id" class="select2 form-control">
+                        <select name="tim_id" class="select2 form-control" id="tim_id">
                             <option value="">{{ __('admin.--Select--') }}</option>
                             @foreach ($teams as $team)
                                 <option value="{{ $team->id }}">{{ $team->name }}</option>
@@ -122,7 +109,7 @@
 
                     <div class="form-group">
                         <label for="">{{ __('admin.Jabatan') }}</label>
-                        <select name="jabatan_id" class="select2 form-control">
+                        <select name="jabatan_id" class="select2 form-control" id="jabatan_id">
                             <option value="">{{ __('admin.--Select--') }}</option>
                             @foreach ($positions as $position)
                                 <option value="{{ $position->id }}">{{ $position->name }}</option>
@@ -133,6 +120,15 @@
                         @enderror
                     </div>
 
+                    <div class="form-group">
+                        <label for="">{{ __('admin.Atasan') }}</label>
+                        <select name="atasan_id" class="select2 form-control" id="atasan_id">
+                            <option value="">{{ __('admin.--Select--') }}</option>
+                        </select>
+                        @error('atasan_id')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <div class="form-group">
                         <label for="">{{ __('admin.Role') }}</label>
                         <select name="role" id="" class="select2 form-control">
@@ -154,7 +150,41 @@
 
 
     <script>
-        document.getElementById('togglePassword').addEventListener('click', function () {
+        $(document).ready(function() {
+            $('#tim_id, #jabatan_id').on('change', function() {
+                const timId = $('#tim_id').val();
+                const jabatanId = $('#jabatan_id').val();
+
+                if (timId && jabatanId) {
+                    $.ajax({
+                        url: '{{ route('get-atasan') }}',
+                        type: 'GET',
+                        data: {
+                            tim_id: timId,
+                            jabatan_id: jabatanId
+                        },
+                        success: function(data) {
+                            const atasanSelect = $('#atasan_id');
+                            atasanSelect.empty();
+                            atasanSelect.append('<option value="">--Select--</option>');
+
+                            data.forEach(function(admin) {
+                                atasanSelect.append(
+                                    `<option value="${admin.id}">${admin.name}</option>`
+                                );
+                            });
+                        },
+                        error: function(xhr) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                } else {
+                    $('#atasan_id').empty().append('<option value="">--Select--</option>');
+                }
+            });
+        });
+
+        document.getElementById('togglePassword').addEventListener('click', function() {
             const passwordInput = document.getElementById('password');
             const eyeIcon = document.getElementById('eyeIcon');
             const isPasswordVisible = passwordInput.type === 'text';
@@ -164,7 +194,7 @@
             eyeIcon.classList.toggle('fa-eye-slash');
         });
 
-        document.getElementById('togglePasswordConfirmation').addEventListener('click', function () {
+        document.getElementById('togglePasswordConfirmation').addEventListener('click', function() {
             const passwordConfirmationInput = document.getElementById('password_confirmation');
             const eyeIconConfirmation = document.getElementById('eyeIconConfirmation');
             const isPasswordVisible = passwordConfirmationInput.type === 'text';

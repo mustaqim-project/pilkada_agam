@@ -29,7 +29,7 @@ class RoleUserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() : View
+    public function index(): View
     {
         $admins = Admin::all();
         return view('admin.role-user.index', compact('admins'));
@@ -38,7 +38,7 @@ class RoleUserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         $roles = Role::all();
         $admins = Admin::all();
@@ -52,7 +52,7 @@ class RoleUserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AdminRoleUserStoreRequest $request) : RedirectResponse
+    public function store(AdminRoleUserStoreRequest $request): RedirectResponse
     {
         try {
             $user = new Admin();
@@ -92,7 +92,7 @@ class RoleUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) : View
+    public function edit(string $id): View
     {
         $user = Admin::findOrFail($id);
         $roles = Role::all();
@@ -139,12 +139,35 @@ class RoleUserController extends Controller
     public function destroy(string $id)
     {
         $user = Admin::findOrFail($id);
-        if($user->getRoleNames()->first() === 'Super Admin'){
+        if ($user->getRoleNames()->first() === 'Super Admin') {
             return response(['status' => 'error', 'message' => __('admin.Can\'t Delete the Super User')]);
         }
         $user->delete();
 
         return response(['status' => 'success', 'message' => __('admin.Deleted Successfully')]);
+    }
 
+
+    public function getAtasan(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'tim_id' => 'required|exists:tims,id',
+            'jabatan_id' => 'required|exists:jabatans,id',
+        ]);
+
+        // Ambil urutan jabatan yang dipilih
+        $jabatan = jabatan::find($request->jabatan_id);
+
+        // Ambil admin berdasarkan tim dan jabatan
+        $admins = Admin::where('tim_id', $request->tim_id)
+            ->whereIn('jabatan_id', function ($query) use ($jabatan) {
+                $query->select('id')
+                    ->from('jabatans')
+                    ->where('urutan', '<', $jabatan->urutan);
+            })
+            ->get();
+
+        return response()->json($admins);
     }
 }

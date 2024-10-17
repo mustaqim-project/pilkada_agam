@@ -173,6 +173,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
 
     /** Admin User Routes */
     Route::resource('role-users', RoleUserController::class);
+    Route::get('/get-atasan', [RoleUserController::class, 'getAtasan'])->name('get-atasan');
 
     /** Localization Routes */
     Route::get('admin-localization', [LocalizationController::class, 'adminIndex'])->name('admin-localization.index');

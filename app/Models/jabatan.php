@@ -16,6 +16,7 @@ class jabatan extends Model
 
     protected $fillable = [
         'name',
+        'urutan',
     ];
 
        protected $casts = [
