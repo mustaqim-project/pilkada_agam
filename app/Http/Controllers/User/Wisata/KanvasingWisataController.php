@@ -145,7 +145,9 @@ class KanvasingWisataController extends Controller
             ->exists();
 
         if ($existingEntry) {
-            return redirect()->back()->withErrors(['no_ktp' => 'Nomor KTP sudah terdaftar.']);
+
+            return redirect()->back()->withErrors('toast_error', 'Nomor KTP sudah terdaftar!');
+
         }
 
         $imagePath = $this->handleFileUpload($request, 'foto');
@@ -193,7 +195,9 @@ class KanvasingWisataController extends Controller
         $data_ganda->latitude = $request->latitude;
         $data_ganda->save();
 
-        return redirect()->route('kanvasing_wisata.create')->with('message', 'Data berhasil disimpan!');
+
+        return redirect()->route('kanvasing_wisata.create')
+        ->with('toast_success', 'Data berhasil ditambahkan!');
     }
 
     public function toggleHadir(Request $request)
