@@ -66,145 +66,146 @@
             </div>
         </div>
     </section>
-@endsection
 
 
-@foreach ($admins as $admin)
-    <div class="modal fade" id="editDataModal{{ $admin->id }}" tabindex="-1" role="dialog"
-        aria-labelledby="editDataModalLabel{{ $admin->id }}" aria-hidden="true">
+    @foreach ($admins as $admin)
+        <div class="modal fade" id="editDataModal{{ $admin->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="editDataModalLabel{{ $admin->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editDataModalLabel{{ $admin->id }}">
+                            {{ __('admin.Edit Anggota Tim') }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('admin.register.update', $admin->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group">
+                                <label for="name">{{ __('admin.Name') }}</label>
+                                <input type="text" class="form-control" name="name" value="{{ $admin->name }}"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">{{ __('admin.Email') }}</label>
+                                <input type="email" class="form-control" name="email" value="{{ $admin->email }}"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pj_name">{{ __('admin.PJ Name') }}</label>
+                                <input type="text" class="form-control" name="pj_name"
+                                    value="{{ $admin->admin ? $admin->admin->name : '' }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="tim_id">{{ __('admin.Tim') }}</label>
+                                <select class="form-control" name="tim_id">
+                                    <!-- Loop untuk tim, tambahkan pilihan sesuai kebutuhan -->
+                                    @foreach ($tims as $team)
+                                        <option value="{{ $team->id }}"
+                                            {{ $admin->tim_id == $team->id ? 'selected' : '' }}>{{ $team->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">{{ __('admin.Close') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('admin.Save changes') }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+
+
+    <!-- Modal Tambah Data -->
+    <div class="modal fade" id="tambahDataModal" tabindex="-1" role="dialog" aria-labelledby="tambahDataModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editDataModalLabel{{ $admin->id }}">
-                        {{ __('admin.Edit Anggota Tim') }}</h5>
+                    <h5 class="modal-title" id="tambahDataModalLabel">{{ __('admin.Create new') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.register.update', $admin->id) }}" method="POST">
+                    <form method="POST" action="{{ route('admin.register.store') }}">
                         @csrf
-                        @method('PUT')
+
                         <div class="form-group">
-                            <label for="name">{{ __('admin.Name') }}</label>
-                            <input type="text" class="form-control" name="name" value="{{ $admin->name }}"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">{{ __('admin.Email') }}</label>
-                            <input type="email" class="form-control" name="email" value="{{ $admin->email }}"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="pj_name">{{ __('admin.PJ Name') }}</label>
-                            <input type="text" class="form-control" name="pj_name"
-                                value="{{ $admin->admin ? $admin->admin->name : '' }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="tim_id">{{ __('admin.Tim') }}</label>
-                            <select class="form-control" name="tim_id">
-                                <!-- Loop untuk tim, tambahkan pilihan sesuai kebutuhan -->
-                                @foreach ($tims as $team)
-                                    <option value="{{ $team->id }}"
-                                        {{ $admin->tim_id == $team->id ? 'selected' : '' }}>{{ $team->name }}
-                                    </option>
+                            <label for="pj_id">{{ __('admin.Nama Koordinator') }}</label>
+                            <select class="form-control" name="pj_id" id="pj_id">
+                                <option value="">{{ __('Pilih Koordinator') }}</option>
+                                @foreach ($admins as $admin)
+                                    @foreach ($admin->roles as $role)
+                                        <option value="{{ $admin->id }}">{{ $admin->name }} - {{ $role->name }}
+                                        </option>
+                                    @endforeach
                                 @endforeach
                             </select>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                data-dismiss="modal">{{ __('admin.Close') }}</button>
-                            <button type="submit" class="btn btn-primary">{{ __('admin.Save changes') }}</button>
+
+                        <div class="form-group">
+                            <label for="tim_id">{{ __('admin.Tim') }}</label>
+                            <select class="form-control" name="tim_id" id="tim_id">
+                                <option value="">{{ __('Pilih Tim') }}</option>
+                                @foreach ($tims as $tim)
+                                    <option value="{{ $tim->id }}">{{ $tim->name }}</option>
+                                    <!-- Menampilkan nama tim -->
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" placeholder="{{ __('admin.Name') }}" type="text"
+                                name="name">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="{{ __('admin.Email') }}" type="email"
+                                name="email">
+                            @error('email')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="{{ __('admin.Password') }}" type="password"
+                                name="password">
+                            @error('password')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="{{ __('admin.Confirm Password') }}" type="password"
+                                name="password_confirmation">
+                            @error('password_confirmation')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">{{ __('admin.Simpan') }}</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-@endforeach
-<!-- Modal Tambah Data -->
-<div class="modal fade" id="tambahDataModal" tabindex="-1" role="dialog" aria-labelledby="tambahDataModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="tambahDataModalLabel">{{ __('admin.Create new') }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{{ route('admin.register.store') }}">
-                    @csrf
-
-                    <div class="form-group">
-                        <label for="pj_id">{{ __('admin.Nama Koordinator') }}</label>
-                        <select class="form-control" name="pj_id" id="pj_id">
-                            <option value="">{{ __('Pilih Koordinator') }}</option>
-                            @foreach ($admins as $admin)
-                                @foreach ($admin->roles as $role)
-                                    <option value="{{ $admin->id }}">{{ $admin->name }} - {{ $role->name }}
-                                    </option>
-                                @endforeach
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tim_id">{{ __('admin.Tim') }}</label>
-                        <select class="form-control" name="tim_id" id="tim_id">
-                            <option value="">{{ __('Pilih Tim') }}</option>
-                            @foreach ($tims as $tim)
-                                <option value="{{ $tim->id }}">{{ $tim->name }}</option>
-                                <!-- Menampilkan nama tim -->
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <input class="form-control" placeholder="{{ __('admin.Name') }}" type="text"
-                            name="name">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" placeholder="{{ __('admin.Email') }}" type="email"
-                            name="email">
-                        @error('email')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" placeholder="{{ __('admin.Password') }}" type="password"
-                            name="password">
-                        @error('password')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" placeholder="{{ __('admin.Confirm Password') }}" type="password"
-                            name="password_confirmation">
-                        @error('password_confirmation')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">{{ __('admin.Simpan') }}</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 @endsection
 
 @push('scripts')
-<script>
-    $("#table").dataTable({
-        "columnDefs": [{
-            "sortable": false,
-            "targets": [2, 3]
-        }]
-    });
-</script>
+    <script>
+        $("#table").dataTable({
+            "columnDefs": [{
+                "sortable": false,
+                "targets": [2, 3]
+            }]
+        });
+    </script>
 @endpush
