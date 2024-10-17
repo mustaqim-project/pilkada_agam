@@ -18,8 +18,6 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/fontawesome/css/all.min.css') }}">
 
     <!-- CSS Libraries -->
-    <script src="{{ asset('admin/assets/modules/summernote/summernote-bs4.js') }}"></script>
-
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/summernote/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/datatables/datatables.min.css') }}">
@@ -79,6 +77,7 @@
     <script src="{{ asset('admin/assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
+    <script src="{{ asset('admin/assets/modules/summernote/summernote-bs4.js') }}"></script>
     <script src="{{ asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
     <script src="{{ asset('admin/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('admin/assets/modules/datatables/datatables.min.js') }}"></script>
