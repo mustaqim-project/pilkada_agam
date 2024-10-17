@@ -57,13 +57,33 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead class="table-light">
                             <tr>
+                                <th>Tanggal</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($totalPerTanggal as $tanggal => $total)
+                                <tr>
+                                    <td>{{ \Carbon\Carbon::parse($tanggal)->format('d-m-Y') }}</td>
+                                    <td>{{ $total }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    <hr>
+
+                    <!-- Tabel Data Kanvasing Wisata -->
+                    <table class="table">
+                        <thead class="table-light">
+                            <tr>
                                 <th>#</th>
                                 <th>Kecamatan</th>
                                 <th>Kelurahan</th>
                                 <th>Nama Responden</th>
                                 <th>Alamat</th>
                                 <th>Foto Kegiatan</th>
-                                <th>Tanggal Kunjugan</th>
+                                <th>Tanggal Kunjungan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -77,17 +97,17 @@
                                     <td>{{ $kanvasing->alamat }}</td>
                                     <td>
                                         <img src="{{ asset($kanvasing->foto_kegiatan) }}" alt="Foto Kegiatan"
-                                        style="width: 50px; height: auto; cursor: pointer;" data-toggle="modal"
-                                        data-target="#imageModal"
-                                        onclick="showImageModal('{{ asset($kanvasing->foto_kegiatan) }}')">
+                                            style="width: 50px; height: auto; cursor: pointer;" data-toggle="modal"
+                                            data-target="#imageModal"
+                                            onclick="showImageModal('{{ asset($kanvasing->foto_kegiatan) }}')">
                                     </td>
-                                    <td>{{ optional($kanvasing->craeted_at)->format('d-m-Y') ?? 'Tidak Diketahui' }}</td>
+                                    <td>{{ optional($kanvasing->created_at)->format('d-m-Y') ?? 'Tidak Diketahui' }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('kanvasing_wisata.edit', $kanvasing->id) }}"
                                                 class="btn btn-warning btn-sm">Edit</a>
-                                            <form action="{{ route('kanvasing_wisata.destroy', $kanvasing->id) }}" method="POST"
-                                                style="display:inline;">
+                                            <form action="{{ route('kanvasing_wisata.destroy', $kanvasing->id) }}"
+                                                method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger delete-item">Hapus</button>
@@ -97,7 +117,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="12" class="text-center">Tidak ada data.</td>
+                                    <td colspan="8" class="text-center">Tidak ada data.</td>
                                 </tr>
                             @endforelse
                         </tbody>

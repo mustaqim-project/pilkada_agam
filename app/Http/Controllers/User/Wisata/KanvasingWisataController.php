@@ -33,29 +33,36 @@ class KanvasingWisataController extends Controller
 
         // Pemilihan model berdasarkan tim_id
         if ($timId == 1) {
-            $kanvasingWisata = kanvasing_ds::with(['kecematan', 'kelurahan', 'pekerjaan'])
+            $kanvasingWisata = kanvasing_ds::with(['kecematan', 'kelurahan'])
                 ->where('user_id', $authUserId)
                 ->get();
         } elseif ($timId == 2) {
-            $kanvasingWisata = kanvasing_pkh::with(['kecematan', 'kelurahan', 'pekerjaan'])
+            $kanvasingWisata = kanvasing_pkh::with(['kecematan', 'kelurahan'])
                 ->where('user_id', $authUserId)
                 ->get();
         } elseif ($timId == 3) {
-            $kanvasingWisata = kanvasing_mm::with(['kecematan', 'kelurahan', 'pekerjaan'])
+            $kanvasingWisata = kanvasing_mm::with(['kecematan', 'kelurahan'])
                 ->where('user_id', $authUserId)
                 ->get();
         } elseif ($timId == 4) {
-            $kanvasingWisata = kanvasing_aisyiah::with(['kecematan', 'kelurahan', 'pekerjaan'])
+            $kanvasingWisata = kanvasing_aisyiah::with(['kecematan', 'kelurahan'])
                 ->where('user_id', $authUserId)
                 ->get();
         } else {
-            $kanvasingWisata = KanvasingWisata::with(['kecematan', 'kelurahan', 'pekerjaan'])
+            $kanvasingWisata = KanvasingWisata::with(['kecematan', 'kelurahan'])
                 ->where('user_id', $authUserId)
                 ->get();
         }
 
-        // Mengirim data ke view
-        return view('mobile.frontend.kanvasing_wisata.index', compact('kanvasingWisata'));
+
+        $totalPerTanggal = $kanvasingWisata->groupBy(function($date) {
+            return \Carbon\Carbon::parse($date->created_at)->format('Y-m-d');
+        })->map(function($row) {
+            return count($row);
+        });
+
+
+        return view('mobile.frontend.kanvasing_wisata.index', compact('kanvasingWisata', 'totalPerTanggal'));
     }
 
     // Method untuk menampilkan form pembuatan data baru
