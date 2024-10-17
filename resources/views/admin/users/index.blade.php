@@ -73,7 +73,7 @@
                         </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('admin.register') }}">
+                <form method="POST" action="{{ route('admin.register.store') }}">
                     @csrf
                     @php
                         use App\Models\Admin;
