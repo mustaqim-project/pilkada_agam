@@ -329,7 +329,9 @@ class KanvasingWisataController extends Controller
         $kanvasingWisata = KanvasingWisata::findOrFail($id);
         $kanvasingWisata->delete();
 
-        return response()->json(['message' => 'Data berhasil dihapus!']);
+
+        return redirect()->route('kanvasing_wisata.create')
+            ->with('success', 'Data berhasil ditambahkan!');
     }
 
 
@@ -337,7 +339,6 @@ class KanvasingWisataController extends Controller
     public function getKelurahans(Request $request)
     {
         $kelurahans = Kelurahan::where('kecamatan_id', $request->kecamatan_id)->get();
-
-        return redirect()->route('kanvasing_wisata.create')
-            ->with('success', 'Data berhasil ditambahkan!');    }
+        return response()->json($kelurahans);
+    }
 }
