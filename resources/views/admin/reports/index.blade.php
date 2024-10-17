@@ -5,7 +5,10 @@
         <div class="section-header">
             <h1>{{ __('admin.Laporan yang Dikirim') }}</h1>
         </div>
+@php
+    use Illuminate\Support\Str;
 
+@endphp
         <div class="card card-primary">
             <div class="card-header">
                 <div class="card-header-actions">
@@ -30,7 +33,7 @@
                                 @foreach ($sentReports as $report)
                                     <tr>
                                         <td>{{ $report->period }}</td>
-                                        <td>{{ $report->report_content }}</td>
+                                        <td>{{ Str::limit($report->report_content, 50) }}</td>
                                         <td>{{ $report->assignee->name }}</td>
                                         <td>
                                             <a href="{{ route('admin.reports.show', $report->id) }}" class="btn btn-info">Lihat Detail</a>
@@ -72,7 +75,7 @@
                                 @foreach ($receivedReports as $report)
                                     <tr>
                                         <td>{{ $report->period }}</td>
-                                        <td>{{ $report->report_content }}</td>
+                                        <td>{{ Str::limit($report->report_content, 50) }}</td>
                                         <td>{{ $report->creator->name }}</td>
                                         <td>
                                             <a href="{{ route('admin.reports.show', $report->id) }}" class="btn btn-info">Lihat Detail</a>
