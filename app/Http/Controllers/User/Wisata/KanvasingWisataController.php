@@ -140,14 +140,10 @@ class KanvasingWisataController extends Controller
         ]);
 
         // Cek entri duplikat berdasarkan no_ktp
-        $existingEntry = kanvasing_ds::where('no_ktp', $request->no_ktp)
-            ->orWhere('no_ktp', $request->no_ktp)
-            ->exists();
+        $existingEntry = kanvasing_ds::where('no_ktp', $request->no_ktp)->exists();
 
         if ($existingEntry) {
-
-            return redirect()->back()->withErrors('error', 'Nomor KTP sudah terdaftar!');
-
+            return redirect()->back()->withErrors(['error' => 'Nomor KTP sudah terdaftar!']);
         }
 
         $imagePath = $this->handleFileUpload($request, 'foto');
