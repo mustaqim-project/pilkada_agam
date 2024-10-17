@@ -146,7 +146,7 @@ class KanvasingWisataController extends Controller
 
         if ($existingEntry) {
 
-            return redirect()->back()->withErrors('toast_error', 'Nomor KTP sudah terdaftar!');
+            return redirect()->back()->withErrors('error', 'Nomor KTP sudah terdaftar!');
 
         }
 
@@ -197,7 +197,8 @@ class KanvasingWisataController extends Controller
 
 
         return redirect()->route('kanvasing_wisata.create')
-        ->with('toast_success', 'Data berhasil ditambahkan!');
+        ->with('success', 'Data berhasil ditambahkan!');
+
     }
 
     public function toggleHadir(Request $request)
