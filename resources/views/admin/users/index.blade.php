@@ -65,9 +65,9 @@
                     @csrf
                     @php
                         use App\Models\Admin;
-                        use App\Models\tim; // Tambahkan model tim
+                        use App\Models\tim;
                         $admins = Admin::with('roles')->get();
-                        $tims = tim::all(); // Mengambil semua tim
+                        $tims = tim::all();
                     @endphp
                     <div class="form-group">
                         <label for="pj_id">{{ __('admin.Nama Koordinator') }}</label>

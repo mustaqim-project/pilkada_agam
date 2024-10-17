@@ -101,7 +101,7 @@ class RoleUserController extends Controller
         $banks = Bank::all(); // Fetching Jabatan positions
         $user = Admin::findOrFail($id);
         $roles = Role::all();
-        return view('admin.role-user.edit', compact('user', 'roles', 'admins', 'teams', 'positions', 'banks'));
+        return view('admin.role-user.create', compact('user', 'roles', 'admins', 'teams', 'positions', 'banks'));
     }
 
     /**
