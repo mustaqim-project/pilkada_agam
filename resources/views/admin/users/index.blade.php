@@ -104,7 +104,7 @@
                             <label for="tim_id">{{ __('admin.Tim') }}</label>
                             <select class="form-control" name="tim_id">
                                 <!-- Loop untuk tim, tambahkan pilihan sesuai kebutuhan -->
-                                @foreach ($teams as $team)
+                                @foreach ($tims as $team)
                                     <option value="{{ $team->id }}"
                                         {{ $admin->tim_id == $team->id ? 'selected' : '' }}>{{ $team->name }}
                                     </option>
