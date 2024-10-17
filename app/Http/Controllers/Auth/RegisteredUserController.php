@@ -30,9 +30,9 @@ class RegisteredUserController extends Controller
         $tims = tim::all();
 
         if ($authUser->hasRole('Super Admin')) {
-            $admins = User::with(['admin', 'tim'])->get(); // Mengambil admin dan tim
+            $admins = User::with(['admin', 'tim', 'roles'])->get(); // Mengambil admin dan tim
         } else {
-            $admins = User::with(['admin', 'tim'])->where('pj_id', $authUser->id)->get();
+            $admins = User::with(['admin', 'tim','roles'])->where('pj_id', $authUser->id)->get();
         }
 
         return view('admin.users.index', [
