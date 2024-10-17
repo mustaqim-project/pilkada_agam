@@ -114,7 +114,7 @@
 @endforeach --}}
 
 <!-- Modal Tambah Data -->
-<div class="modal fade" id="tambahDataModal" tabindex="-1" role="dialog" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="tambahDataModal" tabindex="-1" role="dialog" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -177,5 +177,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
