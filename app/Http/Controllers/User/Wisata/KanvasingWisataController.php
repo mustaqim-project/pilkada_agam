@@ -60,10 +60,11 @@ class KanvasingWisataController extends Controller
         })->map(function($row) {
             return [
                 'total' => count($row), // Menghitung jumlah data untuk setiap tanggal
-                'pendapatan' => $row * 50000,
+                'pendapatan' => count($row) * 50000, // Mengalikan jumlah data dengan 50000
                 'data' => $row // Menyimpan data untuk masing-masing tanggal
             ];
         });
+
 
 
 
