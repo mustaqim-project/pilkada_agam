@@ -33,7 +33,7 @@
                                 @foreach ($sentReports as $report)
                                     <tr>
                                         <td>{{ $report->period }}</td>
-                                        <td>!!{{ Str::limit($report->report_content, 50) }}!!</td>
+                                        <td>{!! Str::limit(strip_tags($report->report_content), 50) !!}</td>
                                         <td>{{ $report->assignee->name }}</td>
                                         <td>
                                             <a href="{{ route('admin.reports.show', $report->id) }}" class="btn btn-info">Lihat Detail</a>
@@ -75,7 +75,7 @@
                                 @foreach ($receivedReports as $report)
                                     <tr>
                                         <td>{{ $report->period }}</td>
-                                        <td>{{ Str::limit($report->report_content, 50) }}</td>
+                                        <td>{!! Str::limit(strip_tags($report->report_content), 50) !!}</td>
                                         <td>{{ $report->creator->name }}</td>
                                         <td>
                                             <a href="{{ route('admin.reports.show', $report->id) }}" class="btn btn-info">Lihat Detail</a>
