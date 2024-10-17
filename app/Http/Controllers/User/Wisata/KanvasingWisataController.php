@@ -337,6 +337,7 @@ class KanvasingWisataController extends Controller
     public function getKelurahans(Request $request)
     {
         $kelurahans = Kelurahan::where('kecamatan_id', $request->kecamatan_id)->get();
-        return response()->json($kelurahans);
-    }
+
+        return redirect()->route('kanvasing_wisata.create')
+            ->with('success', 'Data berhasil ditambahkan!');    }
 }
