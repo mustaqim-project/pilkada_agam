@@ -53,6 +53,9 @@
         <!-- Tabel Daftar Kanvasing Wisata -->
         <div class="card mb-4">
             <div class="card-body">
+                <a href="{{ route('kanvasing_wisata.create') }}">
+                    <i class="ml-3 mr-3" data-feather="user" style="color: #FF5733;"></i>+ Kanvasing</h5>
+                </a>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
                         <thead class="table-light">
