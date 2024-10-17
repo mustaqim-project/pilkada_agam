@@ -21,6 +21,12 @@ class RegisteredUserController extends Controller
         $this->middleware(['permission:user register,admin'])->only(['create', 'store']);
     }
 
+    public function index()
+    {
+
+    }
+
+
     public function create(): View
     {
         $authUser = Auth::guard('admin')->user();
