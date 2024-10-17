@@ -55,7 +55,7 @@ class KanvasingWisataController extends Controller
         }
 
         // Mengirim data ke view
-        return view('mobile.frontend.kanvasing_wiwwsata.index', compact('kanvasingWisata'));
+        return view('mobile.frontend.kanvasing_wisata.index', compact('kanvasingWisata'));
     }
 
     // Method untuk menampilkan form pembuatan data baru
