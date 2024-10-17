@@ -23,23 +23,39 @@ class KanvasingWisataController extends Controller
     // Method untuk menampilkan semua data
     public function index()
     {
-
-        $authUserId = auth()->id(); // Get the authenticated user's ID
-        $timId = auth()->user()->tim_id; // Get the user's team ID
-
-        if ($timId == 1) {
-            $kanvasingWisata = kanvasing_ds::where('user_id', $authUserId)->get();
-        } elseif ($timId == 2) {
-            $kanvasingWisata = kanvasing_pkh::where('user_id', $authUserId)->get();
-        } elseif ($timId == 3) {
-            $kanvasingWisata = kanvasing_mm::where('user_id', $authUserId)->get();
-        } elseif ($timId == 4) {
-            $kanvasingWisata = kanvasing_aisyiah::where('user_id', $authUserId)->get();
-        } else {
-            $kanvasingWisata = KanvasingWisata::where('user_id', $authUserId)->get();
+        // Pastikan user sudah login
+        if (!auth()->check()) {
+            return redirect()->route('login')->withErrors(['error' => 'Anda harus login terlebih dahulu!']);
         }
 
-        return response()->json($kanvasingWisata);
+        $authUserId = auth()->id(); // Mendapatkan ID user yang sedang login
+        $timId = auth()->user()->tim_id; // Mendapatkan tim ID dari user
+
+        // Pemilihan model berdasarkan tim_id
+        if ($timId == 1) {
+            $kanvasingWisata = kanvasing_ds::with(['kecamatan', 'kelurahan'])
+                ->where('user_id', $authUserId)
+                ->get();
+        } elseif ($timId == 2) {
+            $kanvasingWisata = kanvasing_pkh::with(['kecamatan', 'kelurahan'])
+                ->where('user_id', $authUserId)
+                ->get();
+        } elseif ($timId == 3) {
+            $kanvasingWisata = kanvasing_mm::with(['kecamatan', 'kelurahan'])
+                ->where('user_id', $authUserId)
+                ->get();
+        } elseif ($timId == 4) {
+            $kanvasingWisata = kanvasing_aisyiah::with(['kecamatan', 'kelurahan'])
+                ->where('user_id', $authUserId)
+                ->get();
+        } else {
+            $kanvasingWisata = KanvasingWisata::with(['kecamatan', 'kelurahan'])
+                ->where('user_id', $authUserId)
+                ->get();
+        }
+
+        // Mengirim data ke view
+        return view('mobile.frontend.kanvasing_wiwwsata.index', compact('kanvasingWisata'));
     }
 
     // Method untuk menampilkan form pembuatan data baru
@@ -209,8 +225,7 @@ class KanvasingWisataController extends Controller
 
 
         return redirect()->route('kanvasing_wisata.create')
-        ->with('success', 'Data berhasil ditambahkan!');
-
+            ->with('success', 'Data berhasil ditambahkan!');
     }
 
     public function toggleHadir(Request $request)
