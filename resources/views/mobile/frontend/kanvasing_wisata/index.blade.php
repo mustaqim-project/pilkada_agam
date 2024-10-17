@@ -59,6 +59,7 @@
                             <tr>
                                 <th>Tanggal</th>
                                 <th>Total</th>
+                                <th>Pendapatan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,9 +67,11 @@
                                 <tr>
                                     <td>{{ \Carbon\Carbon::parse($tanggal)->format('d-m-Y') }}</td>
                                     <td>{{ $total }}</td>
+                                    <td>Rp {{ number_format($total * 50000, 2, ',', '.') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
+
                     </table>
 
                     <hr>
