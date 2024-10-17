@@ -138,16 +138,32 @@ class KanvasingWisataController extends Controller
             'longitude' => 'required|numeric',
             'latitude' => 'required|numeric',
         ]);
+        $timId = auth()->user()->tim_id;
 
-        // Cek entri duplikat berdasarkan no_ktp
-        $existingEntry = kanvasing_ds::where('no_ktp', $request->no_ktp)->exists();
-dd($existingEntry);
+        if ($timId == 1) {
+            $kanvasingWisata = new kanvasing_ds();
+            $existingEntry = kanvasing_ds::where('no_ktp', $request->no_ktp)->exists();
+        } elseif ($timId == 2) {
+            $kanvasingWisata = new kanvasing_pkh();
+            $existingEntry = kanvasing_pkh::where('no_ktp', $request->no_ktp)->exists();
+        } elseif ($timId == 3) {
+            $kanvasingWisata = new kanvasing_mm();
+            $existingEntry = kanvasing_mm::where('no_ktp', $request->no_ktp)->exists();
+        } elseif ($timId == 4) {
+            $kanvasingWisata = new kanvasing_aisyiah();
+            $existingEntry = kanvasing_aisyiah::where('no_ktp', $request->no_ktp)->exists();
+        } else {
+            $kanvasingWisata = new KanvasingWisata();
+            $kanvasingWisata->jadwal = $request->jadwal;
+            $existingEntry = KanvasingWisata::where('no_ktp', $request->no_ktp)->exists();
+        }
+
+        // Cek entri duplikat
         if ($existingEntry) {
             return redirect()->back()->withErrors(['error' => 'Nomor KTP sudah terdaftar!']);
         }
 
         $imagePath = $this->handleFileUpload($request, 'foto');
-        $timId = auth()->user()->tim_id;
 
         if ($timId == 1) {
             $kanvasingWisata = new kanvasing_ds();
