@@ -157,7 +157,7 @@
 
                 if (timId && jabatanId) {
                     $.ajax({
-                        url: '{{ route('get-atasan') }}',
+                        url: '{{ route('admin.get-atasan') }}',
                         type: 'GET',
                         data: {
                             tim_id: timId,
