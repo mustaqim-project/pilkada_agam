@@ -21,10 +21,7 @@ class RegisteredUserController extends Controller
         $this->middleware(['permission:user register,admin'])->only(['create', 'store']);
     }
 
-    public function index()
-    {
-
-    }
+    public function index() {}
 
 
     public function create(): View
@@ -70,6 +67,5 @@ class RegisteredUserController extends Controller
 
         // return redirect()->route('admin.users.index')->with('success', 'Tim berhasil ditambahkan.');
         return back()->with('success', 'Tim berhasil ditambahkan.');
-
     }
 }
