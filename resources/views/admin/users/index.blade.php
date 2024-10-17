@@ -43,7 +43,7 @@
                                             data-target="#editDataModal{{ $admin->id }}">
                                             <i class="fas fa-edit"></i> {{ __('admin.Edit') }}
                                         </button>
-                                        <form action="{{ route('admin.anggota-tim.destroy', $admin->id) }}" method="POST"
+                                        <form action="{{ route('admin.register.destroy', $admin->id) }}" method="POST"
                                             style="display:inline-block;"
                                             onsubmit="return confirm('{{ __('admin.Confirm delete?') }}');">
                                             @csrf
@@ -77,7 +77,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.anggota-tim.update', $admin->id) }}" method="POST">
+                    <form action="{{ route('admin.register.update', $admin->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
