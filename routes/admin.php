@@ -66,10 +66,7 @@ use App\Http\Controllers\Admin\Keuangan\PenggunaanAnggaranController;
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
 
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
-
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::resource('register', [RegisteredUserController::class]);
 
     Route::get('login', [AdminAuthenticationController::class, 'login'])->name('login');
     Route::post('login', [AdminAuthenticationController::class, 'handleLogin'])->name('handle-login');
