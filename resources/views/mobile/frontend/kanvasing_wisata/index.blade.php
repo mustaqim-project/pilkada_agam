@@ -60,18 +60,31 @@
                                 <th>Tanggal</th>
                                 <th>Total</th>
                                 <th>Pendapatan</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($totalPerTanggal as $tanggal => $total)
+                            @foreach($totalPerTanggal as $tanggal => $data)
                                 <tr>
                                     <td>{{ \Carbon\Carbon::parse($tanggal)->format('d-m-Y') }}</td>
-                                    <td>{{ $total }}</td>
-                                    <td>Rp {{ number_format($total * 50000, 2, ',', '.') }}</td>
+                                    <td>{{ $data['total'] }}</td>
+                                    <td>Rp {{ number_format($data['pendapatan'], 0, ',', '.') }}</td>
+                                    <td>
+                                        <!-- Dropdown Action -->
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Detail
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                @foreach($data['data'] as $kanvasing)
+                                                    <a class="dropdown-item" href="#">{{ $kanvasing->nama_responden }} - {{ optional($kanvasing->created_at)->format('d-m-Y') }}</a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
-
                     </table>
 
                     <hr>
@@ -100,17 +113,17 @@
                                     <td>{{ $kanvasing->alamat }}</td>
                                     <td>
                                         <img src="{{ asset($kanvasing->foto_kegiatan) }}" alt="Foto Kegiatan"
-                                            style="width: 50px; height: auto; cursor: pointer;" data-toggle="modal"
-                                            data-target="#imageModal"
-                                            onclick="showImageModal('{{ asset($kanvasing->foto_kegiatan) }}')">
+                                             style="width: 50px; height: auto; cursor: pointer;" data-toggle="modal"
+                                             data-target="#imageModal"
+                                             onclick="showImageModal('{{ asset($kanvasing->foto_kegiatan) }}')">
                                     </td>
                                     <td>{{ optional($kanvasing->created_at)->format('d-m-Y') ?? 'Tidak Diketahui' }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="{{ route('kanvasing_wisata.edit', $kanvasing->id) }}"
-                                                class="btn btn-warning btn-sm">Edit</a>
-                                            <form action="{{ route('kanvasing_wisata.destroy', $kanvasing->id) }}"
-                                                method="POST" style="display:inline;">
+                                               class="btn btn-warning btn-sm">Edit</a>
+                                            <form action="{{ route('kanvasing_wisata.destroy', $kanvasing->id) }}" method="POST"
+                                                  style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger delete-item">Hapus</button>
