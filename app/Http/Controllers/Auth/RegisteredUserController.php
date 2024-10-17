@@ -27,7 +27,7 @@ class RegisteredUserController extends Controller
     public function create(): View
     {
         $authUser = Auth::guard('admin')->user();
-        $tims = tim::all(); // Ambil data tim
+        $tims = tim::all();
 
         if ($authUser->hasRole('Super Admin')) {
             $admins = User::with(['admin', 'tim'])->get(); // Mengambil admin dan tim
@@ -37,7 +37,7 @@ class RegisteredUserController extends Controller
 
         return view('admin.users.index', [
             'admins' => $admins,
-            'tims' => $tims, // Kirim data tim ke view
+            'tims' => $tims,
         ]);
     }
 

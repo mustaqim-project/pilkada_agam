@@ -91,7 +91,7 @@
                                 <label for="pj_id">{{ __('admin.Nama Koordinator') }}</label>
                                 <select class="form-control" name="pj_id" id="pj_id">
                                     <option value="">{{ __('Pilih Koordinator') }}</option>
-                                    @foreach ($roles as $role)
+                                    @foreach ($admin->roles as $role)
                                         <option value="{{ $role->id }}"
                                             {{ $admin->pj_id == $role->id ? 'selected' : '' }}>
                                             {{ $role->name }}
