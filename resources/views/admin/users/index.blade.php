@@ -5,7 +5,12 @@
         <div class="section-header">
             <h1>{{ __('admin.Anggota Tim') }}</h1>
         </div>
-
+        @php
+            use App\Models\Admin;
+            use App\Models\tim;
+            $admins = Admin::with('roles')->get();
+            $tims = tim::all();
+        @endphp
         <div class="card card-primary">
             <div class="card-header">
                 <h4>{{ __('admin.All Anggota Tim') }}</h4>
@@ -131,12 +136,7 @@
             <div class="modal-body">
                 <form method="POST" action="{{ route('admin.register.store') }}">
                     @csrf
-                    @php
-                        use App\Models\Admin;
-                        use App\Models\tim;
-                        $admins = Admin::with('roles')->get();
-                        $tims = tim::all();
-                    @endphp
+
                     <div class="form-group">
                         <label for="pj_id">{{ __('admin.Nama Koordinator') }}</label>
                         <select class="form-control" name="pj_id" id="pj_id">
