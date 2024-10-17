@@ -115,6 +115,8 @@ class KanvasingWisataController extends Controller
         $data_ganda->no_ktp = $request->no_ktp;
         $data_ganda->nama_responden = $request->nama_responden;
         $data_ganda->alamat = $request->alamat;
+        $data_ganda->longitude = $request->longitude;
+        $data_ganda->latitude = $request->latitude;
         $data_ganda->save();
 
         return redirect()->route('kanvasing_wisata.create')->with('message', 'Data berhasil disimpan!');
