@@ -101,9 +101,8 @@
                             @forelse ($kanvasingWisata as $kanvasing)
                                 <tr>
                                     <td>{{ $kanvasing->id }}</td>
-                                    <td>{{ $kanvasing->kecamatan->nama ?? 'Tidak Diketahui' }}</td>
-                                    <!-- Assuming kecamatan has a 'nama' field -->
-                                    <td>{{ $kanvasing->kelurahan->nama ?? 'Tidak Diketahui' }}</td>
+                                    <td>{{ $kanvasing->kecematan->nama_kecamatan ?? 'Tidak Diketahui' }}</td>
+                                    <td>{{ $kanvasing->kelurahan->nama_kelurahan ?? 'Tidak Diketahui' }}</td>
                                     <td>{{ $kanvasing->no_ktp }}</td>
                                     <td>{{ $kanvasing->nama_responden }}</td>
                                     <td>{{ $kanvasing->tgl_lahir->format('d-m-Y') }}</td>
@@ -172,8 +171,8 @@
             var locations = @json(
                 $kanvasings->map(function ($kanvasing) {
                     return [
-                        'lat' => $kanvasing->lat,
-                        'lng' => $kanvasing->lang,
+                        'lat' => $kanvasing->latitude,
+                        'lng' => $kanvasing->longitude,
                         'nama_kk' => $kanvasing->nama_kk,
                     ];
                 }));

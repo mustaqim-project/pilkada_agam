@@ -31,7 +31,11 @@ class kanvasing_pkh extends Model
         'jadwal',
         'hadir',
         'status',
-
+        'brosur', // Menambahkan kolom baru
+        'stiker', // Menambahkan kolom baru
+        'kartu_coblos', // Menambahkan kolom baru
+        'longitude', // Menambahkan kolom baru
+        'latitude', // Menambahkan kolom baru
     ];
 
     // Casting tipe data secara otomatis
@@ -40,7 +44,11 @@ class kanvasing_pkh extends Model
         'jadwal' => 'date',
         'hadir' => 'boolean',
         'status' => 'boolean',
+        'brosur' => 'boolean', // Menambahkan casting
+        'stiker' => 'boolean', // Menambahkan casting
+        'kartu_coblos' => 'boolean', // Menambahkan casting
     ];
+
 
     // Relasi belongsTo ke model User
     public function user()

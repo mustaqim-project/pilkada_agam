@@ -17,34 +17,37 @@ class kanvasing_parpol extends Model
 
     protected $fillable = [
         'user_id',
-        'provinsi',
-        'kabupaten',
-        'kecamatan',
-        'kelurahan',
-        'no_kk',
+        'kecematan_id',
+        'kelurahan_id',
         'no_ktp',
         'nama_responden',
         'tgl_lahir',
         'jenis_kelamin',
-        'agama_id',
+        'no_hp',
         'pekerjaan_id',
         'alamat',
         'foto_kegiatan',
-        'brosur',
-        'stiker',
-        'kartu_coblos',
-        'longitude',
-        'latitude',
+        'jadwal',
+        'hadir',
+        'status',
+        'brosur', // Menambahkan kolom baru
+        'stiker', // Menambahkan kolom baru
+        'kartu_coblos', // Menambahkan kolom baru
+        'longitude', // Menambahkan kolom baru
+        'latitude', // Menambahkan kolom baru
     ];
 
+    // Casting tipe data secara otomatis
     protected $casts = [
         'tgl_lahir' => 'date',
-        'brosur' => 'boolean',
-        'stiker' => 'boolean',
-        'kartu_coblos' => 'boolean',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'jadwal' => 'date',
+        'hadir' => 'boolean',
+        'status' => 'boolean',
+        'brosur' => 'boolean', // Menambahkan casting
+        'stiker' => 'boolean', // Menambahkan casting
+        'kartu_coblos' => 'boolean', // Menambahkan casting
     ];
+
 
     public function user()
     {
