@@ -94,9 +94,14 @@ class RoleUserController extends Controller
      */
     public function edit(string $id): View
     {
+        $roles = Role::all();
+        $admins = Admin::all();
+        $teams = tim::all(); // Fetching teams
+        $positions = jabatan::all(); // Fetching Jabatan positions
+        $banks = Bank::all(); // Fetching Jabatan positions
         $user = Admin::findOrFail($id);
         $roles = Role::all();
-        return view('admin.role-user.edit', compact('user', 'roles'));
+        return view('admin.role-user.edit', compact('user', 'roles', 'admins', 'teams', 'positions', 'banks'));
     }
 
     /**
