@@ -42,7 +42,6 @@ class ReportController extends Controller
 
         public function store(Request $request)
         {
-            dd($request);
             $request->validate([
                 'assigned_to' => 'required|exists:admins,id',
                 'period' => 'required|string|max:255',
