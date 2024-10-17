@@ -60,14 +60,10 @@
                                 <th>#</th>
                                 <th>Kecamatan</th>
                                 <th>Kelurahan</th>
-                                <th>No KTP</th>
                                 <th>Nama Responden</th>
-                                <th>Tanggal Lahir</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Nomor HP</th>
-                                <th>Pekerjaan</th> <!-- Changed header to reflect job title -->
                                 <th>Alamat</th>
                                 <th>Foto Kegiatan</th>
+                                <th>Tanggal Kunjugan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -77,14 +73,9 @@
                                     <td>{{ $kanvasing->id }}</td>
                                     <td>{{ $kanvasing->kecematan->nama_kecamatan ?? 'Tidak Diketahui' }}</td>
                                     <td>{{ $kanvasing->kelurahan->nama_kelurahan ?? 'Tidak Diketahui' }}</td>
-                                    <td>{{ $kanvasing->no_ktp }}</td>
                                     <td>{{ $kanvasing->nama_responden }}</td>
-                                    <td>{{ optional($kanvasing->tgl_lahir)->format('d-m-Y') ?? 'Tidak Diketahui' }}</td>
-                                    <td>{{ $kanvasing->jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
-                                    <td>{{ $kanvasing->no_hp }}</td>
-                                    <td>{{ $kanvasing->pekerjaan->name ?? 'Tidak Diketahui' }}</td>
-                                    <!-- Map pekerjaan_id to job name -->
                                     <td>{{ $kanvasing->alamat }}</td>
+                                    <td>{{ optional($kanvasing->craeted_At)->format('d-m-Y') ?? 'Tidak Diketahui' }}</td>
                                     <td>
                                         <img src="{{ asset($kanvasing->foto_kegiatan) }}" alt="Foto Kegiatan"
                                             style="width: 50px; height: auto; cursor: pointer;" data-toggle="modal"
