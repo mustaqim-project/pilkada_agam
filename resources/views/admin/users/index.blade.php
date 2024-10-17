@@ -56,7 +56,7 @@
     </div>
 </section>
 
-@foreach ($admins as $admin)
+{{-- @foreach ($admins as $admin)
 <div class="modal fade" id="editDataModal{{ $admin->id }}" tabindex="-1" role="dialog" aria-labelledby="editDataModalLabel{{ $admin->id }}" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -111,7 +111,7 @@
         </div>
     </div>
 </div>
-@endforeach
+@endforeach --}}
 
 <!-- Modal Tambah Data -->
 <div class="modal fade" id="tambahDataModal" tabindex="-1" role="dialog" aria-labelledby="tambahDataModalLabel" aria-hidden="true">
