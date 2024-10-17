@@ -110,7 +110,7 @@ class KanvasingWisataController extends Controller
         $kanvasingWisata->save();
 
         $data_ganda = new data_ganda();
-        $data_ganda->kecematan = $request->kecematan_id;
+        $data_ganda->kecamatan = $request->kecematan_id;
         $data_ganda->nagari = $request->kelurahan_id;
         $data_ganda->no_ktp = $request->no_ktp;
         $data_ganda->nama_responden = $request->nama_responden;
