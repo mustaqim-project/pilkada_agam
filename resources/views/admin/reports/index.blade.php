@@ -50,9 +50,9 @@
 
         <div class="card card-primary">
             <div class="card-header">
-                <div class="card-header-actions">
+                {{-- <div class="card-header-actions">
                     <a href="{{ route('admin.reports.create') }}" class="btn btn-primary">+ Tambah Laporan</a>
-                </div>
+                </div> --}}
             </div>
             <div class="card-body">
                 <div class="table-responsive">
