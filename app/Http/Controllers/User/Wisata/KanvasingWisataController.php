@@ -231,7 +231,7 @@ class KanvasingWisataController extends Controller
         $data_ganda->save();
 
 
-        return redirect()->route('kanvasing_wisata.create')
+        return redirect()->route('kanvasing_wisata.index')
             ->with('success', 'Data berhasil ditambahkan!');
     }
 
@@ -330,7 +330,7 @@ class KanvasingWisataController extends Controller
         $kanvasingWisata->delete();
 
 
-        return redirect()->route('kanvasing_wisata.create')
+        return redirect()->route('kanvasing_wisata.index')
             ->with('success', 'Data berhasil ditambahkan!');
     }
 
