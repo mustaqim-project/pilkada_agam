@@ -225,6 +225,21 @@
                         @enderror
                     </div>
 
+
+                    <!-- Input Nomor Telepon -->
+                    <div class="input-style has-icon input-style-1 input-required mt-4">
+                        <i class="input-icon fa fa-phone color-theme"></i>
+                        <span>Nomor Telepon</span>
+                        <em>(*Wajib Diisi)</em>
+                        <input type="text" name="no_hp" required maxlength="13" minlength="10" pattern="62\d{8,14}" inputmode="numeric"
+                            oninput="this.value = this.value.replace(/\D/g, '')"
+                            placeholder="Nomor Telepon" id="no_hp" />
+
+                        @error('no_hp')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <label class="mt-5">Upload Foto Kegiatan</label>
                     <em>(*Wajib Diisi)</em>
 
@@ -515,5 +530,14 @@
                 alert('Silakan izinkan akses kamera untuk menggunakan fitur ini.');
             }
         };
+
+
+        document.getElementById('no_hp').addEventListener('input', function (e) {
+        const input = e.target;
+        // Cek apakah nomor dimulai dengan '62'
+        if (!input.value.startsWith('62')) {
+            input.value = '62' + input.value.replace(/^0+/, ''); // Gantikan awalan '0' jika ada
+        }
+    });
     </script>
 @endsection

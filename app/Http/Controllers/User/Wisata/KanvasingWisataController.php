@@ -128,6 +128,7 @@ class KanvasingWisataController extends Controller
             'kecematan_id' => 'required',
             'kelurahan_id' => 'required',
             'no_ktp' => 'required|string|max:16',
+            'no_hp' => 'required|string|max:13',
             'nama_responden' => 'required|string|max:255',
             'tgl_lahir' => 'required|date',
             'jenis_kelamin' => 'required|string|max:10',
@@ -167,6 +168,7 @@ class KanvasingWisataController extends Controller
         $kanvasingWisata->kecematan_id = $request->kecematan_id;
         $kanvasingWisata->kelurahan_id = $request->kelurahan_id;
         $kanvasingWisata->no_ktp = $request->no_ktp;
+        $kanvasingWisata->no_hp = $request->no_hp;
         $kanvasingWisata->nama_responden = $request->nama_responden;
         $kanvasingWisata->tgl_lahir = $request->tgl_lahir;
         $kanvasingWisata->jenis_kelamin = $request->jenis_kelamin;
@@ -240,7 +242,7 @@ class KanvasingWisataController extends Controller
             'kecematan_id' => 'required',
             'kelurahan_id' => 'required',
             'no_kk' => 'required|string|max:16',
-            'no_ktp' => 'required|string|max:16',
+            'no_hp' => 'required|string|max:13',
             'nama_responden' => 'required|string|max:255',
             'tgl_lahir' => 'required|date',
             'jenis_kelamin' => 'required|string|max:10',
