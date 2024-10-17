@@ -8,9 +8,12 @@
         }
 
         .table th {
-            background-color: #03836d; /* Bootstrap primary color */
-            color: white; /* White text for table header */
-            text-align: center; /* Center align header text */
+            background-color: #03836d;
+            /* Bootstrap primary color */
+            color: white;
+            /* White text for table header */
+            text-align: center;
+            /* Center align header text */
         }
 
         .table img {
@@ -79,7 +82,8 @@
                                     <td>{{ optional($kanvasing->tgl_lahir)->format('d-m-Y') ?? 'Tidak Diketahui' }}</td>
                                     <td>{{ $kanvasing->jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                     <td>{{ $kanvasing->no_hp }}</td>
-                                    <td>{{ $kanvasing->pekerjaan->name ?? 'Tidak Diketahui' }}</td> <!-- Map pekerjaan_id to job name -->
+                                    <td>{{ $kanvasing->pekerjaan->name ?? 'Tidak Diketahui' }}</td>
+                                    <!-- Map pekerjaan_id to job name -->
                                     <td>{{ $kanvasing->alamat }}</td>
                                     <td>
                                         <img src="{{ asset($kanvasing->foto_kegiatan) }}" alt="Foto Kegiatan"
@@ -137,15 +141,21 @@
         }
 
         $(document).ready(function() {
-            var locations = @json($kanvasingWisata->map(function ($kanvasing) {
-                return [
-                    'lat' => $kanvasing->latitude,
-                    'lng' => $kanvasing->longitude,
-                    'nama_kk' => $kanvasing->nama_responden, // Assuming nama_kk refers to the respondent's name
-                ];
-            }));
+            // Using the correct variable name and ensuring proper syntax
+            var locations = @json(
+                $kanvasingWisata->map(function ($kanvasing) {
+                    return [
+                        'lat' => $kanvasing->latitude,
+                        'lng' => $kanvasing->longitude,
+                        'nama_kk' => $kanvasing->nama_responden, // Assuming nama_kk refers to the respondent's name
+                    ];
+                }));
 
-            var map = L.map('map').setView([locations[0]?.lat || 0, locations[0]?.lng || 0], 13); // Default to (0,0) if no location
+            // Check if locations are available before accessing them
+            var initialLat = locations.length > 0 ? locations[0].lat : 0;
+            var initialLng = locations.length > 0 ? locations[0].lng : 0;
+
+            var map = L.map('map').setView([initialLat, initialLng], 13); // Default to (0,0) if no location
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19
