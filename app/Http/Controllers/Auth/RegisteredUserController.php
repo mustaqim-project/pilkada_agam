@@ -23,9 +23,7 @@ class RegisteredUserController extends Controller
         $this->middleware(['permission:user delete,admin'])->only(['destroy']);
     }
 
-    public function create(){
 
-    }
 
     public function create(): View
     {

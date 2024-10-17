@@ -65,7 +65,19 @@ use App\Http\Controllers\Admin\Keuangan\PenggunaanAnggaranController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
-    Route::resource('register', RegisteredUserController::class);
+    Route::get('/users', [RegisteredUserController::class, 'create'])->name('register.create');
+
+    // Proses penyimpanan data pengguna baru
+    Route::post('/users', [RegisteredUserController::class, 'store'])->name('register.store');
+
+    // Tampilkan form edit pengguna
+    Route::get('/users/{user}/edit', [RegisteredUserController::class, 'edit'])->name('register.edit');
+
+    // Proses update pengguna
+    Route::put('/users/{user}', [RegisteredUserController::class, 'update'])->name('register.update');
+
+    // Proses hapus pengguna
+    Route::delete('/users/{user}', [RegisteredUserController::class, 'destroy'])->name('register.destroy');
 
 
     Route::get('login', [AdminAuthenticationController::class, 'login'])->name('login');
