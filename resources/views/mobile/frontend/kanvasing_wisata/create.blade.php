@@ -155,7 +155,8 @@
                         <i class="input-icon fa fa-id-card color-theme"></i>
                         <span>Nomor KTP</span>
                         <em>(*Wajib Diisi)</em>
-                        <input type="text" name="no_ktp" required maxlength="16" minlength="16" pattern="\d{16}" placeholder="Nomor KTP" />
+                        <input type="text" name="no_ktp" required maxlength="16" minlength="16" pattern="\d{16}" inputmode="numeric"
+                            oninput="this.value = this.value.replace(/\D/g, '')" placeholder="Nomor KTP" />
                         @error('no_ktp')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
