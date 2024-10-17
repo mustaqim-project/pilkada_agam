@@ -56,16 +56,10 @@ class KanvasingWisataController extends Controller
 
 
         $totalPerTanggal = $kanvasingWisata->groupBy(function($date) {
-            return \Carbon\Carbon::parse($date->created_at)->format('Y-m-d'); // Mengelompokkan berdasarkan tanggal
+            return \Carbon\Carbon::parse($date->created_at)->format('Y-m-d');
         })->map(function($row) {
-            return [
-                'total' => count($row), // Menghitung jumlah data untuk setiap tanggal
-                'pendapatan' => count($row) * 50000, // Mengalikan jumlah data dengan 50000
-                'data' => $row // Menyimpan data untuk masing-masing tanggal
-            ];
+            return count($row);
         });
-
-
 
 
         return view('mobile.frontend.kanvasing_wisata.index', compact('kanvasingWisata', 'totalPerTanggal'));
