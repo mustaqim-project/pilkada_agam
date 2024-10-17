@@ -163,7 +163,6 @@ class AdminKecematanWisataController extends Controller
             'assigned_to' => 'required|exists:admins,id',
             'report_content' => 'required|string',
             'period' => 'required|string',
-            'attachment' => 'nullable|string', // Validasi untuk lampiran
         ]);
 
         Report::create([
@@ -171,7 +170,6 @@ class AdminKecematanWisataController extends Controller
             'assigned_to' => $request->input('assigned_to'),
             'report_content' => $request->input('report_content'),
             'period' => $request->input('period'),
-            'attachment' => $request->input('attachment'), // Menyimpan lampiran
         ]);
 
         return redirect()->route('admin.reports.index')->with('success', 'Laporan berhasil dikirim.');
