@@ -141,7 +141,7 @@ class KanvasingWisataController extends Controller
 
         // Cek entri duplikat berdasarkan no_ktp
         $existingEntry = kanvasing_ds::where('no_ktp', $request->no_ktp)->exists();
-
+dd($existingEntry);
         if ($existingEntry) {
             return redirect()->back()->withErrors(['error' => 'Nomor KTP sudah terdaftar!']);
         }
