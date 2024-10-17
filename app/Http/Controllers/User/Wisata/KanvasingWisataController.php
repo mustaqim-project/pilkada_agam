@@ -51,6 +51,76 @@ class KanvasingWisataController extends Controller
         return view('mobile.frontend.kanvasing_wisata.create', compact('kecamatans', 'pekerjaans'));
     }
 
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'user_id' => 'required|exists:users,id',
+    //         'kecematan_id' => 'required',
+    //         'kelurahan_id' => 'required',
+    //         'no_ktp' => 'required|string|max:16',
+    //         'nama_responden' => 'required|string|max:255',
+    //         'tgl_lahir' => 'required|date',
+    //         'jenis_kelamin' => 'required|string|max:10',
+    //         'pekerjaan_id' => 'required',
+    //         'alamat' => 'required|string|max:255',
+    //         'foto_kegiatan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    //         // 'brosur' => 'required|boolean',
+    //         // 'stiker' => 'required|boolean',
+    //         // 'kartu_coblos' => 'required|boolean',
+    //         'longitude' => 'required|numeric',
+    //         'latitude' => 'required|numeric',
+    //     ]);
+
+    //     $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
+    //     $timId = auth()->user()->tim_id;
+
+    //     // Pemilihan model berdasarkan tim_id
+    //     if ($timId == 1) {
+    //         $kanvasingWisata = new kanvasing_ds();
+    //     } elseif ($timId == 2) {
+    //         $kanvasingWisata = new kanvasing_pkh();
+    //     } elseif ($timId == 3) {
+    //         $kanvasingWisata = new kanvasing_mm();
+    //     } elseif ($timId == 4) {
+    //         $kanvasingWisata = new kanvasing_aisyiah();
+    //     } else {
+    //         $kanvasingWisata = new KanvasingWisata();
+    //         $kanvasingWisata->jadwal = $request->jadwal;
+
+    //     }
+
+    //     $kanvasingWisata->user_id = $request->user_id;
+    //     $kanvasingWisata->kecematan_id = $request->kecematan_id;
+    //     $kanvasingWisata->kelurahan_id = $request->kelurahan_id;
+    //     $kanvasingWisata->no_ktp = $request->no_ktp;
+    //     $kanvasingWisata->nama_responden = $request->nama_responden;
+    //     $kanvasingWisata->tgl_lahir = $request->tgl_lahir;
+    //     $kanvasingWisata->jenis_kelamin = $request->jenis_kelamin;
+    //     $kanvasingWisata->pekerjaan_id = $request->pekerjaan_id;
+    //     $kanvasingWisata->alamat = $request->alamat;
+    //     $kanvasingWisata->status = $request->status == 0;
+    //     $kanvasingWisata->hadir = $request->hadir == 0;
+    //     $kanvasingWisata->foto_kegiatan = $imagePath ?? null;
+    //     // $kanvasingWisata->brosur = $request->brosur;
+    //     // $kanvasingWisata->stiker = $request->stiker;
+    //     // $kanvasingWisata->kartu_coblos = $request->kartu_coblos;
+    //     $kanvasingWisata->longitude = $request->longitude;
+    //     $kanvasingWisata->latitude = $request->latitude;
+
+    //     $kanvasingWisata->save();
+
+    //     $data_ganda = new data_ganda();
+    //     $data_ganda->kecamatan = $request->kecematan_id;
+    //     $data_ganda->nagari = $request->kelurahan_id;
+    //     $data_ganda->no_ktp = $request->no_ktp;
+    //     $data_ganda->nama_responden = $request->nama_responden;
+    //     $data_ganda->alamat = $request->alamat;
+    //     $data_ganda->longitude = $request->longitude;
+    //     $data_ganda->latitude = $request->latitude;
+    //     $data_ganda->save();
+
+    //     return redirect()->route('kanvasing_wisata.create')->with('message', 'Data berhasil disimpan!');
+    // }
     public function store(Request $request)
     {
         $request->validate([
@@ -64,17 +134,22 @@ class KanvasingWisataController extends Controller
             'pekerjaan_id' => 'required',
             'alamat' => 'required|string|max:255',
             'foto_kegiatan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            // 'brosur' => 'required|boolean',
-            // 'stiker' => 'required|boolean',
-            // 'kartu_coblos' => 'required|boolean',
             'longitude' => 'required|numeric',
             'latitude' => 'required|numeric',
         ]);
 
+        // Cek entri duplikat berdasarkan no_ktp
+        $existingEntry = kanvasing_ds::where('no_ktp', $request->no_ktp)
+            ->orWhere('no_ktp', $request->no_ktp)
+            ->exists();
+
+        if ($existingEntry) {
+            return redirect()->back()->withErrors(['no_ktp' => 'Nomor KTP sudah terdaftar.']);
+        }
+
         $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
         $timId = auth()->user()->tim_id;
 
-        // Pemilihan model berdasarkan tim_id
         if ($timId == 1) {
             $kanvasingWisata = new kanvasing_ds();
         } elseif ($timId == 2) {
@@ -86,7 +161,6 @@ class KanvasingWisataController extends Controller
         } else {
             $kanvasingWisata = new KanvasingWisata();
             $kanvasingWisata->jadwal = $request->jadwal;
-
         }
 
         $kanvasingWisata->user_id = $request->user_id;
@@ -101,14 +175,12 @@ class KanvasingWisataController extends Controller
         $kanvasingWisata->status = $request->status == 0;
         $kanvasingWisata->hadir = $request->hadir == 0;
         $kanvasingWisata->foto_kegiatan = $imagePath ?? null;
-        // $kanvasingWisata->brosur = $request->brosur;
-        // $kanvasingWisata->stiker = $request->stiker;
-        // $kanvasingWisata->kartu_coblos = $request->kartu_coblos;
         $kanvasingWisata->longitude = $request->longitude;
         $kanvasingWisata->latitude = $request->latitude;
 
         $kanvasingWisata->save();
 
+        // Simpan data ganda
         $data_ganda = new data_ganda();
         $data_ganda->kecamatan = $request->kecematan_id;
         $data_ganda->nagari = $request->kelurahan_id;
