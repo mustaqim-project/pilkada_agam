@@ -134,7 +134,7 @@ class KanvasingWisataController extends Controller
             'jenis_kelamin' => 'required|string|max:10',
             'pekerjaan_id' => 'required',
             'alamat' => 'required|string|max:255',
-            'foto_kegiatan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'longitude' => 'required|numeric',
             'latitude' => 'required|numeric',
         ]);
@@ -148,7 +148,7 @@ class KanvasingWisataController extends Controller
             return redirect()->back()->withErrors(['no_ktp' => 'Nomor KTP sudah terdaftar.']);
         }
 
-        $imagePath = $this->handleFileUpload($request, 'foto_kegiatan');
+        $imagePath = $this->handleFileUpload($request, 'foto');
         $timId = auth()->user()->tim_id;
 
         if ($timId == 1) {
@@ -248,7 +248,7 @@ class KanvasingWisataController extends Controller
             'jenis_kelamin' => 'required|string|max:10',
             'pekerjaan_id' => 'required',
             'alamat' => 'required|string|max:255',
-            'foto_kegiatan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             // 'brosur' => 'required|boolean',
             // 'stiker' => 'required|boolean',
             // 'kartu_coblos' => 'required|boolean',

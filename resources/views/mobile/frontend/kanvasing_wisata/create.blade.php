@@ -258,7 +258,7 @@
                     </div>
 
                     <!-- Hidden Input for File Upload -->
-                    <input type="file" id="foto_kegiatan" name="foto_kegiatan" accept="image/*" style="display:none;">
+                    <input type="file" id="foto" name="foto" accept="image/*" style="display:none;">
 
                     <!-- Lokasi Saya -->
                     <div class="input-style has-icon input-style-1 mt-4">
@@ -411,7 +411,7 @@
             }
 
             // Profile picture preview
-            const profilePictureInput = $('#foto_kegiatan');
+            const profilePictureInput = $('#foto');
             const imagePreview = $('#image_preview');
 
             profilePictureInput.on('change', function() {
