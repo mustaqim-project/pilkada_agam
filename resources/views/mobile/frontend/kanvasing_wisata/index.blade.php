@@ -140,47 +140,46 @@
             document.getElementById('modalImage').src = imageUrl;
         }
 
-        $(document).ready(function() {
-            // Using the correct variable name and ensuring proper syntax
-            var locations = @json(
-                $kanvasingWisata->map(function ($kanvasing) {
-                    return [
-                        'lat' => $kanvasing->latitude,
-                        'lng' => $kanvasing->longitude,
-                        'nama_kk' => $kanvasing->nama_responden, // Assuming nama_kk refers to the respondent's name
-                    ];
-                }));
+        // $(document).ready(function() {
+        //     var locations = @json(
+        //         $kanvasingWisata->map(function ($kanvasing) {
+        //             return [
+        //                 'lat' => $kanvasing->latitude,
+        //                 'lng' => $kanvasing->longitude,
+        //                 'nama_kk' => $kanvasing->nama_responden, // Assuming nama_kk refers to the respondent's name
+        //             ];
+        //         }));
 
-            // Check if locations are available before accessing them
-            var initialLat = locations.length > 0 ? locations[0].lat : 0;
-            var initialLng = locations.length > 0 ? locations[0].lng : 0;
+        //     // Check if locations are available before accessing them
+        //     var initialLat = locations.length > 0 ? locations[0].lat : 0;
+        //     var initialLng = locations.length > 0 ? locations[0].lng : 0;
 
-            var map = L.map('map').setView([initialLat, initialLng], 13); // Default to (0,0) if no location
+        //     var map = L.map('map').setView([initialLat, initialLng], 13); // Default to (0,0) if no location
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19
-            }).addTo(map);
+        //     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //         maxZoom: 19
+        //     }).addTo(map);
 
-            locations.forEach(function(location) {
-                L.marker([location.lat, location.lng]).addTo(map)
-                    .bindPopup('Nama KK: ' + location.nama_kk + '<br>Lat: ' + location.lat + ', Lng: ' +
-                        location.lng)
-                    .openPopup();
-            });
+        //     locations.forEach(function(location) {
+        //         L.marker([location.lat, location.lng]).addTo(map)
+        //             .bindPopup('Nama KK: ' + location.nama_kk + '<br>Lat: ' + location.lat + ', Lng: ' +
+        //                 location.lng)
+        //             .openPopup();
+        //     });
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var userLat = position.coords.latitude;
-                    var userLng = position.coords.longitude;
+        //     if (navigator.geolocation) {
+        //         navigator.geolocation.getCurrentPosition(function(position) {
+        //             var userLat = position.coords.latitude;
+        //             var userLng = position.coords.longitude;
 
-                    map.setView([userLat, userLng], 13);
-                    L.marker([userLat, userLng]).addTo(map)
-                        .bindPopup('Your Location')
-                        .openPopup();
-                });
-            } else {
-                console.log("Geolocation is not supported by this browser.");
-            }
-        });
+        //             map.setView([userLat, userLng], 13);
+        //             L.marker([userLat, userLng]).addTo(map)
+        //                 .bindPopup('Your Location')
+        //                 .openPopup();
+        //         });
+        //     } else {
+        //         console.log("Geolocation is not supported by this browser.");
+        //     }
+        // });
     </script>
 @endsection
