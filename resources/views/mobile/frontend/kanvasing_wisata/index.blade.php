@@ -93,8 +93,8 @@
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a href="{{ route('kanvasing.edit', $kanvasing->id) }}"
-                                                class="btn btn-warning btn-sm">Edit</a>
+                                            {{-- <a href="{{ route('kanvasing.edit', $kanvasing->id) }}"
+                                                class="btn btn-warning btn-sm">Edit</a> --}}
                                             <form action="{{ route('kanvasing.destroy', $kanvasing->id) }}" method="POST"
                                                 style="display:inline;">
                                                 @csrf
