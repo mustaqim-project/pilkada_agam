@@ -155,11 +155,12 @@
                         <i class="input-icon fa fa-id-card color-theme"></i>
                         <span>Nomor KTP</span>
                         <em>(*Wajib Diisi)</em>
-                        <input type="number" name="no_ktp" required maxlength="16" placeholder="Nomor KTP" />
+                        <input type="text" name="no_ktp" required maxlength="16" minlength="16" pattern="\d{16}" placeholder="Nomor KTP" />
                         @error('no_ktp')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
 
                     <!-- Input Nama Responden -->
                     <div class="input-style has-icon input-style-1 input-required mt-4">
