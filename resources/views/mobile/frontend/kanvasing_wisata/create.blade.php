@@ -155,8 +155,9 @@
                         <i class="input-icon fa fa-id-card color-theme"></i>
                         <span>Nomor KTP</span>
                         <em>(*Wajib Diisi)</em>
-                        <input type="text" name="no_ktp" required maxlength="16" minlength="16" pattern="\d{16}" inputmode="numeric"
-                            oninput="this.value = this.value.replace(/\D/g, '')" placeholder="Nomor KTP" />
+                        <input type="text" name="no_ktp" required maxlength="16" minlength="16" pattern="\d{16}"
+                            inputmode="numeric" oninput="this.value = this.value.replace(/\D/g, '')"
+                            placeholder="Nomor KTP" />
                         @error('no_ktp')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -231,8 +232,8 @@
                         <i class="input-icon fa fa-phone color-theme"></i>
                         <span>Nomor Telepon</span>
                         <em>(*Wajib Diisi)</em>
-                        <input type="text" name="no_hp" required maxlength="13" minlength="10" pattern="62\d{8,14}" inputmode="numeric"
-                            oninput="this.value = this.value.replace(/\D/g, '')"
+                        <input type="text" name="no_hp" required maxlength="13" minlength="10" pattern="62\d{8,14}"
+                            inputmode="numeric" oninput="this.value = this.value.replace(/\D/g, '')"
                             placeholder="Nomor Telepon" id="no_hp" />
 
                         @error('no_hp')
@@ -243,9 +244,13 @@
                     <label class="mt-5">Upload Foto Kegiatan</label>
                     <em>(*Wajib Diisi)</em>
 
+                    <label class="mt-5">Upload Foto Kegiatan</label>
+                    <em>(*Wajib Diisi)</em>
+
                     <!-- Image Preview -->
                     <div class="mt-4">
-                        <img id="image_preview" src="" alt="Image Preview" style="display:none;" />
+                        <img id="image_preview" class="img-fluid" src="" alt="Image Preview"
+                            style="display:none;" />
                     </div>
 
                     <!-- Pilihan Akses -->
@@ -257,8 +262,14 @@
                         </select>
                     </div>
 
-                    <!-- Hidden Input for File Upload -->
-                    <input type="file" id="foto" name="foto" accept="image/*" style="display:none;">
+                    <!-- Input untuk Kamera (dengan capture untuk kamera) -->
+                    <input class="upload-file mt-3 bg-highlight shadow-s rounded-s" type="file" id="cameraInput"
+                        name="foto" accept="image/*" capture="camera" style="display:none;" />
+
+                    <!-- Input untuk Galeri -->
+                    <input class="upload-file mt-3 bg-highlight shadow-s rounded-s" type="file" id="galleryInput"
+                        name="foto" accept="image/*" style="display:none;" />
+
 
                     <!-- Lokasi Saya -->
                     <div class="input-style has-icon input-style-1 mt-4">
@@ -389,6 +400,7 @@
                 }
             }
 
+            // Check location permission and set cookie
             // Check location permission and set cookie
             function checkLocationPermission() {
                 const permission = getCookie('location_permission');
@@ -531,13 +543,12 @@
             }
         };
 
-
-        document.getElementById('no_hp').addEventListener('input', function (e) {
-        const input = e.target;
-        // Cek apakah nomor dimulai dengan '62'
-        if (!input.value.startsWith('62')) {
-            input.value = '62' + input.value.replace(/^0+/, ''); // Gantikan awalan '0' jika ada
-        }
-    });
+        document.getElementById('no_hp').addEventListener('input', function(e) {
+            const input = e.target;
+            // Cek apakah nomor dimulai dengan '62'
+            if (!input.value.startsWith('62')) {
+                input.value = '62' + input.value.replace(/^0+/, ''); // Gantikan awalan '0' jika ada
+            }
+        });
     </script>
 @endsection
