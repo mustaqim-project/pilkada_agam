@@ -8,14 +8,10 @@
         }
 
         .table th {
-            background-color: #03836d;
-            /* Bootstrap primary color */
-            color: white;
-            /* White text for table header */
-            text-align: center;
-            /* Center align header text */
+            background-color: #03836d; /* Bootstrap primary color */
+            color: white; /* White text for table header */
+            text-align: center; /* Center align header text */
         }
-
 
         .table img {
             border-radius: 5px;
@@ -51,32 +47,7 @@
             <div class="card-bg preload-img" data-src="admin/mobile/myhr/images/sikad.png"></div>
         </div>
 
-        {{-- @php
-            use App\Models\Kanvasing;
-            $totalKanvasings = Kanvasing::count();
-        @endphp --}}
-
-        <!-- SweetAlert Success -->
-        @if (session('success'))
-            <script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: '{{ session('success') }}',
-                    timer: 2000,
-                    showConfirmButton: false
-                });
-            </script>
-        @endif
-
-        {{-- <div class="map-container">
-            <div id="map" style="display: block; height: 400px;"></div> <!-- Map container -->
-            <div class="total-count-overlay">
-                Total Kanvasing: <strong>{{ $totalKanvasings }}</strong>
-            </div>
-        </div> --}}
-
-        <!-- Tabel Daftar Cakada -->
+        <!-- Tabel Daftar Kanvasing Wisata -->
         <div class="card mb-4">
             <div class="card-body">
                 <div class="table-responsive">
@@ -91,7 +62,7 @@
                                 <th>Tanggal Lahir</th>
                                 <th>Jenis Kelamin</th>
                                 <th>Nomor HP</th>
-                                <th>Pekerjaan ID</th>
+                                <th>Pekerjaan</th> <!-- Changed header to reflect job title -->
                                 <th>Alamat</th>
                                 <th>Foto Kegiatan</th>
                                 <th>Aksi</th>
@@ -105,13 +76,11 @@
                                     <td>{{ $kanvasing->kelurahan->nama_kelurahan ?? 'Tidak Diketahui' }}</td>
                                     <td>{{ $kanvasing->no_ktp }}</td>
                                     <td>{{ $kanvasing->nama_responden }}</td>
-                                    <td>{{ $kanvasing->tgl_lahir->format('d-m-Y') }}</td>
-                                    <td>{{ $kanvasing->jenis_kelamin == 1 ? 'Laki-laki' : ($kanvasing->jenis_kelamin == 2 ? 'Perempuan' : 'Tidak Diketahui') }}
-                                    </td>
+                                    <td>{{ optional($kanvasing->tgl_lahir)->format('d-m-Y') ?? 'Tidak Diketahui' }}</td>
+                                    <td>{{ $kanvasing->jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                     <td>{{ $kanvasing->no_hp }}</td>
-                                    <td>{{ $kanvasing->pekerjaan_id }}</td> <!-- Map this to a job name if needed -->
+                                    <td>{{ $kanvasing->pekerjaan->name ?? 'Tidak Diketahui' }}</td> <!-- Map pekerjaan_id to job name -->
                                     <td>{{ $kanvasing->alamat }}</td>
-                                    <!-- Assuming kelurahan has a 'nama' field -->
                                     <td>
                                         <img src="{{ asset($kanvasing->foto_kegiatan) }}" alt="Foto Kegiatan"
                                             style="width: 50px; height: auto; cursor: pointer;" data-toggle="modal"
@@ -168,16 +137,15 @@
         }
 
         $(document).ready(function() {
-            var locations = @json(
-                $kanvasings->map(function ($kanvasing) {
-                    return [
-                        'lat' => $kanvasing->latitude,
-                        'lng' => $kanvasing->longitude,
-                        'nama_kk' => $kanvasing->nama_kk,
-                    ];
-                }));
+            var locations = @json($kanvasingWisata->map(function ($kanvasing) {
+                return [
+                    'lat' => $kanvasing->latitude,
+                    'lng' => $kanvasing->longitude,
+                    'nama_kk' => $kanvasing->nama_responden, // Assuming nama_kk refers to the respondent's name
+                ];
+            }));
 
-            var map = L.map('map').setView([locations[0].lat, locations[0].lng], 13);
+            var map = L.map('map').setView([locations[0]?.lat || 0, locations[0]?.lng || 0], 13); // Default to (0,0) if no location
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19
