@@ -1150,7 +1150,7 @@
 
                                 @if (canAccess(['user register']))
                                     <li class="{{ setSidebarActive(['admin.register.*']) }}">
-                                        <a class="nav-link" href="{{ route('admin.register') }}">
+                                        <a class="nav-link" href="{{ route('admin.register.create') }}">
                                             <span>{{ __('admin.Tim Lapangan') }}</span>
                                         </a>
                                     </li>
