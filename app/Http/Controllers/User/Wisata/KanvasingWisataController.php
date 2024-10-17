@@ -33,23 +33,23 @@ class KanvasingWisataController extends Controller
 
         // Pemilihan model berdasarkan tim_id
         if ($timId == 1) {
-            $kanvasingWisata = kanvasing_ds::with(['kecamatan', 'kelurahan'])
+            $kanvasingWisata = kanvasing_ds::with(['kecematan', 'kelurahan'])
                 ->where('user_id', $authUserId)
                 ->get();
         } elseif ($timId == 2) {
-            $kanvasingWisata = kanvasing_pkh::with(['kecamatan', 'kelurahan'])
+            $kanvasingWisata = kanvasing_pkh::with(['kecematan', 'kelurahan'])
                 ->where('user_id', $authUserId)
                 ->get();
         } elseif ($timId == 3) {
-            $kanvasingWisata = kanvasing_mm::with(['kecamatan', 'kelurahan'])
+            $kanvasingWisata = kanvasing_mm::with(['kecematan', 'kelurahan'])
                 ->where('user_id', $authUserId)
                 ->get();
         } elseif ($timId == 4) {
-            $kanvasingWisata = kanvasing_aisyiah::with(['kecamatan', 'kelurahan'])
+            $kanvasingWisata = kanvasing_aisyiah::with(['kecematan', 'kelurahan'])
                 ->where('user_id', $authUserId)
                 ->get();
         } else {
-            $kanvasingWisata = KanvasingWisata::with(['kecamatan', 'kelurahan'])
+            $kanvasingWisata = KanvasingWisata::with(['kecematan', 'kelurahan'])
                 ->where('user_id', $authUserId)
                 ->get();
         }
