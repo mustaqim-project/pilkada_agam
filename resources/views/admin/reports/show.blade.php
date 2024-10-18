@@ -7,17 +7,33 @@
         </div>
 
         <div class="card card-primary">
-            <h1>Detail Laporan</h1>
-            <h3>Periode: {{ $report->period }}</h3>
-            <h4>Dari: {{ $report->creator->name }}</h4>
-            <h4>Dikirim ke: {{ $report->assignee->name }}</h4>
+
+            <div class="section-header">
+                <h1>{{ __('admin.Detail Laporan') }}</h1>
+            </div>
+
+            <div class="section-header">
+                <h1>{{ __('admin.Periode') }} : {{ $report->period }}</h1>
+            </div>
+
+            <div class="section-header">
+                <h1>{{ __('admin.Dari: ') }} {{ $report->creator->name }}</h1>
+            </div>
+
+            <div class="section-header">
+                <h1>{{ __('admin.Dikirim ke: ') }} {{ $report->assignee->name }}</h1>
+            </div>
 
             @if ($report->attachment)
-                <h4>Lampiran:</h4>
+                <div class="section-header">
+                    <h1>{{ __('admin.Lampiran') }} </h1>
+                </div>
                 <div>{!! $report->attachment !!}</div>
             @endif
 
-            <h2>Isi Laporan</h2>
+            <div class="section-header">
+                <h1>{{ __('admin.Isi Laporan') }}</h1>
+            </div>
             <div>{!! $report->report_content !!}</div>
 
         </div>
