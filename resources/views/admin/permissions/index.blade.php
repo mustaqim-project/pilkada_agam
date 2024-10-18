@@ -32,8 +32,8 @@
                 <td>{{ $permission->group_name }}</td>
                 <td>{{ $permission->created_at }}</td>
                 <td>
-                    <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST" style="display:inline-block;">
+                    <a href="{{ route('admin.permissions.edit', $permission->id) }}" class="btn btn-warning">Edit</a>
+                    <form action="{{ route('admin.permissions.destroy', $permission->id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
