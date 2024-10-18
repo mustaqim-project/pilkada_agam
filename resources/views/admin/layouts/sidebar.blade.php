@@ -1148,6 +1148,9 @@
                                         href="{{ route('admin.role.index') }}">{{ __('admin.Roles and Permissions') }}</a>
                                 </li>
 
+                                <li class="{{ setSidebarActive(['admin.permissions.*']) }}"><a class="nav-link"
+                                    href="{{ route('admin.permissions.index') }}">{{ __('admin.Permissions') }}</a>
+                            </li>
                                 @if (canAccess(['user register']))
                                     <li class="{{ setSidebarActive(['admin.register.*']) }}">
                                         <a class="nav-link" href="{{ route('admin.register.create') }}">
