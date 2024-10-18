@@ -63,7 +63,7 @@
                             </li>
                         @endif
 
-                        @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
+                        @if (canAccess(['Detail Pembiayaan index', 'Detail Pembiayaan create', 'Detail Pembiayaan update', 'Detail Pembiayaan delete']))
                             <li class="{{ setSidebarActive(['admin.keuangan.detail_pembiayaan.index']) }}">
                                 <a class="nav-link"
                                     href="{{ route('admin.keuangan.detail_pembiayaan.index') }}">{{ __('Detail Pembiayaan') }}</a>
@@ -78,7 +78,7 @@
                             </li>
                         @endif
 
-                        @if (canAccess(['Periode index', 'Periode create', 'Periode update', 'Periode delete']))
+                        @if (canAccess(['Penggunaan Anggaran index', 'Penggunaan Anggaran create', 'Penggunaan Anggaran update', 'Penggunaan Anggaran delete']))
                             <li class="{{ setSidebarActive(['admin.keuangan.penggunaan_anggaran.index']) }}">
                                 <a class="nav-link"
                                     href="{{ route('admin.keuangan.penggunaan_anggaran.index') }}">{{ __('Penggunaan Anggaran') }}</a>

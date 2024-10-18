@@ -1,7 +1,8 @@
 @extends('admin.layouts.master')
+
 @section('content')
 <div class="container">
-    <h1>Create Permission</h1>
+    <h1>Edit Permission</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -13,25 +14,26 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.permissions.store') }}" method="POST">
+    <form action="{{ route('admin.permissions.update', $permission->id) }}" method="POST">
         @csrf
+        @method('PUT') <!-- Menambahkan method PUT untuk update -->
 
         <div class="form-group">
             <label for="name">Permission Name</label>
-            <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+            <input type="text" name="name" class="form-control" value="{{ old('name', $permission->name) }}" required>
         </div>
 
         <div class="form-group">
             <label for="guard_name">Guard Name</label>
-            <input type="text" name="guard_name" class="form-control" value="{{ old('guard_name') }}" required>
+            <input type="text" name="guard_name" class="form-control" value="{{ old('guard_name', $permission->guard_name) }}" required>
         </div>
 
         <div class="form-group">
             <label for="group_name">Group Name</label>
-            <input type="text" name="group_name" class="form-control" value="{{ old('group_name') }}" required>
+            <input type="text" name="group_name" class="form-control" value="{{ old('group_name', $permission->group_name) }}" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create Permission</button>
+        <button type="submit" class="btn btn-primary">Update Permission</button>
     </form>
 </div>
 @endsection
