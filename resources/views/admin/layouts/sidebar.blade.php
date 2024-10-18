@@ -34,7 +34,7 @@
                 </li>
             @endif
 
-            @if (canAccess(['Dashboard Keuangan']))
+            @if (canAccess(['Dashboard Kanvasing']))
                 <li class="{{ setSidebarActive(['admin.dashboard-kanvasing.kanvasing']) }}">
                     <a class="nav-link"
                         href="{{ route('admin.dashboard-kanvasing.kanvasing') }}"> <i class="fas fa-fire"></i>{{ __('Dashboard Kanvasing') }}</a>
