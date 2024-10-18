@@ -9,9 +9,8 @@
         <div class="card card-primary">
             <div class="card-header">
                 <div class="card-header-actions">
-                    <button class="btn btn-primary" id="createTimBtn" data-toggle="modal" data-target="#createTimModal">
-                        <i class="fas fa-plus"></i> {{ __('admin.Create new') }}
-                    </button>
+                    <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary mb-3">Add New Permission</a>
+
                 </div>
             </div>
 
