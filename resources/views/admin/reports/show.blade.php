@@ -14,20 +14,24 @@
             <table class="table">
                 <tr>
                     <th>{{ __('admin.Periode') }}</th>
+                    <td>:</td>
                     <td>{{ $report->period }}</td>
                 </tr>
                 <tr>
                     <th>{{ __('admin.Dari') }}</th>
+                    <td>:</td>
                     <td>{{ $report->creator->name }}</td>
                 </tr>
                 <tr>
                     <th>{{ __('admin.Dikirim ke') }}</th>
+                    <td>:</td>
                     <td>{{ $report->assignee->name }}</td>
                 </tr>
 
                 @if ($report->attachment)
                     <tr>
                         <th>{{ __('admin.Lampiran') }}</th>
+                        <td>:</td>
                         <td>{!! $report->attachment !!}</td>
                     </tr>
                 @endif
