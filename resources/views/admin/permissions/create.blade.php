@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form action="{{ route('permissions.store') }}" method="POST">
+    <form action="{{ route('admin.permissions.store') }}" method="POST">
         @csrf
 
         <div class="form-group">

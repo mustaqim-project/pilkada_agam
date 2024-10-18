@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+
 @section('content')
 <div class="container">
     <h1>Permissions</h1>
@@ -9,7 +10,7 @@
         </div>
     @endif
 
-    <a href="{{ route('permissions.create') }}" class="btn btn-primary mb-3">Add New Permission</a>
+    <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary mb-3">Add New Permission</a>
 
     <table class="table table-bordered">
         <thead>
