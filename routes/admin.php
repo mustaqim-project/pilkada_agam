@@ -59,6 +59,7 @@ use App\Http\Controllers\Admin\Wisata\AdminKecematanWisataController;
 use App\Http\Controllers\Admin\Wisata\KoordinatorKecematanWisataController;
 use App\Http\Controllers\Admin\Keuangan\DetailPembiayaanController;
 use App\Http\Controllers\Admin\Keuangan\PenggunaanAnggaranController;
+use App\Http\Controllers\PermissionController;
 
 
 
@@ -366,6 +367,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
 
 
 
+
+    Route::resource('permissions', PermissionController::class);
 
 
 
