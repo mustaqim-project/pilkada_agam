@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{ __('admin.Team Management') }}</h1>
+            <h1>{{ __('admin.Permission') }}</h1>
         </div>
 
         <div class="card card-primary">
