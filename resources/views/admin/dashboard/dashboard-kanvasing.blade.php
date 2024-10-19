@@ -114,7 +114,7 @@
     </section>
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
     <script>
         // Data untuk chart Kanvasing Harian
         const kanvasingHarianData = {
