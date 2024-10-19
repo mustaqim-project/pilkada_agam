@@ -42,19 +42,29 @@
                                     <td>{{ $wisata->hadir ? 'Ya' : 'Tidak' }}</td>
                                     <td>
                                         <!-- Tombol Edit Wisata -->
-                                        <button type="button" class="btn btn-warning" data-toggle="modal"
+                                        {{-- <button type="button" class="btn btn-warning" data-toggle="modal"
                                             data-target="#modalEditWisata" data-id="{{ $wisata->id }}">
                                             Edit
-                                        </button>
+                                        </button> --}}
+
+                                        <a href="#" data-toggle="modal"
+                                                data-target="#modalEditWisata{{ $wisata->id }}" class="btn btn-warning">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
                                         <!-- Tombol Hapus Wisata -->
-                                        <form
+
+                                        <a href="{{ route('admin.timwisata.admin.kecematan.deleteWisata', $wisata->id) }}"
+                                            class="btn btn-danger delete-item">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                        {{-- <form
                                             action="{{ route('admin.timwisata.admin.kecematan.deleteWisata', $wisata->id) }}"
                                             method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger delete-item"
                                                 >Hapus</button>
-                                        </form>
+                                        </form> --}}
                                     </td>
                                 </tr>
                             @endforeach
