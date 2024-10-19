@@ -14,8 +14,8 @@ class KetuaDashboardController extends Controller
         // Kanvasing Harian
         $kanvasingHarian = DB::table('kanvasing_wisata')
             ->whereDate('created_at', now())
-            ->select(DB::raw('HOUR(created_at) as hour'), DB::raw('COUNT(*) as total'))
-            ->groupBy('hour')
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('HOUR(created_at) as hour'), DB::raw('COUNT(*) as total'))
+            ->groupBy('date', 'hour')
             ->get();
 
         // Kanvasing Mingguan
@@ -39,8 +39,8 @@ class KetuaDashboardController extends Controller
             ->join('kelurahan as kel', 'kw.kelurahan_id', '=', 'kel.id')
             ->join('kecamatan as kec', 'kel.kecamatan_id', '=', 'kec.id')
             ->join('wilayah as w', 'kec.wilayah_id', '=', 'w.id')
-            ->select('w.nama_wilayah', 'kec.nama_kecamatan', 'kel.nama_kelurahan', DB::raw('COUNT(kw.id) as total_kanvasing'))
-            ->groupBy('w.nama_wilayah', 'kec.nama_kecamatan', 'kel.nama_kelurahan')
+            ->select('w.nama_wilayah', DB::raw('COUNT(kw.id) as total_kanvasing'))
+            ->groupBy('w.nama_wilayah')
             ->get();
 
         return view('admin.dashboard.ketuatim', compact(

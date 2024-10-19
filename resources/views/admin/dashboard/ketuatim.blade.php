@@ -62,7 +62,7 @@
         </table>
 
         <h2>Chart Kanvasing per Wilayah</h2>
-        <canvas id="kanvasingChart"></canvas>
+        <canvas id="kanvasingWilayahChart"></canvas>
     </div>
 
     <script>
@@ -71,7 +71,9 @@
         var chartHarian = new Chart(ctxHarian, {
             type: 'line',
             data: {
-                labels: @json($kanvasingHarian->pluck('hour')),
+                labels: @json($kanvasingHarian->map(function($item) {
+                    return $item->date . ' ' . $item->hour . ':00';
+                })),
                 datasets: [{
                     label: 'Total Kanvasing Harian',
                     data: @json($kanvasingHarian->pluck('total')),
@@ -135,24 +137,38 @@
             }
         });
 
-        // Chart Kanvasing per Wilayah
-        var ctxWilayah = document.getElementById('kanvasingChart').getContext('2d');
+        // Chart Kanvasing per Wilayah (Pie Chart)
+        var ctxWilayah = document.getElementById('kanvasingWilayahChart').getContext('2d');
         var chartWilayah = new Chart(ctxWilayah, {
-            type: 'bar',
+            type: 'pie',
             data: {
                 labels: @json($kanvasingPerLokasi->pluck('nama_wilayah')),
                 datasets: [{
                     label: 'Total Kanvasing per Wilayah',
                     data: @json($kanvasingPerLokasi->pluck('total_kanvasing')),
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
                     borderWidth: 1
                 }]
             },
             options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw;
+                            }
+                        }
                     }
                 }
             }
