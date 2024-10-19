@@ -172,9 +172,9 @@
                                     'Tim Pusat DS Keuangan Update',
                                     'Tim Pusat DS Keuangan Delete',
                                 ]))
-                                <li class="{{ setSidebarActive(['admin.timpusatds.ketua.dashboard']) }}">
+                                <li class="{{ setSidebarActive(['admin.ketua.dashboard']) }}">
                                     <a class="nav-link"
-                                        href="{{ route('admin.timpusatds.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        href="{{ route('admin.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
                                 </li>
                                 <li class="{{ setSidebarActive(['admin.timpusatds.index']) }}">
                                     <a class="nav-link"
@@ -227,9 +227,9 @@
                                     'Tim Pusat Wisata Keuangan Update',
                                     'Tim Pusat Wisata Keuangan Delete',
                                 ]))
-                                <li class="{{ setSidebarActive(['admin.timpusatwisata.ketua.dashboard']) }}">
+                                <li class="{{ setSidebarActive(['admin.ketua.dashboard']) }}">
                                     <a class="nav-link"
-                                        href="{{ route('admin.timpusatwisata.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        href="{{ route('admin.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
                                 </li>
                                 <li class="{{ setSidebarActive(['admin.timpusatwisata.index']) }}">
                                     <a class="nav-link"
@@ -283,9 +283,9 @@
                                     'Tim Pusat PKH Keuangan Update',
                                     'Tim Pusat PKH Keuangan Delete',
                                 ]))
-                                <li class="{{ setSidebarActive(['admin.timpusatpkh.ketua.dashboard']) }}">
+                                <li class="{{ setSidebarActive(['admin.ketua.dashboard']) }}">
                                     <a class="nav-link"
-                                        href="{{ route('admin.timpusatpkh.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        href="{{ route('admin.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
                                 </li>
                                 <li class="{{ setSidebarActive(['admin.timpusatpkh.index']) }}">
                                     <a class="nav-link"
@@ -338,9 +338,9 @@
                                     'Tim Pusat Muhammadiyah Keuangan Update',
                                     'Tim Pusat Muhammadiyah Keuangan Delete',
                                 ]))
-                                <li class="{{ setSidebarActive(['admin.timpusatmm.ketua.dashboard']) }}">
+                                <li class="{{ setSidebarActive(['admin.ketua.dashboard']) }}">
                                     <a class="nav-link"
-                                        href="{{ route('admin.timpusatmm.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        href="{{ route('admin.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
                                 </li>
                                 <li class="{{ setSidebarActive(['admin.timpusatmm.index']) }}">
                                     <a class="nav-link"
@@ -394,9 +394,9 @@
                                     'Tim Pusat Aisyiah Keuangan Update',
                                     'Tim Pusat Aisyiah Keuangan Delete',
                                 ]))
-                                <li class="{{ setSidebarActive(['admin.timpusatAisyiah.ketua.dashboard']) }}">
+                                <li class="{{ setSidebarActive(['admin.ketua.dashboard']) }}">
                                     <a class="nav-link"
-                                        href="{{ route('admin.timpusatAisyiah.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        href="{{ route('admin.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
                                 </li>
                                 <li class="{{ setSidebarActive(['admin.timpusatAisyiah.index']) }}">
                                     <a class="nav-link"
