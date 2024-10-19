@@ -7,35 +7,25 @@ use Illuminate\Support\Facades\DB;
 
 class KetuaDashboardController extends Controller
 {
-    public function kanvasingDashboard() {
+    public function kanvasingDashboard()
+    {
         // Query jumlah kanvasing per wilayah
-        $kanvasingWilayah = DB::table('kanvasing_wisata as k')
-            ->join('kelurahan as kel', 'k.kelurahan_id', '=', 'kel.id')
+        $totalKanvasing = DB::table('kanvasing_wisata')->count();
+        $kanvasingMingguan = DB::table('kanvasing_wisata')
+            ->where('created_at', '>=', now()->subDays(7))
+            ->count();
+        $kanvasingHarian = DB::table('kanvasing_wisata')
+            ->whereDate('created_at', now())
+            ->count();
+
+        $kanvasingPerWilayah = DB::table('kanvasing_wisata as kw')
+            ->join('kelurahan as kel', 'kw.kelurahan_id', '=', 'kel.id')
             ->join('kecamatan as kec', 'kel.kecamatan_id', '=', 'kec.id')
             ->join('wilayah as w', 'kec.wilayah_id', '=', 'w.id')
-            ->select('w.nama_wilayah', DB::raw('COUNT(k.id) as total_kanvasing'))
-            ->whereDate('k.created_at', now()->toDateString())
-            ->groupBy('w.id', 'w.nama_wilayah') // Tambahkan w.nama_wilayah ke groupBy
+            ->select('w.nama_wilayah', 'kec.nama_kecamatan', 'kel.nama_kelurahan', DB::raw('COUNT(kw.id) as total_kanvasing'))
+            ->groupBy('w.nama_wilayah', 'kec.nama_kecamatan', 'kel.nama_kelurahan')
             ->get();
 
-
-        // Query jumlah kanvasing per kecamatan
-        $kanvasingKecamatan = DB::table('kanvasing_wisata as k')
-            ->join('kelurahan as kel', 'k.kelurahan_id', '=', 'kel.id')
-            ->join('kecamatan as kec', 'kel.kecamatan_id', '=', 'kec.id')
-            ->select('kec.nama_kecamatan', DB::raw('COUNT(k.id) as total_kanvasing'))
-            ->whereDate('k.created_at', now()->toDateString())
-            ->groupBy('kec.id')
-            ->get();
-
-        // Query jumlah kanvasing per kelurahan
-        $kanvasingKelurahan = DB::table('kanvasing_wisata as k')
-            ->join('kelurahan as kel', 'k.kelurahan_id', '=', 'kel.id')
-            ->select('kel.nama_kelurahan', DB::raw('COUNT(k.id) as total_kanvasing'))
-            ->whereDate('k.created_at', now()->toDateString())
-            ->groupBy('kel.id')
-            ->get();
-
-        return view('admin.dashboard.ketuatim', compact('kanvasingWilayah', 'kanvasingKecamatan', 'kanvasingKelurahan'));
+        return view('admin.dashboard.ketuatim', compact('totalKanvasing', 'kanvasingMingguan', 'kanvasingHarian', 'kanvasingPerWilayah'));
     }
 }
