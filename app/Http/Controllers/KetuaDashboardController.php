@@ -12,10 +12,10 @@ class KetuaDashboardController extends Controller
 
     public function kanvasingDashboard()
     {
-        $authUserId = auth()->id(); // Mendapatkan ID user yang sedang login
-        $timId = auth()->user()->tim_id; // Mendapatkan tim ID dari user
+        $admin = Auth::guard('admin')->user();
+        $timId = $admin->tim_id;
 
-        // Ambil data kanvasing sesuai tim_id
+
         switch ($timId) {
             case 1:
                 $kanvasingWisata = DB::table('kanvasing_ds')->where('user_id', $authUserId)->get();
