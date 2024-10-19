@@ -42,6 +42,15 @@ class KetuaDashboardController extends Controller
         ->select('w.nama_wilayah', 'kec.nama_kecamatan', 'kel.nama_kelurahan', DB::raw('COUNT(kw.id) as total_kanvasing'))
         ->groupBy('w.nama_wilayah', 'kec.nama_kecamatan', 'kel.nama_kelurahan')
         ->get();
+// Jumlah Kanvasing berdasarkan Wilayah
+$kanvasingPerWilayah = DB::table('wilayah as w')
+    ->select('w.id as wilayah_id', 'w.nama_wilayah', DB::raw('COUNT(k.id) as jumlah_kanvasing'))
+    ->leftJoin('kecamatan as kc', 'w.id', '=', 'kc.wilayah_id')
+    ->leftJoin('kelurahan as kl', 'kc.id', '=', 'kl.kecamatan_id')
+    ->leftJoin('kanvasing_wisata as k', 'kl.id', '=', 'k.kelurahan_id')
+    ->groupBy('w.id', 'w.nama_wilayah')
+    ->orderBy('w.nama_wilayah')
+    ->get();
 
 
         return view('admin.dashboard.ketuatim', compact(
@@ -49,7 +58,8 @@ class KetuaDashboardController extends Controller
             'kanvasingHarian',
             'kanvasingMingguan',
             'kanvasingBulanan',
-            'kanvasingPerLokasi'
+            'kanvasingPerLokasi',
+            'kanvasingPerWilayah'
         ));
     }
 }

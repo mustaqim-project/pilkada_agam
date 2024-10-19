@@ -39,7 +39,7 @@
                 <canvas id="kanvasingBulananChart"></canvas>
             </div>
 
-             <h2>Jumlah Kanvasing per Wilayah, Kecamatan, dan Kelurahan</h2>
+            <h2>Jumlah Kanvasing per Wilayah, Kecamatan, dan Kelurahan</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -143,10 +143,10 @@
             var chartWilayah = new Chart(ctxWilayah, {
                 type: 'pie',
                 data: {
-                    labels: @json($kanvasingPerLokasi->pluck('nama_wilayah')),
+                    labels: @json($kanvasingPerWilayah->pluck('nama_wilayah')),
                     datasets: [{
                         label: 'Total Kanvasing per Wilayah',
-                        data: @json($kanvasingPerLokasi->pluck('total_kanvasing')),
+                        data: @json($kanvasingPerWilayah->pluck('jumlah_kanvasing')),
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
