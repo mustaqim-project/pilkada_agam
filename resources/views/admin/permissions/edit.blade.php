@@ -16,7 +16,7 @@
 
     <form action="{{ route('admin.permissions.update', $permission->id) }}" method="POST">
         @csrf
-        @method('PUT') <!-- Menambahkan method PUT untuk update -->
+        @method('PUT')
 
         <div class="form-group">
             <label for="name">Permission Name</label>
