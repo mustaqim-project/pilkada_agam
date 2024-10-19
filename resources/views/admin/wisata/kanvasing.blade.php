@@ -199,22 +199,24 @@
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            @if (Session::has('toast_success'))
+        document.addEventListener('DOMContentLoaded', () => {
+            const successMessage = '{{ session('success') }}';
+            const errorMessage = '{{ session('error') }}';
+
+            if (successMessage) {
                 Toast.fire({
                     icon: 'success',
-                    title: '{{ Session::get('toast_success') }}'
+                    title: successMessage
                 });
-            @endif
+            }
 
-            @if (Session::has('toast_error'))
+            if (errorMessage) {
                 Toast.fire({
                     icon: 'error',
-                    title: '{{ Session::get('toast_error') }}'
+                    title: errorMessage
                 });
-            @endif
+            }
         });
-
 
 
 
