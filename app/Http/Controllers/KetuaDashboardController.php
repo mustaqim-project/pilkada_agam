@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -36,7 +35,7 @@ class KetuaDashboardController extends Controller
                 $kanvasingWisata = DB::table('kanvasing_aisyiahs')->where('user_id', $authUserId)->get();
                 $kanvasingTable = 'kanvasing_aisyiahs';
                 break;
-            case 5:
+            default:
                 $kanvasingWisata = DB::table('kanvasing_wisata')->where('user_id', $authUserId)->get();
                 $kanvasingTable = 'kanvasing_wisata';
                 break;
