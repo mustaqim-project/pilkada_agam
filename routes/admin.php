@@ -60,6 +60,7 @@ use App\Http\Controllers\Admin\Wisata\KoordinatorKecematanWisataController;
 use App\Http\Controllers\Admin\Keuangan\DetailPembiayaanController;
 use App\Http\Controllers\Admin\Keuangan\PenggunaanAnggaranController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\KetuaDashboardController;
 
 
 
@@ -548,6 +549,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
 
 
 
+
+    Route::get('/ketua-dashboard', [KetuaDashboardController::class, 'kanvasingDashboard'])->name('ketua.dashboard');
 
 
 
