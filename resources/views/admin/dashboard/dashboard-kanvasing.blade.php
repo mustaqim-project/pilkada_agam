@@ -7,11 +7,6 @@
         </div>
         <div class="row">
 
-            <div class="card">
-                <div class="card-header">
-                    <h2>Total Kanvasing: {{ $totalKanvasing }}</h2>
-                </div>
-            </div>
 
 
 
@@ -98,8 +93,6 @@
         </div>
     </section>
 
-@section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Data untuk chart Kanvasing Harian
         const kanvasingHarianData = {
