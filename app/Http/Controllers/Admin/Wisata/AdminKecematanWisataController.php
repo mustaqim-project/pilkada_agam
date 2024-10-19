@@ -351,7 +351,10 @@ class AdminKecematanWisataController extends Controller
         $kanvasingWisata = KanvasingWisata::findOrFail($id);
         $kanvasingWisata->delete();
 
-        return redirect()->route('admin.timwisata.admin.kecematan.InputData')->with('success', 'Data berhasil dihapus.');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data berhasil dihapus!'
+        ]);
     }
 
 
