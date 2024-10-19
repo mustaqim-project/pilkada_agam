@@ -38,6 +38,13 @@
                 <h2>Chart Kanvasing Bulanan</h2>
                 <canvas id="kanvasingBulananChart"></canvas>
             </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                <h2>Chart Kanvasing per Wilayah</h2>
+                <canvas id="kanvasingWilayahChart"></canvas>
+            </div>
+
+
+
 
             <h2>Jumlah Kanvasing per Wilayah, Kecamatan, dan Kelurahan</h2>
             <table class="table table-striped">
@@ -61,8 +68,7 @@
                 </tbody>
             </table>
 
-            <h2>Chart Kanvasing per Wilayah</h2>
-            <canvas id="kanvasingWilayahChart"></canvas>
+
         </div>
 
         <script>
