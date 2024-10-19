@@ -199,9 +199,9 @@
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
 
-                                        <li class="{{ setSidebarActive(['admin.timpusatwisata.ketua.laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpusatwisata.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -212,9 +212,9 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.admin.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatwisata.admin.laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpusatwisata.admin.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
