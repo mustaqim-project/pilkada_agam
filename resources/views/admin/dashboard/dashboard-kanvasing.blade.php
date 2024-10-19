@@ -17,7 +17,7 @@
                                 <h4>{{ ucfirst($model) }}</h4>
                             </div>
                             <div class="card-body">
-                                {{ $count }}</p>
+                                {{ $count }}
                             </div>
                         </div>
                     </div>
