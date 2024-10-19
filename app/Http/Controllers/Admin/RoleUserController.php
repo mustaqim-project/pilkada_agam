@@ -96,13 +96,15 @@ class RoleUserController extends Controller
     {
         $user = Admin::with(['atasan', 'tim', 'jabatan', 'bank'])->findOrFail($id);
 
-        // Retrieve all banks
-        $banks = Bank::all();  // Fetch all bank data
-        $teams = tim::all();  // Fetch all bank data
-        $positions  = jabatan::all();  // Fetch all bank data
-        $roles = Role::all();
-        $admins = Admin::all();
-        return view('admin.role-user.edit', compact('roles', 'admins', 'teams', 'positions', 'banks'));
+        // Retrieve all necessary data
+        $banks = Bank::all();      // Fetch all bank data
+        $teams = tim::all();       // Fetch all teams data
+        $positions = jabatan::all(); // Fetch all positions data
+        $roles = Role::all();      // Fetch all roles data
+        $admins = Admin::all();    // Fetch all admins data
+
+        // Pass all variables to the view
+        return view('admin.role-user.edit', compact('user', 'roles', 'admins', 'teams', 'positions', 'banks'));
     }
 
 
