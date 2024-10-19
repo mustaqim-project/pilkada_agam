@@ -42,7 +42,7 @@
             @endif
 
 
-            @if (canAccess(['Keuangan show']))
+            @if (canAccess(['Keuangan Pusat']))
                 <li class="menu-header">{{ __('admin.Keuangan') }}</li>
                 <li class="dropdown">
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-wave"></i>
@@ -56,7 +56,12 @@
                         @endif
 
 
-                        @if (canAccess(['JenisPembiayaan index', 'JenisPembiayaan create', 'JenisPembiayaan update', 'JenisPembiayaan delete']))
+                        @if (canAccess([
+                                'Jenis Pembiayaan index',
+                                'Jenis Pembiayaan create',
+                                'Jenis Pembiayaan update',
+                                'Jenis Pembiayaan delete',
+                            ]))
                             <li class="{{ setSidebarActive(['admin.jenis-pembiayaan.index']) }}">
                                 <a class="nav-link"
                                     href="{{ route('admin.jenis-pembiayaan.index') }}">{{ __('Jenis Pembiayaan') }}</a>
@@ -430,6 +435,8 @@
                 @endif
 
             @endif
+
+
 
 
 
