@@ -9,16 +9,20 @@ class KetuaDashboardController extends Controller
 {
     public function kanvasingDashboard()
     {
-        // Query jumlah kanvasing per wilayah
         $totalKanvasing = DB::table('kanvasing_wisata')->count();
+
+        // Kanvasing Mingguan
         $kanvasingMingguan = DB::table('kanvasing_wisata')
             ->where('created_at', '>=', now()->subDays(7))
             ->count();
+
+        // Kanvasing Harian
         $kanvasingHarian = DB::table('kanvasing_wisata')
             ->whereDate('created_at', now())
             ->count();
 
-        $kanvasingPerWilayah = DB::table('kanvasing_wisata as kw')
+        // Jumlah Kanvasing berdasarkan Wilayah, Kecamatan, dan Kelurahan
+        $kanvasingPerLokasi = DB::table('kanvasing_wisata as kw')
             ->join('kelurahan as kel', 'kw.kelurahan_id', '=', 'kel.id')
             ->join('kecamatan as kec', 'kel.kecamatan_id', '=', 'kec.id')
             ->join('wilayah as w', 'kec.wilayah_id', '=', 'w.id')
@@ -26,6 +30,7 @@ class KetuaDashboardController extends Controller
             ->groupBy('w.nama_wilayah', 'kec.nama_kecamatan', 'kel.nama_kelurahan')
             ->get();
 
-        return view('admin.dashboard.ketuatim', compact('totalKanvasing', 'kanvasingMingguan', 'kanvasingHarian', 'kanvasingPerWilayah'));
+        return view('admin.dashboard.ketuatim',  compact('totalKanvasing', 'kanvasingMingguan', 'kanvasingHarian', 'kanvasingPerLokasi'));
     }
+
 }
