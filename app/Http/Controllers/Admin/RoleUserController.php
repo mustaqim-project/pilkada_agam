@@ -94,12 +94,14 @@ class RoleUserController extends Controller
      */
     public function edit(string $id): View
     {
-
         $user = Admin::with(['atasan', 'tim', 'jabatan', 'bank'])->findOrFail($id);
 
+        // Retrieve all banks
+        $banks = Bank::all();  // Fetch all bank data
 
-        return view('admin.role-user.edit', compact('user'));
+        return view('admin.role-user.edit', compact('user', 'banks')); // Pass both user and banks to the view
     }
+
 
     /**
      * Update the specified resource in storage.

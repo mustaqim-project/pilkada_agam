@@ -52,7 +52,7 @@
                     <select name="kode_bank" class="form-control select2">
                         <option value="">{{ __('admin.--Select--') }}</option>
                         @foreach ($banks as $bank)
-                            <option value="{{ $bank->kode_bank }}" {{ old('kode_bank', $user->kode_bank) == $bank->kode_bank ? 'selected' : '' }}>
+                            <option value="{{ $bank->kode_bank }}" {{ old('kode_bank', $user->bank->kode_bank) == $bank->kode_bank ? 'selected' : '' }}>
                                 {{ $bank->nama_bank }}
                             </option>
                         @endforeach
@@ -61,6 +61,7 @@
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
+
 
                 <div class="form-group">
                     <label>{{ __('admin.No Rekening') }}</label>
