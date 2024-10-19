@@ -11,15 +11,28 @@ class KetuaDashboardController extends Controller
     {
         $totalKanvasing = DB::table('kanvasing_wisata')->count();
 
-        // Kanvasing Mingguan
-        $kanvasingMingguan = DB::table('kanvasing_wisata')
-            ->where('created_at', '>=', now()->subDays(7))
-            ->count();
-
         // Kanvasing Harian
         $kanvasingHarian = DB::table('kanvasing_wisata')
             ->whereDate('created_at', now())
-            ->count();
+            ->select(DB::raw('HOUR(created_at) as hour'), DB::raw('COUNT(*) as total'))
+            ->groupBy('hour')
+            ->get();
+
+        // Kanvasing Mingguan
+        $startDate = now()->subDays(6); // 7 hari termasuk hari ini
+        $endDate = now();
+        $kanvasingMingguan = DB::table('kanvasing_wisata')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('COUNT(*) as total'))
+            ->groupBy('date')
+            ->get();
+
+        // Kanvasing Bulanan
+        $kanvasingBulanan = DB::table('kanvasing_wisata')
+            ->whereYear('created_at', now()->year)
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
+            ->groupBy('month')
+            ->get();
 
         // Jumlah Kanvasing berdasarkan Wilayah, Kecamatan, dan Kelurahan
         $kanvasingPerLokasi = DB::table('kanvasing_wisata as kw')
@@ -30,7 +43,12 @@ class KetuaDashboardController extends Controller
             ->groupBy('w.nama_wilayah', 'kec.nama_kecamatan', 'kel.nama_kelurahan')
             ->get();
 
-        return view('admin.dashboard.ketuatim',  compact('totalKanvasing', 'kanvasingMingguan', 'kanvasingHarian', 'kanvasingPerLokasi'));
+        return view('admin.dashboard.ketuatim', compact(
+            'totalKanvasing',
+            'kanvasingHarian',
+            'kanvasingMingguan',
+            'kanvasingBulanan',
+            'kanvasingPerLokasi'
+        ));
     }
-
 }
