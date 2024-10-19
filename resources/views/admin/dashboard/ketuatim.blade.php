@@ -9,31 +9,53 @@
 
         <div class="row">
             <div class="row mb-4">
-                <div class="col-md-4">
-                    <div class="card text-white bg-primary">
-                        <div class="card-header">Total Kanvasing</div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $totalKanvasing }}</h5>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-primary">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Kanvasing</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalKanvasing }}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card text-white bg-success">
-                        <div class="card-header">Kanvasing Mingguan</div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $kanvasingMingguan }}</h5>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-success">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Kanvasing Mingguan</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $kanvasingMingguan }}
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card text-white bg-info">
-                        <div class="card-header">Kanvasing Harian</div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $kanvasingHarian }}</h5>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-info">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Kanvasing Harian</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $kanvasingHarian }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <h2>Jumlah Kanvasing per Wilayah, Kecamatan, dan Kelurahan</h2>
             <table class="table table-striped">
