@@ -48,9 +48,9 @@
                                         </button> --}}
 
                                         <a href="#" data-toggle="modal"
-                                                data-target="#modalEditWisata{{ $wisata->id }}" class="btn btn-warning">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
+                                        data-target="#modalEditWisata" data-id="{{ $wisata->id }}" class="btn btn-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
                                         <!-- Tombol Hapus Wisata -->
 
                                         <a href="{{ route('admin.timwisata.admin.kecematan.deleteWisata', $wisata->id) }}"
@@ -199,24 +199,24 @@
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const successMessage = '{{ session('success') }}';
-            const errorMessage = '{{ session('error') }}';
-
-            if (successMessage) {
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (Session::has('toast_success'))
                 Toast.fire({
                     icon: 'success',
-                    title: successMessage
+                    title: '{{ Session::get('toast_success') }}'
                 });
-            }
+            @endif
 
-            if (errorMessage) {
+            @if (Session::has('toast_error'))
                 Toast.fire({
                     icon: 'error',
-                    title: errorMessage
+                    title: '{{ Session::get('toast_error') }}'
                 });
-            }
+            @endif
         });
+
+
+
 
         $(document).ready(function() {
             $('#kecematan_id').change(function() {
