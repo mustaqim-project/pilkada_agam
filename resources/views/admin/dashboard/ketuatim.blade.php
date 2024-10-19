@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('admin.layouts.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Kanvasing</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-
-<body>
-
-    <div class="container mt-5">
+@section('content')
+    <section class="section">
         <h1>Dashboard Kanvasing</h1>
 
         <div class="row mb-4">
@@ -90,8 +79,5 @@
                 }
             });
         </script>
-    </div>
-
-</body>
-
-</html>
+    </section>
+@endsection
