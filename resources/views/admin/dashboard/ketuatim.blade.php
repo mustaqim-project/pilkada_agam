@@ -39,7 +39,7 @@
                 <canvas id="kanvasingBulananChart"></canvas>
             </div>
 
-            <h2>Jumlah Kanvasing per Wilayah, Kecamatan, dan Kelurahan</h2>
+             <h2>Jumlah Kanvasing per Wilayah, Kecamatan, dan Kelurahan</h2>
             <table class="table table-striped">
                 <thead>
                     <tr>

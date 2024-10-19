@@ -36,12 +36,13 @@ class KetuaDashboardController extends Controller
 
         // Jumlah Kanvasing berdasarkan Wilayah, Kecamatan, dan Kelurahan
         $kanvasingPerLokasi = DB::table('kanvasing_wisata as kw')
-            ->join('kelurahan as kel', 'kw.kelurahan_id', '=', 'kel.id')
-            ->join('kecamatan as kec', 'kel.kecamatan_id', '=', 'kec.id')
-            ->join('wilayah as w', 'kec.wilayah_id', '=', 'w.id')
-            ->select('w.nama_wilayah', DB::raw('COUNT(kw.id) as total_kanvasing'))
-            ->groupBy('w.nama_wilayah')
-            ->get();
+        ->join('kelurahan as kel', 'kw.kelurahan_id', '=', 'kel.id')
+        ->join('kecamatan as kec', 'kel.kecamatan_id', '=', 'kec.id')
+        ->join('wilayah as w', 'kec.wilayah_id', '=', 'w.id')
+        ->select('w.nama_wilayah', 'kec.nama_kecamatan', 'kel.nama_kelurahan', DB::raw('COUNT(kw.id) as total_kanvasing'))
+        ->groupBy('w.nama_wilayah', 'kec.nama_kecamatan', 'kel.nama_kelurahan')
+        ->get();
+
 
         return view('admin.dashboard.ketuatim', compact(
             'totalKanvasing',
