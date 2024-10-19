@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,7 @@ class KetuaDashboardController extends Controller
     public function kanvasingDashboard()
     {
         $admin = Auth::guard('admin')->user();
+        $authUserId = $admin->id;
         $timId = $admin->tim_id;
 
 
