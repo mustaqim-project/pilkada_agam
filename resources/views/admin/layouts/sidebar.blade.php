@@ -144,9 +144,9 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatds.ketua.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatds.ketua.laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpusatds.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -157,9 +157,9 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatds.admin.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatds.admin.laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpusatds.admin.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -254,9 +254,9 @@
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
 
-                                        <li class="{{ setSidebarActive(['admin.timpusatpkh.ketua.laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpusatpkh.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -268,9 +268,9 @@
                                     <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
                                     <ul class="dropdown-menu">
 
-                                        <li class="{{ setSidebarActive(['admin.timpusatpkh.admin.laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpusatpkh.admin.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -309,9 +309,9 @@
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
 
-                                        <li class="{{ setSidebarActive(['admin.timpusatmm.ketua.laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpusatmm.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -323,9 +323,9 @@
                                     <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
                                     <ul class="dropdown-menu">
 
-                                        <li class="{{ setSidebarActive(['admin.timpusatmm.admin.laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpusatmm.admin.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -351,6 +351,7 @@
                         </ul>
                     </li>
                 @endif
+
                 {{-- TIM PUSAT AISYIAH --}}
                 @if (canAccess(['Tim Pusat Aisyiah']))
                     <li class="dropdown {{ setSidebarActive(['admin.timpusatAisyiah.*']) }}">
@@ -364,9 +365,9 @@
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
 
-                                        <li class="{{ setSidebarActive(['admin.timpusatAisyiah.ketua.laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpusatAisyiah.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -378,9 +379,9 @@
                                     <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
                                     <ul class="dropdown-menu">
 
-                                        <li class="{{ setSidebarActive(['Tim Pusat Aisyiah Admin Laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpusatAisyiah.admin.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -428,9 +429,9 @@
                                             <a class="nav-link"
                                                 href="{{ route('admin.timds.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
-                                        <li class="{{ setSidebarActive(['admin.timds.ketua.laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timds.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -448,9 +449,9 @@
                                                 href="{{ route('admin.timds.koordinator.wilayah.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timds.koordinator.wilayah.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timds.koordinator.wilayah.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -468,9 +469,9 @@
                                                 href="{{ route('admin.timds.koordinator.kecamatan.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timds.koordinator.kecamatan.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timds.koordinator.kecamatan.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -488,9 +489,9 @@
                                                 href="{{ route('admin.timds.koordinator.nagari.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timds.koordinator.nagari.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timds.koordinator.nagari.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -534,9 +535,9 @@
                                                 href="{{ route('admin.timpkh.koordinator.wilayah.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timpkh.koordinator.wilayah.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpkh.koordinator.wilayah.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -622,9 +623,9 @@
                                                 href="{{ route('admin.timmm.koordinator.wilayah.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timmm.koordinator.wilayah.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timmm.koordinator.wilayah.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -642,9 +643,9 @@
                                                 href="{{ route('admin.timmm.koordinator.kecamatan.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timmm.koordinator.kecamatan.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timmm.koordinator.kecamatan.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -662,9 +663,9 @@
                                                 href="{{ route('admin.timmm.koordinator.nagari.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timmm.koordinator.nagari.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timmm.koordinator.nagari.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -689,9 +690,9 @@
                                             <a class="nav-link"
                                                 href="{{ route('admin.timpkh.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
-                                        <li class="{{ setSidebarActive(['admin.timpkh.ketua.laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpkh.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -709,9 +710,9 @@
                                                 href="{{ route('admin.timpkh.koordinator.wilayah.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timpkh.koordinator.wilayah.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpkh.koordinator.wilayah.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -730,9 +731,9 @@
                                                 href="{{ route('admin.timpkh.koordinator.kecamatan.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timpkh.koordinator.kecamatan.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpkh.koordinator.kecamatan.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -777,9 +778,9 @@
                                             <a class="nav-link"
                                                 href="{{ route('admin.timpkh.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
-                                        <li class="{{ setSidebarActive(['admin.timpkh.ketua.laporan']) }}">
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpkh.ketua.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -797,9 +798,9 @@
                                                 href="{{ route('admin.timpkh.koordinator.wilayah.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timpkh.koordinator.wilayah.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpkh.koordinator.wilayah.laporan') }}">{{ __('Laporan') }}</a>
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
                                         </li>
                                     </ul>
                                 </li>
