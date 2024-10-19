@@ -776,9 +776,9 @@
                                             </a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timwisata.koordinator.wilayah.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timwisata.koordinator.wilayah.laporan') }}">
+                                                href="{{ route('admin.reports.index') }}">
                                                 {{ __('Laporan') }}
                                             </a>
                                         </li>
@@ -801,9 +801,9 @@
                                             </a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timwisata.koordinator.kecematan.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timwisata.koordinator.kecematan.laporan') }}">
+                                                href="{{ route('admin.reports.index') }}">
                                                 {{ __('Laporan') }}
                                             </a>
                                         </li>
@@ -838,9 +838,9 @@
                                             </a>
                                         </li>
                                         <li
-                                            class="{{ setSidebarActive(['admin.timwisata.admin.kecematan.laporan']) }}">
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timwisata.admin.kecematan.laporan') }}">
+                                                href="{{ route('admin.reports.index') }}">
                                                 {{ __('Laporan') }}
                                             </a>
                                         </li>
