@@ -426,6 +426,8 @@
 
 
             @if (canAccess(['Tim Inti']))
+            <li class="menu-header">{{ __('admin.TIM INTI') }}</li>
+
                 @if (canAccess(['Tim Inti Ds']))
                     <li class="dropdown {{ setSidebarActive(['admin.timds.*']) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
