@@ -261,61 +261,7 @@
                     </li>
                 @endif
 
-                {{-- TIM PUSAT PKH --}}
-                @if (canAccess(['Tim Pusat PKH']))
-                    <li class="dropdown {{ setSidebarActive(['admin.timpusatpkh.*']) }}">
-                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
-                            <span>{{ __('Tim PKH') }}</span></a>
-                        <ul class="dropdown-menu">
 
-                            {{-- Ketua Tim --}}
-                            @if (canAccess(['Tim Pusat PKH Ketua Tim Dashboard']))
-                                <li class="dropdown {{ setSidebarActive(['admin.timpusatpkh.ketua.*']) }}">
-                                    <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatpkh.ketua.dashboard']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatpkh.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        </li>
-                                        <li class="{{ setSidebarActive(['admin.timpusatpkh.ketua.laporan']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatpkh.ketua.laporan') }}">{{ __('Laporan') }}</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            @endif
-
-                            {{-- Admin --}}
-                            @if (canAccess(['Tim Pusat PKH Admin Dashboard']))
-                                <li class="dropdown {{ setSidebarActive(['admin.timpusatpkh.admin.*']) }}">
-                                    <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatpkh.admin.dashboard']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatpkh.admin.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        </li>
-                                        <li class="{{ setSidebarActive(['admin.timpusatpkh.admin.laporan']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatpkh.admin.laporan') }}">{{ __('Laporan') }}</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            @endif
-
-                            {{-- Keuangan DS --}}
-                            @if (canAccess([
-                                    'Tim Pusat PKH Keuangan Index',
-                                    'Tim Pusat PKH Keuangan Create',
-                                    'Tim Pusat PKH Keuangan Update',
-                                    'Tim Pusat PKH Keuangan Delete',
-                                ]))
-                                <li class="{{ setSidebarActive(['admin.timpusatpkh.index']) }}">
-                                    <a class="nav-link"
-                                        href="{{ route('admin.timpusatpkh.index') }}">{{ __('Keuangan PKH') }}</a>
-                                </li>
-                            @endif
-                    </li>
-                @endif
 
                 {{-- TIM PUSAT MUHAMMADIYAH --}}
                 @if (canAccess(['Tim Pusat Muhammadiyah']))
