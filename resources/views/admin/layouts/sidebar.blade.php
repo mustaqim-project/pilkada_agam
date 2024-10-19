@@ -763,6 +763,95 @@
                     </li>
                 @endif
 
+                @if (canAccess(['Tim Inti Wisata']))
+                    <li class="dropdown {{ setSidebarActive(['admin.timds.*']) }}">
+                        <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>
+                            <span>{{ __('TIM Wisata') }}</span></a>
+                        <ul class="dropdown-menu">
+
+                            {{-- Ketua DS --}}
+                            @if (canAccess(['Tim Inti Ketua wisata dashboard']))
+                                <li class="dropdown {{ setSidebarActive(['admin.timwisata.ketua.*']) }}">
+                                    <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="{{ setSidebarActive(['admin.timwisata.ketua.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timwisata.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li class="{{ setSidebarActive(['admin.reports.index']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+
+                            {{-- Koordinator Wilayah --}}
+                            @if (canAccess(['koordinator wilayah wisata']))
+                                <li class="dropdown {{ setSidebarActive(['admin.timwisata.koordinator.wilayah.*']) }}">
+                                    <a href="#"
+                                        class="nav-link has-dropdown">{{ __('Koordinator Wilayah') }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li
+                                            class="{{ setSidebarActive(['admin.timwisata.koordinator.wilayah.dashboard']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.timwisata.koordinator.wilayah.dashboard') }}">{{ __('Dashboard') }}</a>
+                                        </li>
+                                        <li
+                                            class="{{ setSidebarActive(['admin.reports.index']) }}">
+                                            <a class="nav-link"
+                                                href="{{ route('admin.reports.index') }}">{{ __('Laporan') }}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
+
+
+                            @if (canAccess(['koordinator admin wisata']))
+
+                            <li
+                                class="dropdown {{ setSidebarActive(['admin.timwisata.admin.kecematan.*']) }}">
+                                <a href="#" class="nav-link has-dropdown">
+                                    {{ __('Admin Kecematan') }}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li
+                                        class="{{ setSidebarActive(['admin.timwisata.admin.kecematan.dashboard']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timwisata.admin.kecematan.dashboard') }}">
+                                            {{ __('Dashboard') }}
+                                        </a>
+                                    </li>
+                                    <li
+                                        class="{{ setSidebarActive(['admin.timwisata.admin.kecematan.laporan']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timwisata.admin.kecematan.laporan') }}">
+                                            {{ __('Laporan') }}
+                                        </a>
+                                    </li>
+                                    <li
+                                        class="{{ setSidebarActive(['admin.timwisata.admin.kecematan.InputData']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timwisata.admin.kecematan.InputData') }}">
+                                            {{ __('Input Data Wisata') }}
+                                        </a>
+                                    </li>
+                                    <li
+                                        class="{{ setSidebarActive(['admin.timwisata.admin.kecematan.absensi']) }}">
+                                        <a class="nav-link"
+                                            href="{{ route('admin.timwisata.admin.kecematan.absensi') }}">
+                                            {{ __('Absesnsi Wisata') }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+
+                        </ul>
+                    </li>
+                @endif
+
                 @if (canAccess(['Tim Inti PARPOL']))
                     <li class="dropdown {{ setSidebarActive(['admin.timpkh.*']) }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i>

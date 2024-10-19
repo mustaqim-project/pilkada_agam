@@ -545,4 +545,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         Route::get('/wisata/kelurahans/{kecamatan_id}', [AdminKecematanWisataController::class, 'getKelurahans'])
             ->name('timwisata.admin.kecematan.getKelurahans');
     });
+
+
+
+
+
+
 });
