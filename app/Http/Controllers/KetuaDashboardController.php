@@ -15,8 +15,9 @@ class KetuaDashboardController extends Controller
             ->join('wilayah as w', 'kec.wilayah_id', '=', 'w.id')
             ->select('w.nama_wilayah', DB::raw('COUNT(k.id) as total_kanvasing'))
             ->whereDate('k.created_at', now()->toDateString())
-            ->groupBy('w.id')
+            ->groupBy('w.id', 'w.nama_wilayah') // Tambahkan w.nama_wilayah ke groupBy
             ->get();
+
 
         // Query jumlah kanvasing per kecamatan
         $kanvasingKecamatan = DB::table('kanvasing_wisata as k')
