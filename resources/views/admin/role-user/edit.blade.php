@@ -84,7 +84,7 @@
                     <select name="tim_id" class="select2 form-control" id="tim_id">
                         <option value="">{{ __('admin.--Select--') }}</option>
                         @foreach ($teams as $team)
-                            <option value="{{ $team->id }}" {{ old('tim_id', $user->tim_id) == $team->id ? 'selected' : '' }}>
+                            <option value="{{ $team->id }}" {{ old('tim_id', $user->tim->tim_id) == $team->id ? 'selected' : '' }}>
                                 {{ $team->name }}
                             </option>
                         @endforeach
