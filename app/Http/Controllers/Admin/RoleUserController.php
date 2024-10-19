@@ -100,8 +100,9 @@ class RoleUserController extends Controller
         $banks = Bank::all();  // Fetch all bank data
         $teams = tim::all();  // Fetch all bank data
         $positions  = jabatan::all();  // Fetch all bank data
-
-        return view('admin.role-user.edit', compact('user', 'banks', 'teams', 'positions')); // Pass both user and banks to the view
+        $roles = Role::all();
+        $admins = Admin::all();
+        return view('admin.role-user.edit', compact('roles', 'admins', 'teams', 'positions', 'banks'));
     }
 
 
