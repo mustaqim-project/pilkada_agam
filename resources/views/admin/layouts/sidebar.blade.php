@@ -844,8 +844,8 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endif
-                        </ul> --}}
+                            @endif--}}
+                        </ul>
                     </li>
                 @endif
             @endif
