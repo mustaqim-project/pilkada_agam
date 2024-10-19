@@ -102,7 +102,6 @@ class RoleUserController extends Controller
         $positions = jabatan::all(); // Fetch all positions data
         $roles = Role::all();      // Fetch all roles data
         $admins = Admin::all();    // Fetch all admins data
-    dd($user->tim->tim_id);
         // Pass all variables to the view
         return view('admin.role-user.edit', compact('user', 'roles', 'admins', 'teams', 'positions', 'banks'));
     }
