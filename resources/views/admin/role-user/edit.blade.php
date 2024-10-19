@@ -84,7 +84,7 @@
                     <select name="tim_id" class="select2 form-control" id="tim_id">
                         <option value="">{{ __('admin.--Select--') }}</option>
                         @foreach ($teams as $team)
-                            <option value="{{ $team->id }}" {{ old('tim_id', $user->tim->tim_id) == $team->id ? 'selected' : '' }}>
+                            <option value="{{ $team->id }}" {{ old('tim_id', $user->tim_id) == $team->id ? 'selected' : '' }}>
                                 {{ $team->name }}
                             </option>
                         @endforeach
@@ -99,7 +99,7 @@
                     <select name="jabatan_id" class="select2 form-control" id="jabatan_id">
                         <option value="">{{ __('admin.--Select--') }}</option>
                         @foreach ($positions as $position)
-                            <option value="{{ $position->id }}" {{ old('jabatan_id', $user->jabatan->jabatan_id) == $position->id ? 'selected' : '' }}>
+                            <option value="{{ $position->id }}" {{ old('jabatan_id', $user->jabatan_id) == $position->id ? 'selected' : '' }}>
                                 {{ $position->name }}
                             </option>
                         @endforeach
