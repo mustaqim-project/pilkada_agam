@@ -144,10 +144,6 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatds.ketua.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatds.ketua.dashboard']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatds.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        </li>
                                         <li class="{{ setSidebarActive(['admin.timpusatds.ketua.laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timpusatds.ketua.laporan') }}">{{ __('Laporan') }}</a>
@@ -161,10 +157,6 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatds.admin.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatds.admin.dashboard']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatds.admin.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        </li>
                                         <li class="{{ setSidebarActive(['admin.timpusatds.admin.laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timpusatds.admin.laporan') }}">{{ __('Laporan') }}</a>
@@ -180,6 +172,10 @@
                                     'Tim Pusat DS Keuangan Update',
                                     'Tim Pusat DS Keuangan Delete',
                                 ]))
+                                <li class="{{ setSidebarActive(['admin.timpusatds.ketua.dashboard']) }}">
+                                    <a class="nav-link"
+                                        href="{{ route('admin.timpusatds.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                </li>
                                 <li class="{{ setSidebarActive(['admin.timpusatds.index']) }}">
                                     <a class="nav-link"
                                         href="{{ route('admin.timpusatds.index') }}">{{ __('Keuangan DS') }}</a>
@@ -202,10 +198,7 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.ketua.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatwisata.ketua.dashboard']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatwisata.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        </li>
+
                                         <li class="{{ setSidebarActive(['admin.timpusatwisata.ketua.laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timpusatwisata.ketua.laporan') }}">{{ __('Laporan') }}</a>
@@ -219,10 +212,6 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatwisata.admin.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatwisata.admin.dashboard']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatwisata.admin.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        </li>
                                         <li class="{{ setSidebarActive(['admin.timpusatwisata.admin.laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timpusatwisata.admin.laporan') }}">{{ __('Laporan') }}</a>
@@ -238,6 +227,10 @@
                                     'Tim Pusat Wisata Keuangan Update',
                                     'Tim Pusat Wisata Keuangan Delete',
                                 ]))
+                                <li class="{{ setSidebarActive(['admin.timpusatwisata.ketua.dashboard']) }}">
+                                    <a class="nav-link"
+                                        href="{{ route('admin.timpusatwisata.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                </li>
                                 <li class="{{ setSidebarActive(['admin.timpusatwisata.index']) }}">
                                     <a class="nav-link"
                                         href="{{ route('admin.timpusatwisata.index') }}">{{ __('Keuangan Wisata') }}</a>
@@ -260,10 +253,7 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatpkh.ketua.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatpkh.ketua.dashboard']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatpkh.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        </li>
+
                                         <li class="{{ setSidebarActive(['admin.timpusatpkh.ketua.laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timpusatpkh.ketua.laporan') }}">{{ __('Laporan') }}</a>
@@ -277,10 +267,7 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatpkh.admin.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatpkh.admin.dashboard']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatpkh.admin.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        </li>
+
                                         <li class="{{ setSidebarActive(['admin.timpusatpkh.admin.laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timpusatpkh.admin.laporan') }}">{{ __('Laporan') }}</a>
@@ -296,6 +283,10 @@
                                     'Tim Pusat PKH Keuangan Update',
                                     'Tim Pusat PKH Keuangan Delete',
                                 ]))
+                                <li class="{{ setSidebarActive(['admin.timpusatpkh.ketua.dashboard']) }}">
+                                    <a class="nav-link"
+                                        href="{{ route('admin.timpusatpkh.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                </li>
                                 <li class="{{ setSidebarActive(['admin.timpusatpkh.index']) }}">
                                     <a class="nav-link"
                                         href="{{ route('admin.timpusatpkh.index') }}">{{ __('Keuangan PKH') }}</a>
@@ -317,10 +308,7 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatmm.ketua.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatmm.ketua.dashboard']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatmm.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        </li>
+
                                         <li class="{{ setSidebarActive(['admin.timpusatmm.ketua.laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timpusatmm.ketua.laporan') }}">{{ __('Laporan') }}</a>
@@ -334,10 +322,7 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatmm.admin.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpusatmm.admin.dashboard']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatmm.admin.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        </li>
+
                                         <li class="{{ setSidebarActive(['admin.timpusatmm.admin.laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timpusatmm.admin.laporan') }}">{{ __('Laporan') }}</a>
@@ -353,6 +338,10 @@
                                     'Tim Pusat Muhammadiyah Keuangan Update',
                                     'Tim Pusat Muhammadiyah Keuangan Delete',
                                 ]))
+                                <li class="{{ setSidebarActive(['admin.timpusatmm.ketua.dashboard']) }}">
+                                    <a class="nav-link"
+                                        href="{{ route('admin.timpusatmm.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                </li>
                                 <li class="{{ setSidebarActive(['admin.timpusatmm.index']) }}">
                                     <a class="nav-link"
                                         href="{{ route('admin.timpusatmm.index') }}">{{ __('Keuangan Muhammadiyah') }}</a>
@@ -374,11 +363,7 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatAisyiah.ketua.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li
-                                            class="{{ setSidebarActive(['admin.timpusatAisyiah.ketua.dashboard']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatAisyiah.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        </li>
+
                                         <li class="{{ setSidebarActive(['admin.timpusatAisyiah.ketua.laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timpusatAisyiah.ketua.laporan') }}">{{ __('Laporan') }}</a>
@@ -392,11 +377,7 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpusatAisyiah.admin.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Admin') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li
-                                            class="{{ setSidebarActive(['admin.timpusatAisyiah.admin.dashboard']) }}">
-                                            <a class="nav-link"
-                                                href="{{ route('admin.timpusatAisyiah.admin.dashboard') }}">{{ __('Dashboard') }}</a>
-                                        </li>
+
                                         <li class="{{ setSidebarActive(['Tim Pusat Aisyiah Admin Laporan']) }}">
                                             <a class="nav-link"
                                                 href="{{ route('admin.timpusatAisyiah.admin.laporan') }}">{{ __('Laporan') }}</a>
@@ -412,6 +393,10 @@
                                     'Tim Pusat Aisyiah Keuangan Update',
                                     'Tim Pusat Aisyiah Keuangan Delete',
                                 ]))
+                                <li class="{{ setSidebarActive(['admin.timpusatAisyiah.ketua.dashboard']) }}">
+                                    <a class="nav-link"
+                                        href="{{ route('admin.timpusatAisyiah.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                </li>
                                 <li class="{{ setSidebarActive(['admin.timpusatAisyiah.index']) }}">
                                     <a class="nav-link"
                                         href="{{ route('admin.timpusatAisyiah.index') }}">{{ __('Keuangan Aisyiah') }}</a>
@@ -426,7 +411,7 @@
 
 
             @if (canAccess(['Tim Inti']))
-            <li class="menu-header">{{ __('admin.TIM INTI') }}</li>
+                <li class="menu-header">{{ __('admin.TIM INTI') }}</li>
 
                 @if (canAccess(['Tim Inti Ds']))
                     <li class="dropdown {{ setSidebarActive(['admin.timds.*']) }}">
