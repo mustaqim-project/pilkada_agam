@@ -8,7 +8,6 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-primary">
                         <i class="fas fa-chart-line"></i>
@@ -22,7 +21,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+
 
             <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                 <h2>Chart Kanvasing Harian</h2>
