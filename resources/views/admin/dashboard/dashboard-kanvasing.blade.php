@@ -6,6 +6,15 @@
             <h1>{{ __('admin.Dashboard') }}</h1>
         </div>
         <div class="row">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Total Kanvasing: {{ $totalKanvasing }}</h2>
+                </div>
+            </div>
+
+
+
             @foreach ($counts as $model => $count)
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
@@ -24,97 +33,73 @@
                 </div>
             @endforeach
 
-            <h1>Dashboard Kanvasing</h1>
 
-            <div class="card">
-                <div class="card-header">
-                    <h2>Total Kanvasing: {{ $totalKanvasing }}</h2>
-                </div>
+
+
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                <h2>Chart Kanvasing Harian</h2>
+                <canvas id="kanvasingHarianChart"></canvas>
             </div>
 
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h2>Kanvasing Harian</h2>
-                </div>
-                <div class="card-body">
-                    <canvas id="kanvasingHarianChart"></canvas>
-                </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                <h2>Kanvasing Mingguan</h2>
+                <canvas id="kanvasingMingguanChart"></canvas>
             </div>
 
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h2>Kanvasing Mingguan</h2>
-                </div>
-                <div class="card-body">
-                    <canvas id="kanvasingMingguanChart"></canvas>
-                </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                <h2>Kanvasing Bulanan</h2>
+                <canvas id="kanvasingBulananChart"></canvas>
+            </div>
+            <div class="section-header">
+                <h1>{{ __('admin.Jumlah Kanvasing berdasarkan Lokasi') }}</h1>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nama Wilayah</th>
+                        <th>Nama Kecamatan</th>
+                        <th>Nama Kelurahan</th>
+                        <th>Total Kanvasing</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($kanvasingPerLokasi as $lokasi)
+                        <tr>
+                            <td>{{ $lokasi->nama_wilayah }}</td>
+                            <td>{{ $lokasi->nama_kecamatan }}</td>
+                            <td>{{ $lokasi->nama_kelurahan }}</td>
+                            <td>{{ $lokasi->total_kanvasing }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+
+            <div class="section-header">
+                <h1>{{ __('admin.Jumlah Kanvasing berdasarkan Wilayah') }}</h1>
             </div>
 
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h2>Kanvasing Bulanan</h2>
-                </div>
-                <div class="card-body">
-                    <canvas id="kanvasingBulananChart"></canvas>
-                </div>
-            </div>
-
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h2>Jumlah Kanvasing berdasarkan Lokasi</h2>
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Nama Wilayah</th>
-                                <th>Nama Kecamatan</th>
-                                <th>Nama Kelurahan</th>
-                                <th>Total Kanvasing</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($kanvasingPerLokasi as $lokasi)
-                                <tr>
-                                    <td>{{ $lokasi->nama_wilayah }}</td>
-                                    <td>{{ $lokasi->nama_kecamatan }}</td>
-                                    <td>{{ $lokasi->nama_kelurahan }}</td>
-                                    <td>{{ $lokasi->total_kanvasing }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="card mt-4">
-                <div class="card-header">
-                    <h2>Jumlah Kanvasing berdasarkan Wilayah</h2>
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Nama Wilayah</th>
-                                <th>Jumlah Kanvasing</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($kanvasingPerWilayah as $wilayah)
-                                <tr>
-                                    <td>{{ $wilayah->nama_wilayah }}</td>
-                                    <td>{{ $wilayah->jumlah_kanvasing }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nama Wilayah</th>
+                        <th>Jumlah Kanvasing</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($kanvasingPerWilayah as $wilayah)
+                        <tr>
+                            <td>{{ $wilayah->nama_wilayah }}</td>
+                            <td>{{ $wilayah->jumlah_kanvasing }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </section>
 
 @section('scripts')
-    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Data untuk chart Kanvasing Harian
         const kanvasingHarianData = {
