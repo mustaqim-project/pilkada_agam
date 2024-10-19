@@ -28,11 +28,13 @@
                 </div>
             @endforeach
 
-
+        </div>
+        <div class="row">
 
 
                 <h2>Chart Kanvasing Harian</h2>
                 <canvas id="kanvasingHarianChart"></canvas>
+
 
             <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                 <h2>Kanvasing Mingguan</h2>
