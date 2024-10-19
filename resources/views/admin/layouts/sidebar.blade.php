@@ -506,7 +506,7 @@
                         <ul class="dropdown-menu">
 
                             {{-- Ketua pkh --}}
-                            @if (canAccess(['ketua pkh']))
+                            {{-- @if (canAccess(['ketua pkh']))
                                 <li class="dropdown {{ setSidebarActive(['admin.timpkh.ketua.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
@@ -520,7 +520,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
 
                             {{-- Koordinator Wilayah --}}
                             @if (canAccess(['koordinator pkh wilayah']))
@@ -543,7 +543,7 @@
                             @endif
 
                             {{-- Koordinator Kecamatan --}}
-                            @if (canAccess(['koordinator pkh kecamatan']))
+                            {{-- @if (canAccess(['koordinator pkh kecamatan']))
                                 <li
                                     class="dropdown {{ setSidebarActive(['admin.timpkh.koordinator.kecamatan.*']) }}">
                                     <a href="#"
@@ -561,10 +561,10 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
 
                             {{-- Koordinator Nagari --}}
-                            @if (canAccess(['koordinator pkh nagari']))
+                            {{-- @if (canAccess(['koordinator pkh nagari']))
                                 <li class="dropdown {{ setSidebarActive(['admin.timpkh.koordinator.nagari.*']) }}">
                                     <a href="#"
                                         class="nav-link has-dropdown">{{ __('Koordinator Nagari') }}</a>
@@ -581,7 +581,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
 
                         </ul>
                     </li>
@@ -739,7 +739,7 @@
                             @endif
 
                             {{-- Koordinator Nagari --}}
-                            @if (canAccess(['koordinator Aisyiah nagari']))
+                            {{-- @if (canAccess(['koordinator Aisyiah nagari']))
                                 <li class="dropdown {{ setSidebarActive(['admin.timpkh.koordinator.nagari.*']) }}">
                                     <a href="#"
                                         class="nav-link has-dropdown">{{ __('Koordinator Nagari') }}</a>
@@ -756,7 +756,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
 
                         </ul>
                     </li>
@@ -806,7 +806,7 @@
                             @endif
 
                             {{-- Koordinator Kecamatan --}}
-                            @if (canAccess(['koordinator PARPOL kecamatan']))
+                            {{-- @if (canAccess(['koordinator PARPOL kecamatan']))
                                 <li
                                     class="dropdown {{ setSidebarActive(['admin.timpkh.koordinator.kecamatan.*']) }}">
                                     <a href="#"
@@ -824,10 +824,10 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
 
                             {{-- Koordinator Nagari --}}
-                            @if (canAccess(['koordinator PARPOL nagari']))
+                            {{-- @if (canAccess(['koordinator PARPOL nagari']))
                                 <li class="dropdown {{ setSidebarActive(['admin.timpkh.koordinator.nagari.*']) }}">
                                     <a href="#"
                                         class="nav-link has-dropdown">{{ __('Koordinator Nagari') }}</a>
@@ -845,7 +845,7 @@
                                     </ul>
                                 </li>
                             @endif
-                        </ul>
+                        </ul> --}}
                     </li>
                 @endif
             @endif
