@@ -425,9 +425,9 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timds.ketua.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timds.ketua.dashboard']) }}">
+                                        <li class="{{ setSidebarActive(['admin.ketua.dashboard']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timds.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                                href="{{ route('admin.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
@@ -595,9 +595,9 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timmm.ketua.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timmm.ketua.dashboard']) }}">
+                                        <li class="{{ setSidebarActive(['admin.ketua.dashboard']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timmm.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                                href="{{ route('admin.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li class="{{ setSidebarActive(['admin.timmm.ketua.laporan']) }}">
                                             <a class="nav-link"
@@ -679,9 +679,9 @@
                                 <li class="dropdown {{ setSidebarActive(['admin.timpkh.ketua.*']) }}">
                                     <a href="#" class="nav-link has-dropdown">{{ __('Ketua Tim') }}</a>
                                     <ul class="dropdown-menu">
-                                        <li class="{{ setSidebarActive(['admin.timpkh.ketua.dashboard']) }}">
+                                        <li class="{{ setSidebarActive(['admin.ketua.dashboard']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timpkh.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
+                                                href="{{ route('admin.ketua.dashboard') }}">{{ __('Dashboard') }}</a>
                                         </li>
                                         <li class="{{ setSidebarActive(['admin.reports.index']) }}">
                                             <a class="nav-link"
@@ -769,9 +769,9 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li
-                                            class="{{ setSidebarActive(['admin.timwisata.koordinator.wilayah.dashboard']) }}">
+                                            class="{{ setSidebarActive(['admin.ketua.dashboard']) }}">
                                             <a class="nav-link"
-                                                href="{{ route('admin.timwisata.koordinator.wilayah.dashboard') }}">
+                                                href="{{ route('admin.ketua.dashboard') }}">
                                                 {{ __('Dashboard') }}
                                             </a>
                                         </li>
