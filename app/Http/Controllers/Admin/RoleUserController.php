@@ -96,7 +96,7 @@ class RoleUserController extends Controller
     {
 
         $user = Admin::with(['atasan', 'tim', 'jabatan', 'bank'])->findOrFail($id);
-dd($user);
+
 
         return view('admin.role-user.edit', compact('user'));
     }
