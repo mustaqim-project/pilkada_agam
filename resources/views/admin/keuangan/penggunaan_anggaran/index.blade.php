@@ -141,17 +141,17 @@
     </div>
 
     @foreach ($laporanPembayaran as $item)
-        <div class="modal fade" id="editModal{{ $item->laporan_id }}" tabindex="-1" role="dialog"
-            aria-labelledby="editModalLabel{{ $item->laporan_id }}" aria-hidden="true">
+        <div class="modal fade" id="editModal{{ $laporan->penggunaan_anggaran_id }}" tabindex="-1" role="dialog"
+            aria-labelledby="editModalLabel{{ $laporan->penggunaan_anggaran_id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                 <div class="modal-content">
-                    <form action="{{ route('admin.keuangan.penggunaan_anggaran.update', $item->laporan_id) }}"
+                    <form action="{{ route('admin.keuangan.penggunaan_anggaran.update', $laporan->penggunaan_anggaran_id) }}"
                         method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ $item->laporan_id }}">Edit Penggunaan Anggaran
+                            <h5 class="modal-title" id="editModalLabel{{ $laporan->penggunaan_anggaran_id }}">Edit Penggunaan Anggaran
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
