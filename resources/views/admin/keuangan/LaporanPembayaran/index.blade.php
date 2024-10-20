@@ -86,7 +86,6 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         @foreach ($details as $laporan)
-                                                                        {{ dd($laporan) }}
                                                                             <tr>
                                                                                 {{-- <td>{{ $loop->iteration }}</td> --}}
                                                                                 <td>{{ $laporan->laporan_id }}</td>
@@ -107,6 +106,8 @@
                                                                                     @endif
                                                                                 </td>
                                                                                 <td>
+                                                                                    {{ dd($laporan) }}
+
 
                                                                                     <a href="#" data-toggle="modal"
                                                                                         data-target="#editModal{{ $laporan->laporan_id }}"
