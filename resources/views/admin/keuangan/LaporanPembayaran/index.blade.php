@@ -202,7 +202,7 @@
 
 
     {{-- Modal Edit --}}
-    @foreach ($laporanPembayaran as $tim => $periodes)
+    {{-- @foreach ($laporanPembayaran as $tim => $periodes)
         @foreach ($periodes as $periode => $details)
             @foreach ($details as $laporan)
                 <div class="modal fade" id="editModal{{ $laporan->penggunaan_anggaran_id }}" tabindex="-1"
@@ -271,7 +271,7 @@
                 </div>
             @endforeach
         @endforeach
-    @endforeach
+    @endforeach --}}
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
