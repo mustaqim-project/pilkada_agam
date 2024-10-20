@@ -198,12 +198,12 @@
                     aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                         <div class="modal-content">
-                            <form
+                            {{-- <form
                                 action="{{ route('admin.keuangan.laporan_pembayaran.update', $laporan->laporan_id) }}"
                                 method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-{{--
+
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="editModalLabel{{ $laporan->laporan_id }}">
                                         Edit Penggunaan Anggaran
@@ -247,13 +247,13 @@
                                     </div>
 
 
-                                </div> --}}
+                                </div>
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
-                            </form>
+                            </form> --}}
                         </div>
                     </div>
                 </div>
