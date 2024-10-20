@@ -10,7 +10,6 @@ class periode extends Model
     use HasFactory;
 
     protected $table = 'periode';
-    protected $primaryKey = 'id';
 
     protected $fillable = [
         'anggaran_id',

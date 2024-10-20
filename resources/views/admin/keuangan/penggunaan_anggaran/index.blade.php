@@ -110,11 +110,12 @@
 
                                 @foreach ($periodes as $periode)
 
+                                    <td>{{ $periode->id }}</td>
+                                    <td>{{ $periode->anggaran->tim->name }}</td>
+                                    <td>{{ $periode->nama_periode }}</td>
 
-                                    <option value="{{ $periode->id }}">
-                                        {{ $periode->nama_periode }}
-                                    </option>
-                                @endforeach
+                                </tr>
+                            @endforeach
                             </select>
                         </div>
                         <div class="form-group">

@@ -18,8 +18,7 @@ class PenggunaanAnggaranController extends Controller
 
     public function index()
     {
-        $periodes = periode::all();
-        // $periodes = periode::with('anggaran.tim')->get();
+        $periodes = periode::with('anggaran.tim')->get();
         $detailPembiayaans = DetailPembiayaan::all();
 
         $laporanPembayaran = DB::table('penggunaan_anggaran as pa')
