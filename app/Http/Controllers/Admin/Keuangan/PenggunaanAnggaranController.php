@@ -47,10 +47,10 @@ class PenggunaanAnggaranController extends Controller
             ->map(function ($tim) {
                 return $tim->groupBy('nama_periode');
             });
-            $periodes = periode::with('anggaran.tim')->get();
-            $detailPembiayaans = DetailPembiayaan::all();
+           $dataPeriode = periode::with('anggaran.tim')->get();
+        $datadetailPembiayaans = DetailPembiayaan::all();
 
-            return view('admin.keuangan.penggunaan_anggaran.index', compact('periodes', 'detailPembiayaans', 'laporanPembayaran'));
+            return view('admin.keuangan.penggunaan_anggaran.index', compact('dataPeriode', 'datadetailPembiayaans', 'laporanPembayaran'));
 
         }
 
@@ -123,10 +123,7 @@ class PenggunaanAnggaranController extends Controller
 
     public function create()
     {
-        $periodes = periode::with('anggaran.tim')->get();
-            $detailPembiayaans = DetailPembiayaan::all();
-
-            return view('admin.keuangan.penggunaan_anggaran.create', compact('periodes', 'detailPembiayaans'));
+        return view('admin.keuangan.penggunaan_anggaran.create');
     }
 
     public function store(Request $request)

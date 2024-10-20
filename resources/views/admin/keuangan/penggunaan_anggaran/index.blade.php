@@ -9,14 +9,13 @@
         <div class="card card-primary">
             <div class="card-header">
                 <div class="card-header-actions">
-                    <a href="{{ route('admin.keuangan.penggunaan-anggaran.create') }}">+ Penggunaan Anggaran</a>
-                    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal">
                         + Penggunaan Anggaran
-                    </button> --}}
+                    </button>
                 </div>
             </div>
 
-            {{-- <div class="row mb-4">
+            <div class="row mb-4">
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <thead>
@@ -86,7 +85,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </section>
 
@@ -108,19 +107,17 @@
                         <div class="form-group">
                             <label for="periode_id">Nama Periode</label>
                             <select class="form-control" name="periode_id" required>
-                                @foreach ($periodes as $periode)
-                                {{ var_dump($periode) }}
-
-                                    {{-- <option value="{{ $periode->id }}">
+                                @foreach ($dataPeriode as $periode)
+                                    <option value="{{ $periode->id }}">
                                         {{ $periode->nama_periode }}
-                                    </option> --}}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="detail_pembiayaan_id">Nama Rincian Pembiayaan</label>
                             <select class="form-control" name="detail_pembiayaan_id" required>
-                                @foreach ($detailPembiayaans as $detail)
+                                @foreach ($datadetailPembiayaans as $detail)
                                     <option value="{{ $detail->id }}">{{ $detail->nama_rincian }}</option>
                                 @endforeach
                             </select>
