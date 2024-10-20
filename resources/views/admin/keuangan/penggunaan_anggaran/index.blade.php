@@ -60,17 +60,21 @@
                                                                 {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}
                                                             </td>
                                                             <td>
-                                                                <!-- Add your edit and delete buttons here -->
-                                                                <button class="btn btn-warning" data-toggle="modal"
-                                                                    data-target="#editModal{{ $laporan->laporan_id }}">Edit</button>
-                                                                <form
-                                                                    action="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $laporan->laporan_id) }}"
-                                                                    method="POST" style="display:inline;">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger">Hapus</button>
-                                                                </form>
+
+                                                                <a href="#" data-toggle="modal"
+                                                                    data-target="#editModal{{ $laporan->laporan_id }}"
+                                                                    class="btn btn-warning">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <!-- Tombol Hapus -->
+                                                                <a href="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $laporan->laporan_id) }}"
+                                                                    class="btn btn-danger delete-item">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </a>
+
+
+
+
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -107,7 +111,8 @@
                             <select class="form-control" name="periode_id" required>
                                 @foreach ($periodes as $periode)
                                     <option value="{{ $periode->id }}">{{ $periode->nama_periode }} -
-                                        {{ $periode->anggaran->tim->name }}</option>
+                                        {{ $periode->anggaran->tim->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -209,14 +214,16 @@
             @if (Session::has('toast_success'))
                 Toast.fire({
                     icon: 'success',
-                    title: '{{ Session::get('toast_success') }}'
+                    title: '{{ Session::get('
+                                toast_success ') }}'
                 });
             @endif
 
             @if (Session::has('toast_error'))
                 Toast.fire({
                     icon: 'error',
-                    title: '{{ Session::get('toast_error') }}'
+                    title: '{{ Session::get('
+                                toast_error ') }}'
                 });
             @endif
         });
