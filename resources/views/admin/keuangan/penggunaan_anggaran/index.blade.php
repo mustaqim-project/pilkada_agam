@@ -140,7 +140,7 @@
         </div>
     </div>
 
-    @foreach ($laporanPembayaran as $item)
+    {{-- @foreach ($laporanPembayaran as $item)
         <div class="modal fade" id="editModal{{ $laporan->penggunaan_anggaran_id }}" tabindex="-1" role="dialog"
             aria-labelledby="editModalLabel{{ $laporan->penggunaan_anggaran_id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -203,7 +203,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
 
 
 
