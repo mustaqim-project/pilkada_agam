@@ -211,7 +211,9 @@ class DashLapKeuController extends Controller
                 'lp.tujuan_pembayaran',
                 'lp.nominal',
                 'lp.bukti_pembayaran as bukti_pembayaran_laporan',
-                'lp.tanggal_pembayaran'
+                'lp.tanggal_pembayaran',
+                'lp.id as laporan_id', // Menambahkan ID laporan_pembayaran
+                'pa.id as penggunaan_anggaran_id' // Menambahkan ID penggunaan anggaran
             )
             ->orderBy('t.name')
             ->orderBy('p.nama_periode')
@@ -220,6 +222,8 @@ class DashLapKeuController extends Controller
             ->map(function ($tim) {
                 return $tim->groupBy('nama_periode');
             });
+
+
         return view('admin.dashboard.lapkeu', compact(
             'totalAnggaranKeseluruhan',
             'totalAnggaranPerTim',
