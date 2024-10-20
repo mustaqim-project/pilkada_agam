@@ -262,22 +262,23 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     @foreach ($details as $laporan)
-                                                                        @if ($laporan->tujuan_pembayaran) <!-- Cek jika laporan_pembayaran tidak null -->
-                                                                            <tr>
-                                                                                <td>{{ $laporan->laporan_id }}</td>
-                                                                                <td>{{ $laporan->tujuan_pembayaran }}</td>
-                                                                                <td>Rp {{ number_format($laporan->nominal, 0, ',', '.') }}</td>
-                                                                                <td>
-                                                                                    @if ($laporan->bukti_pembayaran_laporan)
-                                                                                        <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}" target="_blank">Download</a>
-                                                                                    @else
-                                                                                        -
-                                                                                    @endif
-                                                                                </td>
-                                                                                <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d/m/Y') : '-' }}</td>
-                                                                            </tr>
-                                                                        @endif
-                                                                    @endforeach
+                                                                    @if ($laporan->tujuan_pembayaran) <!-- Cek jika laporan_pembayaran tidak null -->
+                                                                        <tr>
+                                                                            <td>{{ $laporan->laporan_id }}</td>
+                                                                            <td>{{ $laporan->penggunaan_anggaran_id }}</td>
+                                                                            <td>{{ $laporan->tujuan_pembayaran }}</td>
+                                                                            <td>Rp {{ number_format($laporan->nominal, 0, ',', '.') }}</td>
+                                                                            <td>
+                                                                                @if ($laporan->bukti_pembayaran_laporan)
+                                                                                    <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}" target="_blank">Download</a>
+                                                                                @else
+                                                                                    -
+                                                                                @endif
+                                                                            </td>
+                                                                            <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d/m/Y') : '-' }}</td>
+                                                                        </tr>
+                                                                    @endif
+                                                                @endforeach
                                                                 </tbody>
                                                             </table>
                                                         </td>
