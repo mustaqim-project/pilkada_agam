@@ -109,7 +109,7 @@
                 </table>
             </div>
         </div> --}}
-        <div class="row mb-4">
+        {{-- <div class="row mb-4">
             <!-- Laporan Pembayaran Lengkap dalam Bentuk Tabel -->
             <div class="col-md-12">
                 <h3>Laporan Pembayaran Lengkap</h3>
@@ -166,6 +166,103 @@
                                                             @else
                                                                 -
                                                             @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        @endforeach
+                                    </table>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div> --}}
+
+
+        <div class="row mb-4">
+            <!-- Laporan Pembayaran Lengkap dalam Bentuk Tabel -->
+            <div class="col-md-12">
+                <h3>Laporan Pembayaran Lengkap</h3>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Tim</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($laporanPembayaran as $tim => $periodes)
+                            <tr>
+                                <td>
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTim{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseTim{{ $loop->iteration }}">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </td>
+                                <td>{{ $tim }}</td>
+                            </tr>
+                            <!-- Subtabel Periode dan Detail untuk Tim -->
+                            <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
+                                <td colspan="3">
+                                    <table class="table table-bordered">
+                                        @foreach ($periodes as $periode => $details)
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="4">Periode: {{ $periode }}</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Rincian</th>
+                                                    <th>Jumlah Digunakan</th>
+                                                    <th>Status Pembayaran</th>
+                                                    <th>Bukti Pembayaran</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($details as $laporan)
+                                                    <tr>
+                                                        <td>{{ $laporan->nama_rincian }}</td>
+                                                        <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
+                                                        <td>
+                                                            @if ($laporan->status_pembayaran == 1)
+                                                                Lunas
+                                                            @elseif($laporan->status_pembayaran == 0)
+                                                                Belum Dibayar
+                                                            @else
+                                                                Status Tidak Diketahui
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if ($laporan->bukti_pembayaran)
+                                                                <a href="{{ asset($laporan->bukti_pembayaran) }}" target="_blank">Download</a>
+                                                            @else
+                                                                -
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <!-- Button untuk membuka dropdown laporan_pembayaran -->
+                                                            <button class="btn btn-sm btn-info" type="button" data-toggle="collapse" data-target="#collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}">
+                                                                Lihat Pembayaran
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Dropdown detail laporan_pembayaran -->
+                                                    <tr id="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}" class="collapse">
+                                                        <td colspan="5">
+                                                            <div class="card card-body">
+                                                                <p><strong>Tujuan Pembayaran:</strong> {{ $laporan->tujuan_pembayaran ?? '-' }}</p>
+                                                                <p><strong>Nominal:</strong> Rp {{ number_format($laporan->nominal ?? 0, 0, ',', '.') }}</p>
+                                                                <p><strong>Tanggal Pembayaran:</strong> {{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d M Y') : '-' }}</p>
+                                                                <p>
+                                                                    <strong>Bukti Pembayaran Laporan:</strong>
+                                                                    @if ($laporan->bukti_pembayaran_laporan)
+                                                                        <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}" target="_blank">Download</a>
+                                                                    @else
+                                                                        -
+                                                                    @endif
+                                                                </p>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
