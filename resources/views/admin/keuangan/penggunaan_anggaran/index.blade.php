@@ -60,21 +60,21 @@
                                                             <td>Rp
                                                                 {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}
                                                             </td>
-                                                            {{-- <td>
+                                                            <td>
 
                                                                 <a href="#" data-toggle="modal"
-                                                                    data-target="#editModal{{ $laporan->laporan_id }}"
+                                                                    data-target="#editModal{{ $laporan->penggunaan_anggaran_id }}"
                                                                     class="btn btn-warning">
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
                                                                 <!-- Tombol Hapus -->
-                                                                <a href="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $laporan->laporan_id) }}"
+                                                                <a href="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $laporan->penggunaan_anggaran_id) }}"
                                                                     class="btn btn-danger delete-item">
                                                                     <i class="fas fa-trash-alt"></i>
                                                                 </a>
 
 
-                                                            </td> --}}
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

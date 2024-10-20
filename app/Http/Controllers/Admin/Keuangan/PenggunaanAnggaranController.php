@@ -48,7 +48,7 @@ class PenggunaanAnggaranController extends Controller
             ->map(function ($tim) {
                 return $tim->groupBy('nama_periode');
             });
-            dd($laporanPembayaran);
+            // dd($laporanPembayaran);
         return view('admin.keuangan.penggunaan_anggaran.index', compact('periodes', 'detailPembiayaans', 'laporanPembayaran'));
     }
 
