@@ -168,31 +168,32 @@ class DashLapKeuController extends Controller
         //     });
 
         $laporanPembayaran = DB::table('penggunaan_anggaran as pa')
-            ->join('detail_pembiayaan as dp', 'pa.detail_pembiayaan_id', '=', 'dp.id')
-            ->join('periode as p', 'pa.periode_id', '=', 'p.id')
-            ->join('anggaran as a', 'p.anggaran_id', '=', 'a.id')
-            ->join('tims as t', 'a.tim_id', '=', 't.id')
-            ->leftJoin('laporan_pembayaran as lp', 'pa.id', '=', 'lp.penggunaan_anggaran_id')
-            ->select(
-                't.name as tim',
-                'p.nama_periode',
-                'dp.nama_rincian',
-                'pa.jumlah_digunakan',
-                'pa.status_pembayaran',
-                'pa.bukti_pembayaran',
-                'lp.tujuan_pembayaran',
-                'lp.nominal',
-                'lp.bukti_pembayaran as bukti_pembayaran_laporan',
-                'lp.tanggal_pembayaran'
-            )
-            ->orderBy('t.name')
-            ->orderBy('p.nama_periode')
-            ->get()
-            ->groupBy('tim')
-            ->map(function ($tim) {
-                return $tim->groupBy('nama_periode');
-            });
-
+        ->join('detail_pembiayaan as dp', 'pa.detail_pembiayaan_id', '=', 'dp.id')
+        ->join('periode as p', 'pa.periode_id', '=', 'p.id')
+        ->join('anggaran as a', 'p.anggaran_id', '=', 'a.id')
+        ->join('tims as t', 'a.tim_id', '=', 't.id')
+        ->leftJoin('laporan_pembayaran as lp', 'pa.id', '=', 'lp.penggunaan_anggaran_id')
+        ->select(
+            't.name as tim',
+            'p.nama_periode',
+            'dp.nama_rincian',
+            'pa.jumlah_digunakan',
+            'pa.status_pembayaran',
+            'pa.bukti_pembayaran',
+            'lp.penggunaan_anggaran_id',
+            'lp.tujuan_pembayaran',
+            'lp.nominal',
+            'lp.bukti_pembayaran as bukti_pembayaran_laporan',
+            'lp.tanggal_pembayaran'
+        )
+        ->orderBy('t.name')
+        ->orderBy('p.nama_periode')
+        ->orderBy('lp.tanggal_pembayaran') // Tambahkan ini untuk urutkan pembayaran per tanggal
+        ->get()
+        ->groupBy('penggunaan_anggaran_id') // Kelompokkan berdasarkan penggunaan_anggaran_id
+        ->map(function ($tim) {
+            return $tim->groupBy('nama_periode');
+        });
 
         return view('admin.dashboard.lapkeu', compact(
             'totalAnggaranKeseluruhan',
