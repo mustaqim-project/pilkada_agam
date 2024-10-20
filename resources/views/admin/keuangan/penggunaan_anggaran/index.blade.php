@@ -140,7 +140,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="periode_id">Nama Periode</label>
                             <select class="form-control" name="periode_id" required>
                                 @foreach ($periodes as $periode)
@@ -148,7 +148,19 @@
                                         {{ $periode->anggaran->tim->name }}</option>
                                 @endforeach
                             </select>
+                        </div> --}}
+                        <div class="form-group">
+                            <label for="periode_id">Nama Periode</label>
+                            <select class="form-control" name="periode_id" required>
+                                @foreach ($periodes as $periode)
+                                    <option value="{{ $periode->id }}">
+                                        {{ $periode->nama_periode }} -
+                                        {{ $periode->anggaran->first()->tim->name ?? 'Tidak ada tim' }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
+
                         <div class="form-group">
                             <label for="detail_pembiayaan_id">Nama Rincian Pembiayaan</label>
                             <select class="form-control" name="detail_pembiayaan_id" required>
