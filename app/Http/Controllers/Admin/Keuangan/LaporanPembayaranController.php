@@ -44,7 +44,7 @@ class LaporanPembayaranController extends Controller
 
 
 
-        return view('admin.keuangan.laporan_pembayaran.index', compact('laporanPembayaran'));
+        return view('admin.keuangan.LaporanPembayaran.index', compact('laporanPembayaran'));
     }
 
     // Menyimpan laporan pembayaran baru
@@ -99,7 +99,7 @@ class LaporanPembayaranController extends Controller
             ->with('toast_success', 'Data penggunaan anggaran berhasil diupdate.');
     }
 
-    // Menghapus laporan pembayaran
+
 
 
     public function destroy($id)
