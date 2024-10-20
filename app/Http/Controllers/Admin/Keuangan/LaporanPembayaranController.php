@@ -21,7 +21,7 @@ class LaporanPembayaranController extends Controller
             ->join('tims as t', 'a.tim_id', '=', 't.id')
             ->leftJoin('laporan_pembayaran as lp', 'pa.id', '=', 'lp.penggunaan_anggaran_id')
             ->select(
-                't.name as tim',
+                 'lp.id as laporan_id','t.name as tim',
                 'p.nama_periode',
                 'dp.nama_rincian',
                 'pa.jumlah_digunakan',
@@ -31,7 +31,6 @@ class LaporanPembayaranController extends Controller
                 'lp.nominal',
                 'lp.bukti_pembayaran as bukti_pembayaran_laporan',
                 'lp.tanggal_pembayaran',
-                'lp.id as laporan_id',
                 'pa.id as penggunaan_anggaran_id'
             )
             ->orderBy('t.name')
@@ -99,10 +98,10 @@ class LaporanPembayaranController extends Controller
 
 
 
-    public function destroy($laporan_id)
+    public function destroy($id)
     {
         // Temukan laporan pembayaran berdasarkan ID
-        $laporan = LaporanPembayaran::findOrFail($laporan_id);
+        $laporan = LaporanPembayaran::findOrFail($id);
         $laporan->delete();
 
 

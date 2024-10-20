@@ -86,9 +86,10 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         @foreach ($details as $laporan)
+                                                                        {{ dd($laporan) }}
                                                                             <tr>
                                                                                 {{-- <td>{{ $loop->iteration }}</td> --}}
-                                                                                <td>{{ $laporan->laporan_id }}</td>
+                                                                                <td>{{ $loop->iteration }}</td>
                                                                                 <td>{{ $laporan->tujuan_pembayaran }}
                                                                                 </td>
                                                                                 <td>Rp
@@ -106,17 +107,15 @@
                                                                                     @endif
                                                                                 </td>
                                                                                 <td>
-                                                                                    {{ dd($laporan) }}
-
 
                                                                                     <a href="#" data-toggle="modal"
                                                                                         data-target="#editModal{{ $laporan->laporan_id }}"
                                                                                         class="btn btn-warning">
                                                                                         <i class="fas fa-edit"></i>
                                                                                     </a>
-                                                                                    <a href="{{ route('admin.keuangan.laporan_pembayaran.destroy', $laporan->laporan_id) }}" class="btn btn-danger delete-item">
+                                                                                    {{-- <a href="{{ route('admin.keuangan.laporan_pembayaran.destroy', $laporan->id) }}" class="btn btn-danger delete-item">
                                                                                         <i class="fas fa-trash-alt"></i>
-                                                                                    </a>
+                                                                                    </a> --}}
 
 
                                                                                 </td>
