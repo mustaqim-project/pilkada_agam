@@ -125,6 +125,8 @@
         </div>
     </section>
 
+
+
     <!-- Modal Tambah -->
     <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
         aria-hidden="true">
@@ -140,7 +142,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        {{-- <div class="form-group">
+                        <div class="form-group">
                             <label for="periode_id">Nama Periode</label>
                             <select class="form-control" name="periode_id" required>
                                 @foreach ($periodes as $periode)
@@ -148,19 +150,7 @@
                                         {{ $periode->anggaran->tim->name }}</option>
                                 @endforeach
                             </select>
-                        </div> --}}
-                        <div class="form-group">
-                            <label for="periode_id">Nama Periode</label>
-                            <select class="form-control" name="periode_id" required>
-                                @foreach ($periodes as $periode)
-                                    <option value="{{ $periode->id }}">
-                                        {{ $periode->nama_periode }} -
-                                        {{ $periode->anggaran->first()->tim->name ?? 'Tidak ada tim' }}
-                                    </option>
-                                @endforeach
-                            </select>
                         </div>
-
                         <div class="form-group">
                             <label for="detail_pembiayaan_id">Nama Rincian Pembiayaan</label>
                             <select class="form-control" name="detail_pembiayaan_id" required>
@@ -187,7 +177,7 @@
         </div>
     </div>
 
-    {{-- Modal Edit --}}
+
     @foreach ($penggunaanAnggaran as $item)
         <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog"
             aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
@@ -197,12 +187,14 @@
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+
                         <div class="modal-header">
                             <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Penggunaan Anggaran</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="periode_id">Nama Periode</label>
@@ -210,11 +202,12 @@
                                     @foreach ($periodes as $periode)
                                         <option value="{{ $periode->id }}"
                                             {{ $periode->id == $item->periode_id ? 'selected' : '' }}>
-                                            {{ $periode->nama_periode }} - {{ $periode->anggaran->tim->name }}
+                                            {{ $periode->nama_periode }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label for="detail_pembiayaan_id">Nama Rincian Pembiayaan</label>
                                 <select class="form-control" name="detail_pembiayaan_id" required>
@@ -226,27 +219,46 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group">
-                                <label for="jumlah_digunakan">Jumlah Anggaran</label>
+                                <label for="jumlah_digunakan">Jumlah Digunakan</label>
                                 <input type="number" class="form-control" name="jumlah_digunakan"
                                     value="{{ $item->jumlah_digunakan }}" required>
                             </div>
+
+                            <div class="form-group">
+                                <label for="status_pembayaran">Status Pembayaran</label>
+                                <select class="form-control" name="status_pembayaran">
+                                    <option value="1" {{ $item->status_pembayaran == 1 ? 'selected' : '' }}>Lunas
+                                    </option>
+                                    <option value="0" {{ $item->status_pembayaran == 0 ? 'selected' : '' }}>Belum
+                                        Lunas</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bukti_pembayaran">Bukti Pembayaran</label>
+                                <input type="file" class="form-control" name="bukti_pembayaran">
+                                @if ($item->bukti_pembayaran)
+                                    <img src="{{ asset($item->bukti_pembayaran) }}" alt="Bukti" width="100">
+                                @endif
+                            </div>
+
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
                                 <textarea class="form-control" name="keterangan">{{ $item->keterangan }}</textarea>
                             </div>
                         </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     @endforeach
-
-
 
 
     <script>
