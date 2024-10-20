@@ -201,7 +201,6 @@
                                 </td>
                                 <td>{{ $tim }}</td>
                             </tr>
-                            <!-- Subtabel Periode untuk Tim -->
                             <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
                                 <td colspan="2">
                                     <table class="table table-bordered">
@@ -217,18 +216,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($details as $laporan)
+                                                @foreach ($details->unique('nama_rincian') as $laporan)
                                                     <tr>
                                                         <td>{{ $laporan->nama_rincian }}</td>
                                                         <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
                                                         <td>
-                                                            <!-- Button untuk membuka dropdown laporan_pembayaran -->
                                                             <button class="btn btn-sm btn-info" type="button" data-toggle="collapse" data-target="#collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}">
                                                                 Lihat Pembayaran
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                    <!-- Dropdown detail laporan_pembayaran -->
                                                     <tr id="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}" class="collapse">
                                                         <td colspan="5">
                                                             <table class="table table-sm table-bordered">
@@ -243,26 +240,25 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     @foreach ($details as $laporan)
-                                                                    @if ($laporan->tujuan_pembayaran) <!-- Cek jika laporan_pembayaran tidak null -->
-                                                                        <tr>
-                                                                            <td>{{ $loop->iteration }}</td>
-                                                                            <td>{{ $laporan->tujuan_pembayaran }}</td>
-                                                                            <td>Rp {{ number_format($laporan->nominal, 0, ',', '.') }}</td>
-                                                                            <td>
-                                                                                @if ($laporan->bukti_pembayaran_laporan)
-                                                                                    <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}" target="_blank">Download</a>
-                                                                                @else
-                                                                                    -
-                                                                                @endif
-                                                                            </td>
-                                                                            <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d/m/Y') : '-' }}</td>
-                                                                        </tr>
-                                                                    @endif
-                                                                @endforeach
+                                                                        @if ($laporan->tujuan_pembayaran)
+                                                                            <tr>
+                                                                                <td>{{ $loop->iteration }}</td>
+                                                                                <td>{{ $laporan->tujuan_pembayaran }}</td>
+                                                                                <td>Rp {{ number_format($laporan->nominal, 0, ',', '.') }}</td>
+                                                                                <td>
+                                                                                    @if ($laporan->bukti_pembayaran_laporan)
+                                                                                        <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}" target="_blank">Download</a>
+                                                                                    @else
+                                                                                        -
+                                                                                    @endif
+                                                                                </td>
+                                                                                <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d/m/Y') : '-' }}</td>
+                                                                            </tr>
+                                                                        @endif
+                                                                    @endforeach
                                                                 </tbody>
                                                             </table>
                                                         </td>
-
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -273,6 +269,7 @@
                         @endforeach
                     </tbody>
                 </table>
+
             </div>
         </div>
 
