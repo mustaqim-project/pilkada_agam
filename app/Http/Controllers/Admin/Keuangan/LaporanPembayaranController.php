@@ -99,10 +99,10 @@ class LaporanPembayaranController extends Controller
 
 
 
-    public function destroy($id)
+    public function destroy($laporan_id)
     {
         // Temukan laporan pembayaran berdasarkan ID
-        $laporan = LaporanPembayaran::findOrFail($id);
+        $laporan = LaporanPembayaran::findOrFail($laporan_id);
         $laporan->delete();
 
 
