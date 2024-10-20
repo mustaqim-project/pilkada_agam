@@ -28,13 +28,14 @@
                             @foreach ($laporanPembayaran as $tim => $periodes)
                                 <tr>
                                     <td>
-                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTim{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseTim{{ $loop->iteration }}">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            data-target="#collapseTim{{ $loop->iteration }}" aria-expanded="false"
+                                            aria-controls="collapseTim{{ $loop->iteration }}">
                                             <i class="fas fa-chevron-down"></i>
                                         </button>
                                     </td>
                                     <td>{{ $tim }}</td>
                                 </tr>
-                                <!-- Subtabel Periode untuk Tim -->
                                 <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
                                     <td colspan="2">
                                         <table class="table table-bordered">
@@ -50,19 +51,24 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($details as $laporan)
+                                                    @foreach ($details->unique('nama_rincian') as $laporan)
                                                         <tr>
                                                             <td>{{ $laporan->nama_rincian }}</td>
-                                                            <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
+                                                            <td>Rp
+                                                                {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}
+                                                            </td>
                                                             <td>
-                                                                <!-- Button untuk membuka dropdown laporan_pembayaran -->
-                                                                <button class="btn btn-sm btn-info" type="button" data-toggle="collapse" data-target="#collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}">
+                                                                <button class="btn btn-sm btn-info" type="button"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}"
+                                                                    aria-expanded="false"
+                                                                    aria-controls="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}">
                                                                     Lihat Pembayaran
                                                                 </button>
                                                             </td>
                                                         </tr>
-                                                        <!-- Dropdown detail laporan_pembayaran -->
-                                                        <tr id="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}" class="collapse">
+                                                        <tr id="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}"
+                                                            class="collapse">
                                                             <td colspan="5">
                                                                 <table class="table table-sm table-bordered">
                                                                     <thead>
@@ -77,41 +83,44 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         @foreach ($details as $laporan)
-                                                                        @if ($laporan->tujuan_pembayaran) <!-- Cek jika laporan_pembayaran tidak null -->
-                                                                            <tr>
-                                                                                <td>{{ $loop->iteration }}</td>
-                                                                                <td>{{ $laporan->tujuan_pembayaran }}</td>
-                                                                                <td>Rp {{ number_format($laporan->nominal, 0, ',', '.') }}</td>
-                                                                                <td>
-                                                                                    @if ($laporan->bukti_pembayaran_laporan)
-                                                                                        <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}" target="_blank">Download</a>
-                                                                                    @else
-                                                                                        -
-                                                                                    @endif
-                                                                                </td>
-                                                                                <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d/m/Y') : '-' }}</td>
-                                                                                <td>
+                                                                            @if ($laporan->tujuan_pembayaran)
+                                                                                <tr>
+                                                                                    <td>{{ $loop->iteration }}</td>
+                                                                                    <td>{{ $laporan->tujuan_pembayaran }}
+                                                                                    </td>
+                                                                                    <td>Rp
+                                                                                        {{ number_format($laporan->nominal, 0, ',', '.') }}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @if ($laporan->bukti_pembayaran_laporan)
+                                                                                            <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}"
+                                                                                                target="_blank">Download</a>
+                                                                                        @else
+                                                                                            -
+                                                                                        @endif
+                                                                                    </td>
+                                                                                    <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d/m/Y') : '-' }}
+                                                                                    </td>
 
+                                                                                    <td>
 
-                                                                                    <a href="#" data-toggle="modal"
-                                                                                    data-target="#editModal{{ $laporan->laporan_id }}"
-                                                                                    class="btn btn-warning">
-                                                                                    <i class="fas fa-edit"></i>
-                                                                                </a>
-                                                                                {{-- <a href="{{ route('admin.keuangan.laporan_pembayaran.destroy', $laporan->penggunaan_anggaran_id) }}"
-                                                                                    class="btn btn-danger delete-item">
-                                                                                    <i class="fas fa-trash-alt"></i>
-                                                                                </a> --}}
-
-
-                                                                                </td>
-                                                                            </tr>
-                                                                        @endif
-                                                                    @endforeach
+                                                                                        <a href="#"
+                                                                                            data-toggle="modal"
+                                                                                            data-target="#editModal{{ $laporan->laporan_id }}"
+                                                                                            class="btn btn-warning">
+                                                                                            <i class="fas fa-edit"></i>
+                                                                                        </a>
+                                                                                        <a href="{{ route('admin.keuangan.laporan-pembayaran.destroy', $laporan->laporan_id) }}"
+                                                                                            class="btn btn-danger delete-item">
+                                                                                            <i class="fas fa-trash-alt"></i>
+                                                                                        </a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endif
+                                                                        @endforeach
                                                                     </tbody>
                                                                 </table>
                                                             </td>
-
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
@@ -193,9 +202,8 @@
     @foreach ($laporanPembayaran as $tim => $periodes)
         @foreach ($periodes as $periode => $details)
             @foreach ($details as $laporan)
-                <div class="modal fade" id="editModal{{ $laporan->laporan_id }}" tabindex="-1"
-                    role="dialog" aria-labelledby="editModalLabel{{ $laporan->laporan_id }}"
-                    aria-hidden="true">
+                <div class="modal fade" id="editModal{{ $laporan->laporan_id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="editModalLabel{{ $laporan->laporan_id }}" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                         <div class="modal-content">
                             {{-- <form
