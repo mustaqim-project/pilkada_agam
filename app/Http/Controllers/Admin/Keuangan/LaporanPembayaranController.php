@@ -97,10 +97,14 @@ class LaporanPembayaranController extends Controller
             ->with('toast_success', 'Data penggunaan anggaran berhasil diupdate.');
     }
 
+
+
     public function destroy($id)
     {
-        $laporanPembayaran = LaporanPembayaran::findOrFail($id);
-        $laporanPembayaran->delete();
+        // Temukan laporan pembayaran berdasarkan ID
+        $laporan = LaporanPembayaran::findOrFail($id);
+        $laporan->delete();
+
 
         return response()->json([
             'status' => 'success',
