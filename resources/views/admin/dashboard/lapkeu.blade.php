@@ -254,7 +254,6 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th>ID</th>
-                                                                        <th>Penggunaan Anggaran ID</th>
                                                                         <th>Tujuan Pembayaran</th>
                                                                         <th>Nominal</th>
                                                                         <th>Bukti Pembayaran</th>
@@ -266,7 +265,6 @@
                                                                         @if ($laporan->tujuan_pembayaran) <!-- Cek jika laporan_pembayaran tidak null -->
                                                                             <tr>
                                                                                 <td>{{ $laporan->laporan_id }}</td>
-                                                                                <td>{{ $laporan->penggunaan_anggaran_id }}</td>
                                                                                 <td>{{ $laporan->tujuan_pembayaran }}</td>
                                                                                 <td>Rp {{ number_format($laporan->nominal, 0, ',', '.') }}</td>
                                                                                 <td>

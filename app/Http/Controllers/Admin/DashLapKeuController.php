@@ -40,36 +40,52 @@ class DashLapKeuController extends Controller
 
         // Sisa Anggaran per Tim
         $sisaAnggaranPerTim = DB::table('tims as t')
-            ->leftJoin(
-                DB::raw('(SELECT
-                tim_id,
-                SUM(total_anggaran) AS total_anggaran
-                FROM anggaran
-                GROUP BY tim_id) AS a'),
-                'a.tim_id',
-                '=',
-                't.id'
-            )
-            ->leftJoin(
-                DB::raw('(SELECT
-                p.anggaran_id,
-                SUM(pa.jumlah_digunakan) AS jumlah_digunakan
-                FROM penggunaan_anggaran pa
-                JOIN periode p ON pa.periode_id = p.id
-                WHERE pa.status_pembayaran = 1
-                GROUP BY p.anggaran_id) AS pa'),
-                'a.tim_id',
-                '=',
-                DB::raw('(SELECT tim_id FROM anggaran WHERE id = pa.anggaran_id)')
-            )
             ->select(
-                't.name as tim',
-                DB::raw('COALESCE(SUM(a.total_anggaran), 0) AS total_anggaran'),
-                DB::raw('COALESCE(SUM(pa.jumlah_digunakan), 0) AS total_anggaran_digunakan'),
-                DB::raw('COALESCE(SUM(a.total_anggaran), 0) - COALESCE(SUM(pa.jumlah_digunakan), 0) AS sisa_anggaran')
+                't.id AS Tim_ID',
+                't.name AS Tim',
+                DB::raw('COALESCE(SUM(a.total_anggaran), 0) AS Total_Anggaran'),
+                DB::raw('COALESCE(SUM(lp.nominal), 0) AS Total_Digunakan'),
+                DB::raw('COALESCE(SUM(a.total_anggaran), 0) - COALESCE(SUM(lp.nominal), 0) AS Sisa_Anggaran')
             )
-            ->groupBy('t.name')
-            ->get();;
+            ->leftJoin('anggaran as a', 't.id', '=', 'a.tim_id')
+            ->leftJoin('periode as p', 'a.id', '=', 'p.anggaran_id')
+            ->leftJoin('penggunaan_anggaran as pa', 'p.id', '=', 'pa.periode_id')
+            ->leftJoin('laporan_pembayaran as lp', 'pa.id', '=', 'lp.penggunaan_anggaran_id')
+            ->groupBy('t.id', 't.name', 'a.total_anggaran')
+            ->orderBy('Tim_ID', 'ASC')
+            ->get();
+
+        // $sisaAnggaranPerTim = DB::table('tims as t')
+        //     ->leftJoin(
+        //         DB::raw('(SELECT
+        //         tim_id,
+        //         SUM(total_anggaran) AS total_anggaran
+        //         FROM anggaran
+        //         GROUP BY tim_id) AS a'),
+        //         'a.tim_id',
+        //         '=',
+        //         't.id'
+        //     )
+        //     ->leftJoin(
+        //         DB::raw('(SELECT
+        //         p.anggaran_id,
+        //         SUM(pa.jumlah_digunakan) AS jumlah_digunakan
+        //         FROM penggunaan_anggaran pa
+        //         JOIN periode p ON pa.periode_id = p.id
+        //         WHERE pa.status_pembayaran = 1
+        //         GROUP BY p.anggaran_id) AS pa'),
+        //         'a.tim_id',
+        //         '=',
+        //         DB::raw('(SELECT tim_id FROM anggaran WHERE id = pa.anggaran_id)')
+        //     )
+        //     ->select(
+        //         't.name as tim',
+        //         DB::raw('COALESCE(SUM(a.total_anggaran), 0) AS total_anggaran'),
+        //         DB::raw('COALESCE(SUM(pa.jumlah_digunakan), 0) AS total_anggaran_digunakan'),
+        //         DB::raw('COALESCE(SUM(a.total_anggaran), 0) - COALESCE(SUM(pa.jumlah_digunakan), 0) AS sisa_anggaran')
+        //     )
+        //     ->groupBy('t.name')
+        //     ->get();;
 
 
         // Penggunaan Anggaran per Jenis Pembiayaan
