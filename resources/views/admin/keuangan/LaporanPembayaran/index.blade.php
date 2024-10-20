@@ -86,40 +86,38 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         @foreach ($details as $laporan)
-                                                                            {{ dd($laporan) }}
-                                                                                <tr>
-                                                                                    <td>{{ $loop->iteration }}</td>
-                                                                                    <td>{{ $laporan->tujuan_pembayaran }}
-                                                                                    </td>
-                                                                                    <td>Rp
-                                                                                        {{ number_format($laporan->nominal, 0, ',', '.') }}
-                                                                                    </td>
+                                                                            <tr>
+                                                                                <td>{{ $loop->iteration }}</td>
+                                                                                <td>{{ $laporan->tujuan_pembayaran }}
+                                                                                </td>
+                                                                                <td>Rp
+                                                                                    {{ number_format($laporan->nominal, 0, ',', '.') }}
+                                                                                </td>
 
-                                                                                    <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d/m/Y') : '-' }}
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        @if ($laporan->bukti_pembayaran_laporan)
-                                                                                            <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}"
-                                                                                                target="_blank">Download</a>
-                                                                                        @else
-                                                                                            -
-                                                                                        @endif
-                                                                                    </td>
-                                                                                    <td>
+                                                                                <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d/m/Y') : '-' }}
+                                                                                </td>
+                                                                                <td>
+                                                                                    @if ($laporan->bukti_pembayaran_laporan)
+                                                                                        <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}"
+                                                                                            target="_blank">Download</a>
+                                                                                    @else
+                                                                                        -
+                                                                                    @endif
+                                                                                </td>
+                                                                                <td>
 
-                                                                                        <a href="#"
-                                                                                            data-toggle="modal"
-                                                                                            data-target="#editModal{{ $laporan->id }}"
-                                                                                            class="btn btn-warning">
-                                                                                            <i class="fas fa-edit"></i>
-                                                                                        </a>
-                                                                                        <a href="{{ route('admin.keuangan.LaporanPembayaran.destroy', $laporan->id) }}"
-                                                                                            class="btn btn-danger delete-item">
-                                                                                            <i class="fas fa-trash-alt"></i>
-                                                                                        </a>
+                                                                                    <a href="#" data-toggle="modal"
+                                                                                        data-target="#editModal{{ $laporan->laporan_id }}"
+                                                                                        class="btn btn-warning">
+                                                                                        <i class="fas fa-edit"></i>
+                                                                                    </a>
+                                                                                    <a href="{{ route('admin.keuangan.LaporanPembayaran.destroy', $laporan->laporan_id) }}"
+                                                                                        class="btn btn-danger delete-item">
+                                                                                        <i class="fas fa-trash-alt"></i>
+                                                                                    </a>
 
-                                                                                    </td>
-                                                                                </tr>
+                                                                                </td>
+                                                                            </tr>
                                                                         @endforeach
                                                                     </tbody>
                                                                 </table>
@@ -142,10 +140,12 @@
 
 
     <!-- Modal Tambah -->
-    <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel" aria-hidden="true">
+    <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <form action="{{ route('admin.keuangan.penggunaan_anggaran.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.keuangan.LaporanPembayaran.store') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="tambahModalLabel">Tambah Penggunaan Anggaran</h5>
@@ -161,7 +161,8 @@
                                     @foreach ($periodes as $detail)
                                         @foreach ($detail->laporan as $laporan)
                                             <option value="{{ $laporan->id }}">
-                                                {{ $laporan->nama_rincian }} - Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}
+                                                {{ $laporan->nama_rincian }} - Rp
+                                                {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}
                                             </option>
                                         @endforeach
                                     @endforeach
@@ -183,7 +184,8 @@
                         </div>
                         <div class="form-group">
                             <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                            <input type="file" class="form-control" name="bukti_pembayaran" accept=".jpg,.jpeg,.png,.gif,.webp">
+                            <input type="file" class="form-control" name="bukti_pembayaran"
+                                accept=".jpg,.jpeg,.png,.gif,.webp">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -201,8 +203,9 @@
     @foreach ($laporanPembayaran as $tim => $periodes)
         @foreach ($periodes as $periode => $details)
             @foreach ($details as $laporan)
-                <div class="modal fade" id="editModal{{ $laporan->penggunaan_anggaran_id }}" tabindex="-1" role="dialog"
-                    aria-labelledby="editModalLabel{{ $laporan->penggunaan_anggaran_id }}" aria-hidden="true">
+                <div class="modal fade" id="editModal{{ $laporan->penggunaan_anggaran_id }}" tabindex="-1"
+                    role="dialog" aria-labelledby="editModalLabel{{ $laporan->penggunaan_anggaran_id }}"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                         <div class="modal-content">
                             <form
