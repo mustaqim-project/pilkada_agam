@@ -86,7 +86,6 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         @foreach ($details as $laporan)
-                                                                        {{ dd($laporan) }}
                                                                             <tr>
                                                                                 {{-- <td>{{ $loop->iteration }}</td> --}}
                                                                                 <td>{{ $loop->iteration }}</td>
