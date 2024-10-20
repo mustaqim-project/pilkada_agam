@@ -111,7 +111,7 @@
                                 @foreach ($periodes as $periode)
 
 
-                                    <option value="{{ $periode->anggaran_id }}">
+                                    <option value="{{ $periode->id }}">
                                         {{ $periode->nama_periode }} -
                                         {{ $periode->anggaran->tim->name }}
                                     </option>
