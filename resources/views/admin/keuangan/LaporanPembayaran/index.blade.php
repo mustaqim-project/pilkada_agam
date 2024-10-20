@@ -98,7 +98,7 @@
                                                                                     class="btn btn-warning">
                                                                                     <i class="fas fa-edit"></i>
                                                                                 </a>
-                                                                                {{-- <a href="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $laporan->penggunaan_anggaran_id) }}"
+                                                                                {{-- <a href="{{ route('admin.keuangan.laporan_pembayaran.destroy', $laporan->penggunaan_anggaran_id) }}"
                                                                                     class="btn btn-danger delete-item">
                                                                                     <i class="fas fa-trash-alt"></i>
                                                                                 </a> --}}
@@ -199,7 +199,7 @@
                     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                         <div class="modal-content">
                             <form
-                                action="{{ route('admin.keuangan.penggunaan_anggaran.update', $laporan->laporan_id) }}"
+                                action="{{ route('admin.keuangan.laporan_pembayaran.update', $laporan->laporan_id) }}"
                                 method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
