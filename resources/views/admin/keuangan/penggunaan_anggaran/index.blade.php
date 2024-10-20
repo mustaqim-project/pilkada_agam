@@ -17,7 +17,6 @@
 
             <div class="row mb-4">
                 <div class="col-md-12">
-                    <h3>Penggunaan Anggaran</h3>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -89,7 +88,7 @@
             </div>
         </div>
     </section>
-{{--
+
     <!-- Modal Tambah -->
     <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
         aria-hidden="true">
@@ -141,7 +140,7 @@
         </div>
     </div>
 
-    @foreach ($laporanPembayaran as $item)
+    {{-- @foreach ($laporanPembayaran as $item)
         <div class="modal fade" id="editModal{{ $item->laporan_id }}" tabindex="-1" role="dialog"
             aria-labelledby="editModalLabel{{ $item->laporan_id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
