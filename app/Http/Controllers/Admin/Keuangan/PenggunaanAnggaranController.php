@@ -17,7 +17,6 @@ class PenggunaanAnggaranController extends Controller
 
     public function index()
     {
-        // Eager load relationships for better performance
         $periodes = periode::with('anggaran.tim')->get();
         $detailPembiayaans = DetailPembiayaan::all();
 
