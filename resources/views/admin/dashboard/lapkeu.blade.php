@@ -47,18 +47,17 @@
                     <tbody>
                         @foreach ($sisaAnggaranPerTim as $tim)
                             <tr>
-                                <td>{{ $tim->tim }}</td>
-                                <td>Rp {{ number_format($tim->total_anggaran, 0, ',', '.') }}</td>
-                                <td>Rp {{ number_format($tim->total_anggaran_digunakan, 0, ',', '.') }}</td>
-                                <td>Rp {{ number_format($tim->sisa_anggaran, 0, ',', '.') }}</td>
+                                <td>{{ $tim->Tim }}</td> <!-- Ganti tim menjadi Tim -->
+                                <td>Rp {{ number_format($tim->Total_Anggaran, 0, ',', '.') }}</td> <!-- Ganti total_anggaran menjadi Total_Anggaran -->
+                                <td>Rp {{ number_format($tim->Total_Digunakan, 0, ',', '.') }}</td> <!-- Ganti total_anggaran_digunakan menjadi Total_Digunakan -->
+                                <td>Rp {{ number_format($tim->Sisa_Anggaran, 0, ',', '.') }}</td> <!-- Ganti sisa_anggaran menjadi Sisa_Anggaran -->
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-
-
         </div>
+
 
 
 
