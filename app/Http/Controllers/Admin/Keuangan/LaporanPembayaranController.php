@@ -21,7 +21,7 @@ class LaporanPembayaranController extends Controller
             ->join('tims as t', 'a.tim_id', '=', 't.id')
             ->leftJoin('laporan_pembayaran as lp', 'pa.id', '=', 'lp.penggunaan_anggaran_id')
             ->select(
-                 'lp.id as laporan_id','t.name as tim',
+                 'lp.id as id','t.name as tim',
                 'p.nama_periode',
                 'dp.nama_rincian',
                 'pa.jumlah_digunakan',

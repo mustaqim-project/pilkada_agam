@@ -108,7 +108,7 @@
                                                                                 <td>
 
                                                                                     <a href="#" data-toggle="modal"
-                                                                                        data-target="#editModal{{ $laporan->laporan_id }}"
+                                                                                        data-target="#editModal{{ $laporan->id }}"
                                                                                         class="btn btn-warning">
                                                                                         <i class="fas fa-edit"></i>
                                                                                     </a>
