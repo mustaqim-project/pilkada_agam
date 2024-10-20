@@ -18,8 +18,7 @@ class PenggunaanAnggaranController extends Controller
 
     public function index()
     {
-        $periodes = periode::with('anggaran.tim')->get();
-        $detailPembiayaans = DetailPembiayaan::all();
+
 
         $laporanPembayaran = DB::table('penggunaan_anggaran as pa')
             ->join('detail_pembiayaan as dp', 'pa.detail_pembiayaan_id', '=', 'dp.id')
@@ -48,9 +47,12 @@ class PenggunaanAnggaranController extends Controller
             ->map(function ($tim) {
                 return $tim->groupBy('nama_periode');
             });
-            // dd($periodes);
-        return view('admin.keuangan.penggunaan_anggaran.index', compact('periodes', 'detailPembiayaans', 'laporanPembayaran'));
-    }
+            $periodes = periode::with('anggaran.tim')->get();
+            $detailPembiayaans = DetailPembiayaan::all();
+
+            return view('admin.keuangan.penggunaan_anggaran.index', compact('periodes', 'detailPembiayaans', 'laporanPembayaran'));
+
+        }
 
 
     // public function index()
@@ -121,7 +123,10 @@ class PenggunaanAnggaranController extends Controller
 
     public function create()
     {
-        return view('admin.keuangan.penggunaan_anggaran.create');
+        $periodes = periode::with('anggaran.tim')->get();
+            $detailPembiayaans = DetailPembiayaan::all();
+
+            return view('admin.keuangan.penggunaan_anggaran.create', compact('periodes', 'detailPembiayaans'));
     }
 
     public function store(Request $request)
