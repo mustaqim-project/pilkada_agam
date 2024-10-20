@@ -15,18 +15,88 @@ class PenggunaanAnggaranController extends Controller
 {
     use FileUploadTrait;
 
-
     public function index()
     {
         $penggunaanAnggaran = PenggunaanAnggaran::with([
-            'periode.anggaran.tim',  // Periode -> Anggaran -> Tim
-            'detailPembiayaan'       // Relasi ke DetailPembiayaan tetap
+            'periode.anggaran.tim',
+            'detailPembiayaan',
         ])->get();
+
         $periodes = periode::with('anggaran.tim')->get();
         $detailPembiayaans = DetailPembiayaan::all();
-        // dd(vars: $penggunaanAnggaran);
-        return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran', 'periodes', 'detailPembiayaans'));
+
+        $laporanPembayaran = DB::table('penggunaan_anggaran as pa')
+            ->join('detail_pembiayaan as dp', 'pa.detail_pembiayaan_id', '=', 'dp.id')
+            ->join('periode as p', 'pa.periode_id', '=', 'p.id')
+            ->join('anggaran as a', 'p.anggaran_id', '=', 'a.id')
+            ->join('tims as t', 'a.tim_id', '=', 't.id')
+            ->leftJoin('laporan_pembayaran as lp', 'pa.id', '=', 'lp.penggunaan_anggaran_id')
+            ->select(
+                't.name as tim',
+                'p.nama_periode',
+                'dp.nama_rincian',
+                'pa.jumlah_digunakan',
+                'pa.status_pembayaran',
+                'pa.bukti_pembayaran',
+                'lp.tujuan_pembayaran',
+                'lp.nominal',
+                'lp.bukti_pembayaran as bukti_pembayaran_laporan',
+                'lp.tanggal_pembayaran',
+                'lp.id as laporan_id',
+                'pa.id as penggunaan_anggaran_id'
+            )
+            ->orderBy('t.name')
+            ->orderBy('p.nama_periode')
+            ->get()
+            ->groupBy('tim')
+            ->map(function ($tim) {
+                return $tim->groupBy('nama_periode');
+            });
+
+        return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran', 'periodes', 'detailPembiayaans', 'laporanPembayaran'));
     }
+
+    // public function index()
+    // {
+    //     $penggunaanAnggaran = PenggunaanAnggaran::with([
+    //         'periode.anggaran.tim',  // Periode -> Anggaran -> Tim
+    //         'detailPembiayaan'       // Relasi ke DetailPembiayaan tetap
+    //     ])->get();
+    //     $periodes = periode::with('anggaran.tim')->get();
+    //     $detailPembiayaans = DetailPembiayaan::all();
+
+    //     $laporanPembayaran = DB::table('penggunaan_anggaran as pa')
+    //     ->join('detail_pembiayaan as dp', 'pa.detail_pembiayaan_id', '=', 'dp.id')
+    //     ->join('periode as p', 'pa.periode_id', '=', 'p.id')
+    //     ->join('anggaran as a', 'p.anggaran_id', '=', 'a.id')
+    //     ->join('tims as t', 'a.tim_id', '=', 't.id')
+    //     ->leftJoin('laporan_pembayaran as lp', 'pa.id', '=', 'lp.penggunaan_anggaran_id')
+    //     ->select(
+    //         't.name as tim',
+    //         'p.nama_periode',
+    //         'dp.nama_rincian',
+    //         'pa.jumlah_digunakan',
+    //         'pa.status_pembayaran',
+    //         'pa.bukti_pembayaran',
+    //         'lp.tujuan_pembayaran',
+    //         'lp.nominal',
+    //         'lp.bukti_pembayaran as bukti_pembayaran_laporan',
+    //         'lp.tanggal_pembayaran',
+    //         'lp.id as laporan_id', // Menambahkan ID laporan_pembayaran
+    //         'pa.id as penggunaan_anggaran_id' // Menambahkan ID penggunaan anggaran
+    //     )
+    //     ->orderBy('t.name')
+    //     ->orderBy('p.nama_periode')
+    //     ->get()
+    //     ->groupBy('tim')
+    //     ->map(function ($tim) {
+    //         return $tim->groupBy('nama_periode');
+    //     });
+
+
+    //     // dd(vars: $penggunaanAnggaran);
+    //     return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran', 'periodes', 'detailPembiayaans'));
+    // }
     // public function index()
     // {
     //     // Mengambil data penggunaan anggaran dengan relasi yang dibutuhkan

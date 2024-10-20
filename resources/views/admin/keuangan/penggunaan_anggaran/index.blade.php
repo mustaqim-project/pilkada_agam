@@ -15,52 +15,106 @@
                 </div>
             </div>
 
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped" id="tablePenggunaanAnggaran">
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h3>Penggunaan Anggaran</h3>
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nama Periode</th>
-                                <th>Nama Rincian Pembiayaan</th>
-                                <th>Jumlah Digunakan</th>
-                                <th>Status Pembayaran</th>
-                                <th>Bukti Pembayaran</th>
-                                <th>Keterangan</th>
-                                <th>Aksi</th>
+                                <th>Nama Tim</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($penggunaanAnggaran as $item)
+                            @foreach ($laporanPembayaran as $tim => $periodes)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->periode->nama_periode }} - {{ $item->periode->anggaran->tim->name }}</td>
-                                    <td>{{ $item->detailPembiayaan->nama_rincian }}</td>
-                                    <td>{{ 'Rp' . number_format($item->jumlah_digunakan, 0, ',', '.') }}</td>
-                                    <td>{{ $item->status_pembayaran == 1 ? 'Lunas' : 'Belum Lunas' }}</td>
-                                    <td><img src="{{ asset($item->bukti_pembayaran) }}" alt="Bukti" width="100"></td>
-                                    <td>{{ $item->keterangan }}</td>
-
                                     <td>
-                                        <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                            <!-- Tombol Detail -->
-                                            <a href="#" data-toggle="modal"
-                                                data-target="#detailModal{{ $item->id }}" class="btn btn-primary"
-                                                aria-label="Lihat Detail {{ $item->name }}">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <!-- Tombol Edit -->
-                                            <a href="#" data-toggle="modal"
-                                                data-target="#editModal{{ $item->id }}" class="btn btn-warning">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <!-- Tombol Hapus -->
-                                            <a href="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $item->id) }}"
-                                                class="btn btn-danger delete-item">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </a>
+                                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            data-target="#collapseTim{{ $loop->iteration }}" aria-expanded="false"
+                                            aria-controls="collapseTim{{ $loop->iteration }}">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                    </td>
+                                    <td>{{ $tim }}</td>
+                                </tr>
 
-                                        </div>
+                                <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
+                                    <td colspan="2">
+                                        <table class="table table-bordered">
+                                            @foreach ($periodes as $periode => $details)
+                                                <thead>
+                                                    <tr>
+                                                        <th colspan="5">Periode: {{ $periode }}</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Rincian</th>
+                                                        <th>Jumlah Anggaran</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($details as $laporan)
+                                                        <tr>
+                                                            <td>{{ $laporan->nama_rincian }}</td>
+                                                            <td>Rp
+                                                                {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-sm btn-info" type="button"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}"
+                                                                    aria-expanded="false"
+                                                                    aria-controls="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}">
+                                                                    Lihat Pembayaran
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr id="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}"
+                                                            class="collapse">
+                                                            <td colspan="5">
+                                                                <table class="table table-sm table-bordered">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>#</th>
+                                                                            <th>Keterangan Penggunaan</th>
+                                                                            <th>Nominal Penggunaan</th>
+                                                                            <th>Bukti Pembayaran</th>
+                                                                            <th>Tanggal Pembayaran</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach ($details as $laporan)
+                                                                            @if ($laporan->tujuan_pembayaran)
+                                                                                <!-- Cek jika laporan_pembayaran tidak null -->
+                                                                                <tr>
+                                                                                    <td>{{ $loop->iteration }}</td>
+                                                                                    <td>{{ $laporan->tujuan_pembayaran }}
+                                                                                    </td>
+                                                                                    <td>Rp
+                                                                                        {{ number_format($laporan->nominal, 0, ',', '.') }}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        @if ($laporan->bukti_pembayaran_laporan)
+                                                                                            <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}"
+                                                                                                target="_blank">Download</a>
+                                                                                        @else
+                                                                                            -
+                                                                                        @endif
+                                                                                    </td>
+                                                                                    <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d/m/Y') : '-' }}
+                                                                                    </td>
+                                                                                </tr>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            @endforeach
+                                        </table>
                                     </td>
                                 </tr>
                             @endforeach
@@ -70,39 +124,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Modal Detail -->
-    @foreach ($penggunaanAnggaran as $item)
-        <div class="modal fade" id="detailModal{{ $item->id }}" tabindex="-1" role="dialog"
-            aria-labelledby="detailModalLabel{{ $item->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="detailModalLabel{{ $item->id }}">Detail Penggunaan Anggaran</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>ID:</strong> {{ $item->id }}</p>
-                        <p><strong>Nama Periode:</strong> {{ $item->periode->nama_periode }} -
-                            {{ $item->periode->anggaran->tim->name }}</p>
-                        <p><strong>Nama Rincian Pembiayaan:</strong> {{ $item->detailPembiayaan->nama_rincian }}</p>
-                        <p><strong>Jumlah Digunakan:</strong>
-                            {{ 'Rp' . number_format($item->jumlah_digunakan, 0, ',', '.') }}</p>
-                        <p><strong>Status Pembayaran:</strong>
-                            {{ $item->status_pembayaran == 1 ? 'Lunas' : 'Belum Lunas' }}</p>
-                        <p><strong>Bukti Pembayaran:</strong></p>
-                        <img src="{{ asset($item->bukti_pembayaran) }}" alt="Bukti" width="100">
-                        <p><strong>Keterangan:</strong> {{ $item->keterangan }}</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
 
     <!-- Modal Tambah -->
     <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
@@ -137,19 +158,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="jumlah_digunakan">Jumlah Digunakan</label>
+                            <label for="jumlah_digunakan">Jumlah Anggaran</label>
                             <input type="number" class="form-control" name="jumlah_digunakan" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="status_pembayaran">Status Pembayaran</label>
-                            <select class="form-control" name="status_pembayaran">
-                                <option value="1">Lunas</option>
-                                <option value="0">Belum Lunas</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                            <input type="file" class="form-control" name="bukti_pembayaran">
                         </div>
                         <div class="form-group">
                             <label for="keterangan">Keterangan</label>
@@ -165,7 +175,7 @@
         </div>
     </div>
 
-
+    {{-- Modal Edit --}}
     @foreach ($penggunaanAnggaran as $item)
         <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog"
             aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
@@ -175,14 +185,12 @@
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-
                         <div class="modal-header">
                             <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Penggunaan Anggaran</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="periode_id">Nama Periode</label>
@@ -190,12 +198,11 @@
                                     @foreach ($periodes as $periode)
                                         <option value="{{ $periode->id }}"
                                             {{ $periode->id == $item->periode_id ? 'selected' : '' }}>
-                                            {{ $periode->nama_periode }}
+                                            {{ $periode->nama_periode }} - {{ $periode->anggaran->tim->name }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
-
                             <div class="form-group">
                                 <label for="detail_pembiayaan_id">Nama Rincian Pembiayaan</label>
                                 <select class="form-control" name="detail_pembiayaan_id" required>
@@ -207,46 +214,27 @@
                                     @endforeach
                                 </select>
                             </div>
-
                             <div class="form-group">
-                                <label for="jumlah_digunakan">Jumlah Digunakan</label>
+                                <label for="jumlah_digunakan">Jumlah Anggaran</label>
                                 <input type="number" class="form-control" name="jumlah_digunakan"
                                     value="{{ $item->jumlah_digunakan }}" required>
                             </div>
-
-                            <div class="form-group">
-                                <label for="status_pembayaran">Status Pembayaran</label>
-                                <select class="form-control" name="status_pembayaran">
-                                    <option value="1" {{ $item->status_pembayaran == 1 ? 'selected' : '' }}>Lunas
-                                    </option>
-                                    <option value="0" {{ $item->status_pembayaran == 0 ? 'selected' : '' }}>Belum
-                                        Lunas</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                                <input type="file" class="form-control" name="bukti_pembayaran">
-                                @if ($item->bukti_pembayaran)
-                                    <img src="{{ asset($item->bukti_pembayaran) }}" alt="Bukti" width="100">
-                                @endif
-                            </div>
-
                             <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
                                 <textarea class="form-control" name="keterangan">{{ $item->keterangan }}</textarea>
                             </div>
                         </div>
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     @endforeach
+
+
 
 
     <script>
