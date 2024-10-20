@@ -44,7 +44,7 @@ class LaporanPembayaranController extends Controller
 
 
 
-        return view('admin.keuangan.LaporanPembayaran.index', compact('laporanPembayaran'));
+        return view('admin.keuangan.laporan_pembayaran.index', compact('laporanPembayaran'));
     }
 
     // Menyimpan laporan pembayaran baru
@@ -66,7 +66,7 @@ class LaporanPembayaranController extends Controller
 
         LaporanPembayaran::create($data);
 
-        return redirect()->route('admin.keuangan.LaporanPembayaran.index')
+        return redirect()->route('admin.keuangan.laporan_pembayaran.index')
             ->with('toast_success', 'Data penggunaan anggaran berhasil disimpan.');
     }
 
@@ -95,7 +95,7 @@ class LaporanPembayaranController extends Controller
 
         $laporanPembayaran->update($data);
 
-        return redirect()->route('admin.keuangan.LaporanPembayaran.index')
+        return redirect()->route('admin.keuangan.laporan_pembayaran.index')
             ->with('toast_success', 'Data penggunaan anggaran berhasil diupdate.');
     }
 
