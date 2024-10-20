@@ -193,18 +193,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($laporanPembayaran as $penggunaan_anggaran_id => $periodes)
+                        @foreach ($laporanPembayaran as $tim => $periodes)
                             <tr>
                                 <td>
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseAnggaran{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseAnggaran{{ $loop->iteration }}">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTim{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseTim{{ $loop->iteration }}">
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
                                 </td>
-                                <td>{{ $periodes->first()->tim }}</td>
+                                <td>{{ $tim }}</td>
                             </tr>
-                            <!-- Subtabel Periode dan Detail untuk Tim -->
-                            <tr id="collapseAnggaran{{ $loop->iteration }}" class="collapse">
-                                <td colspan="3">
+                            <!-- Subtabel Periode untuk Tim -->
+                            <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
+                                <td colspan="2">
                                     <table class="table table-bordered">
                                         @foreach ($periodes as $periode => $details)
                                             <thead>
@@ -242,42 +242,46 @@
                                                         </td>
                                                         <td>
                                                             <!-- Button untuk membuka dropdown laporan_pembayaran -->
-                                                            <button class="btn btn-sm btn-info" type="button" data-toggle="collapse" data-target="#collapseDetail{{ $loop->parent->parent->iteration }}_{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseDetail{{ $loop->parent->parent->iteration }}_{{ $loop->iteration }}">
+                                                            <button class="btn btn-sm btn-info" type="button" data-toggle="collapse" data-target="#collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}">
                                                                 Lihat Pembayaran
                                                             </button>
                                                         </td>
                                                     </tr>
-                                                    <!-- Loop untuk menampilkan semua pembayaran terkait penggunaan_anggaran_id -->
-                                                    @foreach ($periodes as $pembayaran)
-                                                        <tr id="collapseDetail{{ $loop->parent->parent->iteration }}_{{ $loop->iteration }}" class="collapse">
-                                                            <td colspan="5">
-                                                                <table class="table table-sm table-bordered">
+                                                    <!-- Dropdown detail laporan_pembayaran -->
+                                                    <tr id="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}" class="collapse">
+                                                        <td colspan="5">
+                                                            <table class="table table-sm table-bordered">
+                                                                <thead>
                                                                     <tr>
-                                                                        <td><strong>Tujuan Pembayaran:</strong></td>
-                                                                        <td>{{ $pembayaran->tujuan_pembayaran ?? '-' }}</td>
+                                                                        <th>ID</th>
+                                                                        <th>Penggunaan Anggaran ID</th>
+                                                                        <th>Tujuan Pembayaran</th>
+                                                                        <th>Nominal</th>
+                                                                        <th>Bukti Pembayaran</th>
+                                                                        <th>Tanggal Pembayaran</th>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td><strong>Nominal:</strong></td>
-                                                                        <td>Rp {{ number_format($pembayaran->nominal ?? 0, 0, ',', '.') }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><strong>Tanggal Pembayaran:</strong></td>
-                                                                        <td>{{ $pembayaran->tanggal_pembayaran ? \Carbon\Carbon::parse($pembayaran->tanggal_pembayaran)->format('d M Y') : '-' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><strong>Bukti Pembayaran Laporan:</strong></td>
-                                                                        <td>
-                                                                            @if ($pembayaran->bukti_pembayaran_laporan)
-                                                                                <a href="{{ asset($pembayaran->bukti_pembayaran_laporan) }}" target="_blank">Download</a>
-                                                                            @else
-                                                                                -
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($laporan->laporanPembayaran as $detail) <!-- Pastikan laporan memiliki relasi ke laporan_pembayaran -->
+                                                                        <tr>
+                                                                            <td>{{ $detail->id }}</td>
+                                                                            <td>{{ $detail->penggunaan_anggaran_id }}</td>
+                                                                            <td>{{ $detail->tujuan_pembayaran }}</td>
+                                                                            <td>Rp {{ number_format($detail->nominal, 0, ',', '.') }}</td>
+                                                                            <td>
+                                                                                @if ($detail->bukti_pembayaran)
+                                                                                    <a href="{{ asset($detail->bukti_pembayaran) }}" target="_blank">Download</a>
+                                                                                @else
+                                                                                    -
+                                                                                @endif
+                                                                            </td>
+                                                                            <td>{{ $detail->tanggal_pembayaran ? \Carbon\Carbon::parse($detail->tanggal_pembayaran)->format('d/m/Y') : '-' }}</td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         @endforeach
