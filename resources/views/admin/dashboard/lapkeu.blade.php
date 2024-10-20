@@ -183,7 +183,7 @@
         <div class="row mb-4">
             <!-- Laporan Pembayaran Lengkap dalam Bentuk Tabel -->
             <div class="col-md-12">
-                <h3>Laporan Pembayaran Lengkap</h3>
+                <h3>Laporan Serapan Anggaran</h3>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
