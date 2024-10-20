@@ -109,7 +109,7 @@
                 </table>
             </div>
         </div> --}}
-        <div class="row mb-4">
+        {{-- <div class="row mb-4">
             <!-- Laporan Pembayaran Lengkap dalam Bentuk Tabel -->
             <div class="col-md-12">
                 <h3>Laporan Pembayaran Lengkap</h3>
@@ -177,6 +177,80 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div> --}}
+        <div class="row mb-4">
+            <!-- Laporan Pembayaran Lengkap dalam Bentuk Tabel -->
+            <div class="col-md-12">
+                <h3>Laporan Pembayaran Lengkap</h3>
+                <div id="accordion">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nama Tim</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($laporanPembayaran as $tim => $periodes)
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTim{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseTim{{ $loop->iteration }}">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </button>
+                                    </td>
+                                    <td>{{ $tim }}</td>
+                                </tr>
+                                <!-- Subtabel Periode dan Detail untuk Tim -->
+                                <tr>
+                                    <td colspan="2">
+                                        <div id="collapseTim{{ $loop->iteration }}" class="collapse" data-parent="#accordion">
+                                            <div class="card card-body">
+                                                @foreach ($periodes as $periode => $details)
+                                                    <h5>Periode: {{ $periode }}</h5>
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Rincian</th>
+                                                                <th>Jumlah Digunakan</th>
+                                                                <th>Status Pembayaran</th>
+                                                                <th>Bukti Pembayaran</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($details as $laporan)
+                                                                <tr>
+                                                                    <td>{{ $laporan->nama_rincian }}</td>
+                                                                    <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
+                                                                    <td>
+                                                                        @if ($laporan->status_pembayaran == 1)
+                                                                            <span class="badge badge-success">Lunas</span>
+                                                                        @elseif($laporan->status_pembayaran == 0)
+                                                                            <span class="badge badge-danger">Belum Dibayar</span>
+                                                                        @else
+                                                                            <span class="badge badge-warning">Status Tidak Diketahui</span>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        @if ($laporan->bukti_pembayaran)
+                                                                            <a href="{{ asset($laporan->bukti_pembayaran) }}" target="_blank" class="btn btn-sm btn-primary">Download</a>
+                                                                        @else
+                                                                            <span class="text-muted">Tidak Ada Bukti</span>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
