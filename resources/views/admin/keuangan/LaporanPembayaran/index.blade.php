@@ -86,8 +86,7 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         @foreach ($details as $laporan)
-                                                                            @if ($laporan->tujuan_pembayaran)
-                                                                                <!-- Cek jika laporan_pembayaran tidak null -->
+                                                                            {{ dd($laporan) }}
                                                                                 <tr>
                                                                                     <td>{{ $loop->iteration }}</td>
                                                                                     <td>{{ $laporan->tujuan_pembayaran }}
@@ -121,7 +120,6 @@
 
                                                                                     </td>
                                                                                 </tr>
-                                                                            @endif
                                                                         @endforeach
                                                                     </tbody>
                                                                 </table>
