@@ -42,8 +42,6 @@ class LaporanPembayaranController extends Controller
                 return $tim->groupBy('nama_periode');
             });
 
-
-
         return view('admin.keuangan.LaporanPembayaran.index', compact('laporanPembayaran'));
     }
 
@@ -99,13 +97,11 @@ class LaporanPembayaranController extends Controller
             ->with('toast_success', 'Data penggunaan anggaran berhasil diupdate.');
     }
 
-
-
-
     public function destroy($id)
     {
         $laporanPembayaran = LaporanPembayaran::findOrFail($id);
         $laporanPembayaran->delete();
+
         return response()->json([
             'status' => 'success',
             'message' => 'Data berhasil dihapus!'
