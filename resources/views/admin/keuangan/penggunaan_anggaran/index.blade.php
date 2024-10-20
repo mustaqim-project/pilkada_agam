@@ -142,6 +142,7 @@
 
     {{-- Modal Edit --}}
     @foreach ($laporanPembayaran as $tim => $periodes)
+    {{ dd($periodes) }}
         @foreach ($periodes as $periode => $details)
             @foreach ($details as $laporan)
                 <div class="modal fade" id="editModal{{ $laporan->penggunaan_anggaran_id }}" tabindex="-1" role="dialog"
