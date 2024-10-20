@@ -88,7 +88,8 @@
                                                                         @foreach ($details as $laporan)
                                                                         {{ dd($laporan) }}
                                                                             <tr>
-                                                                                <td>{{ $loop->iteration }}</td>
+                                                                                {{-- <td>{{ $loop->iteration }}</td> --}}
+                                                                                <td>{{ $laporan->laporan_id }}</td>
                                                                                 <td>{{ $laporan->tujuan_pembayaran }}
                                                                                 </td>
                                                                                 <td>Rp
