@@ -88,7 +88,7 @@
             </div>
         </div>
     </section>
-
+{{--
     <!-- Modal Tambah -->
     <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
         aria-hidden="true">
@@ -203,7 +203,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
 
 
 
