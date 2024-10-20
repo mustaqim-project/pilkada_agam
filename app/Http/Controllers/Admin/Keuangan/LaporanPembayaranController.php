@@ -54,7 +54,7 @@ class LaporanPembayaranController extends Controller
                 DB::raw('SUM(lp.nominal) AS total_nominal'),
                 'lp.bukti_pembayaran AS bukti_pembayaran_laporan',
                 'lp.tanggal_pembayaran',
-                'lp.id AS laporan_id',
+                'lp.id AS laporan_id', // This needs to be in GROUP BY
                 'pa.id AS penggunaan_anggaran_id'
             )
             ->join('detail_pembiayaan AS dp', 'pa.detail_pembiayaan_id', '=', 'dp.id')
@@ -71,11 +71,13 @@ class LaporanPembayaranController extends Controller
                 'pa.bukti_pembayaran',
                 'lp.tujuan_pembayaran',
                 'lp.bukti_pembayaran',
-                'lp.tanggal_pembayaran'
+                'lp.tanggal_pembayaran',
+                'lp.id' // Add this line
             )
             ->orderBy('t.name')
             ->orderBy('p.nama_periode')
             ->get();
+
 
         return view('admin.keuangan.LaporanPembayaran.index', compact('laporanPembayaran'));
     }
