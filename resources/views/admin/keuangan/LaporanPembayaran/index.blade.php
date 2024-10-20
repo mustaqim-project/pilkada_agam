@@ -110,7 +110,7 @@
                                                                                             class="btn btn-warning">
                                                                                             <i class="fas fa-edit"></i>
                                                                                         </a>
-                                                                                        <a href="{{ route('admin.keuangan.laporan-pembayaran.destroy', $laporan->laporan_id) }}"
+                                                                                        <a href="{{ route('admin.keuangan.laporan_pembayaran.destroy', $laporan->laporan_id) }}"
                                                                                             class="btn btn-danger delete-item">
                                                                                             <i class="fas fa-trash-alt"></i>
                                                                                         </a>
