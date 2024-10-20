@@ -24,11 +24,11 @@
                 <canvas id="totalAnggaranPerTimChart" class="w-100"></canvas>
             </div>
 
-            <!-- Total Anggaran yang Sudah Dikeluarkan per Tim -->
+            {{-- <!-- Total Anggaran yang Sudah Dikeluarkan per Tim -->
             <div class="col-md-4">
                 <h3>Total Anggaran Digunakan per Tim</h3>
                 <canvas id="totalAnggaranDigunakanPerTimChart" class="w-100"></canvas>
-            </div>
+            </div> --}}
         </div>
 
         <div class="row mb-4">
@@ -235,6 +235,7 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th>#</th>
+                                                                        <th>Keterangan Penggunaan</th>
                                                                         <th>Nominal Penggunaan</th>
                                                                         <th>Bukti Pembayaran</th>
                                                                         <th>Tanggal Pembayaran</th>
