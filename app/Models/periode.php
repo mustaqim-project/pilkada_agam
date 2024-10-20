@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\anggaran;
+
 class periode extends Model
 {
     use HasFactory;
 
     protected $table = 'periode';
-    // protected $primaryKey = 'id';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'anggaran_id',
