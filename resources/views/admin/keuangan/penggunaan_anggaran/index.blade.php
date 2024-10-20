@@ -59,7 +59,7 @@
                                                             <td>Rp
                                                                 {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}
                                                             </td>
-                                                            <td>
+                                                            {{-- <td>
 
                                                                 <a href="#" data-toggle="modal"
                                                                     data-target="#editModal{{ $laporan->laporan_id }}"
@@ -73,9 +73,7 @@
                                                                 </a>
 
 
-
-
-                                                            </td>
+                                                            </td> --}}
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
