@@ -304,11 +304,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
             'update' => 'penggunaan_anggaran.update',
             'destroy' => 'penggunaan_anggaran.destroy',
         ]);
-        Route::resource('LaporanPembayaran', LaporanPembayaranController::class)->names([
-            'index' => 'LaporanPembayaran.index',
-            'store' => 'LaporanPembayaran.store',
-            'update' => 'LaporanPembayaran.update',
-            'destroy' => 'LaporanPembayaran.destroy',
+        Route::resource('laporan-pembayaran', LaporanPembayaranController::class)->names([
+            'index' => 'laporan_pembayaran.index',
+            'store' => 'laporan_pembayaran.store',
+            'update' => 'laporan_pembayaran.update',
+            'destroy' => 'laporan_pembayaran.destroy',
         ]);
 
         Route::resource('detail-pembiayaan', DetailPembiayaanController::class)->names([

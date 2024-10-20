@@ -111,7 +111,7 @@
                                                                                         class="btn btn-warning">
                                                                                         <i class="fas fa-edit"></i>
                                                                                     </a>
-                                                                                    <a href="{{ route('admin.keuangan.LaporanPembayaran.destroy', $laporan->laporan_id) }}"
+                                                                                    <a href="{{ route('admin.keuangan.laporan_pembayaran.destroy', $laporan->laporan_id) }}"
                                                                                         class="btn btn-danger delete-item">
                                                                                         <i class="fas fa-trash-alt"></i>
                                                                                     </a>
@@ -144,7 +144,7 @@
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
-                <form action="{{ route('admin.keuangan.LaporanPembayaran.store') }}" method="POST"
+                <form action="{{ route('admin.keuangan.laporan_pembayaran.store') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
