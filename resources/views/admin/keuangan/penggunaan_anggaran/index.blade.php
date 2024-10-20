@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            <div class="row mb-4">
+            {{-- <div class="row mb-4">
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <thead>
@@ -85,7 +85,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
 
