@@ -88,13 +88,13 @@ class DashLapKeuController extends Controller
         //     ->get();;
 
 
-        // Penggunaan Anggaran per Jenis Pembiayaan
-        $penggunaanPerJenisPembiayaan = DB::table('penggunaan_anggaran as pa')
-            ->join('detail_pembiayaan as dp', 'pa.detail_pembiayaan_id', '=', 'dp.id')
-            ->join('jenis_pembiayaan as jp', 'dp.jenis_pembiayaan_id', '=', 'jp.id')
-            ->select('jp.nama_pembiayaan', DB::raw('SUM(pa.jumlah_digunakan) AS total_digunakan'))
-            ->groupBy('jp.nama_pembiayaan')
-            ->get();
+        // // Penggunaan Anggaran per Jenis Pembiayaan
+        // $penggunaanPerJenisPembiayaan = DB::table('penggunaan_anggaran as pa')
+        //     ->join('detail_pembiayaan as dp', 'pa.detail_pembiayaan_id', '=', 'dp.id')
+        //     ->join('jenis_pembiayaan as jp', 'dp.jenis_pembiayaan_id', '=', 'jp.id')
+        //     ->select('jp.nama_pembiayaan', DB::raw('SUM(pa.jumlah_digunakan) AS total_digunakan'))
+        //     ->groupBy('jp.nama_pembiayaan')
+        //     ->get();
 
         // // Penggunaan Anggaran per Periode
         // $penggunaanPeriode = DB::table('tims as t')
@@ -227,9 +227,7 @@ class DashLapKeuController extends Controller
                 'lp.tujuan_pembayaran',
                 'lp.nominal',
                 'lp.bukti_pembayaran as bukti_pembayaran_laporan',
-                'lp.tanggal_pembayaran',
-                'lp.id as laporan_id', // Menambahkan ID laporan_pembayaran
-                'pa.id as penggunaan_anggaran_id' // Menambahkan ID penggunaan anggaran
+                'lp.tanggal_pembayaran'
             )
             ->orderBy('t.name')
             ->orderBy('p.nama_periode')
@@ -238,6 +236,7 @@ class DashLapKeuController extends Controller
             ->map(function ($tim) {
                 return $tim->groupBy('nama_periode');
             });
+
 
 
         return view('admin.dashboard.lapkeu', compact(
