@@ -107,15 +107,14 @@
                         <div class="form-group">
                             <label for="periode_id">Nama Periode</label>
                             <select class="form-control" name="periode_id" required>
-                                dd($periodes);
 
                                 @foreach ($periodes as $periode)
 
 
-                                    {{-- <option value="{{ $periode->id }}">
+                                    <option value="{{ $periode->anggaran_id }}">
                                         {{ $periode->nama_periode }} -
                                         {{ $periode->anggaran->tim->name }}
-                                    </option> --}}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
