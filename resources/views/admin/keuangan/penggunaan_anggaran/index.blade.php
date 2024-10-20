@@ -109,7 +109,7 @@
                             <select class="form-control" name="periode_id" required>
                                 @foreach ($dataPeriode as $periode)
                                     <option value="{{ $periode->id }}">
-                                        {{ $periode->nama_periode }}
+                                        {{ $periode->nama_periode }} - {{ $periode->anggaran->tim->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -140,7 +140,7 @@
         </div>
     </div>
 
-    {{-- @foreach ($laporanPembayaran as $item)
+    @foreach ($laporanPembayaran as $item)
         <div class="modal fade" id="editModal{{ $item->laporan_id }}" tabindex="-1" role="dialog"
             aria-labelledby="editModalLabel{{ $item->laporan_id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -162,7 +162,7 @@
                             <div class="form-group">
                                 <label for="periode_id">Nama Periode</label>
                                 <select class="form-control" name="periode_id" required>
-                                    @foreach ($periodes as $periode)
+                                    @foreach ($dataPeriode as $periode)
                                         <option value="{{ $periode->id }}"
                                             {{ $periode->id == $item->periode_id ? 'selected' : '' }}>
                                             {{ $periode->nama_periode }}
@@ -174,7 +174,7 @@
                             <div class="form-group">
                                 <label for="detail_pembiayaan_id">Nama Rincian Pembiayaan</label>
                                 <select class="form-control" name="detail_pembiayaan_id" required>
-                                    @foreach ($detailPembiayaans as $detail)
+                                    @foreach ($datadetailPembiayaans as $detail)
                                         <option value="{{ $detail->id }}"
                                             {{ $detail->id == $item->detail_pembiayaan_id ? 'selected' : '' }}>
                                             {{ $detail->nama_rincian }}
@@ -203,7 +203,7 @@
                 </div>
             </div>
         </div>
-    @endforeach --}}
+    @endforeach
 
 
 
