@@ -41,20 +41,21 @@ class DashLapKeuController extends Controller
         // Sisa Anggaran per Tim
 
         $sisaAnggaranPerTim = DB::table('tims as t')
-            ->select(
-                't.id AS Tim_ID',
-                't.name AS Tim',
-                DB::raw('COALESCE(SUM(a.total_anggaran), 0) AS Total_Anggaran'),
-                DB::raw('COALESCE(SUM(lp.nominal), 0) AS Total_Digunakan'),
-                DB::raw('COALESCE(SUM(a.total_anggaran), 0) - COALESCE(SUM(lp.nominal), 0) AS Sisa_Anggaran')
-            )
-            ->leftJoin('anggaran as a', 't.id', '=', 'a.tim_id')
-            ->leftJoin('periode as p', 'a.id', '=', 'p.anggaran_id')
-            ->leftJoin('penggunaan_anggaran as pa', 'p.id', '=', 'pa.periode_id')
-            ->leftJoin('laporan_pembayaran as lp', 'pa.id', '=', 'lp.penggunaan_anggaran_id')
-            ->groupBy('t.id', 't.name', 'a.total_anggaran')
-            ->orderBy('Tim_ID', 'ASC')
-            ->get();
+        ->select(
+            't.id AS Tim_ID',
+            't.name AS Tim',
+            'a.total_anggaran AS Total_Anggaran', // Mengambil total_anggaran langsung dari tabel anggaran
+            DB::raw('COALESCE(SUM(lp.nominal), 0) AS Total_Digunakan'),
+            DB::raw('a.total_anggaran - COALESCE(SUM(lp.nominal), 0) AS Sisa_Anggaran') // Menghitung sisa anggaran langsung
+        )
+        ->leftJoin('anggaran as a', 't.id', '=', 'a.tim_id')
+        ->leftJoin('periode as p', 'a.id', '=', 'p.anggaran_id')
+        ->leftJoin('penggunaan_anggaran as pa', 'p.id', '=', 'pa.periode_id')
+        ->leftJoin('laporan_pembayaran as lp', 'pa.id', '=', 'lp.penggunaan_anggaran_id')
+        ->groupBy('t.id', 't.name', 'a.total_anggaran') // Memastikan grup berdasarkan total_anggaran
+        ->orderBy('Tim_ID', 'ASC')
+        ->get();
+
 
         // $sisaAnggaranPerTim = DB::table('tims as t')
         //     ->leftJoin(
