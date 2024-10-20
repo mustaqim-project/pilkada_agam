@@ -25,10 +25,10 @@
             </div>
 
             <!-- Total Anggaran yang Sudah Dikeluarkan per Tim -->
-            {{-- <div class="col-md-4">
+            <div class="col-md-4">
                 <h3>Total Anggaran Digunakan per Tim</h3>
                 <canvas id="totalAnggaranDigunakanPerTimChart" class="w-100"></canvas>
-            </div> --}}
+            </div>
         </div>
 
         <div class="row mb-4">
