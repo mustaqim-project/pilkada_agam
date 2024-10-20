@@ -212,9 +212,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Rincian</th>
-                                                    <th>Jumlah Digunakan</th>
-                                                    <th>Status Pembayaran</th>
-                                                    <th>Bukti Pembayaran</th>
+                                                    <th>Jumlah Anggaran</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -223,22 +221,6 @@
                                                     <tr>
                                                         <td>{{ $laporan->nama_rincian }}</td>
                                                         <td>Rp {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}</td>
-                                                        <td>
-                                                            @if ($laporan->status_pembayaran == 1)
-                                                                Lunas
-                                                            @elseif($laporan->status_pembayaran == 0)
-                                                                Belum Dibayar
-                                                            @else
-                                                                Status Tidak Diketahui
-                                                            @endif
-                                                        </td>
-                                                        <td>
-                                                            @if ($laporan->bukti_pembayaran)
-                                                                <a href="{{ asset($laporan->bukti_pembayaran) }}" target="_blank">Download</a>
-                                                            @else
-                                                                -
-                                                            @endif
-                                                        </td>
                                                         <td>
                                                             <!-- Button untuk membuka dropdown laporan_pembayaran -->
                                                             <button class="btn btn-sm btn-info" type="button" data-toggle="collapse" data-target="#collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}">
@@ -252,9 +234,8 @@
                                                             <table class="table table-sm table-bordered">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>ID</th>
-                                                                        <th>Tujuan Pembayaran</th>
-                                                                        <th>Nominal</th>
+                                                                        <th>#</th>
+                                                                        <th>Nominal Penggunaan</th>
                                                                         <th>Bukti Pembayaran</th>
                                                                         <th>Tanggal Pembayaran</th>
                                                                     </tr>
@@ -263,8 +244,7 @@
                                                                     @foreach ($details as $laporan)
                                                                     @if ($laporan->tujuan_pembayaran) <!-- Cek jika laporan_pembayaran tidak null -->
                                                                         <tr>
-                                                                            <td>{{ $laporan->laporan_id }}</td>
-                                                                            <td>{{ $laporan->penggunaan_anggaran_id }}</td>
+                                                                            <td>{{ $loop->iteration }}</td>
                                                                             <td>{{ $laporan->tujuan_pembayaran }}</td>
                                                                             <td>Rp {{ number_format($laporan->nominal, 0, ',', '.') }}</td>
                                                                             <td>
