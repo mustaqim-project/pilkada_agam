@@ -125,10 +125,10 @@
                             <label for="jumlah_digunakan">Jumlah Anggaran</label>
                             <input type="number" class="form-control" name="jumlah_digunakan" required>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="keterangan">Keterangan</label>
                             <textarea class="form-control" name="keterangan"></textarea>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -195,10 +195,10 @@
                                         value="{{ $laporan->jumlah_digunakan }}" required>
                                 </div>
 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="keterangan">Keterangan</label>
                                     <textarea class="form-control" name="keterangan">{{ $laporan->keterangan }}</textarea>
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="modal-footer">
