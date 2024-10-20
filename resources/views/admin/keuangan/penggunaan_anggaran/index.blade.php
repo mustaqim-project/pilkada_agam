@@ -26,6 +26,7 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             @foreach ($laporanPembayaran as $tim => $periodes)
                                 <tr>
                                     <td>
@@ -53,7 +54,6 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    dd($details);
                                                     @foreach ($details as $laporan)
                                                         <tr>
                                                             <td>{{ $laporan->nama_rincian }}</td>
