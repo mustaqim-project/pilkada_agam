@@ -100,9 +100,9 @@ class LaporanPembayaranController extends Controller
     }
 
     // Menghapus laporan pembayaran
-    public function destroy($id)
+    public function destroy($laporan_pembayaran)
     {
-        $laporanPembayaran = LaporanPembayaran::findOrFail($id);
+        $laporanPembayaran = LaporanPembayaran::findOrFail($laporan_pembayaran);
 
         // Hapus file dari storage jika diperlukan
         if ($laporanPembayaran->bukti_pembayaran) {
