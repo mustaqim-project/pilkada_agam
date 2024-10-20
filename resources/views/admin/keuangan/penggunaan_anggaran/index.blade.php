@@ -141,77 +141,78 @@
 
 
     {{-- Modal Edit --}}
-    @foreach ($laporanPembayaran as $tim => $periodes)
-    {{ dd($periodes) }}
-        @foreach ($periodes as $periode => $details)
-            @foreach ($details as $laporan)
-                <div class="modal fade" id="editModal{{ $laporan->penggunaan_anggaran_id }}" tabindex="-1" role="dialog"
-                    aria-labelledby="editModalLabel{{ $laporan->penggunaan_anggaran_id }}" aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                        <div class="modal-content">
-                            <form
-                                action="{{ route('admin.keuangan.penggunaan_anggaran.update', $laporan->penggunaan_anggaran_id) }}"
-                                method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
+@foreach ($laporanPembayaran as $tim => $periodes)
+    @foreach ($periodes as $periode => $details)
+        @foreach ($details as $laporan)
+            <div class="modal fade" id="editModal{{ $laporan->penggunaan_anggaran_id }}" tabindex="-1" role="dialog"
+                aria-labelledby="editModalLabel{{ $laporan->penggunaan_anggaran_id }}" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <form action="{{ route('admin.keuangan.penggunaan_anggaran.update', $laporan->penggunaan_anggaran_id) }}"
+                            method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
 
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="editModalLabel{{ $laporan->penggunaan_anggaran_id }}">
-                                        Edit Penggunaan Anggaran
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editModalLabel{{ $laporan->penggunaan_anggaran_id }}">
+                                    Edit Penggunaan Anggaran
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="periode_id">Nama Periode</label>
+                                    <select class="form-control" name="periode_id" required>
+                                        <option value="{{ $laporan->nama_periode }}" selected>
+                                            {{ $laporan->nama_periode }}
+                                        </option>
+                                        @foreach ($dataPeriode as $periode)
+                                            <option value="{{ $periode->id }}">
+                                                {{ $periode->nama_periode }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="periode_id">Nama Periode</label>
-                                        <select class="form-control" name="periode_id" required>
-                                            @foreach ($dataPeriode as $periode)
-                                                <option value="{{ $periode->id }}"
-                                                    {{ $periode->id == $laporan->periode_id ? 'selected' : '' }}>
-                                                    {{ $periode->nama_periode }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="detail_pembiayaan_id">Nama Rincian Pembiayaan</label>
-                                        <select class="form-control" name="detail_pembiayaan_id" required>
-                                            @foreach ($datadetailPembiayaans as $detail)
-                                                <option value="{{ $detail->id }}"
-                                                    {{ $detail->id == $laporan->detail_pembiayaan_id ? 'selected' : '' }}>
-                                                    {{ $detail->nama_rincian }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="jumlah_digunakan">Jumlah Digunakan</label>
-                                        <input type="number" class="form-control" name="jumlah_digunakan"
-                                            value="{{ $laporan->jumlah_digunakan }}" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="keterangan">Keterangan</label>
-                                        <textarea class="form-control" name="keterangan">{{ $laporan->keterangan }}</textarea>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="detail_pembiayaan_id">Nama Rincian Pembiayaan</label>
+                                    <select class="form-control" name="detail_pembiayaan_id" required>
+                                        @foreach ($datadetailPembiayaans as $detail)
+                                            <option value="{{ $detail->id }}"
+                                                {{ $detail->nama_rincian == $laporan->nama_rincian ? 'selected' : '' }}>
+                                                {{ $detail->nama_rincian }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                    <button type="submit" class="btn btn-primary">Update</button>
+                                <div class="form-group">
+                                    <label for="jumlah_digunakan">Jumlah Digunakan</label>
+                                    <input type="number" class="form-control" name="jumlah_digunakan"
+                                        value="{{ $laporan->jumlah_digunakan }}" required>
                                 </div>
-                            </form>
-                        </div>
+
+                                <div class="form-group">
+                                    <label for="keterangan">Keterangan</label>
+                                    <textarea class="form-control" name="keterangan">{{ $laporan->keterangan }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            @endforeach
+            </div>
         @endforeach
     @endforeach
+@endforeach
+
 
 
     <script>
