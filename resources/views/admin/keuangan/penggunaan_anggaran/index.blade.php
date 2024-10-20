@@ -108,7 +108,7 @@
                             <label for="periode_id">Nama Periode</label>
                             <select class="form-control" name="periode_id" required>
                                 @foreach ($periodes as $periode)
-                                {{ dd($periode) }}
+                                {{ var_dump($periode) }}
 
                                     {{-- <option value="{{ $periode->id }}">
                                         {{ $periode->nama_periode }}
