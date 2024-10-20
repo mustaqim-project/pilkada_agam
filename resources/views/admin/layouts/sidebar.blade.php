@@ -100,6 +100,18 @@
                             </li>
                         @endif
 
+                        @if (canAccess([
+                                'Laporan Pembiayaan index',
+                                'Laporan Pembiayaan create',
+                                'Laporan Pembiayaan update',
+                                'Laporan Pembiayaan delete',
+                            ]))
+                            <li class="{{ setSidebarActive(['admin.keuangan.penggunaan_anggaran.index']) }}">
+                                <a class="nav-link"
+                                    href="{{ route('admin.keuangan.penggunaan_anggaran.index') }}">{{ __('Laporan Pembiayaan') }}</a>
+                            </li>
+                        @endif
+
                     </ul>
                 </li>
             @endif
