@@ -17,12 +17,8 @@ class PenggunaanAnggaranController extends Controller
 
     public function index()
     {
-        $penggunaanAnggaran = PenggunaanAnggaran::with([
-            'periode.anggaran.tim',
-            'detailPembiayaan',
-        ])->get();
-
-        $periodes = periode::with('anggaran.tim')->get();
+        // Eager load relationships for better performance
+        $periodes = Periode::with('anggaran.tim')->get();
         $detailPembiayaans = DetailPembiayaan::all();
 
         $laporanPembayaran = DB::table('penggunaan_anggaran as pa')
@@ -53,8 +49,9 @@ class PenggunaanAnggaranController extends Controller
                 return $tim->groupBy('nama_periode');
             });
 
-        return view('admin.keuangan.penggunaan_anggaran.index', compact('penggunaanAnggaran', 'periodes', 'detailPembiayaans', 'laporanPembayaran'));
+        return view('admin.keuangan.penggunaan_anggaran.index', compact('periodes', 'detailPembiayaans', 'laporanPembayaran'));
     }
+
 
     // public function index()
     // {

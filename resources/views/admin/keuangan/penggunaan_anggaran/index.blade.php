@@ -60,55 +60,17 @@
                                                                 {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}
                                                             </td>
                                                             <td>
-                                                                <button class="btn btn-sm btn-info" type="button"
-                                                                    data-toggle="collapse"
-                                                                    data-target="#collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}"
-                                                                    aria-expanded="false"
-                                                                    aria-controls="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}">
-                                                                    Lihat Pembayaran
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-
-                                                        <tr id="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}"
-                                                            class="collapse">
-                                                            <td colspan="5">
-                                                                <table class="table table-sm table-bordered">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>#</th>
-                                                                            <th>Keterangan Penggunaan</th>
-                                                                            <th>Nominal Penggunaan</th>
-                                                                            <th>Bukti Pembayaran</th>
-                                                                            <th>Tanggal Pembayaran</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        @foreach ($details as $laporan)
-                                                                            @if ($laporan->tujuan_pembayaran)
-                                                                                <!-- Cek jika laporan_pembayaran tidak null -->
-                                                                                <tr>
-                                                                                    <td>{{ $loop->iteration }}</td>
-                                                                                    <td>{{ $laporan->tujuan_pembayaran }}
-                                                                                    </td>
-                                                                                    <td>Rp
-                                                                                        {{ number_format($laporan->nominal, 0, ',', '.') }}
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        @if ($laporan->bukti_pembayaran_laporan)
-                                                                                            <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}"
-                                                                                                target="_blank">Download</a>
-                                                                                        @else
-                                                                                            -
-                                                                                        @endif
-                                                                                    </td>
-                                                                                    <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d/m/Y') : '-' }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                            @endif
-                                                                        @endforeach
-                                                                    </tbody>
-                                                                </table>
+                                                                <!-- Add your edit and delete buttons here -->
+                                                                <button class="btn btn-warning" data-toggle="modal"
+                                                                    data-target="#editModal{{ $laporan->laporan_id }}">Edit</button>
+                                                                <form
+                                                                    action="{{ route('admin.keuangan.penggunaan_anggaran.destroy', $laporan->laporan_id) }}"
+                                                                    method="POST" style="display:inline;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger">Hapus</button>
+                                                                </form>
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -124,8 +86,6 @@
             </div>
         </div>
     </section>
-
-
 
     <!-- Modal Tambah -->
     <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
@@ -177,19 +137,19 @@
         </div>
     </div>
 
-
-    @foreach ($penggunaanAnggaran as $item)
-        <div class="modal fade" id="editModal{{ $item->id }}" tabindex="-1" role="dialog"
-            aria-labelledby="editModalLabel{{ $item->id }}" aria-hidden="true">
+    @foreach ($laporanPembayaran as $item)
+        <div class="modal fade" id="editModal{{ $item->laporan_id }}" tabindex="-1" role="dialog"
+            aria-labelledby="editModalLabel{{ $item->laporan_id }}" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                 <div class="modal-content">
-                    <form action="{{ route('admin.keuangan.penggunaan_anggaran.update', $item->id) }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('admin.keuangan.penggunaan_anggaran.update', $item->laporan_id) }}"
+                        method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ $item->id }}">Edit Penggunaan Anggaran</h5>
+                            <h5 class="modal-title" id="editModalLabel{{ $item->laporan_id }}">Edit Penggunaan Anggaran
+                            </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -227,24 +187,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="status_pembayaran">Status Pembayaran</label>
-                                <select class="form-control" name="status_pembayaran">
-                                    <option value="1" {{ $item->status_pembayaran == 1 ? 'selected' : '' }}>Lunas
-                                    </option>
-                                    <option value="0" {{ $item->status_pembayaran == 0 ? 'selected' : '' }}>Belum
-                                        Lunas</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                                <input type="file" class="form-control" name="bukti_pembayaran">
-                                @if ($item->bukti_pembayaran)
-                                    <img src="{{ asset($item->bukti_pembayaran) }}" alt="Bukti" width="100">
-                                @endif
-                            </div>
-
-                            <div class="form-group">
                                 <label for="keterangan">Keterangan</label>
                                 <textarea class="form-control" name="keterangan">{{ $item->keterangan }}</textarea>
                             </div>
@@ -252,13 +194,14 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     @endforeach
+
 
 
     <script>
@@ -280,7 +223,7 @@
 
 
         $(document).ready(function() {
-            $("#tablePenggunaanAnggaran").dataTable({
+            $("#tablelaporanPembayaran").dataTable({
                 "columnDefs": [{
                     "sortable": false,
                     "targets": [2, 3]
