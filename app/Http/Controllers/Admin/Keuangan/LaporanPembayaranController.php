@@ -47,7 +47,7 @@ class LaporanPembayaranController extends Controller
                 't.name AS tim',
                 'p.nama_periode',
                 'dp.nama_rincian',
-                DB::raw('SUM(pa.jumlah_digunakan) AS total_jumlah_digunakan'),
+                DB::raw('SUM(pa.jumlah_digunakan) AS jumlah_digunakan'),
                 'pa.status_pembayaran',
                 'pa.bukti_pembayaran',
                 'lp.tujuan_pembayaran',
