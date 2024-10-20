@@ -112,8 +112,7 @@
 
 
                                     <option value="{{ $periode->id }}">
-                                        {{ $periode->nama_periode }} -
-                                        {{ $periode->anggaran->tim->name }}
+                                        {{ $periode->nama_periode }}
                                     </option>
                                 @endforeach
                             </select>
