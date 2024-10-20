@@ -106,9 +106,9 @@
                                 'Laporan Pembiayaan update',
                                 'Laporan Pembiayaan delete',
                             ]))
-                            <li class="{{ setSidebarActive(['admin.keuangan.penggunaan_anggaran.index']) }}">
+                            <li class="{{ setSidebarActive(['admin.keuangan.LaporanPembayaran.index']) }}">
                                 <a class="nav-link"
-                                    href="{{ route('admin.keuangan.penggunaan_anggaran.index') }}">{{ __('Laporan Pembiayaan') }}</a>
+                                    href="{{ route('admin.keuangan.LaporanPembayaran.index') }}">{{ __('Laporan Pembiayaan') }}</a>
                             </li>
                         @endif
 
