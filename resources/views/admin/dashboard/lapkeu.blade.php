@@ -215,6 +215,10 @@
                                                                 <th>Jumlah Digunakan</th>
                                                                 <th>Status Pembayaran</th>
                                                                 <th>Bukti Pembayaran</th>
+                                                                <th>Tujuan Pembayaran</th>
+                                                                <th>Nominal</th>
+                                                                <th>Tanggal Pembayaran</th>
+                                                                <th>Bukti Pembayaran Laporan</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -234,6 +238,17 @@
                                                                     <td>
                                                                         @if ($laporan->bukti_pembayaran)
                                                                             <a href="{{ asset($laporan->bukti_pembayaran) }}" target="_blank" class="btn btn-sm btn-primary">Download</a>
+                                                                        @else
+                                                                            <span class="text-muted">Tidak Ada Bukti</span>
+                                                                        @endif
+                                                                    </td>
+                                                                    <!-- Breakdown dari laporan_pembayaran -->
+                                                                    <td>{{ $laporan->tujuan_pembayaran ?? '-' }}</td>
+                                                                    <td>Rp {{ number_format($laporan->nominal ?? 0, 0, ',', '.') }}</td>
+                                                                    <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d M Y') : '-' }}</td>
+                                                                    <td>
+                                                                        @if ($laporan->bukti_pembayaran_laporan)
+                                                                            <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}" target="_blank" class="btn btn-sm btn-primary">Download</a>
                                                                         @else
                                                                             <span class="text-muted">Tidak Ada Bukti</span>
                                                                         @endif
