@@ -47,16 +47,15 @@
                                                         <th colspan="5">Periode: {{ $periode }}</th>
                                                     </tr>
                                                     <tr>
-                                                        <th>ID</th>
                                                         <th>Rincian</th>
                                                         <th>Jumlah Anggaran</th>
                                                         <th>Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    dd($details);
                                                     @foreach ($details as $laporan)
                                                         <tr>
-                                                            <td>{{ $laporan->id }}</td>
                                                             <td>{{ $laporan->nama_rincian }}</td>
                                                             <td>Rp
                                                                 {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}
