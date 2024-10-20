@@ -9,10 +9,10 @@
         <div class="card card-primary">
             <div class="card-header">
                 <div class="card-header-actions">
-                    <a href="{{ route('admin.keuangan.penggunaan_anggaran.create') }}"></a>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal">
+                    <a href="{{ route('admin.keuangan.penggunaan-anggaran.create') }}">+ Penggunaan Anggaran</a>
+                    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal">
                         + Penggunaan Anggaran
-                    </button>
+                    </button> --}}
                 </div>
             </div>
 
