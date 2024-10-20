@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Keuangan;
 use App\Http\Controllers\Controller;
 use App\Models\PenggunaanAnggaran;
 use App\Models\periode;
-use App\Models\anggaran;
 use App\Models\DetailPembiayaan;
 use Illuminate\Http\Request;
 use App\Traits\FileUploadTrait;
@@ -19,8 +18,7 @@ class PenggunaanAnggaranController extends Controller
     public function index()
     {
         // Eager load relationships for better performance
-        $periodes = periode::with('anggaran.tim')->get(); // Eager load 'anggaran' dan 'tim'
-        $anggarans = anggaran::with('tim')->get(); // Eager load 'tim' pada anggaran
+        $periodes = periode::with('anggaran.tim')->get();
         $detailPembiayaans = DetailPembiayaan::all();
 
         $laporanPembayaran = DB::table('penggunaan_anggaran as pa')
