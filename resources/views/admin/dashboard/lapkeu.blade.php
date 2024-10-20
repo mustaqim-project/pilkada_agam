@@ -209,7 +209,7 @@
                                         @foreach ($periodes as $periode => $details)
                                             <thead>
                                                 <tr>
-                                                    <th colspan="4">Periode: {{ $periode }}</th>
+                                                    <th colspan="5">Periode: {{ $periode }}</th>
                                                 </tr>
                                                 <tr>
                                                     <th>Rincian</th>
@@ -250,19 +250,30 @@
                                                     <!-- Dropdown detail laporan_pembayaran -->
                                                     <tr id="collapseDetail{{ $loop->parent->iteration }}_{{ $loop->iteration }}" class="collapse">
                                                         <td colspan="5">
-                                                            <div class="card card-body">
-                                                                <p><strong>Tujuan Pembayaran:</strong> {{ $laporan->tujuan_pembayaran ?? '-' }}</p>
-                                                                <p><strong>Nominal:</strong> Rp {{ number_format($laporan->nominal ?? 0, 0, ',', '.') }}</p>
-                                                                <p><strong>Tanggal Pembayaran:</strong> {{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d M Y') : '-' }}</p>
-                                                                <p>
-                                                                    <strong>Bukti Pembayaran Laporan:</strong>
-                                                                    @if ($laporan->bukti_pembayaran_laporan)
-                                                                        <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}" target="_blank">Download</a>
-                                                                    @else
-                                                                        -
-                                                                    @endif
-                                                                </p>
-                                                            </div>
+                                                            <table class="table table-sm table-bordered">
+                                                                <tr>
+                                                                    <td><strong>Tujuan Pembayaran:</strong></td>
+                                                                    <td>{{ $laporan->tujuan_pembayaran ?? '-' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Nominal:</strong></td>
+                                                                    <td>Rp {{ number_format($laporan->nominal ?? 0, 0, ',', '.') }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Tanggal Pembayaran:</strong></td>
+                                                                    <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d M Y') : '-' }}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Bukti Pembayaran Laporan:</strong></td>
+                                                                    <td>
+                                                                        @if ($laporan->bukti_pembayaran_laporan)
+                                                                            <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}" target="_blank">Download</a>
+                                                                        @else
+                                                                            -
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
                                                         </td>
                                                     </tr>
                                                 @endforeach
