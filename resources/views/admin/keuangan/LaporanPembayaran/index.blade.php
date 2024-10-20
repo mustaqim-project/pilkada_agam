@@ -106,7 +106,7 @@
                                                                                     @endif
                                                                                 </td>
                                                                                 <td>
-                                                                                    {{ dd($laporan) }}
+                                                                                    {{-- {{ dd($laporan) }} --}}
 
 
                                                                                     <a href="#" data-toggle="modal"
