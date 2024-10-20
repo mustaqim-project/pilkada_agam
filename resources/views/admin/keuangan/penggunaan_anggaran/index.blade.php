@@ -107,16 +107,12 @@
                         <div class="form-group">
                             <label for="periode_id">Nama Periode</label>
                             <select class="form-control" name="periode_id" required>
-                                @if ($periodes->isEmpty())
-                                    <option value="">Tidak ada periode tersedia</option>
-                                @else
-                                    @foreach ($periodes as $periode)
-                                        <option value="{{ $periode->id }}">
-                                            {{ $periode->nama_periode }} -
-                                            {{ $periode->anggaran ? ($periode->anggaran->tim ? $periode->anggaran->tim->name : 'Tidak ada tim') : 'Tidak ada anggaran' }}
-                                        </option>
-                                    @endforeach
-                                @endif
+                                @foreach ($periodes as $periode)
+                                    <option value="{{ $periode->id }}">
+                                        {{ $periode->nama_periode }} -
+                                        {{ $periode->anggaran->tim->name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -218,7 +214,7 @@
                 Toast.fire({
                     icon: 'success',
                     title: '{{ Session::get('
-                                toast_success ') }}'
+                                                    toast_success ') }}'
                 });
             @endif
 
@@ -226,7 +222,7 @@
                 Toast.fire({
                     icon: 'error',
                     title: '{{ Session::get('
-                                toast_error ') }}'
+                                                    toast_error ') }}'
                 });
             @endif
         });
