@@ -14,7 +14,6 @@ class PenggajianController extends Controller
     {
         $penggajians = Penggajian::with(['employee.tim', 'employee.jabatan', 'employee.bank'])->get();
 
-        dd($penggajians);
         return view('admin.keuangan.penggajian.index', compact('penggajians'));
     }
 
