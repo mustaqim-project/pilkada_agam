@@ -268,10 +268,16 @@
 
                         <!-- Bukti Pembayaran -->
                         <div class="form-group">
-                            <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                            <input type="file" name="bukti_pembayaran" class="form-control" id="bukti_pembayaran" accept="image/*" required>
-                            <small class="form-text text-muted">Format yang diterima: JPG, PNG, JPEG. Maksimal 5 MB.</small>
+                            <label for="">{{ __('admin.Bukti Pembayaran') }}</label>
+                            <div id="image-preview" class="image-preview">
+                                <label for="image-upload" id="image-label">{{ __('admin.Choose File') }}</label>
+                                <input type="file" name="bukti_pembayaran" id="image-upload">
+                            </div>
+                            @error('bukti_pembayaran')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
+
 
 
                         <!-- Submit Button -->
