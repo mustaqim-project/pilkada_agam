@@ -22,7 +22,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Nama Tim</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,11 +98,31 @@
 
                                                                         <tr id="collapseGaji{{ $penggajian->id_employee }}" class="collapse">
                                                                             <td colspan="3">
-                                                                                <strong>Tanggal Penggajian:</strong> {{ $penggajian->tanggal_penggajian }} <br>
-                                                                                <strong>Jumlah:</strong> Rp {{ number_format($penggajian->nominal, 0, ',', '.') }} <br>
-                                                                                <strong>Bukti Pembayaran:</strong> {{ $penggajian->bukti_pembayaran }} <br>
-                                                                                <a href="#" class="btn btn-warning">Edit</a>
-                                                                                <a href="#" class="btn btn-danger">Delete</a>
+                                                                                <table class="table table-bordered">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>Tanggal Penggajian</th>
+                                                                                            <th>Jumlah</th>
+                                                                                            <th>Bukti Pembayaran</th>
+                                                                                            <th>Aksi</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td>{{ $penggajian->tanggal_penggajian }}</td>
+                                                                                            <td>Rp {{ number_format($penggajian->nominal, 0, ',', '.') }}</td>
+                                                                                            <td>{{ $penggajian->bukti_pembayaran }}</td>
+                                                                                            <td>
+                                                                                                <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $penggajian->id_penggajian }}">
+                                                                                                    <i class="fas fa-edit"></i>
+                                                                                                </a>
+                                                                                                <a href="#" class="btn btn-danger delete-item" data-id="{{ $penggajian->id_penggajian }}">
+                                                                                                    <i class="fas fa-trash-alt"></i>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
                                                                             </td>
                                                                         </tr>
                                                                     @endforeach
