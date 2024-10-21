@@ -71,8 +71,7 @@
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
                                                             <a href="#" data-toggle="modal"
-                                                                data-target="#editModal{{ $item->id }}"
-                                                                class="btn btn-warning">
+                                                                data-target="#editModal{{ $item->id }}" class="btn btn-warning">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
                                                             <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
