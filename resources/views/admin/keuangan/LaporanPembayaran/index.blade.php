@@ -155,6 +155,8 @@
                             <label for="detail_pembiayaan_id">Nama Rincian Pembiayaan</label>
                             <select class="form-control" name="detail_pembiayaan_id" required>
                                 {{ dd($laporanPembayaran) }}
+
+
                                 @foreach ($laporanPembayaran as $tim => $periodes)
                                     @foreach ($periodes as $detail)
                                         @foreach ($detail->laporan as $laporan)
