@@ -500,7 +500,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
 
 
 
-    Route::resource('gaji', GajiController::class);
     Route::resource('bank', BankController::class);
 
 
