@@ -325,14 +325,14 @@
                             <div class="form-group">
                                 <label for="no_rekening">No Rekening</label>
                                 <input type="text" name="no_rekening" class="form-control" id="no_rekening"
-                                    value="{{ $penggajian->no_rekening }}" required>
+                                    value="{{ $penggajian->employee->no_rekening }}" required>
                             </div>
 
                             <!-- Tanggal Masuk -->
                             <div class="form-group">
                                 <label for="tanggal_masuk">Tanggal Masuk</label>
                                 <input type="date" name="tanggal_masuk" class="form-control" id="tanggal_masuk"
-                                    value="{{ $penggajian->tanggal_masuk }}" required>
+                                    value="{{ $penggajian->employee->tanggal_masuk }}" required>
                             </div>
 
                             <!-- Tim Select Option -->
