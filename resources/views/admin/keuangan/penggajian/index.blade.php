@@ -268,8 +268,11 @@
                                                                                                 <td>{{ $detailPenggajian->tanggal_penggajian }}</td>
                                                                                                 <td>Rp {{ number_format($detailPenggajian->nominal, 0, ',', '.') }}</td>
                                                                                                 <td>
-                                                                                                    <img src="{{ asset($detailPenggajian->bukti_pembayaran) }}" alt="Bukti Pembayaran" style="width: 100px; height: auto;">
+                                                                                                    <a href="#" data-toggle="modal" data-target="#buktiPembayaranModal{{ $detailPenggajian->id_penggajian }}">
+                                                                                                        <img src="{{ asset($detailPenggajian->bukti_pembayaran) }}" alt="Bukti Pembayaran" style="width: 100px; height: auto;">
+                                                                                                    </a>
                                                                                                 </td>
+
 
                                                                                                 <td>
                                                                                                      <a href="#"
@@ -309,6 +312,26 @@
 
         </div>
     </section>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="buktiPembayaranModal{{ $detailPenggajian->id_penggajian }}" tabindex="-1" role="dialog" aria-labelledby="buktiPembayaranLabel{{ $detailPenggajian->id_penggajian }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="buktiPembayaranLabel{{ $detailPenggajian->id_penggajian }}">Bukti Pembayaran</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="{{ asset($detailPenggajian->bukti_pembayaran) }}" alt="Bukti Pembayaran" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
     <!-- The Modal -->
     <div class="modal fade" id="tambahModalGaji" tabindex="-1" aria-labelledby="tambahModalGajiLabel" aria-hidden="true">
