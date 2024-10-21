@@ -46,7 +46,8 @@ class PenggajianController extends Controller
                 'e.no_rekening AS no_rekening',
                 'e.tanggal_masuk AS tanggal_masuk',
                 'e.tim_id AS tim_id',
-                'e.jabatan_id AS jabatan_id'
+                'e.jabatan_id AS jabatan_id',
+                'e.bank_id AS bank_id'
             )
             ->get();
 
