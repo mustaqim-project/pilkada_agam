@@ -268,8 +268,9 @@
                                                                                                 <td>{{ $detailPenggajian->tanggal_penggajian }}</td>
                                                                                                 <td>Rp {{ number_format($detailPenggajian->nominal, 0, ',', '.') }}</td>
                                                                                                 <td>
-                                                                                                    {{ asset($detailPenggajian->bukti_pembayaran) }}
+                                                                                                    <img src="{{ asset($detailPenggajian->bukti_pembayaran) }}" alt="Bukti Pembayaran" style="width: 100px; height: auto;">
                                                                                                 </td>
+
                                                                                                 <td>
                                                                                                      <a href="#"
                                                                                                         data-toggle="modal"
