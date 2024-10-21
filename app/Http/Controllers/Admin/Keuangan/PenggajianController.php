@@ -61,6 +61,8 @@ class PenggajianController extends Controller
     // Menyimpan penggajian baru ke database
     public function store(Request $request)
     {
+
+        dd($request);
         $request->validate([
             'employee_id' => 'required|exists:employees,id',
             'tanggal_penggajian' => 'required|date',
