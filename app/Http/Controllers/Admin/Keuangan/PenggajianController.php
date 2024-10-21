@@ -67,10 +67,10 @@ class PenggajianController extends Controller
             'employee_id' => 'required',
             'tanggal_penggajian' => 'required',
             'jumlah' => 'required',
-            'bukti_pembayaran' => 'nullable|mimes:jpg,png,jpeg|max:5012',
+            'image' => 'nullable|mimes:jpg,png,jpeg|max:5012',
         ]);
 
-        $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran');
+        $imagePath = $this->handleFileUpload($request, 'image');
 
         $penggajian = new Penggajian();
         $penggajian->employee_id = $request->employee_id;
