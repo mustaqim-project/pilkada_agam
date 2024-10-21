@@ -35,9 +35,7 @@
                                         </button>
                                     </td>
                                     <td>{{ $tim }}</td>
-                                    <td>
-                                        <button class="btn btn-info">Detail Jabatan</button>
-                                    </td>
+
                                 </tr>
 
                                 <tr id="collapseTim{{ $loop->iteration }}" class="collapse">
@@ -46,85 +44,108 @@
                                             <thead>
                                                 <tr>
                                                     <th>Jabatan</th>
-                                                    <th>Aksi</th>
+                                                    <th>Nama Jabatan</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($penggajianGroup->groupBy('nama_jabatan') as $jabatan => $jabatanGroup)
                                                     <tr>
                                                         <td>
-                                                            <button class="btn btn-link" type="button" data-toggle="collapse"
-                                                                data-target="#collapseJabatan{{ $loop->parent->iteration }}{{ $loop->iteration }}" aria-expanded="false"
+                                                            <button class="btn btn-link" type="button"
+                                                                data-toggle="collapse"
+                                                                data-target="#collapseJabatan{{ $loop->parent->iteration }}{{ $loop->iteration }}"
+                                                                aria-expanded="false"
                                                                 aria-controls="collapseJabatan{{ $loop->parent->iteration }}{{ $loop->iteration }}">
                                                                 <i class="fas fa-chevron-down"></i>
                                                             </button>
-                                                            {{ $jabatan }}
                                                         </td>
                                                         <td>
-                                                            <button class="btn btn-info">Detail Karyawan</button>
+                                                            {{ $jabatan }}
                                                         </td>
                                                     </tr>
 
-                                                    <tr id="collapseJabatan{{ $loop->parent->iteration }}{{ $loop->iteration }}" class="collapse">
+                                                    <tr id="collapseJabatan{{ $loop->parent->iteration }}{{ $loop->iteration }}"
+                                                        class="collapse">
                                                         <td colspan="2">
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr>
+                                                                        <th>Detail Gaji</th>
                                                                         <th>Nama Karyawan</th>
                                                                         <th>Aksi</th>
-                                                                        <th>Detail Gaji</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @foreach ($jabatanGroup as $penggajian)
-                                                                        <tr>
-                                                                            <td>{{ $penggajian->nama_employee }}</td>
-                                                                            <td>
-                                                                                <a href="#" class="btn btn-warning">
-                                                                                    <i class="fas fa-edit"></i>
-                                                                                </a>
-                                                                                <a href="#" class="btn btn-danger delete-item">
-                                                                                    <i class="fas fa-trash-alt"></i>
-                                                                                </a>
-                                                                            </td>
-                                                                            <td>
-                                                                                <button class="btn btn-link" type="button" data-toggle="collapse"
-                                                                                    data-target="#collapseGaji{{ $penggajian->id_employee }}" aria-expanded="false"
-                                                                                    aria-controls="collapseGaji{{ $penggajian->id_employee }}">
-                                                                                    Detail Gaji
-                                                                                </button>
-                                                                            </td>
-                                                                        </tr>
+                                                                    @foreach ($jabatanGroup->groupBy('id_employee') as $id_employee => $employeeGroup)
+                                                                        @foreach ($employeeGroup as $penggajian)
+                                                                            <tr>
 
-                                                                        <tr id="collapseGaji{{ $penggajian->id_employee }}" class="collapse">
-                                                                            <td colspan="3">
-                                                                                <table class="table table-bordered">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th>Tanggal Penggajian</th>
-                                                                                            <th>Jumlah</th>
-                                                                                            <th>Bukti Pembayaran</th>
-                                                                                            <th>Aksi</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <tr>
-                                                                                            <td>{{ $penggajian->tanggal_penggajian }}</td>
-                                                                                            <td>Rp {{ number_format($penggajian->nominal, 0, ',', '.') }}</td>
-                                                                                            <td>{{ $penggajian->bukti_pembayaran }}</td>
-                                                                                            <td>
-                                                                                                <a href="#" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $penggajian->id_penggajian }}">
-                                                                                                    <i class="fas fa-edit"></i>
-                                                                                                </a>
-                                                                                                <a href="#" class="btn btn-danger delete-item" data-id="{{ $penggajian->id_penggajian }}">
-                                                                                                    <i class="fas fa-trash-alt"></i>
-                                                                                                </a>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </td>
-                                                                        </tr>
+                                                                                <td>
+                                                                                    <button class="btn btn-link"
+                                                                                        type="button"
+                                                                                        data-toggle="collapse"
+                                                                                        data-target="#collapseGaji{{ $penggajian->id_employee }}"
+                                                                                        aria-expanded="false"
+                                                                                        aria-controls="collapseGaji{{ $penggajian->id_employee }}">
+                                                                                        Detail Gaji
+                                                                                    </button>
+                                                                                </td>
+                                                                                <td>{{ $penggajian->nama_employee }}</td>
+
+                                                                                <td>
+                                                                                    <button
+                                                                                        class="btn btn-warning">Edit</button>
+                                                                                    <button
+                                                                                        class="btn btn-danger delete-item">Delete</button>
+                                                                                </td>
+
+
+                                                                            </tr>
+
+                                                                            <tr id="collapseGaji{{ $penggajian->id_employee }}"
+                                                                                class="collapse">
+                                                                                <td colspan="3">
+                                                                                    <table class="table table-bordered">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th>Tanggal Penggajian</th>
+                                                                                                <th>Jumlah</th>
+                                                                                                <th>Bukti Pembayaran</th>
+                                                                                                <th>Aksi</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            @foreach ($employeeGroup as $detailPenggajian)
+                                                                                                <tr>
+                                                                                                    <td>{{ $detailPenggajian->tanggal_penggajian }}
+                                                                                                    </td>
+                                                                                                    <td>Rp
+                                                                                                        {{ number_format($detailPenggajian->nominal, 0, ',', '.') }}
+                                                                                                    </td>
+                                                                                                    <td>{{ $detailPenggajian->bukti_pembayaran }}
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <a href="#"
+                                                                                                            class="btn btn-warning"
+                                                                                                            data-toggle="modal"
+                                                                                                            data-target="#editModal{{ $detailPenggajian->id_penggajian }}">
+                                                                                                            <i
+                                                                                                                class="fas fa-edit"></i>
+                                                                                                        </a>
+                                                                                                        <a href="#"
+                                                                                                            class="btn btn-danger delete-item"
+                                                                                                            data-id="{{ $detailPenggajian->id_penggajian }}">
+                                                                                                            <i
+                                                                                                                class="fas fa-trash-alt"></i>
+                                                                                                        </a>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            @endforeach
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endforeach
                                                                     @endforeach
                                                                 </tbody>
                                                             </table>
@@ -137,6 +158,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
+
                     </table>
                 </div>
             </div>
