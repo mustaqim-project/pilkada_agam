@@ -92,12 +92,11 @@
                                                                                         {{ number_format($laporan->nominal, 0, ',', '.') }}
                                                                                     </td>
                                                                                     <td>
-                                                                                        @if ($laporan->bukti_pembayaran_laporan)
-                                                                                            <a href="{{ asset($laporan->bukti_pembayaran_laporan) }}"
-                                                                                                target="_blank">Download</a>
-                                                                                        @else
-                                                                                            -
-                                                                                        @endif
+                                                                                        <a href="{{ asset($detailPenggajian->bukti_pembayaran) }}" target="_blank">
+                                                                                        <img src="{{ asset($detailPenggajian->bukti_pembayaran) }}"
+                                                                                            style="width: 100px; height: auto; cursor: pointer;">
+
+                                                                                        </a>
                                                                                     </td>
                                                                                     <td>{{ $laporan->tanggal_pembayaran ? \Carbon\Carbon::parse($laporan->tanggal_pembayaran)->format('d/m/Y') : '-' }}
                                                                                     </td>
@@ -206,7 +205,7 @@
                     aria-labelledby="editModalLabel{{ $laporan->laporan_id }}" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                         <div class="modal-content">
-                            {{-- <form
+                            <form
                                 action="{{ route('admin.keuangan.laporan_pembayaran.update', $laporan->laporan_id) }}"
                                 method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -261,7 +260,7 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
-                            </form> --}}
+                            </form>
                         </div>
                     </div>
                 </div>
