@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="card-header-actions">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModalKaryawan">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModalGaji">
                         + Bayar Gaji
                     </button>
                 </div>
