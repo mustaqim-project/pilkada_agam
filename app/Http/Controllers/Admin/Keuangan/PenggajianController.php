@@ -61,6 +61,9 @@ class PenggajianController extends Controller
     // Menyimpan penggajian baru ke database
     public function store(Request $request)
     {
+
+        dd($request);
+
         $request->validate([
             'employee_id' => 'required',
             'tanggal_penggajian' => 'required',
@@ -75,9 +78,6 @@ class PenggajianController extends Controller
         $penggajian->tanggal_penggajian = $request->tanggal_penggajian;
         $penggajian->jumlah = $request->jumlah;
         $penggajian->bukti_pembayaran = $imagePath;
-
-
-        dd($penggajian);
         $penggajian->save();
 
 
