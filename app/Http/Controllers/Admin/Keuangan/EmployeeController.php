@@ -69,4 +69,26 @@ class EmployeeController extends Controller
             ]);
         }
     }
+
+
+    public function getEmployeeDetails(Request $request)
+    {
+        $employee = Employee::findOrFail($request->employee_id);
+        $histori_penggajian = Penggajian::where('employee_id', $request->employee_id)->get();
+
+        return response()->json([
+            'tanggal_masuk' => $employee->tanggal_masuk,
+            'histori_penggajian' => $histori_penggajian
+        ]);
+    }
+
+
+    public function getEmployeesByTimAndJabatan(Request $request)
+    {
+        $employees = Employee::where('tim_id', $request->tim_id)
+            ->where('jabatan_id', $request->jabatan_id)
+            ->get();
+
+        return response()->json($employees);
+    }
 }

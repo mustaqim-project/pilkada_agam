@@ -180,15 +180,18 @@
         use App\Models\tim;
         use App\Models\jabatan;
         use App\Models\Bank;
+        use App\Models\Employee;
 
         // Fetch data from models
+        $employee = Employee::all();
         $timList = tim::all();
         $jabatanList = jabatan::all();
         $bankList = Bank::all();
     @endphp
 
     <!-- The Modal -->
-    <div class="modal fade" id="tambahModalKaryawan" tabindex="-1" aria-labelledby="tambahModalKaryawanLabel" aria-hidden="true">
+    <div class="modal fade" id="tambahModalKaryawan" tabindex="-1" aria-labelledby="tambahModalKaryawanLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
@@ -233,7 +236,7 @@
                             <label for="tim_id">Tim</label>
                             <select name="tim_id" class="form-control" id="tim_id" required>
                                 <option value="">-- Pilih Tim --</option>
-                                @foreach($timList as $tim)
+                                @foreach ($timList as $tim)
                                     <option value="{{ $tim->id }}">{{ $tim->name }}</option>
                                 @endforeach
                             </select>
@@ -244,7 +247,7 @@
                             <label for="jabatan_id">Jabatan</label>
                             <select name="jabatan_id" class="form-control" id="jabatan_id" required>
                                 <option value="">-- Pilih Jabatan --</option>
-                                @foreach($jabatanList as $jabatan)
+                                @foreach ($jabatanList as $jabatan)
                                     <option value="{{ $jabatan->id }}">{{ $jabatan->name }}</option>
                                 @endforeach
                             </select>
@@ -255,7 +258,7 @@
                             <label for="bank_id">Bank</label>
                             <select name="bank_id" class="form-control" id="bank_id" required>
                                 <option value="">-- Pilih Bank --</option>
-                                @foreach($bankList as $bank)
+                                @foreach ($bankList as $bank)
                                     <option value="{{ $bank->id }}">{{ $bank->nama_bank }}</option>
                                 @endforeach
                             </select>
@@ -276,6 +279,99 @@
         </div>
     </div>
 
+
+
+    <!-- The Modal -->
+    <div class="modal fade" id="tambahModalGaji" tabindex="-1" aria-labelledby="tambahModalGajiLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahModalGajiLabel">Bayar Gaji</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- Modal Body (Form) -->
+                <div class="modal-body">
+                    <form action="{{ route('admin.keuangan.gaji.store') }}" method="POST">
+                        @csrf
+
+                        <!-- Tim Select Option -->
+                        <div class="form-group">
+                            <label for="tim_id">Tim</label>
+                            <select name="tim_id" class="form-control" id="tim_id" required>
+                                <option value="">-- Pilih Tim --</option>
+                                @foreach ($timList as $tim)
+                                    <option value="{{ $tim->id }}">{{ $tim->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Jabatan Select Option -->
+                        <div class="form-group">
+                            <label for="jabatan_id">Jabatan</label>
+                            <select name="jabatan_id" class="form-control" id="jabatan_id" required>
+                                <option value="">-- Pilih Jabatan --</option>
+                                @foreach ($jabatanList as $jabatan)
+                                    <option value="{{ $jabatan->id }}">{{ $jabatan->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Employee Select Option -->
+                        <div class="form-group">
+                            <label for="employee_id">Nama Karyawan</label>
+                            <select name="employee_id" class="form-control" id="employee_id" required>
+                                <option value="">-- Pilih Karyawan --</option>
+                                <!-- Options will be loaded dynamically using JavaScript -->
+                            </select>
+                        </div>
+
+                        <!-- Tanggal Masuk (Readonly) -->
+                        <div class="form-group">
+                            <label for="tanggal_masuk">Tanggal Masuk</label>
+                            <input type="text" id="tanggal_masuk" class="form-control" readonly>
+                        </div>
+
+                        <!-- Riwayat Penggajian -->
+                        <div class="form-group">
+                            <label for="histori_penggajian">Riwayat Penggajian</label>
+                            <div id="histori_penggajian" class="form-control" style="height: auto;" readonly>
+                                <!-- Riwayat penggajian akan dimuat di sini menggunakan JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Jumlah Penggajian -->
+                        <div class="form-group">
+                            <label for="jumlah">Jumlah Penggajian</label>
+                            <input type="number" name="jumlah" class="form-control" id="jumlah" required>
+                        </div>
+
+                        <!-- Bukti Pembayaran -->
+                        <div class="form-group">
+                            <label for="bukti_pembayaran">Bukti Pembayaran</label>
+                            <input type="text" name="bukti_pembayaran" class="form-control" id="bukti_pembayaran">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             @if (Session::has('toast_success'))
@@ -291,6 +387,69 @@
                     title: '{{ Session::get('toast_error') }}'
                 });
             @endif
+        });
+
+
+        $(document).ready(function() {
+            // Load employees based on selected tim and jabatan
+            $('#tim_id, #jabatan_id').change(function() {
+                var tim_id = $('#tim_id').val();
+                var jabatan_id = $('#jabatan_id').val();
+
+                if (tim_id && jabatan_id) {
+                    $.ajax({
+                        url: "{{ route('admin.getEmployeesByTimAndJabatan') }}", // Pastikan Anda membuat route dan controller untuk ini
+                        type: "GET",
+                        data: {
+                            tim_id: tim_id,
+                            jabatan_id: jabatan_id
+                        },
+                        success: function(response) {
+                            $('#employee_id').empty();
+                            $('#employee_id').append(
+                                '<option value="">-- Pilih Karyawan --</option>');
+                            $.each(response, function(key, employee) {
+                                $('#employee_id').append('<option value="' + employee
+                                    .id + '">' + employee.nama + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
+
+            // Show employee details (tanggal masuk and histori penggajian) when an employee is selected
+            $('#employee_id').change(function() {
+                var employee_id = $(this).val();
+
+                if (employee_id) {
+                    $.ajax({
+                        url: "{{ route('admin.getEmployeeDetails') }}", // Pastikan Anda membuat route dan controller untuk ini
+                        type: "GET",
+                        data: {
+                            employee_id: employee_id
+                        },
+                        success: function(response) {
+                            // Tampilkan tanggal masuk
+                            $('#tanggal_masuk').val(response.tanggal_masuk);
+
+                            // Tampilkan histori penggajian
+                            var histori = response.histori_penggajian;
+                            var historiHtml = '';
+                            if (histori.length > 0) {
+                                historiHtml += '<ul>';
+                                $.each(histori, function(key, gaji) {
+                                    historiHtml += '<li>' + gaji.tanggal_penggajian +
+                                        ': Rp' + gaji.jumlah + '</li>';
+                                });
+                                historiHtml += '</ul>';
+                            } else {
+                                historiHtml = 'Belum ada histori penggajian.';
+                            }
+                            $('#histori_penggajian').html(historiHtml);
+                        }
+                    });
+                }
+            });
         });
     </script>
 @endsection

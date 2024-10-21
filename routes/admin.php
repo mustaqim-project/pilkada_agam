@@ -336,6 +336,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         ]);
 
     });
+
+    Route::get('get-employees', [EmployeeController::class, 'getEmployeesByTimAndJabatan'])->name('getEmployeesByTimAndJabatan');
+    Route::get('get-employee-details', [EmployeeController::class, 'getEmployeeDetails'])->name('getEmployeeDetails');
+
     // Route::resource('laporan-keuangan', LaporanKeuanganController::class);
     // Route::get('laporan-keuangan/keuangan', [LaporanKeuanganController::class, 'keuangan'])->name('laporan-keuangan.keuangan'); // Menambahkan route ini
 
