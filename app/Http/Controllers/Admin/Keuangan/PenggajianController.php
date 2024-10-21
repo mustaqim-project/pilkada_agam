@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Admin\Keuangan;
 
 
-use App\Models\tim;
-use App\Models\Bank;
-use App\Models\jabatan;
-use App\Models\Employee;
-use App\Models\Penggajian;
-
-use Illuminate\Http\Request;
-use App\Traits\FileUploadTrait;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Penggajian;
+use App\Models\Employee;
+use Illuminate\Support\Facades\DB;
+
+use App\Models\tim;
+use App\Models\jabatan;
+use App\Models\Bank;
+use App\Traits\FileUploadTrait;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -96,7 +96,6 @@ class PenggajianController extends Controller
     //     }
     // }
 
-    use Illuminate\Support\Facades\Log;
 
     public function store(Request $request)
     {
