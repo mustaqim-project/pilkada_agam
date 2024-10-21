@@ -1,30 +1,27 @@
 @extends('admin.layouts.master')
 
-@section('content')
-    <div class="container">
-        <h1>Data Penggajian</h1>
+@extends('layouts.app')
 
-        <!-- Table untuk Tim -->
-        <table class="table">
-            <thead>
+@section('content')
+<div class="container">
+    <h1>Data Penggajian</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Tim</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($penggajians as $index => $penggajian)
                 <tr>
-                    <th>No.</th>
-                    <th>Tim</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($penggajians->groupBy('employee.tim.name') as $timName => $penggajianGroup)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $timName }}</td>
-                        <td>
-                            <button class="btn btn-info" data-toggle="collapse"
-                                data-target="#jabatan-{{ $loop->index }}">Tampilkan Jabatan</button>
-                        </td>
-                    </tr>
-                    <tr id="jabatan-{{ $loop->index }}" class="collapse">
-                        <td colspan="3">
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $penggajian->nama_tim }}</td>
+                    <td>
+                        <button class="btn btn-primary" onclick="toggleJabatanDropdown({{ $penggajian->id_employee }})">Lihat Jabatan</button>
+                        <div id="jabatanDropdown{{ $penggajian->id_employee }}" style="display:none;">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -34,84 +31,89 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($penggajianGroup->groupBy('employee.jabatan.name') as $jabatanName => $jabatanGroup)
+                                    @foreach($penggajians->where('id_employee', $penggajian->id_employee) as $jabatanIndex => $jabatan)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $jabatanName }}</td>
+                                            <td>{{ $jabatanIndex + 1 }}</td>
+                                            <td>{{ $jabatan->nama_jabatan }}</td>
                                             <td>
-                                                <button class="btn btn-info" data-toggle="collapse"
-                                                    data-target="#employee-{{ $loop->index }}">Tampilkan Employee</button>
-                                            </td>
-                                        </tr>
-                                        <tr id="employee-{{ $loop->index }}" class="collapse">
-                                            <td colspan="3">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No.</th>
-                                                            <th>Nama</th>
-                                                            <th>Aksi</th>
-                                                            <th>Detail</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($jabatanGroup as $employee)
+                                                <button class="btn btn-primary" onclick="toggleEmployeeDropdown({{ $jabatan->id_employee }})">Lihat Nama Employee</button>
+                                                <div id="employeeDropdown{{ $jabatan->id_employee }}" style="display:none;">
+                                                    <table class="table">
+                                                        <thead>
                                                             <tr>
-                                                                <td>{{ $loop->iteration }}</td>
-                                                                <td>{{ $employee->employee->nama }}</td>
+                                                                <th>No.</th>
+                                                                <th>Nama</th>
+                                                                <th>Aksi</th>
+                                                                <th>Detail</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>{{ $jabatan->nama_employee }}</td>
                                                                 <td>
-                                                                    <button class="btn btn-warning">Edit</button>
-                                                                    <button class="btn btn-danger">Delete</button>
+                                                                    <a href="{{ route('employee.edit', $jabatan->id_employee) }}" class="btn btn-warning">Edit</a>
+                                                                    <form action="{{ route('employee.destroy', $jabatan->id_employee) }}" method="POST" style="display:inline;">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                                    </form>
                                                                 </td>
                                                                 <td>
-                                                                    <button class="btn btn-info" data-toggle="collapse"
-                                                                        data-target="#gaji-{{ $loop->index }}">Detail
-                                                                        Gaji</button>
+                                                                    <button class="btn btn-info" onclick="toggleGajiDropdown({{ $jabatan->id_employee }})">Lihat Gaji</button>
+                                                                    <div id="gajiDropdown{{ $jabatan->id_employee }}" style="display:none;">
+                                                                        <p>Tanggal Penggajian: {{ $penggajian->tanggal_penggajian }}</p>
+                                                                        <p>Jumlah: {{ number_format($penggajian->nominal, 0, ',', '.') }}</p>
+                                                                        <p>Bukti Pembayaran: <img src="{{ asset('storage/' . $penggajian->bukti_pembayaran) }}" alt="Bukti Pembayaran" width="100"></p>
+                                                                        <button class="btn btn-warning" onclick="toggleEditDelete({{ $penggajian->id_penggajian }})">Aksi</button>
+                                                                        <div id="editDeleteDropdown{{ $penggajian->id_penggajian }}" style="display:none;">
+                                                                            <a href="{{ route('penggajian.edit', $penggajian->id_penggajian) }}" class="btn btn-warning">Edit</a>
+                                                                            <form action="{{ route('penggajian.destroy', $penggajian->id_penggajian) }}" method="POST" style="display:inline;">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
-                                                            <tr id="gaji-{{ $loop->index }}" class="collapse">
-                                                                <td colspan="4">
-                                                                    <table class="table">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>Tanggal Penggajian</th>
-                                                                                <th>Jumlah</th>
-                                                                                <th>Bukti Pembayaran</th>
-                                                                                <th>Aksi</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            @foreach ($employee->employee->penggajians as $gaji)
-                                                                                <tr>
-                                                                                    <td>{{ $gaji->tanggal_penggajian }}
-                                                                                    </td>
-                                                                                    <td>{{ number_format($gaji->jumlah, 2, ',', '.') }}
-                                                                                    </td>
-                                                                                    <td>{{ $gaji->bukti_pembayaran }}</td>
-                                                                                    <td>
-                                                                                        <button
-                                                                                            class="btn btn-warning">Edit</button>
-                                                                                        <button
-                                                                                            class="btn btn-danger">Delete</button>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            @endforeach
-                                                                        </tbody>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+@section('scripts')
+<script>
+    function toggleJabatanDropdown(id) {
+        var dropdown = document.getElementById('jabatanDropdown' + id);
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function toggleEmployeeDropdown(id) {
+        var dropdown = document.getElementById('employeeDropdown' + id);
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function toggleGajiDropdown(id) {
+        var dropdown = document.getElementById('gajiDropdown' + id);
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function toggleEditDelete(id) {
+        var dropdown = document.getElementById('editDeleteDropdown' + id);
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+@endsection
 @endsection

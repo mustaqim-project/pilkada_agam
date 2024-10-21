@@ -7,12 +7,30 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Penggajian;
 use App\Models\Employee;
+use Illuminate\Support\Facades\DB;
 
 class PenggajianController extends Controller
 {
     public function index()
     {
-        $penggajians = Penggajian::with(['employee.tim', 'employee.jabatan', 'employee.bank'])->get();
+        $penggajians = DB::table('penggajians as pg')
+            ->join('employees as e', 'pg.employee_id', '=', 'e.id')
+            ->join('tims as t', 'e.tim_id', '=', 't.id')
+            ->join('jabatans as j', 'e.jabatan_id', '=', 'j.id')
+            ->join('bank as b', 'e.bank_id', '=', 'b.id')
+            ->select(
+                'pg.id AS id_penggajian',
+                'pg.employee_id AS id_employee',
+                'pg.tanggal_penggajian',
+                'pg.jumlah AS nominal',
+                'pg.bukti_pembayaran',
+                't.name AS nama_tim',
+                'j.name AS nama_jabatan',
+                'e.nama AS nama_employee',
+                'b.nama_bank AS nama_bank',
+                'e.gaji AS gaji'
+            )
+            ->get();
 
         return view('admin.keuangan.penggajian.index', compact('penggajians'));
     }
