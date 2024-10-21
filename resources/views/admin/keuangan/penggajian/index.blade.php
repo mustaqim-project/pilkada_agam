@@ -84,15 +84,21 @@
                                                                                     data-target="#collapseGaji{{ $penggajian->id_employee }}"
                                                                                     aria-expanded="false"
                                                                                     aria-controls="collapseGaji{{ $penggajian->id_employee }}">
-                                                                                    <i class="fas fa-chevron-down"></i>                                                                                </button>
+                                                                                    <i class="fas fa-chevron-down"></i>
+                                                                                </button>
                                                                             </td>
                                                                             <td>{{ $penggajian->nama_employee }}</td>
 
                                                                             <td>
-                                                                                <button
-                                                                                    class="btn btn-warning">Edit</button>
-                                                                                <button
-                                                                                    class="btn btn-danger delete-item">Delete</button>
+                                                                                <a href="#" data-toggle="modal"
+                                                                                    data-target="#editModalEmployee{{ $penggajian->id_employee }}"
+                                                                                    class="btn btn-warning">
+                                                                                    <i class="fas fa-edit"></i>
+                                                                                </a>
+                                                                                <a href="{{ route('admin.keuangan.employee.destroy', $penggajian->id_employee) }}"
+                                                                                    class="btn btn-danger delete-item">
+                                                                                    <i class="fas fa-trash-alt"></i>
+                                                                                </a>
                                                                             </td>
                                                                         </tr>
 
@@ -119,19 +125,15 @@
                                                                                                 <td>{{ $detailPenggajian->bukti_pembayaran }}
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <a href="#"
-                                                                                                        class="btn btn-warning"
-                                                                                                        data-toggle="modal"
-                                                                                                        data-target="#editModal{{ $detailPenggajian->id_penggajian }}">
-                                                                                                        <i
-                                                                                                            class="fas fa-edit"></i>
-                                                                                                    </a>
-                                                                                                    <a href="#"
-                                                                                                        class="btn btn-danger delete-item"
-                                                                                                        data-id="{{ $detailPenggajian->id_penggajian }}">
-                                                                                                        <i
-                                                                                                            class="fas fa-trash-alt"></i>
-                                                                                                    </a>
+                                                                                                    <a href="#" data-toggle="modal"
+                                                                                                    data-target="#editModalGaji{{ $detailPenggajian->id_penggajian }}"
+                                                                                                    class="btn btn-warning">
+                                                                                                    <i class="fas fa-edit"></i>
+                                                                                                </a>
+                                                                                                <a href="{{ route('admin.keuangan.gaji.destroy', $detailPenggajian->id_penggajian) }}"
+                                                                                                    class="btn btn-danger delete-item">
+                                                                                                    <i class="fas fa-trash-alt"></i>
+                                                                                                </a>
                                                                                                 </td>
                                                                                             </tr>
                                                                                         @endforeach
