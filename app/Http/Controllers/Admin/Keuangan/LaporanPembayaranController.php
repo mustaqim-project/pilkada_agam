@@ -42,7 +42,7 @@ class LaporanPembayaranController extends Controller
             return $tim->groupBy('nama_periode');
         });
 
-        dd($laporanPembayaran) ;
+        // dd($laporanPembayaran) ;
 
 
         return view('admin.keuangan.LaporanPembayaran.index', compact('laporanPembayaran'));
