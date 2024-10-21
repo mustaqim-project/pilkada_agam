@@ -481,6 +481,63 @@
 
 
 
+    @foreach ($penggajians as $detailPenggajian)
+        <!-- The Edit Modal -->
+        <div class="modal fade" id="editModalGaji{{ $detailPenggajian->id_penggajian }}" tabindex="-1"
+            aria-labelledby="editModalGajiLabel{{ $detailPenggajian->id_penggajian }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalGajiLabel{{ $detailPenggajian->id_penggajian }}">Edit Gaji -
+                            {{ $detailPenggajian->nama_employee }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <!-- Modal Body (Form) -->
+                    <div class="modal-body">
+                        <form action="{{ route('admin.keuangan.gaji.update', $detailPenggajian->id_penggajian) }}"
+                            method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="form-group">
+                                <label for="tanggal_penggajian">Tanggal Penggajian</label>
+                                <input type="date" name="tanggal_penggajian" class="form-control"
+                                    id="tanggal_penggajian" value="{{ $detailPenggajian->tanggal_penggajian }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="jumlah">Jumlah</label>
+                                <input type="number" name="jumlah" class="form-control" id="jumlah"
+                                    value="{{ $detailPenggajian->nominal }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bukti_pembayaran">Bukti Pembayaran</label>
+                                <input type="file" name="bukti_pembayaran" class="form-control" id="bukti_pembayaran"
+                                    accept="image/*">
+                                <small class="form-text text-muted">Jika Anda tidak ingin mengganti bukti pembayaran, cukup
+                                    kosongkan field ini.</small>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
