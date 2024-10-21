@@ -36,12 +36,29 @@ class EmployeeController extends Controller
 
     public function destroy($id)
     {
+        try {
+            $employee = Employee::findOrFail($id);
+            $employee->delete();
 
-        $employee = Employee::findOrFail($id);
-        $employee->delete();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Data berhasil dihapus!'
-        ]);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data berhasil dihapus!'
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Cek jika error disebabkan oleh foreign key constraint violation
+            if ($e->getCode() == 23000) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Data tidak dapat dihapus karena sudah digunakan dalam penggajian!'
+                ]);
+            }
+
+            // Jika error lain, lempar error
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Terjadi kesalahan saat menghapus data.'
+            ]);
+        }
     }
+
 }
