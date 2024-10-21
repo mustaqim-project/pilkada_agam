@@ -269,11 +269,14 @@
                                                                                                 <td>Rp {{ number_format($detailPenggajian->nominal, 0, ',', '.') }}</td>
 
                                                                                                 <td>
-                                                                                                    <img src="{{ asset($detailPenggajian->bukti_pembayaran) }}" alt="Foto Kegiatan"
-                                                                                                        style="width: 100px; height: auto; cursor: pointer;" data-toggle="modal"
-                                                                                                        data-target="#imageModal"
-                                                                                                        onclick="showImageModal('{{ asset($detailPenggajian->bukti_pembayaran) }}')">
+                                                                                                    <a href="{{ asset($detailPenggajian->bukti_pembayaran) }}" target="_blank">
+                                                                                                    <img src="{{ asset($detailPenggajian->bukti_pembayaran) }}"
+                                                                                                        style="width: 100px; height: auto; cursor: pointer;">
+
+                                                                                                    </a>
                                                                                                 </td>
+
+
                                                                                                 <td>
                                                                                                      <a href="#"
                                                                                                         data-toggle="modal"
@@ -777,9 +780,4 @@
             @endif
         });
     </script>
-        <script>
-            function showImageModal(imageUrl) {
-                document.getElementById('modalImage').src = imageUrl;
-            }
-        </script>
 @endsection
