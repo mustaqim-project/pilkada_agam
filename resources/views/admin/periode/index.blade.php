@@ -59,8 +59,6 @@
                                                         <td>Rp {{ number_format($periode->anggaran_periode, 0, ',', '.') }}
                                                         </td>
                                                         <td>
-
-
                                                             <div class="btn-group" role="group" aria-label="Tombol Aksi">
                                                                 <button type="button" class="btn btn-warning"
                                                                     data-toggle="modal"
@@ -74,93 +72,6 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-
-                                                    <!-- Modal Edit -->
-                                                    <div class="modal fade" id="editPeriodeModal{{ $periode->id }}"
-                                                        tabindex="-1" role="dialog"
-                                                        aria-labelledby="editPeriodeModalLabel{{ $periode->id }}"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <form
-                                                                    action="{{ route('admin.periode.update', $periode->id) }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title"
-                                                                            id="editPeriodeModalLabel{{ $periode->id }}">
-                                                                            Edit Periode</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <input type="hidden" name="id"
-                                                                            value="{{ $periode->id }}">
-                                                                        <div class="form-group">
-                                                                            <label for="edit_anggaran_id">Anggaran
-                                                                                ID</label>
-                                                                            <select class="form-control" name="anggaran_id"
-                                                                                required>
-                                                                                <option value="">Pilih Anggaran
-                                                                                </option>
-                                                                                @foreach ($anggarans as $anggaran)
-                                                                                    <option value="{{ $anggaran->id }}"
-                                                                                        {{ $anggaran->id == $periode->anggaran_id ? 'selected' : '' }}>
-                                                                                        {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }}
-                                                                                        -
-                                                                                        Rp
-                                                                                        {{ number_format($anggaran->total_anggaran, 0, ',', '.') }}
-                                                                                    </option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="edit_nama_periode">Nama
-                                                                                Periode</label>
-                                                                            <input type="text" class="form-control"
-                                                                                name="nama_periode"
-                                                                                value="{{ $periode->nama_periode }}"
-                                                                                required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="edit_tanggal_mulai">Tanggal
-                                                                                Mulai</label>
-                                                                            <input type="date" class="form-control"
-                                                                                name="tanggal_mulai"
-                                                                                value="{{ $periode->tanggal_mulai }}"
-                                                                                required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="edit_tanggal_selesai">Tanggal
-                                                                                Selesai</label>
-                                                                            <input type="date" class="form-control"
-                                                                                name="tanggal_selesai"
-                                                                                value="{{ $periode->tanggal_selesai }}"
-                                                                                required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="edit_anggaran_periode">Anggaran
-                                                                                Periode</label>
-                                                                            <input type="number" class="form-control"
-                                                                                name="anggaran_periode"
-                                                                                value="{{ $periode->anggaran_periode }}"
-                                                                                required>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Tutup</button>
-                                                                        <button type="submit"
-                                                                            class="btn btn-primary">Update Periode</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- End Modal Edit -->
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -173,6 +84,67 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal Edit -->
+    @foreach ($periodes as $periode)
+        <div class="modal fade" id="editPeriodeModal{{ $periode->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="editPeriodeModalLabel{{ $periode->id }}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="{{ route('admin.periode.update', $periode->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editPeriodeModalLabel{{ $periode->id }}">Edit Periode</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="id" value="{{ $periode->id }}">
+                            <div class="form-group">
+                                <label for="edit_anggaran_id">Anggaran ID</label>
+                                <select class="form-control" name="anggaran_id" required>
+                                    <option value="">Pilih Anggaran</option>
+                                    @foreach ($anggarans as $anggaran)
+                                        <option value="{{ $anggaran->id }}"
+                                            {{ $anggaran->id == $periode->anggaran_id ? 'selected' : '' }}>
+                                            {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }} - Rp
+                                            {{ number_format($anggaran->total_anggaran, 0, ',', '.') }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_nama_periode">Nama Periode</label>
+                                <input type="text" class="form-control" name="nama_periode"
+                                    value="{{ $periode->nama_periode }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_tanggal_mulai">Tanggal Mulai</label>
+                                <input type="date" class="form-control" name="tanggal_mulai"
+                                    value="{{ $periode->tanggal_mulai }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_tanggal_selesai">Tanggal Selesai</label>
+                                <input type="date" class="form-control" name="tanggal_selesai"
+                                    value="{{ $periode->tanggal_selesai }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_anggaran_periode">Anggaran Periode</label>
+                                <input type="number" class="form-control" name="anggaran_periode"
+                                    value="{{ $periode->anggaran_periode }}" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Update Periode</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
 
 
