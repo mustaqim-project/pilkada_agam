@@ -68,19 +68,32 @@ class PenggajianController extends Controller
             'bukti_pembayaran' => 'nullable|mimes:jpg,png,jpeg|max:5012', // Memastikan format dan ukuran file
         ]);
 
-        // Menghandle pengunggahan file dan mendapatkan jalur file
-        $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran');
+        try {
+            // Menghandle pengunggahan file dan mendapatkan jalur file
+            $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran');
 
-        // Membuat entri penggajian baru dengan data yang relevan
-        $penggajian = new Penggajian();
-        $penggajian->employee_id = $request->employee_id;
-        $penggajian->tanggal_penggajian = $request->tanggal_penggajian;
-        $penggajian->jumlah = $request->jumlah;
-        $penggajian->bukti_pembayaran = $imagePath;
-        $penggajian->save(); // Simpan entri penggajian ke database
+            // Membuat entri penggajian baru dengan data yang relevan
+            $penggajian = new Penggajian();
+            $penggajian->employee_id = $request->employee_id;
+            $penggajian->tanggal_penggajian = $request->tanggal_penggajian;
+            $penggajian->jumlah = $request->jumlah;
+            $penggajian->bukti_pembayaran = $imagePath;
+            $penggajian->save(); // Simpan entri penggajian ke database
+            // return redirect()->route('admin.keuangan.gaji.index')->with('toast_success', 'Penggajian berhasil dibuat.');
 
-        return redirect()->route('admin.keuangan.gaji.index')->with('toast_success', 'Penggajian berhasil dibuat.');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Data berhasil disimpan!'
+            ]);
+        } catch (\Exception $e) {
+            // Menangani error jika terjadi kesalahan saat menyimpan data
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Data gagal disimpan: ' . $e->getMessage()
+            ], 500); // Mengembalikan status 500 untuk kesalahan server
+        }
     }
+
 
     public function update(Request $request, $id)
     {
