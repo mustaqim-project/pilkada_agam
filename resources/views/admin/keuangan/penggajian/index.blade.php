@@ -189,7 +189,7 @@
 
                 <!-- Modal Body (Form) -->
                 <div class="modal-body">
-                    <form action="{{ route('admin.keuangan.gaji.store') }}" method="POST">
+                    <form action="{{ route('admin.keuangan.gaji.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
@@ -313,7 +313,7 @@
                     <!-- Modal Body (Form) -->
                     <div class="modal-body">
                         <form action="{{ route('admin.keuangan.employee.update', $penggajian->id_employee) }}"
-                            method="POST">
+                            method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -414,7 +414,7 @@
 
                 <!-- Modal Body (Form) -->
                 <div class="modal-body">
-                    <form action="{{ route('admin.keuangan.employee.store') }}" method="POST">
+                    <form action="{{ route('admin.keuangan.employee.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Nama Karyawan -->
