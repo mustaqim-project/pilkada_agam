@@ -81,7 +81,7 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>ID</th>
+                                                                        <th>id_employee</th>
                                                                         <th>Detail Gaji</th>
                                                                         <th>Nama Karyawan</th>
                                                                         <th>Aksi</th>
@@ -94,9 +94,9 @@
                                                                             <td>
                                                                                 <button class="btn btn-link" type="button"
                                                                                     data-toggle="collapse"
-                                                                                    data-target="#collapseGaji{{ $penggajian->nama_employee }}"
+                                                                                    data-target="#collapseGaji{{ $penggajian->id_employee }}"
                                                                                     aria-expanded="false"
-                                                                                    aria-controls="collapseGaji{{ $penggajian->nama_employee }}">
+                                                                                    aria-controls="collapseGaji{{ $penggajian->id_employee }}">
                                                                                     <i class="fas fa-chevron-down"></i>
                                                                                 </button>
                                                                             </td>
@@ -115,13 +115,14 @@
                                                                             </td>
                                                                         </tr>
 
-                                                                        <tr id="collapseGaji{{ $penggajian->nama_employee }}"
+                                                                        <tr id="collapseGaji{{ $penggajian->id_employee }}"
                                                                             class="collapse">
                                                                             <td colspan="3">
                                                                                 <table class="table table-bordered">
                                                                                     <thead>
                                                                                         <tr>
-                                                                                            <th>ID</th>
+                                                                                            <th>ID Penggajian</th>
+                                                                                            <th>ID Employee</th>
                                                                                             <th>Tanggal Penggajian</th>
                                                                                             <th>Jumlah</th>
                                                                                             <th>Bukti Pembayaran</th>
@@ -132,6 +133,7 @@
                                                                                         @foreach ($jabatanGroup->unique('id_penggajian') as $detailPenggajian)
                                                                                             <tr>
                                                                                                 <td>{{ $detailPenggajian->id_penggajian }}
+                                                                                                <td>{{ $detailPenggajian->id_employee }}
                                                                                                 <td>{{ $detailPenggajian->tanggal_penggajian }}
                                                                                                 </td>
                                                                                                 <td>Rp
