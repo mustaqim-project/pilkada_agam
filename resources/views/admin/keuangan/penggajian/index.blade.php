@@ -81,6 +81,7 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr>
+                                                                        <th>ID</th>
                                                                         <th>Detail Gaji</th>
                                                                         <th>Nama Karyawan</th>
                                                                         <th>Aksi</th>
