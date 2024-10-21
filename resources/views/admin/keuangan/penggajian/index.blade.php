@@ -126,7 +126,7 @@
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        @foreach ($jabatanGroup as $detailPenggajian)
+                                                                                        @foreach ($jabatanGroup->unique('id_penggajian') as $detailPenggajian)
                                                                                             <tr>
                                                                                                 <td>{{ $detailPenggajian->tanggal_penggajian }}
                                                                                                 </td>
