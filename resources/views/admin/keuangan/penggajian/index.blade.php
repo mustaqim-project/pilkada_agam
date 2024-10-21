@@ -84,8 +84,7 @@
                                                                                     data-target="#collapseGaji{{ $penggajian->id_employee }}"
                                                                                     aria-expanded="false"
                                                                                     aria-controls="collapseGaji{{ $penggajian->id_employee }}">
-                                                                                    Detail Gaji
-                                                                                </button>
+                                                                                    <i class="fas fa-chevron-down"></i>                                                                                </button>
                                                                             </td>
                                                                             <td>{{ $penggajian->nama_employee }}</td>
 
