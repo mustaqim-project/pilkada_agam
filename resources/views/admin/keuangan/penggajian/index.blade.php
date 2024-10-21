@@ -87,9 +87,10 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @foreach ($jabatanGroup->unique('nama_employee') as $penggajian)
+                                                                    @foreach ($jabatanGroup->unique('id_employee') as $penggajian)
                                                                         <tr>
                                                                             <td>
+                                                                                <td>{{ $penggajian->id_employee }}</td>
                                                                                 <button class="btn btn-link" type="button"
                                                                                     data-toggle="collapse"
                                                                                     data-target="#collapseGaji{{ $penggajian->id_employee }}"
@@ -119,6 +120,7 @@
                                                                                 <table class="table table-bordered">
                                                                                     <thead>
                                                                                         <tr>
+                                                                                            <th>ID</th>
                                                                                             <th>Tanggal Penggajian</th>
                                                                                             <th>Jumlah</th>
                                                                                             <th>Bukti Pembayaran</th>
@@ -128,6 +130,7 @@
                                                                                     <tbody>
                                                                                         @foreach ($jabatanGroup->unique('id_penggajian') as $detailPenggajian)
                                                                                             <tr>
+                                                                                                <td>{{ $detailPenggajian->id_penggajian }}
                                                                                                 <td>{{ $detailPenggajian->tanggal_penggajian }}
                                                                                                 </td>
                                                                                                 <td>Rp
