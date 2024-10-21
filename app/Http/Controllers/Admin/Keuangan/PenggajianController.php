@@ -90,12 +90,12 @@ class PenggajianController extends Controller
             'employee_id' => 'required',
             'tanggal_penggajian' => 'required',
             'jumlah' => 'required',
-            'bukti_pembayaran' => 'nullable|mimes:jpg,png,jpeg|max:5012', // Memastikan format dan ukuran file
+            'image' => 'nullable|mimes:jpg,png,jpeg|max:5012', // Memastikan format dan ukuran file
         ]);
 
         $penggajian = Penggajian::findOrFail($id);
 
-        $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran');
+        $imagePath = $this->handleFileUpload($request, 'image');
 
 
         // Mengupdate data penggajian dengan data yang relevan
