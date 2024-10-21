@@ -62,7 +62,6 @@ class PenggajianController extends Controller
     public function store(Request $request)
     {
 
-        dd($request);
         $request->validate([
             'employee_id' => 'required|exists:employees,id',
             'tanggal_penggajian' => 'required|date',
