@@ -60,18 +60,18 @@
                                                         <td>Rp {{ number_format($periode->anggaran_periode, 0, ',', '.') }}
                                                         </td>
                                                         <td>
-                                                            <button type="button" class="btn btn-warning"
-                                                                data-toggle="modal" data-target="#editPeriodeModal"
-                                                                data-id="{{ $periode->id }}">
-                                                                Edit
-                                                            </button>
-                                                            <form
-                                                                action="{{ route('admin.periode.destroy', $periode->id) }}"
-                                                                method="POST" style="display:inline;">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger">Hapus</button>
-                                                            </form>
+
+                                                            <div class="btn-group" role="group" aria-label="Tombol Aksi">
+                                                                <a href="#" data-toggle="modal"
+                                                                    data-target="#editPeriodeModal{{ $periode->id }}" class="btn btn-warning">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <a href="{{ route('admin.periode.', $periode->id) }}"
+                                                                    class="btn btn-danger delete-item">
+                                                                    <i class="fas fa-trash-alt"></i>
+                                                                </a>
+                                                            </div>
+
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -201,6 +201,22 @@
 
     @push('scripts')
         <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                @if (Session::has('toast_success'))
+                    Toast.fire({
+                        icon: 'success',
+                        title: '{{ Session::get('toast_success') }}'
+                    });
+                @endif
+
+                @if (Session::has('toast_error'))
+                    Toast.fire({
+                        icon: 'error',
+                        title: '{{ Session::get('toast_error') }}'
+                    });
+                @endif
+            });
+
             $("#tablePeriode").dataTable({
                 "columnDefs": [{
                     "sortable": false,

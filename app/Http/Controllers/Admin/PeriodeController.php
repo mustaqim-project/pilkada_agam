@@ -22,7 +22,6 @@ class PeriodeController extends Controller
         $periodes = periode::with('anggaran.tim')->get();
         $anggarans = anggaran::with('tim')->get();
 
-        // dd($periodes,$anggarans);
         return view('admin.periode.index', compact('periodes', 'anggarans'));
     }
 
@@ -37,7 +36,7 @@ class PeriodeController extends Controller
         ]);
 
         periode::create($request->all());
-        return redirect()->back()->with('success', 'Periode berhasil ditambahkan.');
+        return redirect()->back()->with('toast_success', 'Periode berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -58,13 +57,16 @@ class PeriodeController extends Controller
 
         $periode = periode::findOrFail($id);
         $periode->update($request->all());
-        return redirect()->back()->with('success', 'Periode berhasil diperbarui.');
+        return redirect()->back()->with('toast_success', 'Periode berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         $periode = periode::findOrFail($id);
         $periode->delete();
-        return redirect()->back()->with('success', 'Periode berhasil dihapus.');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data berhasil dihapus!'
+        ]);
     }
 }
