@@ -54,12 +54,12 @@
                                                             <td>{{ $loop->iteration }}</td>
                                                             <td>{{ $nama }}</td>
                                                             <td>
-                                                                <a href="{{ route('penggajian.edit', $penggajians->first()->id) }}" class="btn btn-warning">Edit</a>
+                                                                {{-- <a href="{{ route('penggajian.edit', $penggajians->first()->id) }}" class="btn btn-warning">Edit</a>
                                                                 <form action="{{ route('penggajian.destroy', $penggajians->first()->id) }}" method="POST" style="display:inline-block;">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus penggajian ini?')">Delete</button>
-                                                                </form>
+                                                                </form> --}}
                                                             </td>
                                                             <td>
                                                                 <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapse-gaji-{{ Str::slug($tim . '-' . $jabatan . '-' . $nama) }}" aria-expanded="false" aria-controls="collapse-gaji-{{ Str::slug($tim . '-' . $jabatan . '-' . $nama) }}">
