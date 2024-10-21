@@ -87,7 +87,7 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @foreach ($jabatanGroup->unique('id_employee') as $penggajian)
+                                                                    @foreach ($jabatanGroup->unique('nama_employee') as $penggajian)
                                                                         <tr>
                                                                             <td>
                                                                                 <button class="btn btn-link" type="button"

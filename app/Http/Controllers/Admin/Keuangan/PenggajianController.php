@@ -34,6 +34,7 @@ class PenggajianController extends Controller
             ->join('tims as t', 'e.tim_id', '=', 't.id')
             ->join('jabatans as j', 'e.jabatan_id', '=', 'j.id')
             ->join('bank as b', 'e.bank_id', '=', 'b.id')
+            ->distinct()
             ->select(
                 'pg.id AS id_penggajian',
                 'pg.employee_id AS id_employee',
