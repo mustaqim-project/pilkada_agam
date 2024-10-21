@@ -41,7 +41,8 @@
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                        <a href="#" data-toggle="modal" data-target="#editModal{{ $jenis->id }}" class="btn btn-warning">
+                                        <a href="#" data-toggle="modal" data-target="#editModal{{ $jenis->id }}"
+                                            class="btn btn-warning">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <a href="{{ route('admin.keuangan.jenis_pembiayaan.destroy', $jenis->id) }}"
@@ -51,7 +52,8 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr id="collapse{{ $jenis->id }}" class="collapse" aria-labelledby="heading{{ $jenis->id }}">
+                            <tr id="collapse{{ $jenis->id }}" class="collapse"
+                                aria-labelledby="heading{{ $jenis->id }}">
                                 <td colspan="2">
                                     <table class="table table-bordered">
                                         <thead>
@@ -68,10 +70,13 @@
                                                     <td>{{ $item->nama_rincian }}</td>
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                                            <a href="#" data-toggle="modal" data-target="#editModal{{ $item->id }}" class="btn btn-warning">
+                                                            <a href="#" data-toggle="modal"
+                                                                data-target="#editModal{{ $item->id }}"
+                                                                class="btn btn-warning">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
-                                                            <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}" class="btn btn-danger delete-item">
+                                                            <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
+                                                                class="btn btn-danger delete-item">
                                                                 <i class="fas fa-trash-alt"></i>
                                                             </a>
                                                         </div>
