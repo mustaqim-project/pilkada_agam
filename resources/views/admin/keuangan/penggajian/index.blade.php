@@ -4,24 +4,37 @@
 <div class="container">
     <h2>Daftar Penggajian</h2>
 
-    <div class="accordion" id="accordionExample">
-        @foreach($penggajians->groupBy('employee.tim.nama_tim') as $tim => $penggajianByTim)
-            <div class="card">
-                <div class="card-header" id="heading-{{ Str::slug($tim) }}">
-                    <h5 class="mb-0">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Nama TIM</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($penggajians->groupBy('employee.tim.nama_tim') as $tim => $penggajianByTim)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-{{ Str::slug($tim) }}" aria-expanded="true" aria-controls="collapse-{{ Str::slug($tim) }}">
-                            TIM: {{ $tim }}
+                            {{ $tim }}
                         </button>
-                    </h5>
-                </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapse-jabatan-{{ Str::slug($tim) }}" aria-expanded="false" aria-controls="collapse-jabatan-{{ Str::slug($tim) }}">
+                            Lihat Jabatan
+                        </button>
+                    </td>
+                </tr>
 
-                <div id="collapse-{{ Str::slug($tim) }}" class="collapse" aria-labelledby="heading-{{ Str::slug($tim) }}" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <table class="table">
+                <tr id="collapse-{{ Str::slug($tim) }}" class="collapse">
+                    <td colspan="3">
+                        <table class="table table-bordered mt-2">
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Jabatan</th>
+                                    <th>Posisi Jabatan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -31,13 +44,13 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $jabatan }}</td>
                                         <td>
-                                            <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapse-jabatan-{{ Str::slug($tim . '-' . $jabatan) }}" aria-expanded="false" aria-controls="collapse-jabatan-{{ Str::slug($tim . '-' . $jabatan) }}">
+                                            <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapse-karyawan-{{ Str::slug($tim . '-' . $jabatan) }}" aria-expanded="false" aria-controls="collapse-karyawan-{{ Str::slug($tim . '-' . $jabatan) }}">
                                                 Lihat Karyawan
                                             </button>
                                         </td>
                                     </tr>
 
-                                    <tr id="collapse-jabatan-{{ Str::slug($tim . '-' . $jabatan) }}" class="collapse">
+                                    <tr id="collapse-karyawan-{{ Str::slug($tim . '-' . $jabatan) }}" class="collapse">
                                         <td colspan="3">
                                             <table class="table table-bordered mt-2">
                                                 <thead>
@@ -54,12 +67,12 @@
                                                             <td>{{ $loop->iteration }}</td>
                                                             <td>{{ $nama }}</td>
                                                             <td>
-                                                                {{-- <a href="{{ route('penggajian.edit', $penggajians->first()->id) }}" class="btn btn-warning">Edit</a>
+                                                                <a href="{{ route('penggajian.edit', $penggajians->first()->id) }}" class="btn btn-warning">Edit</a>
                                                                 <form action="{{ route('penggajian.destroy', $penggajians->first()->id) }}" method="POST" style="display:inline-block;">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus penggajian ini?')">Delete</button>
-                                                                </form> --}}
+                                                                </form>
                                                             </td>
                                                             <td>
                                                                 <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapse-gaji-{{ Str::slug($tim . '-' . $jabatan . '-' . $nama) }}" aria-expanded="false" aria-controls="collapse-gaji-{{ Str::slug($tim . '-' . $jabatan . '-' . $nama) }}">
@@ -104,10 +117,10 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 @endsection
