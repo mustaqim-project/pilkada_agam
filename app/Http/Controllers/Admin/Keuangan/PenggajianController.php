@@ -42,7 +42,9 @@ class PenggajianController extends Controller
                 'j.name AS nama_jabatan',
                 'e.nama AS nama_employee',
                 'b.nama_bank AS nama_bank',
-                'e.gaji AS gaji'
+                'e.gaji AS gaji',
+                'e.no_rekening AS no_rekening',
+                'e.tanggal_masuk AS tanggal_masuk',
             )
             ->get();
 
