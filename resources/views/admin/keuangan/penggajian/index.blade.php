@@ -389,10 +389,11 @@
                 const timId = $('#tim_id').val();
                 const jabatanId = $('#jabatan_id').val();
 
+
                 if (timId && jabatanId) {
                     $.ajax({
-                        url: "{{ route('admin.getEmployeesByTimAndJabatan') }}", // Pastikan Anda membuat route dan controller untuk ini
-                        type: "GET",
+                        url: '{{ route('admin.getEmployeesByTimAndJabatan') }}',
+                        type: 'GET',
                         data: {
                             tim_id: timId,
                             jabatan_id: jabatanId
