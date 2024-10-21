@@ -18,7 +18,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-{{ Str::slug($tim) }}" aria-expanded="true" aria-controls="collapse-{{ Str::slug($tim) }}">
-                            {{ $tim }}
+                            {{ $tim->name }}
                         </button>
                     </td>
                     <td>
@@ -42,7 +42,7 @@
                                 @foreach($penggajianByTim->groupBy('employee.jabatan.nama_jabatan') as $jabatan => $penggajianByJabatan)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $jabatan }}</td>
+                                        <td>{{ $jabatan->name }}</td>
                                         <td>
                                             <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapse-karyawan-{{ Str::slug($tim . '-' . $jabatan) }}" aria-expanded="false" aria-controls="collapse-karyawan-{{ Str::slug($tim . '-' . $jabatan) }}">
                                                 Lihat Karyawan
