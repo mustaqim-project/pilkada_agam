@@ -29,12 +29,36 @@ class PenggajianController extends Controller
         $bankList = Bank::all();
 
 
+        // $penggajians = DB::table('penggajians as pg')
+        //     ->join('employees as e', 'pg.employee_id', '=', 'e.id')
+        //     ->join('tims as t', 'e.tim_id', '=', 't.id')
+        //     ->join('jabatans as j', 'e.jabatan_id', '=', 'j.id')
+        //     ->join('bank as b', 'e.bank_id', '=', 'b.id')
+        //     ->distinct()
+        //     ->select(
+        //         'pg.id AS id_penggajian',
+        //         'pg.employee_id AS id_employee',
+        //         'pg.tanggal_penggajian',
+        //         'pg.jumlah AS nominal',
+        //         'pg.bukti_pembayaran',
+        //         't.name AS nama_tim',
+        //         'j.name AS nama_jabatan',
+        //         'e.nama AS nama_employee',
+        //         'b.nama_bank AS nama_bank',
+        //         'e.gaji AS gaji',
+        //         'e.no_rekening AS no_rekening',
+        //         'e.tanggal_masuk AS tanggal_masuk',
+        //         'e.tim_id AS tim_id',
+        //         'e.jabatan_id AS jabatan_id',
+        //         'e.bank_id AS bank_id'
+        //     )
+        //     ->get();
+
         $penggajians = DB::table('penggajians as pg')
             ->join('employees as e', 'pg.employee_id', '=', 'e.id')
             ->join('tims as t', 'e.tim_id', '=', 't.id')
             ->join('jabatans as j', 'e.jabatan_id', '=', 'j.id')
             ->join('bank as b', 'e.bank_id', '=', 'b.id')
-            ->distinct()
             ->select(
                 'pg.id AS id_penggajian',
                 'pg.employee_id AS id_employee',
@@ -47,12 +71,13 @@ class PenggajianController extends Controller
                 'b.nama_bank AS nama_bank',
                 'e.gaji AS gaji',
                 'e.no_rekening AS no_rekening',
-                'e.tanggal_masuk AS tanggal_masuk',
-                'e.tim_id AS tim_id',
-                'e.jabatan_id AS jabatan_id',
-                'e.bank_id AS bank_id'
+                'e.tanggal_masuk AS tanggal_masuk'
             )
+            ->orderBy('t.name')  // Order berdasarkan nama tim
+            ->orderBy('j.name')  // Order berdasarkan nama jabatan
+            ->orderBy('pg.employee_id')  // Order berdasarkan employee_id
             ->get();
+
 
         return view('admin.keuangan.penggajian.index', compact('penggajians', 'employee', 'timList', 'jabatanList', 'bankList'));
     }
