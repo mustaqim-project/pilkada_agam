@@ -22,33 +22,66 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tim</th>
-                                <th>Nama Periode</th>
-                                <th>Tanggal Mulai</th>
-                                <th>Tanggal Selesai</th>
-                                <th>Anggaran Periode</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($periodes as $periode)
+                            @foreach ($periodes->groupBy('anggaran.tim.name') as $timName => $timPeriods)
                                 <tr>
-                                    <td>{{ $periode->id }}</td>
-                                    <td>{{ $periode->anggaran->tim->name }}</td>
-                                    <td>{{ $periode->nama_periode }}</td>
-                                    <td>{{ $periode->tanggal_mulai }}</td>
-                                    <td>{{ $periode->tanggal_selesai }}</td>
-                                    <td>Rp {{ number_format($periode->anggaran_periode, 0, ',', '.') }}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-warning" data-toggle="modal"
-                                            data-target="#editPeriodeModal" data-id="{{ $periode->id }}">
-                                            Edit
+                                    <td colspan="2">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            data-target="#collapse{{ $loop->index }}" aria-expanded="false"
+                                            aria-controls="collapse{{ $loop->index }}">
+                                            {{ $timName }}
                                         </button>
-                                        <form action="{{ route('admin.periode.destroy', $periode->id) }}" method="POST"
-                                            style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Hapus</button>
-                                        </form>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Tombol Aksi">
+                                            <button type="button" class="btn btn-warning" data-toggle="modal"
+                                                data-target="#editTimModal" data-tim="{{ $timName }}">
+                                                Edit Tim
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr id="collapse{{ $loop->index }}" class="collapse">
+                                    <td colspan="3">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nama Periode</th>
+                                                    <th>Tanggal Mulai</th>
+                                                    <th>Tanggal Selesai</th>
+                                                    <th>Anggaran Periode</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($timPeriods as $periode)
+                                                    <tr>
+                                                        <td>{{ $periode->nama_periode }}</td>
+                                                        <td>{{ $periode->tanggal_mulai }}</td>
+                                                        <td>{{ $periode->tanggal_selesai }}</td>
+                                                        <td>Rp {{ number_format($periode->anggaran_periode, 0, ',', '.') }}
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-warning"
+                                                                data-toggle="modal" data-target="#editPeriodeModal"
+                                                                data-id="{{ $periode->id }}">
+                                                                Edit
+                                                            </button>
+                                                            <form
+                                                                action="{{ route('admin.periode.destroy', $periode->id) }}"
+                                                                method="POST" style="display:inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </td>
                                 </tr>
                             @endforeach
