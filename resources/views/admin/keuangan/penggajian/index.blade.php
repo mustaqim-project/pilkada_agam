@@ -255,7 +255,11 @@
                                 <!-- Riwayat penggajian akan dimuat di sini menggunakan JavaScript -->
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label for="tanggal_penggajian">Tanggal Penggajian</label>
+                            <input type="date" name="tanggal_penggajian" class="form-control"
+                                id="tanggal_penggajian" required>
+                        </div>
                         <!-- Jumlah Penggajian -->
                         <div class="form-group">
                             <label for="jumlah">Jumlah Penggajian</label>
