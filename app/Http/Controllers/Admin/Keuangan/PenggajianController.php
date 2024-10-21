@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\tim;
 use App\Models\jabatan;
 use App\Models\Bank;
+use App\Traits\FileUploadTrait;
 
 
 
@@ -54,7 +55,7 @@ class PenggajianController extends Controller
         return view('admin.keuangan.penggajian.index', compact('penggajians', 'employee', 'timList', 'jabatanList', 'bankList'));
     }
 
-
+    use FileUploadTrait;
 
     // Menyimpan penggajian baru ke database
     public function store(Request $request)
@@ -63,14 +64,17 @@ class PenggajianController extends Controller
             'employee_id' => 'required|exists:employees,id',
             'tanggal_penggajian' => 'required|date',
             'jumlah' => 'required|string|max:255',
-            'bukti_pembayaran' => 'nullable|string|max:255',
+            'bukti_pembayaran' => 'nullable|mimes:jpg,png,jpeg|max:5012', // Memastikan format dan ukuran file
         ]);
 
-        Penggajian::create($request->all());
+        // Menghandle pengunggahan file dan mendapatkan jalur file
+        $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran');
+
+        // Membuat entri penggajian baru dengan data yang relevan
+        Penggajian::create(array_merge($request->all(), ['bukti_pembayaran' => $imagePath]));
 
         return redirect()->route('admin.keuangan.gaji.index')->with('toast_success', 'Penggajian berhasil dibuat.');
     }
-
 
     public function update(Request $request, $id)
     {
@@ -78,11 +82,21 @@ class PenggajianController extends Controller
             'employee_id' => 'required|exists:employees,id',
             'tanggal_penggajian' => 'required|date',
             'jumlah' => 'required|string|max:255',
-            'bukti_pembayaran' => 'nullable|string|max:255',
+            'bukti_pembayaran' => 'nullable|mimes:jpg,png,jpeg|max:5012', // Memastikan format dan ukuran file
         ]);
 
         $penggajian = Penggajian::findOrFail($id);
-        $penggajian->update($request->all());
+
+        // Menangani pengunggahan file jika ada
+        if ($request->hasFile('bukti_pembayaran')) {
+            $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran');
+            // Mengupdate hanya jika file baru diunggah
+            $penggajian->bukti_pembayaran = $imagePath;
+        }
+
+        // Mengupdate data penggajian dengan data yang relevan
+        $penggajian->update($request->except('bukti_pembayaran')); // Menghindari duplikasi
+        $penggajian->save(); // Menyimpan perubahan
 
         return redirect()->route('admin.keuangan.gaji.index')->with('toast_success', 'Penggajian berhasil diperbarui.');
     }
