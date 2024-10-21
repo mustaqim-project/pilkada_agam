@@ -13,6 +13,13 @@
                         + Tambah Karyawan
                     </button>
                 </div>
+
+                <div class="card-header-actions">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModalKaryawan">
+                        + Bayar Gaji
+                    </button>
+                </div>
+
             </div>
 
             <div class="row mb-4">
