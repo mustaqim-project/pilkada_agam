@@ -140,7 +140,7 @@
     <div class="modal fade" id="tambahModal" tabindex="-1" role="dialog" aria-labelledby="tambahModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-            {{-- <div class="modal-content">
+            <div class="modal-content">
                 <form action="{{ route('admin.keuangan.laporan_pembayaran.store') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
@@ -191,7 +191,7 @@
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
-            </div> --}}
+            </div>
         </div>
     </div>
 
@@ -205,7 +205,7 @@
                     aria-labelledby="editModalLabel{{ $laporan->laporan_id }}" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                         <div class="modal-content">
-                            <form
+                            {{-- <form
                                 action="{{ route('admin.keuangan.laporan_pembayaran.update', $laporan->laporan_id) }}"
                                 method="POST" enctype="multipart/form-data">
                                 @csrf
@@ -260,7 +260,7 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
-                            </form>
+                            </form> --}}
                         </div>
                     </div>
                 </div>
