@@ -176,18 +176,7 @@
     </section>
 
 
-    @php
-        use App\Models\tim;
-        use App\Models\jabatan;
-        use App\Models\Bank;
-        use App\Models\Employee;
 
-        // Fetch data from models
-        $employee = Employee::all();
-        $timList = tim::all();
-        $jabatanList = jabatan::all();
-        $bankList = Bank::all();
-    @endphp
 
     <!-- The Modal -->
     <div class="modal fade" id="tambahModalKaryawan" tabindex="-1" aria-labelledby="tambahModalKaryawanLabel"

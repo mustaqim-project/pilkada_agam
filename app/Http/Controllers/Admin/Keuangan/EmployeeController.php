@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Penggajian;
 
+use App\Models\tim;
+use App\Models\jabatan;
+use App\Models\Bank;
+
+
+
+
 class EmployeeController extends Controller
 {
     public function store(Request $request)

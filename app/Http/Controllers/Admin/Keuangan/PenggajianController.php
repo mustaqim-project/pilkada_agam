@@ -9,10 +9,24 @@ use App\Models\Penggajian;
 use App\Models\Employee;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\tim;
+use App\Models\jabatan;
+use App\Models\Bank;
+
+
+
 class PenggajianController extends Controller
 {
     public function index()
     {
+
+        // Fetch data from models
+        $employee = Employee::all();
+        $timList = tim::all();
+        $jabatanList = jabatan::all();
+        $bankList = Bank::all();
+
+
         $penggajians = DB::table('penggajians as pg')
             ->join('employees as e', 'pg.employee_id', '=', 'e.id')
             ->join('tims as t', 'e.tim_id', '=', 't.id')
@@ -32,7 +46,7 @@ class PenggajianController extends Controller
             )
             ->get();
 
-        return view('admin.keuangan.penggajian.index', compact('penggajians'));
+        return view('admin.keuangan.penggajian.index', compact('penggajians', 'employee', 'timList', 'jabatanList', 'bankList'));
     }
 
 
