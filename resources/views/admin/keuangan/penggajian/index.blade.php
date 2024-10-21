@@ -52,12 +52,12 @@
                                                                 <td>1</td>
                                                                 <td>{{ $jabatan->nama_employee }}</td>
                                                                 <td>
-                                                                    <a href="{{ route('employee.edit', $jabatan->id_employee) }}" class="btn btn-warning">Edit</a>
+                                                                    {{-- <a href="{{ route('employee.edit', $jabatan->id_employee) }}" class="btn btn-warning">Edit</a>
                                                                     <form action="{{ route('employee.destroy', $jabatan->id_employee) }}" method="POST" style="display:inline;">
                                                                         @csrf
                                                                         @method('DELETE')
                                                                         <button type="submit" class="btn btn-danger">Delete</button>
-                                                                    </form>
+                                                                    </form> --}}
                                                                 </td>
                                                                 <td>
                                                                     <button class="btn btn-info" onclick="toggleGajiDropdown({{ $jabatan->id_employee }})">Lihat Gaji</button>
@@ -67,12 +67,12 @@
                                                                         <p>Bukti Pembayaran: <img src="{{ asset('storage/' . $penggajian->bukti_pembayaran) }}" alt="Bukti Pembayaran" width="100"></p>
                                                                         <button class="btn btn-warning" onclick="toggleEditDelete({{ $penggajian->id_penggajian }})">Aksi</button>
                                                                         <div id="editDeleteDropdown{{ $penggajian->id_penggajian }}" style="display:none;">
-                                                                            <a href="{{ route('penggajian.edit', $penggajian->id_penggajian) }}" class="btn btn-warning">Edit</a>
+                                                                            {{-- <a href="{{ route('penggajian.edit', $penggajian->id_penggajian) }}" class="btn btn-warning">Edit</a>
                                                                             <form action="{{ route('penggajian.destroy', $penggajian->id_penggajian) }}" method="POST" style="display:inline;">
                                                                                 @csrf
                                                                                 @method('DELETE')
                                                                                 <button type="submit" class="btn btn-danger">Delete</button>
-                                                                            </form>
+                                                                            </form> --}}
                                                                         </div>
                                                                     </div>
                                                                 </td>
