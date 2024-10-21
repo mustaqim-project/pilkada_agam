@@ -112,33 +112,21 @@
                             </li>
                         @endif
 
+                        @if (canAccess([
+                                'Gaji Tim',
+                            ]))
+                            <li class="{{ setSidebarActive(['admin.keuangan.gaji.index']) }}">
+                                <a class="nav-link"
+                                    href="{{ route('admin.keuangan.gaji.index') }}">{{ __('Gaji Tim') }}</a>
+                            </li>
+                        @endif
+
                     </ul>
                 </li>
             @endif
 
 
-            @if (canAccess(['Gaji Pusat']))
-                <li class="menu-header">{{ __('admin.Gaji') }}</li>
-                <li class="dropdown">
-                    <a href="#" class="nav-link has-dropdown"><i class="fas fa-money-bill-wave"></i>
-                        <span>{{ __('Gaji') }}</span></a>
-                    <ul class="dropdown-menu">
-                        @if (canAccess(['Gaji Tim Pusat dan Tim Inti']))
-                            <li class="{{ setSidebarActive(['admin.anggaran.index']) }}">
-                                <a class="nav-link"
-                                    href="{{ route('admin.anggaran.index') }}">{{ __('Gaji Tim Pusat dan Tim Inti') }}</a>
-                            </li>
-                        @endif
 
-                        @if (canAccess(['Gaji Tim Lapangan']))
-                            <li class="{{ setSidebarActive(['admin.periode.index']) }}">
-                                <a class="nav-link"
-                                    href="{{ route('admin.periode.index') }}">{{ __('Gaji Tim Lapangan') }}</a>
-                            </li>
-                        @endif
-                    </ul>
-                </li>
-            @endif
 
             @if (canAccess(['Tim Pusat']))
 
