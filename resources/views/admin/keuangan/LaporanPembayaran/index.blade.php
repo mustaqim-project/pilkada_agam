@@ -155,16 +155,17 @@
                             <label for="detail_pembiayaan_id">Nama Rincian Pembiayaan</label>
                             <select class="form-control" name="detail_pembiayaan_id" required>
                                 @foreach ($laporanPembayaran as $tim => $periodes)
-
-                                {{ dd($periodes) }}
-                                    {{-- @foreach ($periodes as $detail)
+                                    @foreach ($periodes as $detail)
                                         @foreach ($detail->laporan as $laporan)
+
+{{ dd($laporan) }}
+
                                             <option value="{{ $laporan->id }}">
                                                 {{ $laporan->nama_rincian }} - Rp
                                                 {{ number_format($laporan->jumlah_digunakan, 0, ',', '.') }}
                                             </option>
                                         @endforeach
-                                    @endforeach --}}
+                                    @endforeach
                                 @endforeach
                             </select>
                         </div>
