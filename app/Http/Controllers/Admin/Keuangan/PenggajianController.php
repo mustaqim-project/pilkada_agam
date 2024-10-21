@@ -65,19 +65,20 @@ class PenggajianController extends Controller
             'employee_id' => 'required',
             'tanggal_penggajian' => 'required',
             'jumlah' => 'required',
-            'bukti_pembayaran' => 'nullable|mimes:jpg,png,jpeg|max:5012', // Memastikan format dan ukuran file
+            'bukti_pembayaran' => 'nullable|mimes:jpg,png,jpeg|max:5012',
         ]);
 
-        // Menghandle pengunggahan file dan mendapatkan jalur file
         $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran');
 
-        // Membuat entri penggajian baru dengan data yang relevan
         $penggajian = new Penggajian();
         $penggajian->employee_id = $request->employee_id;
         $penggajian->tanggal_penggajian = $request->tanggal_penggajian;
         $penggajian->jumlah = $request->jumlah;
         $penggajian->bukti_pembayaran = $imagePath;
-        $penggajian->save(); // Simpan entri penggajian ke database
+
+
+        dd($penggajian);
+        $penggajian->save();
 
 
 
