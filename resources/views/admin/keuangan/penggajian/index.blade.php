@@ -395,6 +395,10 @@
 
 
         $(document).ready(function() {
+
+            var tim_id = $('#tim_id').val();
+            var jabatan_id = $('#jabatan_id').val();
+            console.log('Tim ID:', tim_id, 'Jabatan ID:', jabatan_id);
             // Load employees based on selected tim and jabatan
             $('#tim_id, #jabatan_id').change(function() {
                 var tim_id = $('#tim_id').val();
