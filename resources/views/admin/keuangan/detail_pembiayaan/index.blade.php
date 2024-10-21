@@ -18,23 +18,42 @@
             </div>
 
             <div class="card-body">
-                <div class="accordion" id="accordionPembiayaan">
-                    @foreach ($jenisPembiayaans as $jenis)
-                        <div class="card">
-                            <div class="card-header" id="heading{{ $jenis->id }}">
-                                <h2 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse"
-                                        data-target="#collapse{{ $jenis->id }}" aria-expanded="true"
-                                        aria-controls="collapse{{ $jenis->id }}">
-                                        {{ $jenis->nama_pembiayaan }}
-                                    </button>
-                                </h2>
-                            </div>
-
-                            <div id="collapse{{ $jenis->id }}" class="collapse" aria-labelledby="heading{{ $jenis->id }}"
-                                data-parent="#accordionPembiayaan">
-                                <div class="card-body">
-                                    <table class="table table-striped">
+                <table class="table table-striped" id="tablePembiayaan">
+                    <thead>
+                        <tr>
+                            <th>Jenis Pembiayaan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($jenisPembiayaans as $jenis)
+                            <tr>
+                                <td>
+                                    <div class="card-header" id="heading{{ $jenis->id }}">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                                data-target="#collapse{{ $jenis->id }}" aria-expanded="true"
+                                                aria-controls="collapse{{ $jenis->id }}">
+                                                {{ $jenis->nama_pembiayaan }}
+                                            </button>
+                                        </h2>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Tombol Aksi">
+                                        <a href="#" data-toggle="modal" data-target="#editModal{{ $jenis->id }}" class="btn btn-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{ route('admin.keuangan.jenis_pembiayaan.destroy', $jenis->id) }}"
+                                            class="btn btn-danger delete-item">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="collapse{{ $jenis->id }}" class="collapse" aria-labelledby="heading{{ $jenis->id }}">
+                                <td colspan="2">
+                                    <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
@@ -49,12 +68,10 @@
                                                     <td>{{ $item->nama_rincian }}</td>
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                                            <a href="#" data-toggle="modal"
-                                                                data-target="#editModal{{ $item->id }}" class="btn btn-warning">
+                                                            <a href="#" data-toggle="modal" data-target="#editModal{{ $item->id }}" class="btn btn-warning">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
-                                                            <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
-                                                                class="btn btn-danger delete-item">
+                                                            <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}" class="btn btn-danger delete-item">
                                                                 <i class="fas fa-trash-alt"></i>
                                                             </a>
                                                         </div>
@@ -63,11 +80,11 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
