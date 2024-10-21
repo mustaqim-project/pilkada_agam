@@ -90,8 +90,8 @@
                                                                 <tbody>
                                                                     @foreach ($jabatanGroup->unique('id_employee') as $penggajian)
                                                                         <tr>
+                                                                            <td>{{ $penggajian->id_employee }}</td>
                                                                             <td>
-                                                                                <td>{{ $penggajian->id_employee }}</td>
                                                                                 <button class="btn btn-link" type="button"
                                                                                     data-toggle="collapse"
                                                                                     data-target="#collapseGaji{{ $penggajian->id_employee }}"
