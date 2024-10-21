@@ -14,8 +14,7 @@
         </thead>
         <tbody>
             @foreach($penggajians->groupBy('employee.tim.nama_tim') as $tim => $penggajianByTim)
-            {{ dd($penggajianByTim) }}
-            <tr>
+                <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-{{ Str::slug($tim) }}" aria-expanded="true" aria-controls="collapse-{{ Str::slug($tim) }}">
