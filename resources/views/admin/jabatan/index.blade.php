@@ -31,8 +31,14 @@
                                     <td>{{ $jabatan->id }}</td>
                                     <td>{{ $jabatan->name }}</td>
                                     <td>
-                                        <button class="btn btn-warning editJabatanBtn"
-                                            data-id="{{ $jabatan->id }}">Edit</button>
+                                        {{-- <button class="btn btn-warning editJabatanBtn"
+                                            data-id="{{ $jabatan->id }}">Edit</button> --}}
+
+
+                                        <a href="#" data-toggle="modal"
+                                            data-target="#editJabatanBtn{{ $jabatan->id }}" class="btn btn-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
 
 
                                         <a href="{{ route('admin.jabatan.destroy', $jabatan->id) }}"
