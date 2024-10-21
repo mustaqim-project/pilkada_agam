@@ -9,8 +9,8 @@
         <div class="card card-primary">
             <div class="card-header">
                 <div class="card-header-actions">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModal">
-                        + Tambah Penggajian
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModalKaryawan">
+                        + Tambah Karyawan
                     </button>
                 </div>
             </div>
@@ -125,15 +125,18 @@
                                                                                                 <td>{{ $detailPenggajian->bukti_pembayaran }}
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <a href="#" data-toggle="modal"
-                                                                                                    data-target="#editModalGaji{{ $detailPenggajian->id_penggajian }}"
-                                                                                                    class="btn btn-warning">
-                                                                                                    <i class="fas fa-edit"></i>
-                                                                                                </a>
-                                                                                                <a href="{{ route('admin.keuangan.gaji.destroy', $detailPenggajian->id_penggajian) }}"
-                                                                                                    class="btn btn-danger delete-item">
-                                                                                                    <i class="fas fa-trash-alt"></i>
-                                                                                                </a>
+                                                                                                    <a href="#"
+                                                                                                        data-toggle="modal"
+                                                                                                        data-target="#editModalGaji{{ $detailPenggajian->id_penggajian }}"
+                                                                                                        class="btn btn-warning">
+                                                                                                        <i
+                                                                                                            class="fas fa-edit"></i>
+                                                                                                    </a>
+                                                                                                    <a href="{{ route('admin.keuangan.gaji.destroy', $detailPenggajian->id_penggajian) }}"
+                                                                                                        class="btn btn-danger delete-item">
+                                                                                                        <i
+                                                                                                            class="fas fa-trash-alt"></i>
+                                                                                                    </a>
                                                                                                 </td>
                                                                                             </tr>
                                                                                         @endforeach
@@ -162,26 +165,121 @@
     </section>
 
 
+    @php
+        use App\Models\tim;
+        use App\Models\jabatan;
+        use App\Models\Bank;
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        @if (Session::has('toast_success'))
-            Toast.fire({
-                icon: 'success',
-                title: '{{ Session::get('toast_success') }}'
-            });
-        @endif
+        // Fetch data from models
+        $timList = tim::all();
+        $jabatanList = jabatan::all();
+        $bankList = Bank::all();
+    @endphp
 
-        @if (Session::has('toast_error'))
-            Toast.fire({
-                icon: 'error',
-                title: '{{ Session::get('toast_error') }}'
-            });
-        @endif
-    });
+    <!-- The Modal -->
+    <div class="modal fade" id="tambahModalKaryawan" tabindex="-1" aria-labelledby="tambahModalKaryawanLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahModalKaryawanLabel">Tambah Karyawan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
+                <!-- Modal Body (Form) -->
+                <div class="modal-body">
+                    <form action="{{ route('admin.keuangan.employee.store') }}" method="POST">
+                        @csrf
 
-</script>
+                        <!-- Nama Karyawan -->
+                        <div class="form-group">
+                            <label for="nama">Nama Karyawan</label>
+                            <input type="text" name="nama" class="form-control" id="nama" required>
+                        </div>
 
+                        <!-- Gaji -->
+                        <div class="form-group">
+                            <label for="gaji">Gaji</label>
+                            <input type="number" name="gaji" class="form-control" id="gaji" required>
+                        </div>
 
+                        <!-- No Rekening -->
+                        <div class="form-group">
+                            <label for="no_rekening">No Rekening</label>
+                            <input type="text" name="no_rekening" class="form-control" id="no_rekening" required>
+                        </div>
+
+                        <!-- Tanggal Masuk -->
+                        <div class="form-group">
+                            <label for="tanggal_masuk">Tanggal Masuk</label>
+                            <input type="date" name="tanggal_masuk" class="form-control" id="tanggal_masuk" required>
+                        </div>
+
+                        <!-- Tim Select Option -->
+                        <div class="form-group">
+                            <label for="tim_id">Tim</label>
+                            <select name="tim_id" class="form-control" id="tim_id" required>
+                                <option value="">-- Pilih Tim --</option>
+                                @foreach($timList as $tim)
+                                    <option value="{{ $tim->id }}">{{ $tim->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Jabatan Select Option -->
+                        <div class="form-group">
+                            <label for="jabatan_id">Jabatan</label>
+                            <select name="jabatan_id" class="form-control" id="jabatan_id" required>
+                                <option value="">-- Pilih Jabatan --</option>
+                                @foreach($jabatanList as $jabatan)
+                                    <option value="{{ $jabatan->id }}">{{ $jabatan->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Bank Select Option -->
+                        <div class="form-group">
+                            <label for="bank_id">Bank</label>
+                            <select name="bank_id" class="form-control" id="bank_id" required>
+                                <option value="">-- Pilih Bank --</option>
+                                @foreach($bankList as $bank)
+                                    <option value="{{ $bank->id }}">{{ $bank->nama_bank }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if (Session::has('toast_success'))
+                Toast.fire({
+                    icon: 'success',
+                    title: '{{ Session::get('toast_success') }}'
+                });
+            @endif
+
+            @if (Session::has('toast_error'))
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ Session::get('toast_error') }}'
+                });
+            @endif
+        });
+    </script>
 @endsection

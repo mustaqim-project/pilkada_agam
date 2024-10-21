@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin\Keuangan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-Use App\Models\Employee;
+use App\Models\Employee;
+
 class EmployeeController extends Controller
 {
     public function store(Request $request)
@@ -16,10 +17,13 @@ class EmployeeController extends Controller
             'tanggal_masuk' => 'required|date',
         ]);
 
-        Employee::create($request->all());
+        $data = $request->all();
+        $data['tim_id'] = $data['tim_id'] ?? 0;
+        $data['jabatan_id'] = $data['jabatan_id'] ?? 0;
+
+        Employee::create($data);
         return redirect()->route('admin.keuangan.gaji.index')->with('toast_success', 'Employee created successfully.');
     }
-
 
     public function update(Request $request, Employee $employee)
     {
@@ -30,9 +34,14 @@ class EmployeeController extends Controller
             'tanggal_masuk' => 'required|date',
         ]);
 
-        $employee->update($request->all());
+        $data = $request->all();
+        $data['tim_id'] = $data['tim_id'] ?? 0;
+        $data['jabatan_id'] = $data['jabatan_id'] ?? 0;
+
+        $employee->update($data);
         return redirect()->route('admin.keuangan.gaji.index')->with('toast_success', 'Employee updated successfully.');
     }
+
 
     public function destroy($id)
     {
@@ -60,5 +69,4 @@ class EmployeeController extends Controller
             ]);
         }
     }
-
 }

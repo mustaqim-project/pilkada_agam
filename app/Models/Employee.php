@@ -22,6 +22,17 @@ class Employee extends Model
         'tanggal_masuk'
     ];
 
+    // Set default values for certain fields
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->tim_id = $model->tim_id ?? 0;
+            $model->jabatan_id = $model->jabatan_id ?? 0;
+        });
+    }
+
     // Relationships (optional)
     public function tim()
     {
