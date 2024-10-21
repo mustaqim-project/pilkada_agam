@@ -92,8 +92,8 @@
                                                                                         {{ number_format($laporan->nominal, 0, ',', '.') }}
                                                                                     </td>
                                                                                     <td>
-                                                                                        <a href="{{ asset($detailPenggajian->bukti_pembayaran) }}" target="_blank">
-                                                                                        <img src="{{ asset($detailPenggajian->bukti_pembayaran) }}"
+                                                                                        <a href="{{ asset($laporan->bukti_pembayaran) }}" target="_blank">
+                                                                                        <img src="{{ asset($laporan->bukti_pembayaran) }}"
                                                                                             style="width: 100px; height: auto; cursor: pointer;">
 
                                                                                         </a>
