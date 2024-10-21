@@ -610,7 +610,10 @@
                     });
                 }
             });
-
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
             @if (Session::has('toast_success'))
                 Toast.fire({
                     icon: 'success',
