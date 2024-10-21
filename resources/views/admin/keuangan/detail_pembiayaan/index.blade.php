@@ -29,26 +29,18 @@
                         @foreach ($jenisPembiayaans as $jenis)
                             <tr>
                                 <td>
+                                    {{ $jenis->nama_pembiayaan }}
+
+
+                                </td>
+                                <td>
                                     <div class="card-header" id="heading{{ $jenis->id }}">
                                         <h2 class="mb-0">
                                             <button class="btn btn-link" type="button" data-toggle="collapse"
                                                 data-target="#collapse{{ $jenis->id }}" aria-expanded="true"
                                                 aria-controls="collapse{{ $jenis->id }}">
-                                                {{ $jenis->nama_pembiayaan }}
                                             </button>
                                         </h2>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                        <a href="#" data-toggle="modal" data-target="#editModal{{ $jenis->id }}"
-                                            class="btn btn-warning">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="{{ route('admin.keuangan.jenis_pembiayaan.destroy', $jenis->id) }}"
-                                            class="btn btn-danger delete-item">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
                                     </div>
                                 </td>
                             </tr>
