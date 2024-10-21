@@ -336,6 +336,18 @@
                             <input type="text" id="tanggal_masuk" class="form-control" readonly>
                         </div>
 
+                        <!-- No Rekening (Readonly) -->
+                        <div class="form-group">
+                            <label for="no_rekening">No Rekening</label>
+                            <input type="text" id="no_rekening" class="form-control" readonly>
+                        </div>
+
+                        <!-- Nama Bank (Readonly) -->
+                        <div class="form-group">
+                            <label for="nama_bank">Nama Bank</label>
+                            <input type="text" id="nama_bank" class="form-control" readonly>
+                        </div>
+
                         <!-- Riwayat Penggajian -->
                         <div class="form-group">
                             <label for="histori_penggajian">Riwayat Penggajian</label>
@@ -391,65 +403,64 @@
 
 
         $(document).ready(function() {
-            // Load employees based on selected tim and jabatan
-            $('#tim_id, #jabatan_id').change(function() {
-                var tim_id = $('#tim_id').val();
-                var jabatan_id = $('#jabatan_id').val();
+    // Load employees based on selected tim and jabatan
+    $('#tim_id, #jabatan_id').change(function() {
+        var tim_id = $('#tim_id').val();
+        var jabatan_id = $('#jabatan_id').val();
 
-                if (tim_id && jabatan_id) {
-                    $.ajax({
-                        url: "{{ route('admin.getEmployeesByTimAndJabatan') }}", // Pastikan Anda membuat route dan controller untuk ini
-                        type: "GET",
-                        data: {
-                            tim_id: tim_id,
-                            jabatan_id: jabatan_id
-                        },
-                        success: function(response) {
-                            $('#employee_id').empty();
-                            $('#employee_id').append(
-                                '<option value="">-- Pilih Karyawan --</option>');
-                            $.each(response, function(key, employee) {
-                                $('#employee_id').append('<option value="' + employee
-                                    .id + '">' + employee.nama + '</option>');
-                            });
-                        }
+        if(tim_id && jabatan_id) {
+            $.ajax({
+                url: "{{ route('admin.getEmployeesByTimAndJabatan') }}", // Pastikan Anda membuat route dan controller untuk ini
+                type: "GET",
+                data: { tim_id: tim_id, jabatan_id: jabatan_id },
+                success: function(response) {
+                    $('#employee_id').empty();
+                    $('#employee_id').append('<option value="">-- Pilih Karyawan --</option>');
+                    $.each(response, function(key, employee) {
+                        $('#employee_id').append('<option value="' + employee.id + '">' + employee.nama + '</option>');
                     });
                 }
             });
+        }
+    });
 
-            // Show employee details (tanggal masuk and histori penggajian) when an employee is selected
-            $('#employee_id').change(function() {
-                var employee_id = $(this).val();
+    // Show employee details (tanggal masuk, no rekening, nama bank, and histori penggajian) when an employee is selected
+    $('#employee_id').change(function() {
+        var employee_id = $(this).val();
 
-                if (employee_id) {
-                    $.ajax({
-                        url: "{{ route('admin.getEmployeeDetails') }}", // Pastikan Anda membuat route dan controller untuk ini
-                        type: "GET",
-                        data: {
-                            employee_id: employee_id
-                        },
-                        success: function(response) {
-                            // Tampilkan tanggal masuk
-                            $('#tanggal_masuk').val(response.tanggal_masuk);
+        if(employee_id) {
+            $.ajax({
+                url: "{{ route('admin.getEmployeeDetails') }}", // Pastikan Anda membuat route dan controller untuk ini
+                type: "GET",
+                data: { employee_id: employee_id },
+                success: function(response) {
+                    // Tampilkan tanggal masuk
+                    $('#tanggal_masuk').val(response.tanggal_masuk);
 
-                            // Tampilkan histori penggajian
-                            var histori = response.histori_penggajian;
-                            var historiHtml = '';
-                            if (histori.length > 0) {
-                                historiHtml += '<ul>';
-                                $.each(histori, function(key, gaji) {
-                                    historiHtml += '<li>' + gaji.tanggal_penggajian +
-                                        ': Rp' + gaji.jumlah + '</li>';
-                                });
-                                historiHtml += '</ul>';
-                            } else {
-                                historiHtml = 'Belum ada histori penggajian.';
-                            }
-                            $('#histori_penggajian').html(historiHtml);
-                        }
-                    });
+                    // Tampilkan no rekening
+                    $('#no_rekening').val(response.no_rekening);
+
+                    // Tampilkan nama bank
+                    $('#nama_bank').val(response.nama_bank);
+
+                    // Tampilkan histori penggajian
+                    var histori = response.histori_penggajian;
+                    var historiHtml = '';
+                    if(histori.length > 0) {
+                        historiHtml += '<ul>';
+                        $.each(histori, function(key, gaji) {
+                            historiHtml += '<li>' + gaji.tanggal_penggajian + ': Rp' + gaji.jumlah + '</li>';
+                        });
+                        historiHtml += '</ul>';
+                    } else {
+                        historiHtml = 'Belum ada histori penggajian.';
+                    }
+                    $('#histori_penggajian').html(historiHtml);
                 }
             });
-        });
+        }
+    });
+});
+
     </script>
 @endsection

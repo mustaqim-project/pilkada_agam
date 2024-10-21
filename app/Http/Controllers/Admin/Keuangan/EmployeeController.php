@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Keuangan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Models\Penggajian;
 
 class EmployeeController extends Controller
 {
@@ -75,12 +76,16 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($request->employee_id);
         $histori_penggajian = Penggajian::where('employee_id', $request->employee_id)->get();
+        $bank = Bank::find($employee->bank_id);
 
         return response()->json([
             'tanggal_masuk' => $employee->tanggal_masuk,
+            'no_rekening' => $employee->no_rekening,
+            'nama_bank' => $bank ? $bank->nama : 'Tidak ada bank terdaftar',
             'histori_penggajian' => $histori_penggajian
         ]);
     }
+
 
 
     public function getEmployeesByTimAndJabatan(Request $request)
