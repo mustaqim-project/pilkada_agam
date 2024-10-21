@@ -58,7 +58,9 @@ use App\Http\Controllers\Admin\Wisata\TimPusatWisataController;
 use App\Http\Controllers\Admin\Wisata\AdminKecematanWisataController;
 use App\Http\Controllers\Admin\Wisata\KoordinatorKecematanWisataController;
 use App\Http\Controllers\Admin\Keuangan\DetailPembiayaanController;
+use App\Http\Controllers\Admin\Keuangan\EmployeeController;
 use App\Http\Controllers\Admin\Keuangan\LaporanPembayaranController;
+use App\Http\Controllers\Admin\Keuangan\PenggajianController;
 use App\Http\Controllers\Admin\Keuangan\PenggunaanAnggaranController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\KetuaDashboardController;
@@ -318,6 +320,21 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
             'update' => 'detail_pembiayaan.update',
             'destroy' => 'detail_pembiayaan.destroy',
         ]);
+
+
+        Route::resource('gaji', PenggajianController::class)->names([
+            'index' => 'gaji.index',
+            'store' => 'gaji.store',
+            'update' => 'gaji.update',
+            'destroy' => 'gaji.destroy',
+        ]);
+
+        Route::resource('employee', EmployeeController::class)->names([
+            'store' => 'employee.store',
+            'update' => 'employee.update',
+            'destroy' => 'employee.destroy',
+        ]);
+
     });
     // Route::resource('laporan-keuangan', LaporanKeuanganController::class);
     // Route::get('laporan-keuangan/keuangan', [LaporanKeuanganController::class, 'keuangan'])->name('laporan-keuangan.keuangan'); // Menambahkan route ini
