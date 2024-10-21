@@ -94,9 +94,9 @@
                                                                             <td>
                                                                                 <button class="btn btn-link" type="button"
                                                                                     data-toggle="collapse"
-                                                                                    data-target="#collapseGaji{{ $penggajian->id_employee }}"
+                                                                                    data-target="#collapseGaji{{ $penggajian->nama_employee }}"
                                                                                     aria-expanded="false"
-                                                                                    aria-controls="collapseGaji{{ $penggajian->id_employee }}">
+                                                                                    aria-controls="collapseGaji{{ $penggajian->nama_employee }}">
                                                                                     <i class="fas fa-chevron-down"></i>
                                                                                 </button>
                                                                             </td>
@@ -115,7 +115,7 @@
                                                                             </td>
                                                                         </tr>
 
-                                                                        <tr id="collapseGaji{{ $penggajian->id_employee }}"
+                                                                        <tr id="collapseGaji{{ $penggajian->nama_employee }}"
                                                                             class="collapse">
                                                                             <td colspan="3">
                                                                                 <table class="table table-bordered">
