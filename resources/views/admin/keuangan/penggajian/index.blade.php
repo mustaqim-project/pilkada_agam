@@ -229,7 +229,6 @@
                                                             <table class="table table-bordered">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th>ID Employee</th>
                                                                         <th>Nama Karyawan</th>
                                                                         <th>Detail Gaji</th>
                                                                     </tr>
@@ -240,7 +239,6 @@
                                                                             $employee = $employeeGroup->first();
                                                                         @endphp
                                                                         <tr>
-                                                                            <td>{{ $employee->id_employee }}</td>
                                                                             <td>{{ $employee->nama_employee }}</td>
                                                                             <td>
                                                                                 <button class="btn btn-link" type="button"
@@ -258,7 +256,6 @@
                                                                                 <table class="table table-bordered">
                                                                                     <thead>
                                                                                         <tr>
-                                                                                            <th>ID Penggajian</th>
                                                                                             <th>Tanggal Penggajian</th>
                                                                                             <th>Jumlah</th>
                                                                                             <th>Bukti Pembayaran</th>
@@ -268,7 +265,6 @@
                                                                                     <tbody>
                                                                                         @foreach ($employeeGroup as $detailPenggajian)
                                                                                             <tr>
-                                                                                                <td>{{ $detailPenggajian->id_penggajian }}</td>
                                                                                                 <td>{{ $detailPenggajian->tanggal_penggajian }}</td>
                                                                                                 <td>Rp {{ number_format($detailPenggajian->nominal, 0, ',', '.') }}</td>
                                                                                                 <td>
