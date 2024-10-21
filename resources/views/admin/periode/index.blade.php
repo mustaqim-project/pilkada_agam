@@ -28,9 +28,8 @@
                         <tbody>
                             @foreach ($periodes->groupBy('anggaran.tim.name') as $timName => $timPeriods)
                                 <tr>
-                                    <td colspan="2">
-                                        {{ $timName }}
-                                    </td>
+                                    <td colspan="2">{{ $loop->iteration }}</td>
+                                    <td colspan="2">{{ $timName }}</td>
                                     <td colspan="2">
                                         <button class="btn btn-link" type="button" data-toggle="collapse"
                                             data-target="#collapse{{ $loop->index }}" aria-expanded="false"
@@ -61,19 +60,107 @@
                                                         </td>
                                                         <td>
 
+
                                                             <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                                                <a href="#" data-toggle="modal"
-                                                                    data-target="#editPeriodeModal{{ $periode->id }}" class="btn btn-warning">
+                                                                <button type="button" class="btn btn-warning"
+                                                                    data-toggle="modal"
+                                                                    data-target="#editPeriodeModal{{ $periode->id }}">
                                                                     <i class="fas fa-edit"></i>
-                                                                </a>
+                                                                </button>
                                                                 <a href="{{ route('admin.periode.destroy', $periode->id) }}"
                                                                     class="btn btn-danger delete-item">
                                                                     <i class="fas fa-trash-alt"></i>
                                                                 </a>
                                                             </div>
-
                                                         </td>
                                                     </tr>
+
+                                                    <!-- Modal Edit -->
+                                                    <div class="modal fade" id="editPeriodeModal{{ $periode->id }}"
+                                                        tabindex="-1" role="dialog"
+                                                        aria-labelledby="editPeriodeModalLabel{{ $periode->id }}"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <form
+                                                                    action="{{ route('admin.periode.update', $periode->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="editPeriodeModalLabel{{ $periode->id }}">
+                                                                            Edit Periode</h5>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <input type="hidden" name="id"
+                                                                            value="{{ $periode->id }}">
+                                                                        <div class="form-group">
+                                                                            <label for="edit_anggaran_id">Anggaran
+                                                                                ID</label>
+                                                                            <select class="form-control" name="anggaran_id"
+                                                                                required>
+                                                                                <option value="">Pilih Anggaran
+                                                                                </option>
+                                                                                @foreach ($anggarans as $anggaran)
+                                                                                    <option value="{{ $anggaran->id }}"
+                                                                                        {{ $anggaran->id == $periode->anggaran_id ? 'selected' : '' }}>
+                                                                                        {{ $anggaran->tim ? $anggaran->tim->name : 'Tim tidak ditemukan' }}
+                                                                                        -
+                                                                                        Rp
+                                                                                        {{ number_format($anggaran->total_anggaran, 0, ',', '.') }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="edit_nama_periode">Nama
+                                                                                Periode</label>
+                                                                            <input type="text" class="form-control"
+                                                                                name="nama_periode"
+                                                                                value="{{ $periode->nama_periode }}"
+                                                                                required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="edit_tanggal_mulai">Tanggal
+                                                                                Mulai</label>
+                                                                            <input type="date" class="form-control"
+                                                                                name="tanggal_mulai"
+                                                                                value="{{ $periode->tanggal_mulai }}"
+                                                                                required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="edit_tanggal_selesai">Tanggal
+                                                                                Selesai</label>
+                                                                            <input type="date" class="form-control"
+                                                                                name="tanggal_selesai"
+                                                                                value="{{ $periode->tanggal_selesai }}"
+                                                                                required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="edit_anggaran_periode">Anggaran
+                                                                                Periode</label>
+                                                                            <input type="number" class="form-control"
+                                                                                name="anggaran_periode"
+                                                                                value="{{ $periode->anggaran_periode }}"
+                                                                                required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-dismiss="modal">Tutup</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Update Periode</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Modal Edit -->
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -86,6 +173,9 @@
             </div>
         </div>
     </section>
+
+
+
 
     <!-- Modal Create -->
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createPeriodeModalLabel"
@@ -123,7 +213,8 @@
                         </div>
                         <div class="form-group">
                             <label for="tanggal_selesai">Tanggal Selesai</label>
-                            <input type="date" class="form-control" name="tanggal_selesai" id="tanggal_selesai" required>
+                            <input type="date" class="form-control" name="tanggal_selesai" id="tanggal_selesai"
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="anggaran_periode">Anggaran Periode</label>
@@ -140,7 +231,7 @@
         </div>
     </div>
 
-    <!-- Modal Edit -->
+    {{-- <!-- Modal Edit -->
     <div class="modal fade" id="editPeriodeModal" tabindex="-1" role="dialog" aria-labelledby="editPeriodeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -196,7 +287,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
     @push('scripts')
@@ -227,23 +318,23 @@
                 ]
             });
 
-            $('#editPeriodeModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget); // Tombol yang memicu modal
-                var id = button.data('id'); // Ambil ID dari tombol
+            // $('#editPeriodeModal').on('show.bs.modal', function(event) {
+            //     var button = $(event.relatedTarget); // Tombol yang memicu modal
+            //     var id = button.data('id'); // Ambil ID dari tombol
 
-                // Fetch data periode berdasarkan ID
-                $.get(`/admin/periode/${id}/edit`, function(data) {
-                    $('#periodeId').val(data.id); // Set ID ke input hidden
-                    $('#edit_anggaran_id').val(data.anggaran_id); // Set anggaran_id ke select
-                    $('#edit_nama_periode').val(data.nama_periode); // Set nama_periode ke input
-                    $('#edit_tanggal_mulai').val(data.tanggal_mulai); // Set tanggal_mulai ke input
-                    $('#edit_tanggal_selesai').val(data.tanggal_selesai); // Set tanggal_selesai ke input
-                    $('#edit_anggaran_periode').val(data.anggaran_periode); // Set anggaran_periode ke input
+            //     // Fetch data periode berdasarkan ID
+            //     $.get(`/admin/periode/${id}/edit`, function(data) {
+            //         $('#periodeId').val(data.id); // Set ID ke input hidden
+            //         $('#edit_anggaran_id').val(data.anggaran_id); // Set anggaran_id ke select
+            //         $('#edit_nama_periode').val(data.nama_periode); // Set nama_periode ke input
+            //         $('#edit_tanggal_mulai').val(data.tanggal_mulai); // Set tanggal_mulai ke input
+            //         $('#edit_tanggal_selesai').val(data.tanggal_selesai); // Set tanggal_selesai ke input
+            //         $('#edit_anggaran_periode').val(data.anggaran_periode); // Set anggaran_periode ke input
 
-                    // Ubah action form untuk update
-                    $('#editPeriodeForm').attr('action', `/admin/periode/${data.id}`);
-                });
-            });
+            //         // Ubah action form untuk update
+            //         $('#editPeriodeForm').attr('action', `/admin/periode/${data.id}`);
+            //     });
+            // });
         </script>
     @endpush
 @endsection
