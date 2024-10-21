@@ -193,7 +193,7 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="">{{ __('admin.Tim') }}</label>
+                            <label for="tim_id">{{ __('admin.Tim') }}</label>
                             <select name="tim_id" class="select2 form-control" id="tim_id">
                                 <option value="">{{ __('admin.--Select--') }}</option>
                                 @foreach ($timList as $team)
@@ -206,7 +206,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="">{{ __('admin.Jabatan') }}</label>
+                            <label for="jabatan_id">{{ __('admin.Jabatan') }}</label>
                             <select name="jabatan_id" class="select2 form-control" id="jabatan_id">
                                 <option value="">{{ __('admin.--Select--') }}</option>
                                 @foreach ($jabatanList as $position)
@@ -218,14 +218,17 @@
                             @enderror
                         </div>
 
-                        <!-- Employee Select Option -->
                         <div class="form-group">
                             <label for="employee_id">Nama Karyawan</label>
                             <select name="employee_id" class="form-control" id="employee_id" required>
                                 <option value="">-- Pilih Karyawan --</option>
                                 <!-- Options will be loaded dynamically using JavaScript -->
                             </select>
+                            @error('employee_id')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
+
 
                         <!-- Tanggal Masuk (Readonly) -->
                         <div class="form-group">
@@ -262,8 +265,10 @@
                         <!-- Bukti Pembayaran -->
                         <div class="form-group">
                             <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                            <input type="text" name="bukti_pembayaran" class="form-control" id="bukti_pembayaran">
+                            <input type="file" name="bukti_pembayaran" class="form-control" id="bukti_pembayaran"
+                                accept="image/*">
                         </div>
+
 
                         <!-- Submit Button -->
                         <div class="form-group">
@@ -416,6 +421,8 @@
                             employee_id: employee_id
                         },
                         success: function(response) {
+
+
                             // Tampilkan tanggal masuk
                             $('#tanggal_masuk').val(response.tanggal_masuk);
 
