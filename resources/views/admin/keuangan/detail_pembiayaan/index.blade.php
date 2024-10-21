@@ -18,43 +18,55 @@
             </div>
 
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped" id="tableDetailPembiayaan">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Jenis Pembiayaan</th>
-                                <th>Nama Rincian</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($jenisPembiayaans as $jenis)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $jenis->nama_pembiayaan }}</td>
-                                    <td>
-                                        <select class="form-control">
-                                            @foreach ($jenis->detailPembiayaan as $detail)
-                                                <option>{{ $detail->nama_rincian }}</option>
+                <div class="accordion" id="accordionPembiayaan">
+                    @foreach ($jenisPembiayaans as $jenis)
+                        <div class="card">
+                            <div class="card-header" id="heading{{ $jenis->id }}">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse"
+                                        data-target="#collapse{{ $jenis->id }}" aria-expanded="true"
+                                        aria-controls="collapse{{ $jenis->id }}">
+                                        {{ $jenis->nama_pembiayaan }}
+                                    </button>
+                                </h2>
+                            </div>
+
+                            <div id="collapse{{ $jenis->id }}" class="collapse" aria-labelledby="heading{{ $jenis->id }}"
+                                data-parent="#accordionPembiayaan">
+                                <div class="card-body">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama Rincian</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($jenis->detailPembiayaan as $item)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $item->nama_rincian }}</td>
+                                                    <td>
+                                                        <div class="btn-group" role="group" aria-label="Tombol Aksi">
+                                                            <a href="#" data-toggle="modal"
+                                                                data-target="#editModal{{ $item->id }}" class="btn btn-warning">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                            <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
+                                                                class="btn btn-danger delete-item">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                            <a href="#" class="btn btn-warning">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $jenis->id) }}"
-                                                class="btn btn-danger delete-item">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
