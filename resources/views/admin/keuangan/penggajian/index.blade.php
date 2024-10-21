@@ -273,11 +273,17 @@
                                                                                                     </a>
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <a href="#" class="btn btn-warning">
-                                                                                                        <i class="fas fa-edit"></i>
+                                                                                                     <a href="#"
+                                                                                                        data-toggle="modal"
+                                                                                                        data-target="#editModalGaji{{ $detailPenggajian->id_penggajian }}"
+                                                                                                        class="btn btn-warning">
+                                                                                                        <i
+                                                                                                            class="fas fa-edit"></i>
                                                                                                     </a>
-                                                                                                    <a href="#" class="btn btn-danger delete-item">
-                                                                                                        <i class="fas fa-trash-alt"></i>
+                                                                                                    <a href="{{ route('admin.keuangan.gaji.destroy', $detailPenggajian->id_penggajian) }}"
+                                                                                                        class="btn btn-danger delete-item">
+                                                                                                        <i
+                                                                                                            class="fas fa-trash-alt"></i>
                                                                                                     </a>
                                                                                                 </td>
                                                                                             </tr>
