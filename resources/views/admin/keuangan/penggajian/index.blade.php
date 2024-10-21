@@ -383,11 +383,32 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-
     <script>
         $(document).ready(function() {
+            $('#tim_id, #jabatan_id').on('change', function() {
+                const timId = $('#tim_id').val();
+                const jabatanId = $('#jabatan_id').val();
+
+                if (timId && jabatanId) {
+                    $.ajax({
+                        url: "{{ route('admin.getEmployeesByTimAndJabatan') }}", // Pastikan Anda membuat route dan controller untuk ini
+                        type: "GET",
+                        data: {
+                            tim_id: timId,
+                            jabatan_id: jabatanId
+                        },
+                        success: function(response) {
+                            $('#employee_id').empty();
+                            $('#employee_id').append(
+                                '<option value="">-- Pilih Karyawan --</option>');
+                            $.each(response, function(key, employee) {
+                                $('#employee_id').append('<option value="' + employee
+                                    .id + '">' + employee.nama + '</option>');
+                            });
+                        }
+                    });
+                }
+            });
 
             @if (Session::has('toast_success'))
                 Toast.fire({
@@ -404,31 +425,9 @@
             @endif
 
 
-            $('#tim_id, #jabatan_id').change(function() {
-                var tim_id = $('#tim_id').val();
-                var jabatan_id = $('#jabatan_id').val();
-                console.log('Tim ID:', tim_id, 'Jabatan ID:', jabatan_id);
 
-                if (tim_id && jabatan_id) {
-                    $.ajax({
-                        url: "{{ route('admin.getEmployeesByTimAndJabatan') }}", // Pastikan Anda membuat route dan controller untuk ini
-                        type: "GET",
-                        data: {
-                            tim_id: tim_id,
-                            jabatan_id: jabatan_id
-                        },
-                        success: function(response) {
-                            $('#employee_id').empty();
-                            $('#employee_id').append(
-                                '<option value="">-- Pilih Karyawan --</option>');
-                            $.each(response, function(key, employee) {
-                                $('#employee_id').append('<option value="' + employee
-                                    .id + '">' + employee.nama + '</option>');
-                            });
-                        }
-                    });
-                }
-            });
+
+
 
             // Show employee details (tanggal masuk, no rekening, nama bank, and histori penggajian) when an employee is selected
             $('#employee_id').change(function() {
