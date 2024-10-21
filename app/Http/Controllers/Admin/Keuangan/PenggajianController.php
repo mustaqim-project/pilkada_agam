@@ -45,7 +45,6 @@ class PenggajianController extends Controller
                 'e.gaji AS gaji'
             )
             ->get();
-            dd($timList, $jabatanList, $bankList);
 
         return view('admin.keuangan.penggajian.index', compact('penggajians', 'employee', 'timList', 'jabatanList', 'bankList'));
     }
