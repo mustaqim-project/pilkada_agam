@@ -373,7 +373,46 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
+    $(document).ready(function() {
+        $('#tim_id, #jabatan_id').on('change', function() {
+            const timId = $('#tim_id').val();
+            const jabatanId = $('#jabatan_id').val();
+
+
+            console.log(timId,jabatanId);
+            if (timId && jabatanId) {
+                $.ajax({
+                    url: '{{ route('admin.get-atasan') }}',
+                    type: 'GET',
+                    data: {
+                        tim_id: timId,
+                        jabatan_id: jabatanId
+                    },
+                    success: function(data) {
+                        const atasanSelect = $('#atasan_id');
+                        atasanSelect.empty();
+                        atasanSelect.append('<option value="">--Select--</option>');
+
+                        data.forEach(function(admin) {
+                            atasanSelect.append(
+                                `<option value="${admin.id}">${admin.name}</option>`
+                            );
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            } else {
+                $('#atasan_id').empty().append('<option value="">--Select--</option>');
+            }
+        });
+    });
+</script>
+
+{{-- <script>
     $(document).ready(function() {
         $('#tim_id, #jabatan_id').on('change', function() {
             const timId = $('#tim_id').val();
@@ -444,7 +483,7 @@
             }
         });
     });
-</script>
+</script> --}}
 
 
 
