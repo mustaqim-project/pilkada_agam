@@ -29,22 +29,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($detailPembiayaan as $item)
+                            @foreach ($jenisPembiayaans as $jenis)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->jenisPembiayaan->nama_pembiayaan }}</td>
-                                    <td>{{ $item->nama_rincian }}</td>
+                                    <td>{{ $jenis->nama_pembiayaan }}</td>
+                                    <td>
+                                        <select class="form-control">
+                                            @foreach ($jenis->detailPembiayaan as $detail)
+                                                <option>{{ $detail->nama_rincian }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                            <a href="#" data-toggle="modal"
-                                                data-target="#editModal{{ $item->id }}" class="btn btn-warning">
+                                            <a href="#" class="btn btn-warning">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $item->id) }}"
+                                            <a href="{{ route('admin.keuangan.detail_pembiayaan.destroy', $jenis->id) }}"
                                                 class="btn btn-danger delete-item">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
-
                                         </div>
                                     </td>
                                 </tr>
@@ -144,14 +148,14 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            @if(Session::has('toast_success'))
+            @if (Session::has('toast_success'))
                 Toast.fire({
                     icon: 'success',
                     title: '{{ Session::get('toast_success') }}'
                 });
             @endif
 
-            @if(Session::has('toast_error'))
+            @if (Session::has('toast_error'))
                 Toast.fire({
                     icon: 'error',
                     title: '{{ Session::get('toast_error') }}'
@@ -159,5 +163,4 @@
             @endif
         });
     </script>
-
 @endsection

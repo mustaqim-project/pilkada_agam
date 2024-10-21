@@ -12,7 +12,7 @@ class DetailPembiayaanController extends Controller
     // Menampilkan daftar Detail Pembiayaan
     public function index()
     {
-        $jenisPembiayaans = jenis_pembiayaan::all();
+        $jenisPembiayaans = jenis_pembiayaan::with('detailPembiayaan')->get();
         $detailPembiayaan = DetailPembiayaan::with('jenisPembiayaan')->get();
         return view('admin.keuangan.detail_pembiayaan.index', compact('detailPembiayaan', 'jenisPembiayaans'));
     }
