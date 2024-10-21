@@ -387,7 +387,8 @@
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        $(document).ready(function() {
+
             @if (Session::has('toast_success'))
                 Toast.fire({
                     icon: 'success',
@@ -401,12 +402,6 @@
                     title: '{{ Session::get('toast_error') }}'
                 });
             @endif
-        });
-
-
-        $(document).ready(function() {
-
-
 
 
             $('#tim_id, #jabatan_id').change(function() {
