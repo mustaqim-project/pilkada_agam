@@ -299,7 +299,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-
+{{ dd($penggajian) }}
                     <!-- Modal Body (Form) -->
                     <div class="modal-body">
                         <form action="{{ route('admin.keuangan.employee.update', $penggajian->id_employee) }}"
