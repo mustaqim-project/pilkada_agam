@@ -38,7 +38,8 @@
                                         <h2 class="mb-0">
                                             <button class="btn btn-link" type="button" data-toggle="collapse"
                                                 data-target="#collapse{{ $jenis->id }}" aria-expanded="true"
-                                                aria-controls="collapse{{ $jenis->id }}">
+                                                aria-controls="collapse{{ $jenis->id }}"><i class="fas fa-chevron-down"></i>
+
                                             </button>
                                         </h2>
                                     </div>
