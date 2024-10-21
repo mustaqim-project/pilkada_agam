@@ -68,7 +68,7 @@
                                                             <td>{{ $nama }}</td>
                                                             <td>
                                                                 {{-- <a href="{{ route('admin.penggajian.edit', $penggajians->first()->id) }}" class="btn btn-warning">Edit</a> --}}
-                                                                <form action="{{ route('admin.keuangan.penggajian.destroy', $penggajians->first()->id) }}" method="POST" style="display:inline-block;">
+                                                                <form action="{{ route('admin.keuangan.gaji.destroy', $penggajians->first()->id) }}" method="POST" style="display:inline-block;">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus penggajian ini?')">Delete</button>
