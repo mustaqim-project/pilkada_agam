@@ -66,7 +66,7 @@
                                                                     data-target="#editPeriodeModal{{ $periode->id }}" class="btn btn-warning">
                                                                     <i class="fas fa-edit"></i>
                                                                 </a>
-                                                                <a href="{{ route('admin.periode.', $periode->id) }}"
+                                                                <a href="{{ route('admin.periode.destroy', $periode->id) }}"
                                                                     class="btn btn-danger delete-item">
                                                                     <i class="fas fa-trash-alt"></i>
                                                                 </a>
