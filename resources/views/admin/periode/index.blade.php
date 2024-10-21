@@ -29,19 +29,14 @@
                             @foreach ($periodes->groupBy('anggaran.tim.name') as $timName => $timPeriods)
                                 <tr>
                                     <td colspan="2">
+                                        {{ $timName }}
+                                    </td>
+                                    <td colspan="2">
                                         <button class="btn btn-link" type="button" data-toggle="collapse"
                                             data-target="#collapse{{ $loop->index }}" aria-expanded="false"
                                             aria-controls="collapse{{ $loop->index }}">
-                                            {{ $timName }}
+                                            <i class="fas fa-chevron-down"></i>
                                         </button>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Tombol Aksi">
-                                            <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                data-target="#editTimModal" data-tim="{{ $timName }}">
-                                                Edit Tim
-                                            </button>
-                                        </div>
                                     </td>
                                 </tr>
                                 <tr id="collapse{{ $loop->index }}" class="collapse">
