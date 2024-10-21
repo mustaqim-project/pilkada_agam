@@ -8,17 +8,21 @@
 
         <div class="card card-primary">
             <div class="card-header">
+
                 <div class="card-header-actions">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModalGaji">
+                        + Bayar Gaji
+                    </button>
+                </div>
+
+
+
+                <div class="card-header-actions" style="margin-left: 3rem">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModalKaryawan">
                         + Tambah Karyawan
                     </button>
                 </div>
 
-                <div class="card-header-actions" style="margin-left: 5rem">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambahModalGaji">
-                        + Bayar Gaji
-                    </button>
-                </div>
 
             </div>
 
