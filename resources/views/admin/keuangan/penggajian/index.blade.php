@@ -374,82 +374,9 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
-        $(document).ready(function() {
-            @if (Session::has('toast_success'))
-                Toast.fire({
-                    icon: 'success',
-                    title: '{{ Session::get('toast_success') }}'
-                });
-            @endif
-
-            @if (Session::has('toast_error'))
-                Toast.fire({
-                    icon: 'error',
-                    title: '{{ Session::get('toast_error') }}'
-                });
-            @endif
-
-            // Load employees based on selected tim and jabatan
-            $('#tim_id, #jabatan_id').change(function() {
-                var tim_id = $('#tim_id').val();
-                var jabatan_id = $('#jabatan_id').val();
-
-                if (tim_id && jabatan_id) {
-                    $.ajax({
-                        url: "{{ route('admin.getEmployeesByTimAndJabatan') }}",
-                        type: "GET",
-                        data: {
-                            tim_id: tim_id,
-                            jabatan_id: jabatan_id
-                        },
-                        success: function(response) {
-                            $('#employee_id').empty();
-                            $('#employee_id').append('<option value="">-- Pilih Karyawan --</option>');
-                            $.each(response, function(key, employee) {
-                                $('#employee_id').append('<option value="' + employee.id + '">' + employee.nama + '</option>');
-                            });
-                        }
-                    });
-                }
-            });
-
-            // Show employee details when an employee is selected
-            $('#employee_id').change(function() {
-                var employee_id = $(this).val();
-
-                if (employee_id) {
-                    $.ajax({
-                        url: "{{ route('admin.getEmployeeDetails') }}",
-                        type: "GET",
-                        data: {
-                            employee_id: employee_id
-                        },
-                        success: function(response) {
-                            $('#tanggal_masuk').val(response.tanggal_masuk);
-                            $('#no_rekening').val(response.no_rekening);
-                            $('#nama_bank').val(response.nama_bank);
-
-                            var histori = response.histori_penggajian;
-                            var historiHtml = '';
-                            if (histori.length > 0) {
-                                historiHtml += '<ul>';
-                                $.each(histori, function(key, gaji) {
-                                    historiHtml += '<li>' + gaji.tanggal_penggajian + ': Rp' + gaji.jumlah + '</li>';
-                                });
-                                historiHtml += '</ul>';
-                            } else {
-                                historiHtml = 'Belum ada histori penggajian.';
-                            }
-                            $('#histori_penggajian').html(historiHtml);
-                        }
-                    });
-                }
-            });
-        });
-    </script>
-
-    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
             @if (Session::has('toast_success'))
                 Toast.fire({
@@ -534,5 +461,5 @@
                 }
             });
         });
-    </script> --}}
+    </script>
 @endsection
