@@ -288,13 +288,13 @@
                     <form action="{{ route('admin.keuangan.gaji.store') }}" method="POST">
                         @csrf
 
-                        <!-- Tim Select Option -->
-                        <div class="form-group">
+                         <!-- Tim Select Option -->
+                         <div class="form-group">
                             <label for="tim_id">Tim</label>
                             <select name="tim_id" class="form-control" id="tim_id" required>
                                 <option value="">-- Pilih Tim --</option>
                                 @foreach ($timList as $tim)
-                                    <option value="{{ $tim->id }}">{{ $tim->nama }}</option>
+                                    <option value="{{ $tim->id }}">{{ $tim->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -305,10 +305,12 @@
                             <select name="jabatan_id" class="form-control" id="jabatan_id" required>
                                 <option value="">-- Pilih Jabatan --</option>
                                 @foreach ($jabatanList as $jabatan)
-                                    <option value="{{ $jabatan->id }}">{{ $jabatan->nama }}</option>
+                                    <option value="{{ $jabatan->id }}">{{ $jabatan->name }}</option>
                                 @endforeach
                             </select>
                         </div>
+
+
 
                         <!-- Employee Select Option -->
                         <div class="form-group">
