@@ -88,7 +88,7 @@ class EmployeeController extends Controller
         return response()->json([
             'tanggal_masuk' => $employee->tanggal_masuk,
             'no_rekening' => $employee->no_rekening,
-            'nama_bank' => $bank ? $bank->nama : 'Tidak ada bank terdaftar',
+            'nama_bank' => $bank ? $bank->nama_bank : 'Tidak ada bank terdaftar',
             'histori_penggajian' => $histori_penggajian
         ]);
     }
