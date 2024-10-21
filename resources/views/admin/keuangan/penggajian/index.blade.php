@@ -160,4 +160,28 @@
             </div>
         </div>
     </section>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if (Session::has('toast_success'))
+            Toast.fire({
+                icon: 'success',
+                title: '{{ Session::get('toast_success') }}'
+            });
+        @endif
+
+        @if (Session::has('toast_error'))
+            Toast.fire({
+                icon: 'error',
+                title: '{{ Session::get('toast_error') }}'
+            });
+        @endif
+    });
+
+
+</script>
+
+
 @endsection

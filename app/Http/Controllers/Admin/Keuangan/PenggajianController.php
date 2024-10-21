@@ -49,7 +49,7 @@ class PenggajianController extends Controller
 
         Penggajian::create($request->all());
 
-        return redirect()->route('penggajians.index')->with('success', 'Penggajian berhasil dibuat.');
+        return redirect()->route('admin.keuangan.gaji.index')->with('toast_success', 'Penggajian berhasil dibuat.');
     }
 
 
@@ -65,7 +65,7 @@ class PenggajianController extends Controller
         $penggajian = Penggajian::findOrFail($id);
         $penggajian->update($request->all());
 
-        return redirect()->route('penggajians.index')->with('success', 'Penggajian berhasil diperbarui.');
+        return redirect()->route('admin.keuangan.gaji.index')->with('toast_success', 'Penggajian berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -73,6 +73,9 @@ class PenggajianController extends Controller
         $penggajian = Penggajian::findOrFail($id);
         $penggajian->delete();
 
-        return redirect()->route('penggajians.index')->with('success', 'Penggajian berhasil dihapus.');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data berhasil dihapus!'
+        ]);
     }
 }

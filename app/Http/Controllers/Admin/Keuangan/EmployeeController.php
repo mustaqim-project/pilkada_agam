@@ -17,7 +17,7 @@ class EmployeeController extends Controller
         ]);
 
         Employee::create($request->all());
-        return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
+        return redirect()->route('admin.keuangan.gaji.index')->with('toast_success', 'Employee created successfully.');
     }
 
 
@@ -31,12 +31,17 @@ class EmployeeController extends Controller
         ]);
 
         $employee->update($request->all());
-        return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
+        return redirect()->route('admin.keuangan.gaji.index')->with('toast_success', 'Employee updated successfully.');
     }
 
-    public function destroy(Employee $employee)
+    public function destroy($id)
     {
+
+        $employee = Employee::findOrFail($id);
         $employee->delete();
-        return redirect()->route('employees.index')->with('success', 'Employee deleted successfully.');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Data berhasil dihapus!'
+        ]);
     }
 }
