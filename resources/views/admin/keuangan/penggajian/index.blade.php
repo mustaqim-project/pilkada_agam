@@ -285,7 +285,110 @@
         </div>
     </div>
 
+    <!-- Modal Edit Employee -->
+    @foreach ($penggajians->unique('id_employee') as $penggajian)
+        <div class="modal fade" id="editModalEmployee{{ $penggajian->id_employee }}" tabindex="-1"
+            aria-labelledby="editModalEmployeeLabel{{ $penggajian->id_employee }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalEmployeeLabel{{ $penggajian->id_employee }}">Edit Karyawan:
+                            {{ $penggajian->nama_employee }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 
+                    <!-- Modal Body (Form) -->
+                    <div class="modal-body">
+                        <form action="{{ route('admin.keuangan.employee.update', $penggajian->id_employee) }}"
+                            method="POST">
+                            @csrf
+                            @method('PUT')
+
+                            <!-- Nama Karyawan -->
+                            <div class="form-group">
+                                <label for="nama">Nama Karyawan</label>
+                                <input type="text" name="nama" class="form-control" id="nama"
+                                    value="{{ $penggajian->nama_employee }}" required>
+                            </div>
+
+                            <!-- Gaji -->
+                            <div class="form-group">
+                                <label for="gaji">Gaji</label>
+                                <input type="number" name="gaji" class="form-control" id="gaji"
+                                    value="{{ $penggajian->gaji }}" required>
+                            </div>
+
+                            <!-- No Rekening -->
+                            <div class="form-group">
+                                <label for="no_rekening">No Rekening</label>
+                                <input type="text" name="no_rekening" class="form-control" id="no_rekening"
+                                    value="{{ $penggajian->no_rekening }}" required>
+                            </div>
+
+                            <!-- Tanggal Masuk -->
+                            <div class="form-group">
+                                <label for="tanggal_masuk">Tanggal Masuk</label>
+                                <input type="date" name="tanggal_masuk" class="form-control" id="tanggal_masuk"
+                                    value="{{ $penggajian->tanggal_masuk }}" required>
+                            </div>
+
+                            <!-- Tim Select Option -->
+                            <div class="form-group">
+                                <label for="tim_id">Tim</label>
+                                <select name="tim_id" class="form-control" id="tim_id" required>
+                                    <option value="">-- Pilih Tim --</option>
+                                    @foreach ($timList as $tim)
+                                        <option value="{{ $tim->id }}"
+                                            {{ $tim->id == $penggajian->tim_id ? 'selected' : '' }}>{{ $tim->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Jabatan Select Option -->
+                            <div class="form-group">
+                                <label for="jabatan_id">Jabatan</label>
+                                <select name="jabatan_id" class="form-control" id="jabatan_id" required>
+                                    <option value="">-- Pilih Jabatan --</option>
+                                    @foreach ($jabatanList as $jabatan)
+                                        <option value="{{ $jabatan->id }}"
+                                            {{ $jabatan->id == $penggajian->jabatan_id ? 'selected' : '' }}>
+                                            {{ $jabatan->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Bank Select Option -->
+                            <div class="form-group">
+                                <label for="bank_id">Bank</label>
+                                <select name="bank_id" class="form-control" id="bank_id" required>
+                                    <option value="">-- Pilih Bank --</option>
+                                    @foreach ($bankList as $bank)
+                                        <option value="{{ $bank->id }}"
+                                            {{ $bank->id == $penggajian->bank_id ? 'selected' : '' }}>
+                                            {{ $bank->nama_bank }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
     <!-- The Modal -->
     <div class="modal fade" id="tambahModalKaryawan" tabindex="-1" aria-labelledby="tambahModalKaryawanLabel"
         aria-hidden="true">
