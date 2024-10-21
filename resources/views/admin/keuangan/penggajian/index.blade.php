@@ -288,27 +288,35 @@
                     <form action="{{ route('admin.keuangan.gaji.store') }}" method="POST">
                         @csrf
 
-                        <!-- Tim Select Option -->
                         <div class="form-group">
-                            <label for="tim_id">Tim</label>
-                            <select name="tim_id" class="form-control" id="tim_id" required>
-                                <option value="">-- Pilih Tim --</option>
-                                @foreach ($timList as $tim)
-                                    <option value="{{ $tim->id }}">{{ $tim->name }}</option>
+                            <label for="">{{ __('admin.Tim') }}</label>
+                            <select name="tim_id" class="select2 form-control" id="tim_id">
+                                <option value="">{{ __('admin.--Select--') }}</option>
+                                @foreach ($timList as $team)
+                                    <option value="{{ $team->id }}">{{ $team->name }}</option>
                                 @endforeach
                             </select>
+                            @error('tim_id')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
 
-                        <!-- Jabatan Select Option -->
+
                         <div class="form-group">
-                            <label for="jabatan_id">Jabatan</label>
-                            <select name="jabatan_id" class="form-control" id="jabatan_id" required>
-                                <option value="">-- Pilih Jabatan --</option>
-                                @foreach ($jabatanList as $jabatan)
-                                    <option value="{{ $jabatan->id }}">{{ $jabatan->name }}</option>
+                            <label for="">{{ __('admin.Jabatan') }}</label>
+                            <select name="jabatan_id" class="select2 form-control" id="jabatan_id">
+                                <option value="">{{ __('admin.--Select--') }}</option>
+                                @foreach ($jabatanList as $position)
+                                    <option value="{{ $position->id }}">{{ $position->name }}</option>
                                 @endforeach
                             </select>
+                            @error('jabatan_id')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
+
+
+
 
 
 
@@ -375,6 +383,8 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
