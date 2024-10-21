@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Admin\Keuangan;
 
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Penggajian;
-use App\Models\Employee;
-use Illuminate\Support\Facades\DB;
-
 use App\Models\tim;
-use App\Models\jabatan;
 use App\Models\Bank;
+use App\Models\jabatan;
+use App\Models\Employee;
+use App\Models\Penggajian;
+
+use Illuminate\Http\Request;
 use App\Traits\FileUploadTrait;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 
 
 
@@ -59,42 +60,83 @@ class PenggajianController extends Controller
 
 
     // Menyimpan penggajian baru ke database
+    // public function store(Request $request)
+    // {
+
+    //     $request->validate([
+    //         'employee_id' => 'required|exists:employees,id',
+    //         'tanggal_penggajian' => 'required|date',
+    //         'jumlah' => 'required|numeric|max:255', // Mengubah validasi menjadi numeric untuk jumlah
+    //         'bukti_pembayaran' => 'nullable|mimes:jpg,png,jpeg|max:5012', // Memastikan format dan ukuran file
+    //     ]);
+
+    //     try {
+    //         // Menghandle pengunggahan file dan mendapatkan jalur file
+    //         $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran');
+
+    //         // Membuat entri penggajian baru dengan data yang relevan
+    //         $penggajian = new Penggajian();
+    //         $penggajian->employee_id = $request->employee_id;
+    //         $penggajian->tanggal_penggajian = $request->tanggal_penggajian;
+    //         $penggajian->jumlah = $request->jumlah;
+    //         $penggajian->bukti_pembayaran = $imagePath;
+    //         $penggajian->save(); // Simpan entri penggajian ke database
+    //         // return redirect()->route('admin.keuangan.gaji.index')->with('toast_success', 'Penggajian berhasil dibuat.');
+
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'message' => 'Data berhasil disimpan!'
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         // Menangani error jika terjadi kesalahan saat menyimpan data
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => 'Data gagal disimpan: ' . $e->getMessage()
+    //         ], 500); // Mengembalikan status 500 untuk kesalahan server
+    //     }
+    // }
+
+    use Illuminate\Support\Facades\Log;
+
     public function store(Request $request)
     {
+        Log::info('Masuk ke metode store');
 
         $request->validate([
             'employee_id' => 'required|exists:employees,id',
             'tanggal_penggajian' => 'required|date',
-            'jumlah' => 'required|numeric|max:255', // Mengubah validasi menjadi numeric untuk jumlah
-            'bukti_pembayaran' => 'nullable|mimes:jpg,png,jpeg|max:5012', // Memastikan format dan ukuran file
+            'jumlah' => 'required|numeric|max:255',
+            'bukti_pembayaran' => 'nullable|mimes:jpg,png,jpeg|max:5012',
         ]);
 
+        Log::info('Validasi berhasil');
+
         try {
-            // Menghandle pengunggahan file dan mendapatkan jalur file
             $imagePath = $this->handleFileUpload($request, 'bukti_pembayaran');
 
-            // Membuat entri penggajian baru dengan data yang relevan
+            Log::info('File berhasil diunggah: ' . $imagePath);
+
             $penggajian = new Penggajian();
             $penggajian->employee_id = $request->employee_id;
             $penggajian->tanggal_penggajian = $request->tanggal_penggajian;
             $penggajian->jumlah = $request->jumlah;
             $penggajian->bukti_pembayaran = $imagePath;
-            $penggajian->save(); // Simpan entri penggajian ke database
-            // return redirect()->route('admin.keuangan.gaji.index')->with('toast_success', 'Penggajian berhasil dibuat.');
+            $penggajian->save();
+
+            Log::info('Data penggajian berhasil disimpan');
 
             return response()->json([
                 'status' => 'success',
                 'message' => 'Data berhasil disimpan!'
             ]);
         } catch (\Exception $e) {
-            // Menangani error jika terjadi kesalahan saat menyimpan data
+            Log::error('Data gagal disimpan: ' . $e->getMessage());
             return response()->json([
                 'status' => 'error',
                 'message' => 'Data gagal disimpan: ' . $e->getMessage()
-            ], 500); // Mengembalikan status 500 untuk kesalahan server
+            ], 500);
         }
     }
-
 
     public function update(Request $request, $id)
     {

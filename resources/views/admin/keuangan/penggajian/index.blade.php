@@ -257,9 +257,9 @@
                         </div>
                         <div class="form-group">
                             <label for="tanggal_penggajian">Tanggal Penggajian</label>
-                            <input type="date" name="tanggal_penggajian" class="form-control"
-                                id="tanggal_penggajian" required>
+                            <input type="date" name="tanggal_penggajian" class="form-control" id="tanggal_penggajian" required>
                         </div>
+
                         <!-- Jumlah Penggajian -->
                         <div class="form-group">
                             <label for="jumlah">Jumlah Penggajian</label>
@@ -269,8 +269,8 @@
                         <!-- Bukti Pembayaran -->
                         <div class="form-group">
                             <label for="bukti_pembayaran">Bukti Pembayaran</label>
-                            <input type="file" name="bukti_pembayaran" class="form-control" id="bukti_pembayaran"
-                                accept="image/*">
+                            <input type="file" name="bukti_pembayaran" class="form-control" id="bukti_pembayaran" accept="image/*" required>
+                            <small class="form-text text-muted">Format yang diterima: JPG, PNG, JPEG. Maksimal 5 MB.</small>
                         </div>
 
 
