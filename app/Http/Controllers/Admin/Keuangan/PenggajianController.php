@@ -12,7 +12,6 @@ class PenggajianController extends Controller
 {
     public function index()
     {
-        // Eager load relationships properly
         $penggajians = Penggajian::with(['employee.tim', 'employee.jabatan', 'employee.bank'])->get();
         return view('admin.keuangan.penggajian.index', compact('penggajians'));
     }
